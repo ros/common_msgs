@@ -8,7 +8,5 @@
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://pr.willowgarage.com/wiki/ROS</url>
-  <depend stack="ros" version="0.5"/
-  <depend stack="common" version="0.1"/>
+  <depend stack="ros" version="0.5"/>
 </stack>
-
