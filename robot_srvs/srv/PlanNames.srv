@@ -1,0 +1,9 @@
+---
+
+#The names of each of the joints:
+string[] names
+
+#The number of values associated with each point:
+int32[] num_values
+
+

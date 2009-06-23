@@ -1,0 +1,17 @@
+<package>
+  <description brief="A package for diagnostic_msgs">
+
+     diagnostic_msgs is the package which provides the messages used by the diagnostic system in ROS.
+
+  </description>
+  <author>Tully Foote/ tfoote@willowgarage.com</author>
+  <license>BSD</license>
+  <review status="api cleared" notes=""/>
+  <url>http://pr.willowgarage.com/wiki/diagnostic_msgs</url>
+  <export>
+    <cpp cflags="-I${prefix}/msg/cpp -I${prefix}/srv/cpp"/>
+  </export>
+
+</package>
+
+

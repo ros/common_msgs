@@ -1,0 +1,9 @@
+/**
+\mainpage
+\htmlinclude manifest.html
+
+\b sensor_msgs is a package which collects the common message
+data types for robot sensors.  
+
+
+*/

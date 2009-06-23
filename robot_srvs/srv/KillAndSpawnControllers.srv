@@ -1,0 +1,6 @@
+string add_config
+string[] kill_name
+---
+string[] add_name
+uint8[] add_ok
+uint8[] kill_ok
