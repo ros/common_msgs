@@ -1,0 +1,18 @@
+<package>
+  <description brief="Messages for the nav stack">
+
+    These messages are the common messages used to interact with the nav stack
+
+  </description>
+  <author>Tully Foote</author>
+  <license>BSD</license>
+  <review status="API conditionally cleared" notes="http://pr.willowgarage.com/wiki/robot_msgs/2009-05-05_API_Reviewx"/>
+  <url>http://pr.willowgarage.com/wiki/nav_msgs</url>
+  <depend package="robot_msgs"/>
+  <export>
+    <cpp cflags="-I${prefix}/msg/cpp"/>
+  </export>
+
+</package>
+
+
