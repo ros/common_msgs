@@ -1,2 +1,2 @@
 ---
-robot_msgs/OccGrid map
+nav_msgs/OccGrid map

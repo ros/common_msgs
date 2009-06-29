@@ -11,6 +11,7 @@
   <logo>http://www.willowgarage.com/files/willowgarage/robot10.jpg</logo>
   <depend package="std_msgs"/>
   <depend package="robot_msgs"/>
+  <depend package="nav_msgs"/><!-- will not be needed when StaticMap is moved to nav_srvs -->
   <export>
     <cpp cflags="-I${prefix}/srv/cpp"/>
   </export>
