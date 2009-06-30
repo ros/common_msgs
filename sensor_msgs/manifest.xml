@@ -6,7 +6,7 @@
   </description>
   <author>Tully Foote</author>
   <license>BSD</license>
-  <review status="unreviewed" notes=""/>
+  <review status="proposal cleared" notes=""/>
   <url>http://pr.willowgarage.com/wiki/sensor_msgs</url>
 
   <export>
