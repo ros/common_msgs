@@ -1,0 +1,21 @@
+<package>
+  <description brief="tabletop_msgs">
+
+     tabletop_msgs
+
+  </description>
+  <author>Ioan Sucan</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://pr.willowgarage.com/wiki/tabletop_msgs</url>
+
+  <depend package="robot_msgs" />
+  <depend package="std_msgs"/>
+  
+  <export>
+    <cpp cflags="-I${prefix}/msg/cpp"/>
+  </export>
+  
+</package>
+
+

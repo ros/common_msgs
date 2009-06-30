@@ -1,0 +1,4 @@
+Header header
+tabletop_msgs/ObjectOnTable object
+---
+uint8 status

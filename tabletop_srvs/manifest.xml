@@ -1,0 +1,22 @@
+<package>
+  <description brief="tabletop_srvs">
+
+     tabletop_srvs
+
+  </description>
+  <author>Ioan Sucan</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://pr.willowgarage.com/wiki/tabletop_srvs</url>
+  
+  <depend package="std_msgs"/>
+  <depend package="robot_msgs"/>
+  <depend package="tabletop_msgs"/>
+
+  <export>
+    <cpp cflags="-I${prefix}/srv/cpp"/>
+  </export>
+
+</package>
+
+
