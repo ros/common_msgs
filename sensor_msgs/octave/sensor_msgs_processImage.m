@@ -1,7 +1,7 @@
-%% I = image_msgs_processImage(image_msg)
+%% I = sensor_msgs_processImage(image_msg)
 %%
-%% returns an image matrix given a image_msgs/Image
-function I = image_msgs_processImage(image_msg)
+%% returns an image matrix given a sensor_msgs/Image
+function I = sensor_msgs_processImage(image_msg)
 %res.camimage_msg.layout
 %I = zeros([data.height data.width 3]);
 layout = eval(sprintf('image_msg.%s_data.layout',image_msg.depth));

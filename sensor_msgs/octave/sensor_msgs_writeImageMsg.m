@@ -1,11 +1,11 @@
-%% image_msg = image_msgs_processImage(I)
+%% image_msg = sensor_msgs_processImage(I)
 %%
-%% returns an image matrix given a image_msgs/Image
+%% returns an image matrix given a sensor_msgs/Image
 %% If I is in integer format, assumes range for each channel is [0,255]
 %% otherwise range for each channel is [0,1]
-function image_msg = image_msgs_writeImageMsg(I)
+function image_msg = sensor_msgs_writeImageMsg(I)
 
-image_msg = image_msgs_Image();
+image_msg = sensor_msgs_Image();
 image_msg.label = 'OctaveImage';
 image_msg.depth = 'uint8';
 
