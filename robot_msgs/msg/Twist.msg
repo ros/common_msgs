@@ -1,3 +1,3 @@
 Header header
-robot_msgs/Point  vel
-robot_msgs/Point  rot
+robot_msgs/Vector3  vel
+robot_msgs/Vector3  rot
