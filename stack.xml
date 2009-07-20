@@ -7,6 +7,6 @@
   <author>Maintained by Tully Foote tfoote@willowgarage.com</author>
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
-  <url>http://pr.willowgarage.com/wiki/ROS</url>
+  <url>http://pr.willowgarage.com/wiki/common_msgs</url>
   <depend stack="ros" version="0.5"/>
 </stack>
