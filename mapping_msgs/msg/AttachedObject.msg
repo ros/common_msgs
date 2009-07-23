@@ -1,6 +1,4 @@
-# This mesage defines what objects are attached to a link. The objects
-# are assumed to be defined in the reference frame of the link they
-# are attached to
+# This mesage defines what objects are attached to a link. 
 
 Header header
 string link_name
