@@ -14,10 +14,10 @@ uint8       IMAGE_RECT_COLOR=5
 
 Header        header
 StereoInfo    stereo_info
-CamInfo       left_info
+CameraInfo    left_info
 uint8         left_type
 Image         left_image
-CamInfo       right_info
+CameraInfo    right_info
 uint8         right_type
 Image         right_image
 uint8         has_disparity
