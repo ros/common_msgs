@@ -12,6 +12,10 @@
   <depend package="rostest"/>
   <depend package="rosbagmigration"/>
 
+  <depend package="diagnostic_msgs"/>
+  <depend package="geometry_msgs"/>
+  <depend package="sensor_msgs"/>
+
   <url>http://pr.willowgarage.com/wiki/test_common_msgs</url>
 
 </package>

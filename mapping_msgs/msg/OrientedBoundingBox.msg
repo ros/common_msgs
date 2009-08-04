@@ -1,4 +1,4 @@
-robot_msgs/Point32 center
-robot_msgs/Point32 extents
-robot_msgs/Point32 axis
+geometry_msgs/Point32 center
+geometry_msgs/Point32 extents
+geometry_msgs/Point32 axis
 float32 angle

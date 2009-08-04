@@ -27,4 +27,4 @@ float64[] dimensions
 # list of triangles; triangle k is defined by tre vertices located
 # at indices triangles[3k], triangles[3k+1], triangles[3k+2]
 int32[] triangles
-robot_msgs/Point[] vertices
+geometry_msgs/Point[] vertices

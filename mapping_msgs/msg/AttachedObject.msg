@@ -3,4 +3,4 @@
 Header header
 string link_name
 Object[] objects
-robot_msgs/Pose[] poses
+geometry_msgs/Pose[] poses

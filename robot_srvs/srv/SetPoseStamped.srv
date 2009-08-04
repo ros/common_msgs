@@ -1,2 +1,2 @@
-robot_msgs/PoseStamped p
+geometry_msgs/PoseStamped p
 ---

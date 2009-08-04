@@ -1,3 +1,3 @@
 Header header
-robot_msgs/Pose pose
+geometry_msgs/Pose pose
 int32 inliers

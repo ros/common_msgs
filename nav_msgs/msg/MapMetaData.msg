@@ -8,4 +8,4 @@ uint32 width
 uint32 height
 # The origin of the map [m, m, rad].  This is the real-world pose of the
 # cell (0,0) in the map.
-robot_msgs/Pose origin
+geometry_msgs/Pose origin

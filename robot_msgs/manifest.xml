@@ -7,6 +7,7 @@
   <review status="API conditionally cleared" notes=""/>
   <url>http://pr.willowgarage.com/wiki/robot_msgs</url>
   <depend package="std_msgs"/>
+  <depend package="geometry_msgs"/>
   <export>
     <cpp cflags="-I${prefix}/msg/cpp"/>
   </export>

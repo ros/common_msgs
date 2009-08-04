@@ -1,3 +1,0 @@
-string name
-float64 update_time
-float64 max_update_time

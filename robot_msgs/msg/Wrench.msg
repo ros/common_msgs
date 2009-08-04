@@ -1,3 +1,3 @@
 Header header
-robot_msgs/Vector3  force
-robot_msgs/Vector3  torque
+geometry_msgs/Vector3  force
+geometry_msgs/Vector3  torque

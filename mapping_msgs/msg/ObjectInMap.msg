@@ -9,4 +9,4 @@ byte action
 
 Object object
 
-robot_msgs/Pose pose
+geometry_msgs/Pose pose

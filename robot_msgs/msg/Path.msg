@@ -1,1 +1,1 @@
-PoseStamped[] poses
+geometry_msgs/PoseStamped[] poses

@@ -1,0 +1,17 @@
+[robot_msgs/PoseDDot]:
+Acceleration acc
+AngularAcceleration ang_acc
+
+================================================================================
+MSG: robot_msgs/Acceleration
+float64 ax ##Axis angle format 
+float64 ay ##Axis is defined by direction of x,y,z
+float64 az ## magnitude in radians/second
+
+================================================================================
+MSG: robot_msgs/AngularAcceleration
+float64 ax ##Axis angle format 
+float64 ay ##Axis is defined by direction of x,y,z
+float64 az ## magnitude in radians/sec^2
+
+

@@ -1,3 +1,3 @@
 Header header
 
-robot_msgs/Pose[] poses
+geometry_msgs/Pose[] poses
