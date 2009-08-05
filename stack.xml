@@ -8,5 +8,6 @@
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://pr.willowgarage.com/wiki/common_msgs</url>
-  <depend stack="ros" version="0.5"/>
+  <depend stack="ros"/> <!-- rospy, rosrecord, rostest, rosbagmigration, std_msgs, std_msgs, rosbagmigration, rosbagmigration, std_msgs, rosbagmigration, std_msgs --> 
+
 </stack>
