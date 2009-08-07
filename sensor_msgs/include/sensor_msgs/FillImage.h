@@ -40,105 +40,28 @@
 namespace sensor_msgs
 {
 
-  template <class M>
-  void fillImageHelper(M &m,
-                      uint32_t sz0, uint32_t st0,
-                      uint32_t sz1, uint32_t st1,
-                      uint32_t sz2, uint32_t st2,
-                      void *d)
-  {
-    m.layout.dim.resize(3);
-    m.layout.dim[0].label  = "height";
-    m.layout.dim[0].size   = sz0;
-    m.layout.dim[0].stride = st0;
-    m.layout.dim[1].label  = "width";
-    m.layout.dim[1].size   = sz1;
-    m.layout.dim[1].stride = st1;
-    m.layout.dim[2].label  = "channel";
-    m.layout.dim[2].size   = sz2;
-    m.layout.dim[2].stride = st2;
-    m.data.resize(st0);
-    memcpy((char*)(&m.data[0]), (char*)(d), st0*sizeof(m.data[0]));
-  }
-
-  template <class M>
-  void clearImageHelper(M &m)
-  {
-    m.layout.dim.resize(0);
-    m.data.resize(0);
-  }
-
   bool fillImage(Image& image,
-                 std::string label_arg,
-                 uint32_t height_arg, uint32_t width_arg, uint32_t channel_arg,
-                 std::string encoding_arg, std::string depth_arg,
-                 void* data_arg,
-                 uint32_t channel_step = 0, uint32_t width_step = 0, uint32_t height_step = 0)
+                 uint32_t type_arg,
+                 uint32_t rows_arg,
+                 uint32_t cols_arg,
+                 uint32_t step_arg,
+                 void* data_arg)
   {
-    image.label    = label_arg;
-    image.encoding = encoding_arg;
-    image.depth    = depth_arg;
-    
-    if (channel_step == 0)
-      channel_step = channel_arg;
-    
-    if (width_step == 0)
-      width_step = width_arg * channel_step;
-    
-    if (height_step == 0)
-      height_step = height_arg * width_step;
-    
-    if (image.depth == "uint8")
-      fillImageHelper(image.uint8_data,
-                     height_arg, height_step,
-                     width_arg, width_step,
-                     channel_arg, channel_step,
-                     data_arg);
-    
-    else if (image.depth == "uint16")
-      fillImageHelper(image.uint16_data,
-                     height_arg, height_step,
-                     width_arg, width_step,
-                     channel_arg, channel_step,
-                     data_arg);
+    image.type    = type_arg;
+    image.rows    = rows_arg;
+    image.cols    = cols_arg;
+    image.step    = step_arg;
+    size_t st0 = (step_arg * rows_arg);
+    image.data.resize(st0);
+    memcpy((char*)(&image.data[0]), (char*)(data_arg), st0);
 
-    else if (image.depth == "int16")
-      fillImageHelper(image.int16_data,
-                     height_arg, height_step,
-                     width_arg, width_step,
-                     channel_arg, channel_step,
-                     data_arg);
-    else
-    {
-      return false;
-    }
-    
+    image.is_bigendian = 0;
     return true;
   }
 
   void clearImage(Image& image)
   {
-    image.label    = "none";
-    image.encoding = "other";
-    if (image.depth == "uint8")
-      clearImageHelper(image.uint8_data);
-    else if (image.depth == "uint16")
-      clearImageHelper(image.uint16_data);
-    else if (image.depth == "int16")
-      clearImageHelper(image.int16_data);
-    else if (image.depth == "uint32")
-      clearImageHelper(image.uint32_data);
-    else if (image.depth == "int32")
-      clearImageHelper(image.int32_data);
-    else if (image.depth == "uint64")
-      clearImageHelper(image.uint64_data);
-    else if (image.depth == "int64")
-      clearImageHelper(image.int64_data);
-    else if (image.depth == "float32")
-      clearImageHelper(image.float32_data);
-    else if (image.depth == "float64")
-      clearImageHelper(image.float64_data);
-    image.depth = "none";
+    image.data.resize(0);
   }
 }
 
