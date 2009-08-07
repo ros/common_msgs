@@ -1,3 +1,3 @@
 Header header
-robot_msgs/Polygon3D[] polygons
+geometry_msgs/Polygon[] polygons
 sensor_msgs/ChannelFloat32[] chan
