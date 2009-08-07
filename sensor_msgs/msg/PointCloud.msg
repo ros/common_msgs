@@ -1,3 +1,3 @@
 Header header
-geometry_msgs/Point32[] pts
-ChannelFloat32[] chan
+geometry_msgs/Point32[] points
+ChannelFloat32[] channels

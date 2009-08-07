@@ -1,2 +1,2 @@
 string name
-float32[] vals
+float32[] values
