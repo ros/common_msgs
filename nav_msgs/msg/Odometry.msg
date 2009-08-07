@@ -1,2 +1,3 @@
-geometry_msgs/PoseWithCovariance position
-geometry_msgs/TwistWithCovariance velocity
+Header header
+geometry_msgs/PoseWithCovariance pose_with_covariance
+geometry_msgs/TwistWithCovariance twist_with_covariance
