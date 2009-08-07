@@ -18,4 +18,7 @@ float64[3]  T  # translation vector
 float64[3]  Om # rotation, encoded as a Rodigues vector
 
 # Reprojection matrix
+# Allows computation of 3D point corresponding to a left image
+# coordinate + disparity:
+# [X Y Z W]^T = R * [u v d 1]^T
 float64[16] RP # 4x4 row-major matrix

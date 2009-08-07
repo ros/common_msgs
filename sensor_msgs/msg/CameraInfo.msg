@@ -8,7 +8,7 @@
 
 Header header
 
-# Resolution in pixels
+# Camera resolution in pixels
 uint32 height
 uint32 width
 
