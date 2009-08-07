@@ -1,3 +1,2 @@
-Header header
-geometry_msgs/PoseWithCovariance
-geometry_msgs/TwistWithCovariance
+geometry_msgs/PoseWithCovariance pose
+geometry_msgs/TwistWithCovariance twist
