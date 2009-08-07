@@ -2,6 +2,8 @@
 # occupancy.  Occupancy values are integers in the range [0,100], or -1 
 # for unknown.
 
+Header header 
+
 #MetaData for the map
 MapMetaData info
 
