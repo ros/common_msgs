@@ -19,14 +19,14 @@ As an example, consider the DiagnosticStatus message:
     diagnostic_status_classes = self.load_saved_classes('DiagnosticStatus.saved')
     
     diagnostic_status = diagnostic_status_classes['diagnostic_msgs/DiagnosticStatus']
-    diagnostic_value  = diagnostic_status_classes['diagnostic_msgs/DiagnosticValue']
+    diagnostic_value  = diagnostic_status_classes['diagnostic_msgs/KeyValue']
     diagnostic_value  = diagnostic_status_classes['diagnostic_msgs/DiagnosticString']
 
     return diagnostic_status(0, "abcdef", "ghijkl", [diagnostic_value(42.42, 'foo')], [diagnostic_value('xxxxx', 'bar')])
 
   def get_new_diagnostic_status(self):
     diagnostic_status = load_current_class('diagnostic_msgs/DiagnosticStatus')
-    diagnostic_value  = load_current_class('diagnostic_msgs/DiagnosticValue')
+    diagnostic_value  = load_current_class('diagnostic_msgs/KeyValue')
     diagnostic_value  = load_current_class('diagnostic_msgs/DiagnosticString')
 
     return diagnostic_status(0, "abcdef", "ghijkl", [diagnostic_value(42.42, 'foo')], [diagnostic_value('xxxxx', 'bar')])

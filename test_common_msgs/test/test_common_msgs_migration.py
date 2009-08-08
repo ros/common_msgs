@@ -57,17 +57,17 @@ class TestCommonMsgsMigration(unittest.TestCase):
     diagnostic_status_classes = self.load_saved_classes('DiagnosticStatus.saved')
     
     diagnostic_status = diagnostic_status_classes['diagnostic_msgs/DiagnosticStatus']
-    diagnostic_value  = diagnostic_status_classes['diagnostic_msgs/DiagnosticValue']
+    diagnostic_value  = diagnostic_status_classes['diagnostic_msgs/KeyValue']
     diagnostic_string = diagnostic_status_classes['diagnostic_msgs/DiagnosticString']
 
     return diagnostic_status(0, "abcdef", "ghijkl", [diagnostic_value(42.42, 'foo')], [diagnostic_string('xxxxx', 'bar')])
 
   def get_new_diagnostic_status(self):
     from diagnostic_msgs.msg import DiagnosticStatus
-    from diagnostic_msgs.msg import DiagnosticValue
+    from diagnostic_msgs.msg import KeyValue
     from diagnostic_msgs.msg import DiagnosticString
 
-    return DiagnosticStatus(0, "abcdef", "ghijkl", "NONE", [DiagnosticValue(42.42, 'foo')], [DiagnosticString('xxxxx', 'bar')])
+    return DiagnosticStatus(0, "abcdef", "ghijkl", "NONE", [KeyValue(42.42, 'foo')], [DiagnosticString('xxxxx', 'bar')])
 
 
   def test_diagnostic_status(self):
