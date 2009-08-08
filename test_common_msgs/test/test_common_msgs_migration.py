@@ -177,7 +177,7 @@ class TestCommonMsgsMigration(unittest.TestCase):
     from diagnostic_msgs.msg import DiagnosticStatus
     from diagnostic_msgs.msg import KeyValue
 
-    return DiagnosticStatus(0, "abcdef", "ghijkl", "NONE", [KeyValue(str(42.42), 'foo'), KeyValue('xxxxx', 'bar')])
+    return DiagnosticStatus(0, "abcdef", "ghijkl", "NONE", [KeyValue(str(struct.unpack('<f',struct.pack('<f',42.42))[0]), 'foo'), KeyValue('xxxxx', 'bar')])
 
 
   def test_diagnostic_status(self):
@@ -209,9 +209,9 @@ class TestCommonMsgsMigration(unittest.TestCase):
     from diagnostic_msgs.msg import KeyValue
 
     msg = DiagnosticArray(None, [])
-    msg.status.append(DiagnosticStatus(0, "abcdef", "ghijkl", "NONE", [KeyValue(str(12.34), 'abc'), KeyValue('ghbvf', 'jkl')]))
-    msg.status.append(DiagnosticStatus(0, "mnop", "qrst", "NONE", [KeyValue(str(56.78), 'def'), KeyValue('klmnh', 'mno')]))
-    msg.status.append(DiagnosticStatus(0, "uvw", "xyz", "NONE", [KeyValue(str(90.12), 'ghi'), KeyValue('erfcd', 'pqr')]))
+    msg.status.append(DiagnosticStatus(0, "abcdef", "ghijkl", "NONE", [KeyValue(str(struct.unpack('<f',struct.pack('<f',12.34))[0]), 'abc'), KeyValue('ghbvf', 'jkl')]))
+    msg.status.append(DiagnosticStatus(0, "mnop", "qrst", "NONE", [KeyValue(str(struct.unpack('<f',struct.pack('<f',56.78))[0]), 'def'), KeyValue('klmnh', 'mno')]))
+    msg.status.append(DiagnosticStatus(0, "uvw", "xyz", "NONE", [KeyValue(str(struct.unpack('<f',struct.pack('<f',90.12))[0]), 'ghi'), KeyValue('erfcd', 'pqr')]))
 
     return msg
 
