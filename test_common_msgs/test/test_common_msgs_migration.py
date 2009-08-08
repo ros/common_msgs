@@ -48,7 +48,118 @@ import re
 from cStringIO import StringIO
 import os
 
+import rospy
+
 class TestCommonMsgsMigration(unittest.TestCase):
+
+
+# (*) Acceleration.saved
+# (*) AngularAcceleration.saved
+# (*) AngularVelocity.saved
+# (*) BatteryState.saved
+# (*) ChannelFloat32.saved
+# (*) DiagnosticMessage.saved
+# (*) DiagnosticStatus.saved
+# (*) Path.saved
+# (*) Point32.saved
+# (*) PointCloud.saved
+# (*) Point.saved
+# (*) PointStamped.saved
+# (*) Polygon3D.saved
+# (*) PoseDDot.saved
+# (*) PoseDot.saved
+# (*) Pose.saved
+# (*) PoseStamped.saved
+# (*) PoseWithCovariance.saved
+# (-) PoseWithRatesStamped.saved
+# (*) Quaternion.saved
+# (*) QuaternionStamped.saved
+# (*) Transform.saved
+# (*) TransformStamped.saved
+# (*) Twist.saved
+# (*) Vector3.saved
+# (*) Vector3Stamped.saved
+# (*) Velocity.saved
+# VOPose.saved
+# (*) Wrench.saved
+
+
+
+
+########### Polygon3d ###############
+
+  def get_old_polygon3d(self):
+    polygon3d_classes = self.load_saved_classes('Polygon3D.saved')
+
+    polygon3d = polygon3d_classes['robot_msgs/Polygon3D']
+    point32   = polygon3d_classes['robot_msgs/Point32']
+    color_rgba   = polygon3d_classes['std_msgs/ColorRGBA']
+
+    return polygon3d([point32(1.23, 4.56, 7.89), point32(82.861, 31.028, 93.317), point32(87.569, 29.085, 33.415)], color_rgba(255, 100, 100, 0))
+
+  def get_new_polygon3d(self):
+    from geometry_msgs.msg import Polygon
+    from geometry_msgs.msg import Point32
+
+    return Polygon([Point32(1.23, 4.56, 7.89), Point32(82.861, 31.028, 93.317), Point32(87.569, 29.085, 33.415)])
+
+  def test_polygon3d(self):
+    self.do_test('polygon3d', self.get_old_polygon3d, self.get_new_polygon3d)
+
+
+########### Acceleration ###############
+
+  def get_old_acceleration(self):
+    acceleration_classes = self.load_saved_classes('Acceleration.saved')
+
+    acceleration = acceleration_classes['robot_msgs/Acceleration']
+
+    return acceleration(1.23, 4.56, 7.89)
+
+  def get_new_acceleration(self):
+    from geometry_msgs.msg import Vector3
+
+    return Vector3(1.23, 4.56, 7.89)
+
+  def test_acceleration(self):
+    self.do_test('acceleration', self.get_old_acceleration, self.get_new_acceleration)
+
+
+
+########### AngularAcceleration ###############
+
+  def get_old_angular_acceleration(self):
+    angular_acceleration_classes = self.load_saved_classes('AngularAcceleration.saved')
+
+    angular_acceleration = angular_acceleration_classes['robot_msgs/AngularAcceleration']
+
+    return angular_acceleration(1.23, 4.56, 7.89)
+
+  def get_new_angular_acceleration(self):
+    from geometry_msgs.msg import Vector3
+
+    return Vector3(1.23, 4.56, 7.89)
+
+  def test_angular_acceleration(self):
+    self.do_test('angular_acceleration', self.get_old_angular_acceleration, self.get_new_angular_acceleration)
+
+
+########### BatteryState ###############
+
+  def get_old_battery_state(self):
+    battery_state_classes = self.load_saved_classes('BatteryState.saved')
+
+    battery_state = battery_state_classes['robot_msgs/BatteryState']
+
+    return battery_state(None, 1.23, 4.56, 7.89)
+
+  def get_new_battery_state(self):
+    from pr2_msgs.msg import BatteryState
+
+    return BatteryState(None, 9.87, 6.54, 3.21)
+
+  def test_battery_state(self):
+    self.do_test('battery_state', self.get_old_battery_state, self.get_new_battery_state)
 
 
 ########### DiagnosticStatus ###############
@@ -57,7 +168,7 @@ class TestCommonMsgsMigration(unittest.TestCase):
     diagnostic_status_classes = self.load_saved_classes('DiagnosticStatus.saved')
     
     diagnostic_status = diagnostic_status_classes['diagnostic_msgs/DiagnosticStatus']
-    diagnostic_value  = diagnostic_status_classes['diagnostic_msgs/KeyValue']
+    diagnostic_value  = diagnostic_status_classes['diagnostic_msgs/DiagnosticValue']
     diagnostic_string = diagnostic_status_classes['diagnostic_msgs/DiagnosticString']
 
     return diagnostic_status(0, "abcdef", "ghijkl", [diagnostic_value(42.42, 'foo')], [diagnostic_string('xxxxx', 'bar')])
@@ -65,13 +176,49 @@ class TestCommonMsgsMigration(unittest.TestCase):
   def get_new_diagnostic_status(self):
     from diagnostic_msgs.msg import DiagnosticStatus
     from diagnostic_msgs.msg import KeyValue
-    from diagnostic_msgs.msg import DiagnosticString
 
-    return DiagnosticStatus(0, "abcdef", "ghijkl", "NONE", [KeyValue(42.42, 'foo')], [DiagnosticString('xxxxx', 'bar')])
+    return DiagnosticStatus(0, "abcdef", "ghijkl", "NONE", [KeyValue(str(42.42), 'foo'), KeyValue('xxxxx', 'bar')])
 
 
   def test_diagnostic_status(self):
     self.do_test('diagnostic_status', self.get_old_diagnostic_status, self.get_new_diagnostic_status)
+
+
+
+
+########### DiagnosticMessage ###############
+
+  def get_old_diagnostic_message(self):
+    diagnostic_message_classes = self.load_saved_classes('DiagnosticMessage.saved')
+    
+    diagnostic_message = diagnostic_message_classes['diagnostic_msgs/DiagnosticMessage']
+    diagnostic_status = diagnostic_message_classes['diagnostic_msgs/DiagnosticStatus']
+    diagnostic_value  = diagnostic_message_classes['diagnostic_msgs/DiagnosticValue']
+    diagnostic_string = diagnostic_message_classes['diagnostic_msgs/DiagnosticString']
+
+    msg = diagnostic_message(None, [])
+    msg.status.append(diagnostic_status(0, "abcdef", "ghijkl", [diagnostic_value(12.34, 'abc')], [diagnostic_string('ghbvf', 'jkl')]))
+    msg.status.append(diagnostic_status(0, "mnop", "qrst", [diagnostic_value(56.78, 'def')], [diagnostic_string('klmnh', 'mno')]))
+    msg.status.append(diagnostic_status(0, "uvw", "xyz", [diagnostic_value(90.12, 'ghi')], [diagnostic_string('erfcd', 'pqr')]))
+
+    return msg
+
+  def get_new_diagnostic_message(self):
+    from diagnostic_msgs.msg import DiagnosticArray
+    from diagnostic_msgs.msg import DiagnosticStatus
+    from diagnostic_msgs.msg import KeyValue
+
+    msg = DiagnosticArray(None, [])
+    msg.status.append(DiagnosticStatus(0, "abcdef", "ghijkl", "NONE", [KeyValue(str(12.34), 'abc'), KeyValue('ghbvf', 'jkl')]))
+    msg.status.append(DiagnosticStatus(0, "mnop", "qrst", "NONE", [KeyValue(str(56.78), 'def'), KeyValue('klmnh', 'mno')]))
+    msg.status.append(DiagnosticStatus(0, "uvw", "xyz", "NONE", [KeyValue(str(90.12), 'ghi'), KeyValue('erfcd', 'pqr')]))
+
+    return msg
+
+
+  def test_diagnostic_message(self):
+    self.do_test('diagnostic_message', self.get_old_diagnostic_message, self.get_new_diagnostic_message)
+
 
 
 ########### Vector3 ###############
@@ -295,6 +442,7 @@ class TestCommonMsgsMigration(unittest.TestCase):
     self.do_test('pose', self.get_old_pose, self.get_new_pose)
 
 
+
 ########### PoseStamped ###############
 
 
@@ -319,13 +467,102 @@ class TestCommonMsgsMigration(unittest.TestCase):
 
   def test_pose_stamped(self):
     self.do_test('pose_stamped', self.get_old_pose_stamped, self.get_new_pose_stamped)
+
+
+
+########### PoseWithCovariance ###############
+
+
+  def get_old_pose_with_covariance(self):
+    pose_with_covariance_classes = self.load_saved_classes('PoseWithCovariance.saved')
     
+    pose_with_covariance  = pose_with_covariance_classes['robot_msgs/PoseWithCovariance']
+    pose  = pose_with_covariance_classes['robot_msgs/Pose']
+    point  = pose_with_covariance_classes['robot_msgs/Point']
+    quaternion  = pose_with_covariance_classes['robot_msgs/Quaternion']
+    
+    return pose_with_covariance(None, pose(point(1.23, 4.56, 7.89), quaternion(0,0,0,1)), [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0])
+
+  def get_new_pose_with_covariance(self):
+    from geometry_msgs.msg import PoseWithCovarianceStamped
+    from geometry_msgs.msg import Pose
+    from geometry_msgs.msg import Point
+    from geometry_msgs.msg import Quaternion
+    
+    return PoseWithCovarianceStamped(None, Pose(Point(1.23, 4.56, 7.89), Quaternion(0,0,0,1)), [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0])
+
+
+  def test_pose_with_covariance(self):
+    self.do_test('pose_with_covariance', self.get_old_pose_with_covariance, self.get_new_pose_with_covariance)
+
+
+
+########### PoseDot ###############
+
+
+  def get_old_pose_dot(self):
+    pose_dot_classes = self.load_saved_classes('PoseDot.saved')
+    
+    pose_dot          = pose_dot_classes['robot_msgs/PoseDot']
+    velocity          = pose_dot_classes['robot_msgs/Velocity']
+    angular_velocity  = pose_dot_classes['robot_msgs/AngularVelocity']
+    
+    return pose_dot(velocity(1.23, 4.56, 7.89), angular_velocity(9.87, 6.54, 3.21))
+
+  def get_new_pose_dot(self):
+    from geometry_msgs.msg import Twist
+    from geometry_msgs.msg import Vector3
+    
+    return Twist(Vector3(1.23, 4.56, 7.89), Vector3(9.87, 6.54, 3.21))
+
+  def test_pose_dot(self):
+    self.do_test('pose_dot', self.get_old_pose_dot, self.get_new_pose_dot)
+
+
+
+########### Path ###############
+
+
+  def get_old_path(self):
+    path_classes = self.load_saved_classes('Path.saved')
+    
+
+
+    path  = path_classes['robot_msgs/Path']
+    header = path_classes['roslib/Header']
+    pose_stamped  = path_classes['robot_msgs/PoseStamped']
+    pose  = path_classes['robot_msgs/Pose']
+    point  = path_classes['robot_msgs/Point']
+    quaternion  = path_classes['robot_msgs/Quaternion']
+    
+    return path([pose_stamped(header(0,rospy.Time(0,0),'foo'),    pose(point(1.23, 4.56, 7.89), quaternion(1,0,0,1))),
+                       pose_stamped(header(0,rospy.Time(0,1000),'foo'), pose(point(1.25, 4.58, 7.91), quaternion(0,1,0,1))),
+                       pose_stamped(header(0,rospy.Time(0,2000),'foo'), pose(point(1.27, 4.60, 7.93), quaternion(0,0,1,1)))])
+
+  def get_new_path(self):
+    from robot_msgs.msg import Path
+    from roslib.msg import Header
+    from geometry_msgs.msg import PoseStamped
+    from geometry_msgs.msg import Pose
+    from geometry_msgs.msg import Point
+    from geometry_msgs.msg import Quaternion
+    
+    return Path([PoseStamped(Header(0,rospy.Time(0,0),'foo'),    Pose(Point(1.23, 4.56, 7.89), Quaternion(1,0,0,1))),
+                       PoseStamped(Header(0,rospy.Time(0,1000),'foo'), Pose(Point(1.25, 4.58, 7.91), Quaternion(0,1,0,1))),
+                       PoseStamped(Header(0,rospy.Time(0,2000),'foo'), Pose(Point(1.27, 4.60, 7.93), Quaternion(0,0,1,1)))])
+
+
+  def test_path(self):
+    self.do_test('path', self.get_old_path, self.get_new_path)
+
+
+
 
 ########### Velocity ###############
 
 
   def get_old_velocity(self):
-    velocity_classes = """self.load_saved_classes('Velocity.saved')
+    velocity_classes = self.load_saved_classes('Velocity.saved')
     
     velocity  = velocity_classes['robot_msgs/Velocity']
     
@@ -339,7 +576,7 @@ class TestCommonMsgsMigration(unittest.TestCase):
 
   def test_velocity(self):
     self.do_test('velocity', self.get_old_velocity, self.get_new_velocity)
-    """
+
 
 ########### Twist ###############
 
@@ -353,14 +590,40 @@ class TestCommonMsgsMigration(unittest.TestCase):
     return twist(None, vector3(1,2,3), vector3(4, 5, 6))
 
   def get_new_twist(self):
+    from geometry_msgs.msg import TwistStamped
     from geometry_msgs.msg import Twist
     from geometry_msgs.msg import Vector3
 
-    return Twist(Vector3(1,2,3), Vector3(4, 5, 6))
+    return TwistStamped(None, Twist(Vector3(1,2,3), Vector3(4, 5, 6)))
 
 
   def test_twist(self):
     self.do_test('twist', self.get_old_twist, self.get_new_twist)
+
+
+
+
+########### Wrench ###############
+
+
+  def get_old_wrench(self):
+    wrench_classes = self.load_saved_classes('Wrench.saved')
+    
+    wrench    = wrench_classes['robot_msgs/Wrench']
+    vector3   = wrench_classes['robot_msgs/Vector3']
+    
+    return wrench(None, vector3(1,2,3), vector3(4, 5, 6))
+
+  def get_new_wrench(self):
+    from geometry_msgs.msg import WrenchStamped
+    from geometry_msgs.msg import Wrench
+    from geometry_msgs.msg import Vector3
+
+    return WrenchStamped(None, Wrench(Vector3(1,2,3), Vector3(4, 5, 6)))
+
+
+  def test_wrench(self):
+    self.do_test('wrench', self.get_old_wrench, self.get_new_wrench)
 
 
 

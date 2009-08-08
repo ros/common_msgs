@@ -1,24 +1,3 @@
-class update_robot_msgs_ChannelFloat32_61c47e4621e471c885edb248b5dcafd5(MessageUpdateRule):
-	old_type = "robot_msgs/ChannelFloat32"
-	old_full_text = """
-string name
-float32[] vals
-"""
-
-	new_type = "sensor_msgs/ChannelFloat32"
-	new_full_text = """
-string name
-float32[] vals
-"""
-
-	order = 0
-	migrated_types = []
-
-	valid = True
-
-	def update(self, old_msg, new_msg):
-                assert 0, "md5sum matches, update should never be called."
-
 class update_robot_msgs_PointCloud_c47b5cedd2b77d241b27547ed7624840(MessageUpdateRule):
 	old_type = "robot_msgs/PointCloud"
 	old_full_text = """
@@ -55,8 +34,8 @@ float32[] vals
 	new_type = "sensor_msgs/PointCloud"
 	new_full_text = """
 Header header
-geometry_msgs/Point32[] pts
-ChannelFloat32[] chan
+geometry_msgs/Point32[] points
+ChannelFloat32[] channels
 
 ================================================================================
 MSG: roslib/Header
@@ -81,17 +60,42 @@ float32 z
 ================================================================================
 MSG: sensor_msgs/ChannelFloat32
 string name
-float32[] vals
+float32[] values
 """
 
 	order = 0
 	migrated_types = [
 		("Header","Header"),
-		("Point32", "geometry_msgs/Point32"),
-		("ChannelFloat32", "ChannelFloat32")]
+                ("Point32","geometry_msgs/Point32"),
+                ("ChannelFloat32","ChannelFloat32")]
 
 	valid = True
 
 	def update(self, old_msg, new_msg):
-                assert 0, "md5sum matches, update should never be called."
+		self.migrate(old_msg.header, new_msg.header)
+		self.migrate_array(old_msg.pts, new_msg.points, "geometry_msgs/Point32")
+		self.migrate_array(old_msg.chan, new_msg.channels, "ChannelFloat32")
+
+
+class update_robot_msgs_ChannelFloat32_61c47e4621e471c885edb248b5dcafd5(MessageUpdateRule):
+	old_type = "robot_msgs/ChannelFloat32"
+	old_full_text = """
+string name
+float32[] vals
+"""
+
+	new_type = "sensor_msgs/ChannelFloat32"
+	new_full_text = """
+string name
+float32[] values
+"""
+
+	order = 0
+	migrated_types = []
+
+	valid = True
+
+	def update(self, old_msg, new_msg):
+		new_msg.name = old_msg.name
+		new_msg.values = old_msg.vals
 
