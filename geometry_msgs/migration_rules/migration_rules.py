@@ -155,7 +155,7 @@ float64 z
 	new_type = "geometry_msgs/Vector3Stamped"
 	new_full_text = """
 Header header
-Vector3 data
+Vector3 vector
 
 ================================================================================
 MSG: roslib/Header
@@ -188,7 +188,7 @@ float64 z
 
 	def update(self, old_msg, new_msg):
 		self.migrate(old_msg.header, new_msg.header)
-		self.migrate(old_msg.vector, new_msg.data)
+		self.migrate(old_msg.vector, new_msg.vector)
 
 class update_robot_msgs_Point_4a842b65f413084dc2b10fb484ea7f17(MessageUpdateRule):
 	old_type = "robot_msgs/Point"
