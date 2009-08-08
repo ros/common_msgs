@@ -89,6 +89,38 @@ class TestCommonMsgsMigration(unittest.TestCase):
 
 
 
+########### OccupancyGrid ###############
+
+  def get_old_occupancy_grid(self):
+    occupancy_grid_classes = self.load_saved_classes('OccGrid.saved')
+
+    occupancy_grid = occupancy_grid_classes['robot_msgs/OccGrid']
+    map_meta_data  = occupancy_grid_classes['robot_msgs/MapMetaData']
+    pose           = occupancy_grid_classes['robot_msgs/Pose']
+    point          = occupancy_grid_classes['robot_msgs/Point']
+    quaternion     = occupancy_grid_classes['robot_msgs/Quaternion']
+
+    import random
+    r = random.Random(1234)
+    
+    return occupancy_grid(map_meta_data(rospy.Time(123,456), 0.1, 100, 100, pose(point(1.23, 4.56, 7.89), quaternion(0,0,0,1))), [r.randint(-1,100) for x in xrange(0,1000)])
+
+  def get_new_occupancy_grid(self):
+    from nav_msgs.msg import OccupancyGrid
+    from nav_msgs.msg import MapMetaData
+    from roslib.msg import Header
+    from geometry_msgs.msg import Pose
+    from geometry_msgs.msg import Point
+    from geometry_msgs.msg import Quaternion
+    
+    import random
+    r = random.Random(1234)
+    
+    return OccupancyGrid(Header(0, rospy.Time(0,0), "/map"), MapMetaData(rospy.Time(123,456), 0.1, 100, 100, Pose(Point(1.23, 4.56, 7.89), Quaternion(0,0,0,1))), [r.randint(-1,100) for x in xrange(0,1000)])
+
+  def test_occupancy_grid(self):
+    self.do_test('occupancy_grid', self.get_old_occupancy_grid, self.get_new_occupancy_grid)
+
 
 ########### Polygon3d ###############
 
