@@ -6,11 +6,22 @@
 # The meaning of the camera parameters are described in detail at
 # http://pr.willowgarage.com/wiki/Camera_Calibration.
 
+##########################
+# Image acquisition info #
+##########################
+
+# Time of image acquisition, camera coordinate frame ID
 Header header
 
 # Camera resolution in pixels
 uint32 height
 uint32 width
+
+# Region of interest (subwindow of full camera resolution), if applicable
+RegionOfInterest roi
+
+# Encoding of raw pixel data
+PixelEncoding raw_encoding
 
 ########################
 # Intrinsic parameters #
