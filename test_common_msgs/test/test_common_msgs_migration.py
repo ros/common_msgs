@@ -84,7 +84,7 @@ class TestCommonMsgsMigration(unittest.TestCase):
 
 # DiagnosticString.saved
 # DiagnosticValue.saved
-# OccupancyGrid_no_header.saved
+# OccupancyGrid.saved
 # VOPose.saved
 
 
@@ -164,6 +164,44 @@ class TestCommonMsgsMigration(unittest.TestCase):
 
   def test_battery_state(self):
     self.do_test('battery_state', self.get_old_battery_state, self.get_new_battery_state)
+
+
+########### DiagnosticValue ###############
+
+  def get_old_diagnostic_value(self):
+    diagnostic_value_classes = self.load_saved_classes('DiagnosticValue.saved')
+    
+    diagnostic_value  = diagnostic_value_classes['diagnostic_msgs/DiagnosticValue']
+
+    return diagnostic_value(42.42, 'foo')
+
+  def get_new_diagnostic_value(self):
+    from diagnostic_msgs.msg import KeyValue
+
+    return KeyValue(str(struct.unpack('<f',struct.pack('<f',42.42))[0]), 'foo')
+
+
+  def test_diagnostic_value(self):
+    self.do_test('diagnostic_value', self.get_old_diagnostic_value, self.get_new_diagnostic_value)
+
+
+########### DiagnosticString ###############
+
+  def get_old_diagnostic_string(self):
+    diagnostic_string_classes = self.load_saved_classes('DiagnosticString.saved')
+    
+    diagnostic_string  = diagnostic_string_classes['diagnostic_msgs/DiagnosticString']
+
+    return diagnostic_string('xxxxx', 'bar')
+
+  def get_new_diagnostic_string(self):
+    from diagnostic_msgs.msg import KeyValue
+
+    return KeyValue('xxxxx', 'bar')
+
+
+  def test_diagnostic_string(self):
+    self.do_test('diagnostic_string', self.get_old_diagnostic_string, self.get_new_diagnostic_string)
 
 
 ########### DiagnosticStatus ###############
