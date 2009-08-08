@@ -16,6 +16,7 @@
   <depend package="geometry_msgs"/>
   <depend package="sensor_msgs"/>
   <depend package="pr2_msgs"/>
+  <depend package="nav_msgs"/>
 
   <url>http://pr.willowgarage.com/wiki/test_common_msgs</url>
 

@@ -79,13 +79,42 @@ class TestCommonMsgsMigration(unittest.TestCase):
 # (*) Vector3Stamped.saved
 # (*) Velocity.saved
 # (*) Wrench.saved
+# (*) DiagnosticString.saved
+# (*) DiagnosticValue.saved
+# (*) OccupancyGrid.saved
+# (*) VOPose.saved
+# (*) RobotBase2DOdom.saved
 
 
 
-# DiagnosticString.saved
-# DiagnosticValue.saved
-# OccupancyGrid.saved
-# VOPose.saved
+########### RobotBase2DOdom ###############
+
+  def get_old_robot_base_2d_odom(self):
+    robot_base_2d_odom_classes = self.load_saved_classes('RobotBase2DOdom.saved')
+
+    robot_base_2d_odom = robot_base_2d_odom_classes['deprecated_msgs/RobotBase2DOdom']
+    pose_2d_float32    = robot_base_2d_odom_classes['deprecated_msgs/Pose2DFloat32']
+    
+    return robot_base_2d_odom(None, pose_2d_float32(0,0,0), pose_2d_float32(0,0,0), 0, 0)
+
+  def get_new_robot_base_2d_odom(self):
+    from nav_msgs.msg import Odometry
+    from geometry_msgs.msg import PoseWithCovariance
+    from geometry_msgs.msg import Pose
+    from geometry_msgs.msg import Point
+    from geometry_msgs.msg import Quaternion
+    from geometry_msgs.msg import TwistWithCovariance
+    from geometry_msgs.msg import Twist
+    from geometry_msgs.msg import Vector3
+    
+    p = PoseWithCovariance(Pose(Point(1.23, 4.56, 7.89), Quaternion(0,0,0,1)), [0.0]*36)
+    t = TwistWithCovariance(Twist(Vector3(1.23, 4.56, 7.89), Vector3(9.87, 6.54, 3.21)), [0.0]*36)
+
+    return Odometry(None, p, t)
+
+  def test_robot_base_2d_odom(self):
+    self.do_test('robot_base_2d_odom', self.get_old_robot_base_2d_odom, self.get_new_robot_base_2d_odom)
+
 
 
 
