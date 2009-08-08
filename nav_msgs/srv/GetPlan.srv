@@ -1,4 +1,4 @@
 geometry_msgs/PoseStamped goal
 float32 tolerance
 ---
-robot_msgs/Path plan
+nav_msgs/Path plan
