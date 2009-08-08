@@ -87,7 +87,7 @@ float64 w
 	new_type = "geometry_msgs/QuaternionStamped"
 	new_full_text = """
 Header header
-Quaternion data
+Quaternion quaternion
 
 ================================================================================
 MSG: roslib/Header
@@ -122,7 +122,7 @@ float64 w
 
 	def update(self, old_msg, new_msg):
 		self.migrate(old_msg.header, new_msg.header)
-		self.migrate(old_msg.quaternion, new_msg.data)
+		self.migrate(old_msg.quaternion, new_msg.quaternion)
 
 class update_robot_msgs_Vector3Stamped_7b324c7325e683bf02a9b14b01090ec7(MessageUpdateRule):
 	old_type = "robot_msgs/Vector3Stamped"
@@ -246,7 +246,7 @@ float64 z
 	new_type = "geometry_msgs/PointStamped"
 	new_full_text = """
 Header header
-Point data
+Point point
 
 ================================================================================
 MSG: roslib/Header
@@ -279,7 +279,7 @@ float64 z
 
 	def update(self, old_msg, new_msg):
 		self.migrate(old_msg.header, new_msg.header)
-		self.migrate(old_msg.point, new_msg.data)
+		self.migrate(old_msg.point, new_msg.point)
 
 class update_robot_msgs_Transform_ac9eff44abf714214112b05d54a3cf9b(MessageUpdateRule):
 	old_type = "robot_msgs/Transform"
@@ -649,7 +649,7 @@ float64 z
 	new_type = "geometry_msgs/TwistStamped"
 	new_full_text = """
 Header header
-Twist data
+Twist twist
 
 ================================================================================
 MSG: roslib/Header
@@ -687,6 +687,6 @@ float64 z
 
 	def update(self, old_msg, new_msg):
 		self.migrate(old_msg.header, new_msg.header)
-		new_msg.data = self.get_new_class('Twist')()
-                self.migrate(old_msg.vel, new_msg.data.linear)
-                self.migrate(old_msg.rot, new_msg.data.angular)
+		new_msg.twist = self.get_new_class('Twist')()
+                self.migrate(old_msg.vel, new_msg.twist.linear)
+                self.migrate(old_msg.rot, new_msg.twist.angular)

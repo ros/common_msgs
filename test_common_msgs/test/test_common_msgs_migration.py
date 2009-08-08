@@ -67,11 +67,9 @@ class TestCommonMsgsMigration(unittest.TestCase):
 # (*) PointStamped.saved
 # (*) Polygon3D.saved
 # (*) PoseDDot.saved
-# (*) PoseDot.saved
 # (*) Pose.saved
 # (*) PoseStamped.saved
 # (*) PoseWithCovariance.saved
-# (-) PoseWithRatesStamped.saved
 # (*) Quaternion.saved
 # (*) QuaternionStamped.saved
 # (*) Transform.saved
@@ -80,8 +78,14 @@ class TestCommonMsgsMigration(unittest.TestCase):
 # (*) Vector3.saved
 # (*) Vector3Stamped.saved
 # (*) Velocity.saved
-# VOPose.saved
 # (*) Wrench.saved
+
+
+
+# DiagnosticString.saved
+# DiagnosticValue.saved
+# OccupancyGrid_no_header.saved
+# VOPose.saved
 
 
 
@@ -182,8 +186,6 @@ class TestCommonMsgsMigration(unittest.TestCase):
 
   def test_diagnostic_status(self):
     self.do_test('diagnostic_status', self.get_old_diagnostic_status, self.get_new_diagnostic_status)
-
-
 
 
 ########### DiagnosticMessage ###############
@@ -467,6 +469,33 @@ class TestCommonMsgsMigration(unittest.TestCase):
 
   def test_pose_stamped(self):
     self.do_test('pose_stamped', self.get_old_pose_stamped, self.get_new_pose_stamped)
+
+
+
+########### VOPose ###############
+
+
+  def get_old_vo_pose(self):
+    vo_pose_classes = self.load_saved_classes('VOPose.saved')
+    
+    vo_pose  = vo_pose_classes['robot_msgs/VOPose']
+    pose  = vo_pose_classes['robot_msgs/Pose']
+    point  = vo_pose_classes['robot_msgs/Point']
+    quaternion  = vo_pose_classes['robot_msgs/Quaternion']
+    
+    return vo_pose(None, pose(point(1.23, 4.56, 7.89), quaternion(0,0,0,1)), 123)
+
+  def get_new_vo_pose(self):
+    from deprecated_msgs.msg import VOPose
+    from geometry_msgs.msg import Pose
+    from geometry_msgs.msg import Point
+    from geometry_msgs.msg import Quaternion
+    
+    return VOPose(None, Pose(Point(1.23, 4.56, 7.89), Quaternion(0,0,0,1)), 123)
+
+
+  def test_vo_pose(self):
+    self.do_test('vo_pose', self.get_old_vo_pose, self.get_new_vo_pose)
 
 
 
