@@ -48,8 +48,8 @@ namespace sensor_msgs
                  void* data_arg)
   {
     image.type    = type_arg;
-    image.rows    = rows_arg;
-    image.cols    = cols_arg;
+    image.height  = rows_arg;
+    image.width   = cols_arg;
     image.step    = step_arg;
     size_t st0 = (step_arg * rows_arg);
     image.data.resize(st0);
