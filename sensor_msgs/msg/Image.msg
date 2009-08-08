@@ -4,6 +4,11 @@ Header header        # Header
 uint32 TYPE_MONO8=0
 uint32 TYPE_BGR8=16
 
+# Encoded as OpenCV's CvMat type.
+# S=signed, U=unsigned, F=float.
+# For example, TYPE_8UC1 means the elements are 8-bit unsigned and the
+# there is 1 channel, and TYPE_32SC2 means the elements are 32-bit
+# signed and there are 2 channels.
 uint32 TYPE_8UC1=0
 uint32 TYPE_8UC2=8
 uint32 TYPE_8UC3=16
