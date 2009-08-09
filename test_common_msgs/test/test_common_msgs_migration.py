@@ -240,20 +240,20 @@ class TestCommonMsgsMigration(unittest.TestCase):
 
 ########### BatteryState ###############
 
-  def get_old_battery_state(self):
-    battery_state_classes = self.load_saved_classes('BatteryState.saved')
-
-    battery_state = battery_state_classes['robot_msgs/BatteryState']
-
-    return battery_state(None, 1.23, 4.56, 7.89)
-
-  def get_new_battery_state(self):
-    from pr2_msgs.msg import BatteryState
-
-    return BatteryState(None, 9.87, 6.54, 3.21)
-
-  def test_battery_state(self):
-    self.do_test('battery_state', self.get_old_battery_state, self.get_new_battery_state)
+#  def get_old_battery_state(self):
+#    battery_state_classes = self.load_saved_classes('BatteryState.saved')
+#
+#    battery_state = battery_state_classes['robot_msgs/BatteryState']
+#
+#    return battery_state(None, 1.23, 4.56, 7.89)
+#
+#  def get_new_battery_state(self):
+#    from pr2_msgs.msg import BatteryState
+#
+#    return BatteryState(None, 9.87, 6.54, 3.21)
+#
+#  def test_battery_state(self):
+#    self.do_test('battery_state', self.get_old_battery_state, self.get_new_battery_state)
 
 
 ########### DiagnosticValue ###############
@@ -603,27 +603,27 @@ class TestCommonMsgsMigration(unittest.TestCase):
 ########### VOPose ###############
 
 
-  def get_old_vo_pose(self):
-    vo_pose_classes = self.load_saved_classes('VOPose.saved')
-    
-    vo_pose  = vo_pose_classes['robot_msgs/VOPose']
-    pose  = vo_pose_classes['robot_msgs/Pose']
-    point  = vo_pose_classes['robot_msgs/Point']
-    quaternion  = vo_pose_classes['robot_msgs/Quaternion']
-    
-    return vo_pose(None, pose(point(1.23, 4.56, 7.89), quaternion(0,0,0,1)), 123)
-
-  def get_new_vo_pose(self):
-    from deprecated_msgs.msg import VOPose
-    from geometry_msgs.msg import Pose
-    from geometry_msgs.msg import Point
-    from geometry_msgs.msg import Quaternion
-    
-    return VOPose(None, Pose(Point(1.23, 4.56, 7.89), Quaternion(0,0,0,1)), 123)
-
-
-  def test_vo_pose(self):
-    self.do_test('vo_pose', self.get_old_vo_pose, self.get_new_vo_pose)
+#  def get_old_vo_pose(self):
+#    vo_pose_classes = self.load_saved_classes('VOPose.saved')
+#    
+#    vo_pose  = vo_pose_classes['robot_msgs/VOPose']
+#    pose  = vo_pose_classes['robot_msgs/Pose']
+#    point  = vo_pose_classes['robot_msgs/Point']
+#    quaternion  = vo_pose_classes['robot_msgs/Quaternion']
+#    
+#    return vo_pose(None, pose(point(1.23, 4.56, 7.89), quaternion(0,0,0,1)), 123)
+#
+#  def get_new_vo_pose(self):
+#    from deprecated_msgs.msg import VOPose
+#    from geometry_msgs.msg import Pose
+#    from geometry_msgs.msg import Point
+#    from geometry_msgs.msg import Quaternion
+#    
+#    return VOPose(None, Pose(Point(1.23, 4.56, 7.89), Quaternion(0,0,0,1)), 123)
+#
+#
+#  def test_vo_pose(self):
+#    self.do_test('vo_pose', self.get_old_vo_pose, self.get_new_vo_pose)
 
 
 

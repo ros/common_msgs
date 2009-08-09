@@ -179,3 +179,25 @@ string label # what to label this value when viewing
 		new_msg.values = tmp_values1 + tmp_values2
 
 
+class update_diagnostic_msgs_KeyValue_160b8172585340ae9280191a0d54f07c(MessageUpdateRule):
+	old_type = "diagnostic_msgs/KeyValue"
+	old_full_text = """
+string value # a value to track over time
+string label # what to label this value when viewing
+"""
+
+	new_type = "diagnostic_msgs/KeyValue"
+	new_full_text = """
+string key # what to label this value when viewing
+string value # a value to track over time
+"""
+
+	order = 0
+	migrated_types = []
+
+	valid = True
+
+	def update(self, old_msg, new_msg):
+		new_msg.key = old_msg.label
+		new_msg.value = old_msg.value
+
