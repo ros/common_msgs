@@ -1,2 +1,0 @@
-Header header
-PoseWithRates pose_with_rates
