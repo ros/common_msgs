@@ -690,3 +690,55 @@ float64 z
 		new_msg.twist = self.get_new_class('Twist')()
                 self.migrate(old_msg.vel, new_msg.twist.linear)
                 self.migrate(old_msg.rot, new_msg.twist.angular)
+
+class update_robot_msgs_Acceleration_271a8351f08a1993852d2e5e55f1efa1(MessageUpdateRule):
+	old_type = "robot_msgs/Acceleration"
+	old_full_text = """
+float64 ax ##Axis angle format 
+float64 ay ##Axis is defined by direction of x,y,z
+float64 az ## magnitude in radians/second
+"""
+
+	new_type = "geometry_msgs/Vector3"
+	new_full_text = """
+float64 x
+float64 y
+float64 z
+"""
+
+	order = 0
+	migrated_types = []
+
+	valid = True
+
+	def update(self, old_msg, new_msg):
+		new_msg.x = old_msg.ax
+		new_msg.y = old_msg.ay
+		new_msg.z = old_msg.az
+
+
+class update_robot_msgs_AngularAcceleration_271a8351f08a1993852d2e5e55f1efa1(MessageUpdateRule):
+	old_type = "robot_msgs/AngularAcceleration"
+	old_full_text = """
+float64 ax ##Axis angle format 
+float64 ay ##Axis is defined by direction of x,y,z
+float64 az ## magnitude in radians/sec^2
+"""
+
+	new_type = "geometry_msgs/Vector3"
+	new_full_text = """
+float64 x
+float64 y
+float64 z
+"""
+
+	order = 0
+	migrated_types = []
+
+	valid = True
+
+	def update(self, old_msg, new_msg):
+		new_msg.x = old_msg.ax
+		new_msg.y = old_msg.ay
+		new_msg.z = old_msg.az
+
