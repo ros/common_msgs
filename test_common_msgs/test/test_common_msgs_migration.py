@@ -50,6 +50,36 @@ import os
 
 import rospy
 
+import math
+
+def quaternion_from_euler(x, y, z):
+  x /= 2.0
+  y /= 2.0
+  z /= 2.0
+  ci = math.cos(x)
+  si = math.sin(x)
+  cj = math.cos(y)
+  sj = math.sin(y)
+  ck = math.cos(z)
+  sk = math.sin(z)
+  cc = ci*ck
+  cs = ci*sk
+  sc = si*ck
+  ss = si*sk
+
+  quaternion = [0.0,0.0,0.0,0.0]
+
+  quaternion[0] = cj*sc - sj*cs
+  quaternion[1] = cj*ss + sj*cc
+  quaternion[2] = cj*cs - sj*sc
+  quaternion[3] = cj*cc + sj*ss
+
+  return quaternion
+
+
+
+identity6x6 = [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0]
+
 class TestCommonMsgsMigration(unittest.TestCase):
 
 
@@ -86,7 +116,6 @@ class TestCommonMsgsMigration(unittest.TestCase):
 # (*) RobotBase2DOdom.saved
 
 
-
 ########### RobotBase2DOdom ###############
 
   def get_old_robot_base_2d_odom(self):
@@ -95,7 +124,7 @@ class TestCommonMsgsMigration(unittest.TestCase):
     robot_base_2d_odom = robot_base_2d_odom_classes['deprecated_msgs/RobotBase2DOdom']
     pose_2d_float32    = robot_base_2d_odom_classes['deprecated_msgs/Pose2DFloat32']
     
-    return robot_base_2d_odom(None, pose_2d_float32(0,0,0), pose_2d_float32(0,0,0), 0, 0)
+    return robot_base_2d_odom(None, pose_2d_float32(3.33, 2.22, 1.11), pose_2d_float32(.1,.2,.3), 0, 1)
 
   def get_new_robot_base_2d_odom(self):
     from nav_msgs.msg import Odometry
@@ -107,8 +136,8 @@ class TestCommonMsgsMigration(unittest.TestCase):
     from geometry_msgs.msg import Twist
     from geometry_msgs.msg import Vector3
     
-    p = PoseWithCovariance(Pose(Point(1.23, 4.56, 7.89), Quaternion(0,0,0,1)), [0.0]*36)
-    t = TwistWithCovariance(Twist(Vector3(1.23, 4.56, 7.89), Vector3(9.87, 6.54, 3.21)), [0.0]*36)
+    p = PoseWithCovariance(Pose(Point(3.33, 2.22, 0), apply(Quaternion,quaternion_from_euler(0,0,1.11))), identity6x6)
+    t = TwistWithCovariance(Twist(Vector3(.1, .2, 0), Vector3(0, 0, .3)), identity6x6)
 
     return Odometry(None, p, t)
 
@@ -609,7 +638,7 @@ class TestCommonMsgsMigration(unittest.TestCase):
     point  = pose_with_covariance_classes['robot_msgs/Point']
     quaternion  = pose_with_covariance_classes['robot_msgs/Quaternion']
     
-    return pose_with_covariance(None, pose(point(1.23, 4.56, 7.89), quaternion(0,0,0,1)), [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0])
+    return pose_with_covariance(None, pose(point(1.23, 4.56, 7.89), quaternion(0,0,0,1)), identity6x6)
 
   def get_new_pose_with_covariance(self):
     from geometry_msgs.msg import PoseWithCovarianceStamped
@@ -617,7 +646,7 @@ class TestCommonMsgsMigration(unittest.TestCase):
     from geometry_msgs.msg import Point
     from geometry_msgs.msg import Quaternion
     
-    return PoseWithCovarianceStamped(None, Pose(Point(1.23, 4.56, 7.89), Quaternion(0,0,0,1)), [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0])
+    return PoseWithCovarianceStamped(None, Pose(Point(1.23, 4.56, 7.89), Quaternion(0,0,0,1)), identity6x6)
 
 
   def test_pose_with_covariance(self):
