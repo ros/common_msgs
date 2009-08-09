@@ -1,6 +1,6 @@
 #
 # Laser scans angles are measured counter clockwise, with 0 facing forward
-# (along the x-axis) of the device frame
+# (along the x-axis) of the device frame, and the laser plane horizontal (perpendicular to the Z axis)
 #
 
 Header header

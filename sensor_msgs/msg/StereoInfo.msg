@@ -15,7 +15,7 @@ uint32 width
 
 # Pose of right camera in the left camera coordinate frame
 float64[3]  T  # translation vector
-float64[3]  Om # rotation, encoded as a Rodigues vector
+float64[3]  Om # rotation, encoded as a Rodrigues vector
 
 # Reprojection matrix
 # Allows computation of 3D point corresponding to a left image
