@@ -43,6 +43,35 @@ namespace sensor_msgs
     extern const std::string RGBA8;
     extern const std::string BGR8;
     extern const std::string BGRA8;
-    // etc.
+    extern const std::string MONO8;
+    extern const std::string MONO16;
+    extern const std::string TYPE_8UC1;
+    extern const std::string TYPE_8UC2;
+    extern const std::string TYPE_8UC3;
+    extern const std::string TYPE_8UC4;
+    extern const std::string TYPE_8SC1;
+    extern const std::string TYPE_8SC2;
+    extern const std::string TYPE_8SC3;
+    extern const std::string TYPE_8SC4;
+    extern const std::string TYPE_16UC1;
+    extern const std::string TYPE_16UC2;
+    extern const std::string TYPE_16UC3;
+    extern const std::string TYPE_16UC4;
+    extern const std::string TYPE_16SC1;
+    extern const std::string TYPE_16SC2;
+    extern const std::string TYPE_16SC3;
+    extern const std::string TYPE_16SC4;
+    extern const std::string TYPE_32SC1;
+    extern const std::string TYPE_32SC2;
+    extern const std::string TYPE_32SC3;
+    extern const std::string TYPE_32SC4;
+    extern const std::string TYPE_32FC1;
+    extern const std::string TYPE_32FC2;
+    extern const std::string TYPE_32FC3;
+    extern const std::string TYPE_32FC4;
+    extern const std::string TYPE_64FC1;
+    extern const std::string TYPE_64FC2;
+    extern const std::string TYPE_64FC3;
+    extern const std::string TYPE_64FC4;
   }
 }
