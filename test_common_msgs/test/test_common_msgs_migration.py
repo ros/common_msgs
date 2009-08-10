@@ -169,7 +169,16 @@ class TestCommonMsgsMigration(unittest.TestCase):
   def get_new_mono_image(self):
     from sensor_msgs.msg import Image
 
-    return Image()
+    import random
+    r = random.Random(1234)
+
+    return Image(None,
+                 'mono8',
+                 640,
+                 [r.randint(0,255) for x in xrange(0,307200)],
+                 480,
+                 640,
+                 0)
 
   def test_mono_image(self):
     self.do_test('mono_image', self.get_old_mono_image, self.get_new_mono_image)
@@ -206,7 +215,7 @@ class TestCommonMsgsMigration(unittest.TestCase):
                                                        multi_array_dimension('width',  640, 1920),
                                                        multi_array_dimension('channel',  3, 3)
                                                        ], 0),
-                                   [r.randint(0,255) for x in xrange(0,307200)]),
+                                   [r.randint(0,255) for x in xrange(0,921600)]),
                  int8_multi_array(),
                  uint16_multi_array(),
                  int16_multi_array(),
@@ -220,7 +229,16 @@ class TestCommonMsgsMigration(unittest.TestCase):
   def get_new_rgb_image(self):
     from sensor_msgs.msg import Image
 
-    return Image()
+    import random
+    r = random.Random(1234)
+
+    return Image(None,
+                 'rgb8',
+                 1920,
+                 [r.randint(0,255) for x in xrange(0,921600)],
+                 480,
+                 640,
+                 0)
 
   def test_rgb_image(self):
     self.do_test('rgb_image', self.get_old_rgb_image, self.get_new_rgb_image)
@@ -248,8 +266,8 @@ class TestCommonMsgsMigration(unittest.TestCase):
     from geometry_msgs.msg import Vector3
     
     # We have to repack x,y values because they moved from float to double
-    p = PoseWithCovariance(Pose(Point(repack(3.33), repack(2.22), 0), apply(Quaternion,quaternion_from_euler(0,0,repack(1.11)))), identity6x6)
-    t = TwistWithCovariance(Twist(Vector3(repack(.1), repack(.2), 0), Vector3(0, 0, repack(.3))), identity6x6)
+    p = PoseWithCovariance(Pose(Point(repack(3.33), repack(2.22), 0), apply(Quaternion,quaternion_from_euler(0,0,repack(1.11)))), 36*[0.])
+    t = TwistWithCovariance(Twist(Vector3(repack(.1), repack(.2), 0), Vector3(0, 0, repack(.3))), 36*[0.])
 
     return Odometry(None, p, t)
 
@@ -1024,10 +1042,10 @@ class TestCommonMsgsMigration(unittest.TestCase):
     m.deserialize(buff.getvalue())
     
     #Compare
-    print "old"
-    print roslib.message.strify_message(msgs[0][1])
-    print "new"
-    print roslib.message.strify_message(m)
+#    print "old"
+#    print roslib.message.strify_message(msgs[0][1])
+#    print "new"
+#    print roslib.message.strify_message(m)
 
     # Strifying them helps make the comparison easier until I figure out why the equality operator is failing
     self.assertTrue(roslib.message.strify_message(msgs[0][1]) == roslib.message.strify_message(m))
