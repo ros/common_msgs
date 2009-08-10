@@ -1,3 +1,5 @@
+# This hold basic information about the characterists of the OccupancyGrid
+
 # The time at which the map was loaded
 time map_load_time
 # The map resolution [m/cell]
