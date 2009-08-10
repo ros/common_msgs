@@ -199,3 +199,264 @@ float64 w
 		self.migrate(old_msg.info, new_msg.info)
 		new_msg.data = old_msg.data
 
+class update_robot_msgs_Path_f4bbbec105a3dc69d6c5974def547813(MessageUpdateRule):
+	old_type = "robot_msgs/Path"
+	old_full_text = """
+PoseStamped[] poses
+
+================================================================================
+MSG: robot_msgs/PoseStamped
+Header header
+Pose pose
+
+================================================================================
+MSG: roslib/Header
+#Standard metadata for higher-level flow data types
+#sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+
+================================================================================
+MSG: robot_msgs/Pose
+Point position
+Quaternion orientation
+
+================================================================================
+MSG: robot_msgs/Point
+float64 x
+float64 y
+float64 z
+
+================================================================================
+MSG: robot_msgs/Quaternion
+# xyz - vector rotation axis, w - scalar term (cos(ang/2))
+float64 x
+float64 y
+float64 z
+float64 w
+"""
+
+	new_type = "nav_msgs/Path"
+	new_full_text = """
+geometry_msgs/PoseStamped[] poses
+
+================================================================================
+MSG: geometry_msgs/PoseStamped
+Header header
+Pose pose
+
+================================================================================
+MSG: roslib/Header
+#Standard metadata for higher-level flow data types
+#sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+
+================================================================================
+MSG: geometry_msgs/Pose
+Point position
+Quaternion orientation
+
+================================================================================
+MSG: geometry_msgs/Point
+float64 x
+float64 y
+float64 z
+
+================================================================================
+MSG: geometry_msgs/Quaternion
+# xyz - vector rotation axis, w - scalar term (cos(ang/2))
+float64 x
+float64 y
+float64 z
+float64 w
+"""
+
+	order = 0
+	migrated_types = [
+		("PoseStamped","geometry_msgs/PoseStamped"),]
+
+	valid = True
+
+	def update(self, old_msg, new_msg):
+		self.migrate_array(old_msg.poses, new_msg.poses, "geometry_msgs/PoseStamped")
+
+
+import math
+
+class update_deprecated_msgs_RobotBase2DOdom_c3caa47ad9e2bbe7b59c0cfdba67172f(MessageUpdateRule):
+	old_type = "deprecated_msgs/RobotBase2DOdom"
+	old_full_text = """
+Header header
+Pose2DFloat32 pos
+Pose2DFloat32 vel
+byte stall
+float32 residual
+================================================================================
+MSG: roslib/Header
+#Standard metadata for higher-level flow data types
+#sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+
+================================================================================
+MSG: deprecated_msgs/Pose2DFloat32
+float32 x
+float32 y
+float32 th
+"""
+
+	new_type = "nav_msgs/Odometry"
+	new_full_text = """
+Header header
+geometry_msgs/PoseWithCovariance pose_with_covariance
+geometry_msgs/TwistWithCovariance twist_with_covariance
+
+================================================================================
+MSG: roslib/Header
+#Standard metadata for higher-level flow data types
+#sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+
+================================================================================
+MSG: geometry_msgs/PoseWithCovariance
+Pose pose
+
+# Row-major representation of the 6x6 covariance matrix
+# The orientation parameters use a fixed-axis representation.
+# In order, the parameters are:
+# (x, y, z, rotation about Z axis, rotation about Y axis, rotation about X axis)
+float64[36] covariance
+
+================================================================================
+MSG: geometry_msgs/Pose
+Point position
+Quaternion orientation
+
+================================================================================
+MSG: geometry_msgs/Point
+float64 x
+float64 y
+float64 z
+
+================================================================================
+MSG: geometry_msgs/Quaternion
+# xyz - vector rotation axis, w - scalar term (cos(ang/2))
+float64 x
+float64 y
+float64 z
+float64 w
+
+================================================================================
+MSG: geometry_msgs/TwistWithCovariance
+Twist twist
+
+# Row-major representation of the 6x6 covariance matrix
+# The orientation parameters use a fixed-axis representation.
+# In order, the parameters are:
+# (x, y, z, rotation about Z axis, rotation about Y axis, rotation about X axis)
+float64[36] covariance
+
+================================================================================
+MSG: geometry_msgs/Twist
+Vector3  linear
+Vector3  angular
+
+================================================================================
+MSG: geometry_msgs/Vector3
+float64 x
+float64 y
+float64 z
+"""
+
+	order = 0
+	migrated_types = [
+		("Header","Header"),]
+
+	valid = True
+
+        def quaternion_from_euler(self, x, y, z):
+                x /= 2.0
+                y /= 2.0
+                z /= 2.0
+                ci = math.cos(x)
+                si = math.sin(x)
+                cj = math.cos(y)
+                sj = math.sin(y)
+                ck = math.cos(z)
+                sk = math.sin(z)
+                cc = ci*ck
+                cs = ci*sk
+                sc = si*ck
+                ss = si*sk
+                
+                quaternion = [0.0,0.0,0.0,0.0]
+                
+                quaternion[0] = cj*sc - sj*cs
+                quaternion[1] = cj*ss + sj*cc
+                quaternion[2] = cj*cs - sj*sc
+                quaternion[3] = cj*cc + sj*ss
+
+                return quaternion
+
+        identity6x6 = [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0]
+
+	def update(self, old_msg, new_msg):
+		self.migrate(old_msg.header, new_msg.header)
+
+                new_msg.pose_with_covariance.pose.position.x = old_msg.pos.x
+                new_msg.pose_with_covariance.pose.position.y = old_msg.pos.y
+                new_msg.pose_with_covariance.pose.position.z = 0.
+
+                q = self.quaternion_from_euler(0,0,old_msg.pos.th)
+
+                new_msg.pose_with_covariance.pose.orientation.x = q[0]
+                new_msg.pose_with_covariance.pose.orientation.y = q[1]
+                new_msg.pose_with_covariance.pose.orientation.z = q[2]
+                new_msg.pose_with_covariance.pose.orientation.w = q[3]
+                     
+                new_msg.pose_with_covariance.covariance = [x/old_msg.residual for x in self.identity6x6]
+
+                new_msg.twist_with_covariance.twist.linear.x = old_msg.vel.x
+                new_msg.twist_with_covariance.twist.linear.y = old_msg.vel.y
+                new_msg.twist_with_covariance.twist.linear.z = 0.
+
+                new_msg.twist_with_covariance.twist.angular.x = 0.
+                new_msg.twist_with_covariance.twist.angular.y = 0.
+                new_msg.twist_with_covariance.twist.angular.z = old_msg.vel.th
+
+                new_msg.twist_with_covariance.covariance = [x/old_msg.residual for x in self.identity6x6]
+

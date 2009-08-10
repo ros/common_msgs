@@ -80,6 +80,10 @@ def quaternion_from_euler(x, y, z):
 
 identity6x6 = [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0]
 
+
+def repack(x):
+  return struct.unpack('<f',struct.pack('<f',x))[0]
+
 class TestCommonMsgsMigration(unittest.TestCase):
 
 
@@ -136,8 +140,9 @@ class TestCommonMsgsMigration(unittest.TestCase):
     from geometry_msgs.msg import Twist
     from geometry_msgs.msg import Vector3
     
-    p = PoseWithCovariance(Pose(Point(3.33, 2.22, 0), apply(Quaternion,quaternion_from_euler(0,0,1.11))), identity6x6)
-    t = TwistWithCovariance(Twist(Vector3(.1, .2, 0), Vector3(0, 0, .3)), identity6x6)
+    # We have to repack x,y values because they moved from float to double
+    p = PoseWithCovariance(Pose(Point(repack(3.33), repack(2.22), 0), apply(Quaternion,quaternion_from_euler(0,0,repack(1.11)))), identity6x6)
+    t = TwistWithCovariance(Twist(Vector3(repack(.1), repack(.2), 0), Vector3(0, 0, repack(.3))), identity6x6)
 
     return Odometry(None, p, t)
 
@@ -268,7 +273,7 @@ class TestCommonMsgsMigration(unittest.TestCase):
   def get_new_diagnostic_value(self):
     from diagnostic_msgs.msg import KeyValue
 
-    return KeyValue('foo', str(struct.unpack('<f',struct.pack('<f',42.42))[0]))
+    return KeyValue('foo', str(repack(42.42)))
 
 
   def test_diagnostic_value(self):
@@ -309,7 +314,7 @@ class TestCommonMsgsMigration(unittest.TestCase):
     from diagnostic_msgs.msg import DiagnosticStatus
     from diagnostic_msgs.msg import KeyValue
 
-    return DiagnosticStatus(0, "abcdef", "ghijkl", "NONE", [KeyValue('foo', str(struct.unpack('<f',struct.pack('<f',42.42))[0])), KeyValue('bar', 'xxxxx')])
+    return DiagnosticStatus(0, "abcdef", "ghijkl", "NONE", [KeyValue('foo', str(repack(42.42))), KeyValue('bar', 'xxxxx')])
 
 
   def test_diagnostic_status(self):
@@ -339,9 +344,9 @@ class TestCommonMsgsMigration(unittest.TestCase):
     from diagnostic_msgs.msg import KeyValue
 
     msg = DiagnosticArray(None, [])
-    msg.status.append(DiagnosticStatus(0, "abcdef", "ghijkl", "NONE", [KeyValue('abc', str(struct.unpack('<f',struct.pack('<f',12.34))[0])), KeyValue('jkl', 'ghbvf')]))
-    msg.status.append(DiagnosticStatus(0, "mnop", "qrst", "NONE", [KeyValue('def', str(struct.unpack('<f',struct.pack('<f',56.78))[0])), KeyValue('mno', 'klmnh')]))
-    msg.status.append(DiagnosticStatus(0, "uvw", "xyz", "NONE", [KeyValue('ghi', str(struct.unpack('<f',struct.pack('<f',90.12))[0])), KeyValue('pqr', 'erfcd')]))
+    msg.status.append(DiagnosticStatus(0, "abcdef", "ghijkl", "NONE", [KeyValue('abc', str(repack(12.34))), KeyValue('jkl', 'ghbvf')]))
+    msg.status.append(DiagnosticStatus(0, "mnop", "qrst", "NONE", [KeyValue('def', str(repack(56.78))), KeyValue('mno', 'klmnh')]))
+    msg.status.append(DiagnosticStatus(0, "uvw", "xyz", "NONE", [KeyValue('ghi', str(repack(90.12))), KeyValue('pqr', 'erfcd')]))
 
     return msg
 
@@ -642,11 +647,12 @@ class TestCommonMsgsMigration(unittest.TestCase):
 
   def get_new_pose_with_covariance(self):
     from geometry_msgs.msg import PoseWithCovarianceStamped
+    from geometry_msgs.msg import PoseWithCovariance
     from geometry_msgs.msg import Pose
     from geometry_msgs.msg import Point
     from geometry_msgs.msg import Quaternion
     
-    return PoseWithCovarianceStamped(None, Pose(Point(1.23, 4.56, 7.89), Quaternion(0,0,0,1)), identity6x6)
+    return PoseWithCovarianceStamped(None, PoseWithCovariance(Pose(Point(1.23, 4.56, 7.89), Quaternion(0,0,0,1)), identity6x6))
 
 
   def test_pose_with_covariance(self):
@@ -697,7 +703,7 @@ class TestCommonMsgsMigration(unittest.TestCase):
                        pose_stamped(header(0,rospy.Time(0,2000),'foo'), pose(point(1.27, 4.60, 7.93), quaternion(0,0,1,1)))])
 
   def get_new_path(self):
-    from robot_msgs.msg import Path
+    from nav_msgs.msg import Path
     from roslib.msg import Header
     from geometry_msgs.msg import PoseStamped
     from geometry_msgs.msg import Pose
@@ -733,6 +739,26 @@ class TestCommonMsgsMigration(unittest.TestCase):
 
   def test_velocity(self):
     self.do_test('velocity', self.get_old_velocity, self.get_new_velocity)
+
+
+########### Angular Velocity ###############
+
+
+  def get_old_angular_velocity(self):
+    angular_velocity_classes = self.load_saved_classes('AngularVelocity.saved')
+    
+    angular_velocity  = angular_velocity_classes['robot_msgs/AngularVelocity']
+    
+    return angular_velocity(1.23, 4.56, 7.89)
+
+  def get_new_angular_velocity(self):
+    from geometry_msgs.msg import Vector3
+    
+    return Vector3(1.23, 4.56, 7.89)
+
+
+  def test_angular_velocity(self):
+    self.do_test('angular_velocity', self.get_old_angular_velocity, self.get_new_angular_velocity)
 
 
 ########### Twist ###############
