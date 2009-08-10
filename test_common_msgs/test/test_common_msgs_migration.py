@@ -1078,7 +1078,7 @@ class TestCommonMsgsMigration(unittest.TestCase):
 
 
   def load_saved_classes(self,saved_msg):
-    f = open("%s/test/%s"%(self.pkg_dir,saved_msg), 'r')
+    f = open("%s/test/saved/%s"%(self.pkg_dir,saved_msg), 'r')
 
     type_line = f.readline()
     pat = re.compile(r"\[(.*)]:")
