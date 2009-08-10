@@ -315,6 +315,9 @@ string frame_id
 
 	valid = True
 
+        def update_empty(self, old_msg, new_msg):
+                pass
+
 	def update_mono_uint8(self, old_msg, new_msg):
                 assert (len(old_msg.uint8_data.layout.dim) == 3 and
                         old_msg.uint8_data.layout.dim[0].label == 'height' and
@@ -361,7 +364,8 @@ string frame_id
 		new_msg.is_bigendian = 0
 
         def update(self, old_msg, new_msg):
-                encoding_map = {('mono', 'uint8'): self.update_mono_uint8,
+                encoding_map = {('',''): self.update_empty,
+                                ('mono', 'uint8'): self.update_mono_uint8,
                                 ('rgb', 'uint8'): self.update_rgb_uint8,
                                 ('bgr', 'uint8'): self.update_bgr_uint8}
                 key = (old_msg.encoding, old_msg.depth)
