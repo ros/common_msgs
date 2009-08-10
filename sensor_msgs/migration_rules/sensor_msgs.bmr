@@ -99,8 +99,284 @@ float32[] values
 		new_msg.name = old_msg.name
 		new_msg.values = old_msg.vals
 
-class update_image_msgs_Image_97d4ca3868dc81af4a2403bcb6558cb0(MessageUpdateRule):
-	old_type = "image_msgs/Image"
+
+
+
+
+class update_image_msgs_CamInfo_a48ffa77e74ab6901331e50745dff353(MessageUpdateRule):
+	old_type = "image_msgs/CamInfo"
+	old_full_text = """
+# This message defines meta information for a camera. It should be in a
+# camera namespace and accompanied by up to 5 image topics named:
+# 
+# image_raw, image, image_color, image_rect, and image_rect_color
+
+Header header
+
+uint32 height
+uint32 width
+
+float64[5]  D # Distortion: k1, k2, t1, t2, k3
+float64[9]  K # original camera matrix
+float64[9]  R # rectification matrix
+float64[12] P # projection/camera matrix
+
+# Should put exposure, gain, etc. information here as well
+
+================================================================================
+MSG: roslib/Header
+#Standard metadata for higher-level flow data types
+#sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+"""
+
+	new_type = "sensor_msgs/CameraInfo"
+	new_full_text = """
+# This message defines meta information for a camera. It should be in a
+# camera namespace and accompanied by up to 5 image topics named:
+# 
+# image_raw, image, image_color, image_rect, and image_rect_color
+#
+# The meaning of the camera parameters are described in detail at
+# http://pr.willowgarage.com/wiki/Camera_Calibration.
+
+Header header
+
+# Resolution in pixels
+uint32 height
+uint32 width
+
+########################
+# Intrinsic parameters #
+########################
+
+# Distortion parameters: k1, k2, t1, t2, k3
+# These model radial and tangential distortion of the camera.
+float64[5]  D # 5x1 vector
+
+# Original camera matrix
+# Projects 3D points in the camera coordinate frame to 2D pixel
+# coordinates using the focal lengths (fx, fy) and principal point
+# (cx, cy):
+#     [fx  0 cx]
+# K = [ 0 fy cy]
+#     [ 0  0  1]
+float64[9]  K # 3x3 row-major matrix
+
+########################
+# Extrinsic parameters #
+########################
+
+# Rectification matrix (stereo cameras only)
+# A homography which takes an image to the ideal stereo image plane
+# so that epipolar lines in both stereo images are parallel.
+float64[9]  R # 3x3 row-major matrix
+
+# Projection/camera matrix
+# Projects 3D points in a world coordinate frame to 2D pixel coordinates.
+float64[12] P # 3x4 row-major matrix
+
+================================================================================
+MSG: roslib/Header
+#Standard metadata for higher-level flow data types
+#sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+"""
+
+	order = 0
+	migrated_types = [
+		("Header","Header"),]
+
+	valid = True
+
+	def update(self, old_msg, new_msg):
+		self.migrate(old_msg.header, new_msg.header)
+		new_msg.height = old_msg.height
+		new_msg.width = old_msg.width
+		new_msg.D = old_msg.D
+		new_msg.K = old_msg.K
+		new_msg.R = old_msg.R
+		new_msg.P = old_msg.P
+
+
+class update_sensor_msgs_CameraInfo_a48ffa77e74ab6901331e50745dff353(MessageUpdateRule):
+
+	old_type = "sensor_msgs/CameraInfo"
+	old_full_text = """
+# This message defines meta information for a camera. It should be in a
+# camera namespace and accompanied by up to 5 image topics named:
+# 
+# image_raw, image, image_color, image_rect, and image_rect_color
+#
+# The meaning of the camera parameters are described in detail at
+# http://pr.willowgarage.com/wiki/Camera_Calibration.
+
+Header header
+
+# Resolution in pixels
+uint32 height
+uint32 width
+
+########################
+# Intrinsic parameters #
+########################
+
+# Distortion parameters: k1, k2, t1, t2, k3
+# These model radial and tangential distortion of the camera.
+float64[5]  D # 5x1 vector
+
+# Original camera matrix
+# Projects 3D points in the camera coordinate frame to 2D pixel
+# coordinates using the focal lengths (fx, fy) and principal point
+# (cx, cy):
+#     [fx  0 cx]
+# K = [ 0 fy cy]
+#     [ 0  0  1]
+float64[9]  K # 3x3 row-major matrix
+
+########################
+# Extrinsic parameters #
+########################
+
+# Rectification matrix (stereo cameras only)
+# A homography which takes an image to the ideal stereo image plane
+# so that epipolar lines in both stereo images are parallel.
+float64[9]  R # 3x3 row-major matrix
+
+# Projection/camera matrix
+# Projects 3D points in a world coordinate frame to 2D pixel coordinates.
+float64[12] P # 3x4 row-major matrix
+
+================================================================================
+MSG: roslib/Header
+#Standard metadata for higher-level flow data types
+#sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+"""
+
+	new_type = "sensor_msgs/CameraInfo"
+	new_full_text = """
+# This message defines meta information for a camera. It should be in a
+# camera namespace and accompanied by up to 5 image topics named:
+# 
+# image_raw, image, image_color, image_rect, and image_rect_color
+#
+# The meaning of the camera parameters are described in detail at
+# http://pr.willowgarage.com/wiki/Camera_Calibration.
+
+##########################
+# Image acquisition info #
+##########################
+
+# Time of image acquisition, camera coordinate frame ID
+Header header
+
+# Camera resolution in pixels
+uint32 height
+uint32 width
+
+# Region of interest (subwindow of full camera resolution), if applicable
+RegionOfInterest roi
+
+########################
+# Intrinsic parameters #
+########################
+
+# Distortion parameters: k1, k2, t1, t2, k3
+# These model radial and tangential distortion of the camera.
+float64[5]  D # 5x1 vector
+
+# Original camera matrix
+# Projects 3D points in the camera coordinate frame to 2D pixel
+# coordinates using the focal lengths (fx, fy) and principal point
+# (cx, cy):
+#     [fx  0 cx]
+# K = [ 0 fy cy]
+#     [ 0  0  1]
+float64[9]  K # 3x3 row-major matrix
+
+########################
+# Extrinsic parameters #
+########################
+
+# Rectification matrix (stereo cameras only)
+# A homography which takes an image to the ideal stereo image plane
+# so that epipolar lines in both stereo images are parallel.
+float64[9]  R # 3x3 row-major matrix
+
+# Projection/camera matrix
+# Projects 3D points in a world coordinate frame to 2D pixel coordinates.
+float64[12] P # 3x4 row-major matrix
+
+================================================================================
+MSG: roslib/Header
+#Standard metadata for higher-level flow data types
+#sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+
+================================================================================
+MSG: sensor_msgs/RegionOfInterest
+uint32 x_offset
+uint32 y_offset
+uint32 height
+uint32 width
+"""
+
+	order = 0
+	migrated_types = [
+		("Header","Header"),]
+
+	valid = True
+
+	def update(self, old_msg, new_msg):
+		self.migrate(old_msg.header, new_msg.header)
+		new_msg.height = old_msg.height
+		new_msg.width = old_msg.width
+		new_msg.roi = self.get_new_class('sensor_msgs/RegionOfInterest')(0,0,old_msg.height,old_msg.width)
+		new_msg.D = old_msg.D
+		new_msg.K = old_msg.K
+		new_msg.R = old_msg.R
+		new_msg.P = old_msg.P
+
+
+class update_sensor_msgs_Image_97d4ca3868dc81af4a2403bcb6558cb0(MessageUpdateRule):
+	old_type = "sensor_msgs/Image"
 	old_full_text = """
 Header header        # Header
 string label         # Label for the image
@@ -316,6 +592,7 @@ string frame_id
 
 	valid = True
 
+
         def update_empty(self, old_msg, new_msg):
                 pass
 
@@ -376,25 +653,51 @@ string frame_id
 
                 encoding_map[key](old_msg, new_msg)
 
-class update_image_msgs_CamInfo_a48ffa77e74ab6901331e50745dff353(MessageUpdateRule):
-	old_type = "image_msgs/CamInfo"
+
+
+
+
+class update_image_msgs_Image_97d4ca3868dc81af4a2403bcb6558cb0(MessageUpdateRule):
+	old_type = "image_msgs/Image"
 	old_full_text = """
-# This message defines meta information for a camera. It should be in a
-# camera namespace and accompanied by up to 5 image topics named:
-# 
-# image_raw, image, image_color, image_rect, and image_rect_color
+Header header        # Header
+string label         # Label for the image
+string encoding      # Specifies the color encoding of the data
+                     #   Acceptable values are:
+                     #    1 channel types:
+                     #     mono, bayer_rggb, bayer_gbrg, bayer_grbg, bayer_bggr
+                     #    3 channel types:
+                     #     rgb, bgr
+                     #    4 channel types:
+                     #     rgba, bgra, yuv422
+                     #    6 channel types:
+                     #     yuv411
+                     #    N channel types:
+                     #     other
+string depth         # Specifies the depth of the data:
+                     #   Acceptable values:
+                     #    uint8, int8, uint16, int16, uint32, int32, uint64, int64, float32, float64
 
-Header header
+# Based on depth ONE of the following MultiArrays may contain data.
+# The multi-array MUST have 3 dimensions, labeled as "height",
+# "width", and "channel", though depending on usage the ordering of
+# the dimensions may very.  Note that IPL Image convention will order
+# these as: height, width, channel, which is the preferred ordering
+# unless performance dictates otherwise.
+#
+# Height, width, and number of channels are specified in the dimension
+# sizes within the appropriate MultiArray
 
-uint32 height
-uint32 width
-
-float64[5]  D # Distortion: k1, k2, t1, t2, k3
-float64[9]  K # original camera matrix
-float64[9]  R # rectification matrix
-float64[12] P # projection/camera matrix
-
-# Should put exposure, gain, etc. information here as well
+std_msgs/UInt8MultiArray   uint8_data
+std_msgs/Int8MultiArray    int8_data
+std_msgs/UInt16MultiArray  uint16_data   
+std_msgs/Int16MultiArray   int16_data
+std_msgs/UInt32MultiArray  uint32_data
+std_msgs/Int32MultiArray   int32_data
+std_msgs/UInt64MultiArray  uint64_data
+std_msgs/Int64MultiArray   int64_data
+std_msgs/Float32MultiArray float32_data
+std_msgs/Float64MultiArray float64_data
 
 ================================================================================
 MSG: roslib/Header
@@ -410,61 +713,171 @@ time stamp
 # 0: no frame
 # 1: global frame
 string frame_id
+
+================================================================================
+MSG: std_msgs/UInt8MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+uint8[]           data          # array of data
+
+
+================================================================================
+MSG: std_msgs/MultiArrayLayout
+# The multiarray declares a generic multi-dimensional array of a
+# particular data type.  Dimensions are ordered from outer most
+# to inner most.
+
+MultiArrayDimension[] dim # Array of dimension properties
+uint32 data_offset        # padding bytes at front of data
+
+# Accessors should ALWAYS be written in terms of dimension stride
+# and specified outer-most dimension first.
+# 
+# multiarray(i,j,k) = data[data_offset + dim_stride[1]*i + dim_stride[2]*j + k]
+#
+# A standard, 3-channel 640x480 image with interleaved color channels
+# would be specified as:
+#
+# dim[0].label  = "height"
+# dim[0].size   = 480
+# dim[0].stride = 3*640*480 = 921600  (note dim[0] stride is just size of image)
+# dim[1].label  = "width"
+# dim[1].size   = 640
+# dim[1].stride = 3*640 = 1920
+# dim[2].label  = "channel"
+# dim[2].size   = 3
+# dim[2].stride = 3
+#
+# multiarray(i,j,k) refers to the ith row, jth column, and kth channel.
+================================================================================
+MSG: std_msgs/MultiArrayDimension
+string label   # label of given dimension
+uint32 size    # size of given dimension (in type units)
+uint32 stride  # stride of given dimension
+================================================================================
+MSG: std_msgs/Int8MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+int8[]            data          # array of data
+
+
+================================================================================
+MSG: std_msgs/UInt16MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+uint16[]            data        # array of data
+
+
+================================================================================
+MSG: std_msgs/Int16MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+int16[]           data          # array of data
+
+
+================================================================================
+MSG: std_msgs/UInt32MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+uint32[]          data          # array of data
+
+
+================================================================================
+MSG: std_msgs/Int32MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+int32[]           data          # array of data
+
+
+================================================================================
+MSG: std_msgs/UInt64MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+uint64[]          data          # array of data
+
+
+================================================================================
+MSG: std_msgs/Int64MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+int64[]           data          # array of data
+
+
+================================================================================
+MSG: std_msgs/Float32MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+float32[]         data          # array of data
+
+
+================================================================================
+MSG: std_msgs/Float64MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+float64[]         data          # array of data
 """
 
-	new_type = "sensor_msgs/CameraInfo"
+
+	new_type = "sensor_msgs/Image"
 	new_full_text = """
-# This message defines meta information for a camera. It should be in a
-# camera namespace and accompanied by up to 5 image topics named:
-# 
-# image_raw, image, image_color, image_rect, and image_rect_color
+Header header        # Header
+string label         # Label for the image
+string encoding      # Specifies the color encoding of the data
+                     #   Acceptable values are:
+                     #    1 channel types:
+                     #     mono, bayer_rggb, bayer_gbrg, bayer_grbg, bayer_bggr
+                     #    3 channel types:
+                     #     rgb, bgr
+                     #    4 channel types:
+                     #     rgba, bgra, yuv422
+                     #    6 channel types:
+                     #     yuv411
+                     #    N channel types:
+                     #     other
+string depth         # Specifies the depth of the data:
+                     #   Acceptable values:
+                     #    uint8, int8, uint16, int16, uint32, int32, uint64, int64, float32, float64
+
+# Based on depth ONE of the following MultiArrays may contain data.
+# The multi-array MUST have 3 dimensions, labeled as "height",
+# "width", and "channel", though depending on usage the ordering of
+# the dimensions may very.  Note that IPL Image convention will order
+# these as: height, width, channel, which is the preferred ordering
+# unless performance dictates otherwise.
 #
-# The meaning of the camera parameters are described in detail at
-# http://pr.willowgarage.com/wiki/Camera_Calibration.
+# Height, width, and number of channels are specified in the dimension
+# sizes within the appropriate MultiArray
 
-##########################
-# Image acquisition info #
-##########################
-
-# Time of image acquisition, camera coordinate frame ID
-Header header
-
-# Camera resolution in pixels
-uint32 height
-uint32 width
-
-# Region of interest (subwindow of full camera resolution), if applicable
-RegionOfInterest roi
-
-########################
-# Intrinsic parameters #
-########################
-
-# Distortion parameters: k1, k2, t1, t2, k3
-# These model radial and tangential distortion of the camera.
-float64[5]  D # 5x1 vector
-
-# Original camera matrix
-# Projects 3D points in the camera coordinate frame to 2D pixel
-# coordinates using the focal lengths (fx, fy) and principal point
-# (cx, cy):
-#     [fx  0 cx]
-# K = [ 0 fy cy]
-#     [ 0  0  1]
-float64[9]  K # 3x3 row-major matrix
-
-########################
-# Extrinsic parameters #
-########################
-
-# Rectification matrix (stereo cameras only)
-# A homography which takes an image to the ideal stereo image plane
-# so that epipolar lines in both stereo images are parallel.
-float64[9]  R # 3x3 row-major matrix
-
-# Projection/camera matrix
-# Projects 3D points in a world coordinate frame to 2D pixel coordinates.
-float64[12] P # 3x4 row-major matrix
+std_msgs/UInt8MultiArray   uint8_data
+std_msgs/Int8MultiArray    int8_data
+std_msgs/UInt16MultiArray  uint16_data   
+std_msgs/Int16MultiArray   int16_data
+std_msgs/UInt32MultiArray  uint32_data
+std_msgs/Int32MultiArray   int32_data
+std_msgs/UInt64MultiArray  uint64_data
+std_msgs/Int64MultiArray   int64_data
+std_msgs/Float32MultiArray float32_data
+std_msgs/Float64MultiArray float64_data
 
 ================================================================================
 MSG: roslib/Header
@@ -482,28 +895,140 @@ time stamp
 string frame_id
 
 ================================================================================
-MSG: sensor_msgs/RegionOfInterest
-uint32 x_offset
-uint32 y_offset
-uint32 height
-uint32 width
+MSG: std_msgs/UInt8MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+uint8[]           data          # array of data
+
+
+================================================================================
+MSG: std_msgs/MultiArrayLayout
+# The multiarray declares a generic multi-dimensional array of a
+# particular data type.  Dimensions are ordered from outer most
+# to inner most.
+
+MultiArrayDimension[] dim # Array of dimension properties
+uint32 data_offset        # padding bytes at front of data
+
+# Accessors should ALWAYS be written in terms of dimension stride
+# and specified outer-most dimension first.
+# 
+# multiarray(i,j,k) = data[data_offset + dim_stride[1]*i + dim_stride[2]*j + k]
+#
+# A standard, 3-channel 640x480 image with interleaved color channels
+# would be specified as:
+#
+# dim[0].label  = "height"
+# dim[0].size   = 480
+# dim[0].stride = 3*640*480 = 921600  (note dim[0] stride is just size of image)
+# dim[1].label  = "width"
+# dim[1].size   = 640
+# dim[1].stride = 3*640 = 1920
+# dim[2].label  = "channel"
+# dim[2].size   = 3
+# dim[2].stride = 3
+#
+# multiarray(i,j,k) refers to the ith row, jth column, and kth channel.
+================================================================================
+MSG: std_msgs/MultiArrayDimension
+string label   # label of given dimension
+uint32 size    # size of given dimension (in type units)
+uint32 stride  # stride of given dimension
+================================================================================
+MSG: std_msgs/Int8MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+int8[]            data          # array of data
+
+
+================================================================================
+MSG: std_msgs/UInt16MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+uint16[]            data        # array of data
+
+
+================================================================================
+MSG: std_msgs/Int16MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+int16[]           data          # array of data
+
+
+================================================================================
+MSG: std_msgs/UInt32MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+uint32[]          data          # array of data
+
+
+================================================================================
+MSG: std_msgs/Int32MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+int32[]           data          # array of data
+
+
+================================================================================
+MSG: std_msgs/UInt64MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+uint64[]          data          # array of data
+
+
+================================================================================
+MSG: std_msgs/Int64MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+int64[]           data          # array of data
+
+
+================================================================================
+MSG: std_msgs/Float32MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+float32[]         data          # array of data
+
+
+================================================================================
+MSG: std_msgs/Float64MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+float64[]         data          # array of data
 """
 
 	order = 0
 	migrated_types = [
-		("Header","Header"),]
+		("Header","Header"),
+                ("Image","Image")]
 
 	valid = True
 
 	def update(self, old_msg, new_msg):
-		self.migrate(old_msg.header, new_msg.header)
-		new_msg.height = old_msg.height
-		new_msg.width = old_msg.width
-		new_msg.roi = self.get_new_class('RegionOfInterest')(0,0,old_msg.height,old_msg.width)
-		new_msg.D = old_msg.D
-		new_msg.K = old_msg.K
-		new_msg.R = old_msg.R
-		new_msg.P = old_msg.P
+		self.migrate(old_msg, new_msg)
+
+
+
 
 class update_sensor_msgs_CompressedImage_9f25a34569b1b807704b985d4396ad35(MessageUpdateRule):
 	old_type = "sensor_msgs/CompressedImage"
