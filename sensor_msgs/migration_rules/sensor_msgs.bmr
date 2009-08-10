@@ -370,3 +370,132 @@ string frame_id
 
                 encoding_map[key](old_msg, new_msg)
 
+class update_image_msgs_CamInfo_a48ffa77e74ab6901331e50745dff353(MessageUpdateRule):
+	old_type = "image_msgs/CamInfo"
+	old_full_text = """
+# This message defines meta information for a camera. It should be in a
+# camera namespace and accompanied by up to 5 image topics named:
+# 
+# image_raw, image, image_color, image_rect, and image_rect_color
+
+Header header
+
+uint32 height
+uint32 width
+
+float64[5]  D # Distortion: k1, k2, t1, t2, k3
+float64[9]  K # original camera matrix
+float64[9]  R # rectification matrix
+float64[12] P # projection/camera matrix
+
+# Should put exposure, gain, etc. information here as well
+
+================================================================================
+MSG: roslib/Header
+#Standard metadata for higher-level flow data types
+#sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+"""
+
+	new_type = "sensor_msgs/CameraInfo"
+	new_full_text = """
+# This message defines meta information for a camera. It should be in a
+# camera namespace and accompanied by up to 5 image topics named:
+# 
+# image_raw, image, image_color, image_rect, and image_rect_color
+#
+# The meaning of the camera parameters are described in detail at
+# http://pr.willowgarage.com/wiki/Camera_Calibration.
+
+##########################
+# Image acquisition info #
+##########################
+
+# Time of image acquisition, camera coordinate frame ID
+Header header
+
+# Camera resolution in pixels
+uint32 height
+uint32 width
+
+# Region of interest (subwindow of full camera resolution), if applicable
+RegionOfInterest roi
+
+########################
+# Intrinsic parameters #
+########################
+
+# Distortion parameters: k1, k2, t1, t2, k3
+# These model radial and tangential distortion of the camera.
+float64[5]  D # 5x1 vector
+
+# Original camera matrix
+# Projects 3D points in the camera coordinate frame to 2D pixel
+# coordinates using the focal lengths (fx, fy) and principal point
+# (cx, cy):
+#     [fx  0 cx]
+# K = [ 0 fy cy]
+#     [ 0  0  1]
+float64[9]  K # 3x3 row-major matrix
+
+########################
+# Extrinsic parameters #
+########################
+
+# Rectification matrix (stereo cameras only)
+# A homography which takes an image to the ideal stereo image plane
+# so that epipolar lines in both stereo images are parallel.
+float64[9]  R # 3x3 row-major matrix
+
+# Projection/camera matrix
+# Projects 3D points in a world coordinate frame to 2D pixel coordinates.
+float64[12] P # 3x4 row-major matrix
+
+================================================================================
+MSG: roslib/Header
+#Standard metadata for higher-level flow data types
+#sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+
+================================================================================
+MSG: sensor_msgs/RegionOfInterest
+uint32 x_offset
+uint32 y_offset
+uint32 height
+uint32 width
+"""
+
+	order = 0
+	migrated_types = [
+		("Header","Header"),]
+
+	valid = True
+
+	def update(self, old_msg, new_msg):
+		self.migrate(old_msg.header, new_msg.header)
+		new_msg.height = old_msg.height
+		new_msg.width = old_msg.width
+		new_msg.roi = self.get_new_class('RegionOfInterest')(0,0,old_msg.height,old_msg.width)
+		new_msg.D = old_msg.D
+		new_msg.K = old_msg.K
+		new_msg.R = old_msg.R
+		new_msg.P = old_msg.P
+
