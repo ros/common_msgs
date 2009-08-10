@@ -12,7 +12,7 @@
   <depend package="rosbagmigration"/>
   <export>
     <cpp cflags="-I${prefix}/msg/cpp -I${prefix}/srv/cpp"/>
-    <rosbagmigration rule_file="migration_rules/migration_rules.py"/>
+    <rosbagmigration rule_file="migration_rules/nav_msgs.bmr"/>
   </export>
 </package>
 

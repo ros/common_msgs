@@ -11,7 +11,7 @@
 
   <export>
     <cpp cflags="-I${prefix}/include -I${prefix}/msg/cpp" lflags="-L${prefix}/lib -lsensor_msgs -Wl,-rpath,${prefix}/lib"/>
-    <rosbagmigration rule_file="migration_rules/migration_rules.py"/>
+    <rosbagmigration rule_file="migration_rules/sensor_msgs.bmr"/>
   </export>
 
   <depend package="std_msgs"/>
