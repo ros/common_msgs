@@ -448,7 +448,8 @@ float64 z
                 new_msg.pose.pose.orientation.z = q[2]
                 new_msg.pose.pose.orientation.w = q[3]
                      
-                new_msg.pose.covariance = [x/old_msg.residual for x in self.identity6x6]
+#                new_msg.pose.covariance = [x/old_msg.residual for x in self.identity6x6]
+                new_msg.pose.covariance = 36*[0.0]
 
                 new_msg.twist.twist.linear.x = old_msg.vel.x
                 new_msg.twist.twist.linear.y = old_msg.vel.y
@@ -458,5 +459,6 @@ float64 z
                 new_msg.twist.twist.angular.y = 0.
                 new_msg.twist.twist.angular.z = old_msg.vel.th
 
-                new_msg.twist.covariance = [x/old_msg.residual for x in self.identity6x6]
+#                new_msg.twist.covariance = [x/old_msg.residual for x in self.identity6x6]
+                new_msg.twist.covariance = 36*[0.0]
 
