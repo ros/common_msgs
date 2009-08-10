@@ -120,6 +120,113 @@ class TestCommonMsgsMigration(unittest.TestCase):
 # (*) RobotBase2DOdom.saved
 
 
+
+
+########### Image ###############
+
+  def get_old_mono_image(self):
+    image_classes = self.load_saved_classes('Image.saved')
+
+    image = image_classes['image_msgs/Image']
+
+    multi_array_layout = image_classes['std_msgs/MultiArrayLayout']
+    multi_array_dimension = image_classes['std_msgs/MultiArrayDimension']
+
+    uint8_multi_array = image_classes['std_msgs/UInt8MultiArray']
+    int8_multi_array = image_classes['std_msgs/Int8MultiArray']
+    uint16_multi_array = image_classes['std_msgs/UInt16MultiArray']
+    int16_multi_array = image_classes['std_msgs/Int16MultiArray']
+    uint32_multi_array = image_classes['std_msgs/UInt32MultiArray']
+    int32_multi_array = image_classes['std_msgs/Int32MultiArray']
+    uint64_multi_array = image_classes['std_msgs/UInt64MultiArray']
+    int64_multi_array = image_classes['std_msgs/Int64MultiArray']
+
+    float32_multi_array = image_classes['std_msgs/Float32MultiArray']
+    float64_multi_array = image_classes['std_msgs/Float64MultiArray']    
+
+    import random
+    r = random.Random(1234)
+
+    return image(None,
+                 'image',
+                 'mono',
+                 'uint8',
+                 uint8_multi_array(multi_array_layout([multi_array_dimension('height', 480, 307200),
+                                                       multi_array_dimension('width', 640, 640),
+                                                       multi_array_dimension('channel', 1, 1)
+                                                       ], 0),
+                                   [r.randint(0,255) for x in xrange(0,307200)]),
+                 int8_multi_array(),
+                 uint16_multi_array(),
+                 int16_multi_array(),
+                 uint32_multi_array(),
+                 int32_multi_array(),
+                 uint64_multi_array(),
+                 int64_multi_array(),
+                 float32_multi_array(),
+                 float64_multi_array())
+
+  def get_new_mono_image(self):
+    from sensor_msgs.msg import Image
+
+    return Image()
+
+  def test_mono_image(self):
+    self.do_test('mono_image', self.get_old_mono_image, self.get_new_mono_image)
+
+
+  def get_old_rgb_image(self):
+    image_classes = self.load_saved_classes('Image.saved')
+
+    image = image_classes['image_msgs/Image']
+
+    multi_array_layout = image_classes['std_msgs/MultiArrayLayout']
+    multi_array_dimension = image_classes['std_msgs/MultiArrayDimension']
+
+    uint8_multi_array = image_classes['std_msgs/UInt8MultiArray']
+    int8_multi_array = image_classes['std_msgs/Int8MultiArray']
+    uint16_multi_array = image_classes['std_msgs/UInt16MultiArray']
+    int16_multi_array = image_classes['std_msgs/Int16MultiArray']
+    uint32_multi_array = image_classes['std_msgs/UInt32MultiArray']
+    int32_multi_array = image_classes['std_msgs/Int32MultiArray']
+    uint64_multi_array = image_classes['std_msgs/UInt64MultiArray']
+    int64_multi_array = image_classes['std_msgs/Int64MultiArray']
+
+    float32_multi_array = image_classes['std_msgs/Float32MultiArray']
+    float64_multi_array = image_classes['std_msgs/Float64MultiArray']    
+
+    import random
+    r = random.Random(1234)
+
+    return image(None,
+                 'image',
+                 'rgb',
+                 'uint8',
+                 uint8_multi_array(multi_array_layout([multi_array_dimension('height', 480, 921600),
+                                                       multi_array_dimension('width',  640, 1920),
+                                                       multi_array_dimension('channel',  3, 3)
+                                                       ], 0),
+                                   [r.randint(0,255) for x in xrange(0,307200)]),
+                 int8_multi_array(),
+                 uint16_multi_array(),
+                 int16_multi_array(),
+                 uint32_multi_array(),
+                 int32_multi_array(),
+                 uint64_multi_array(),
+                 int64_multi_array(),
+                 float32_multi_array(),
+                 float64_multi_array())
+
+  def get_new_rgb_image(self):
+    from sensor_msgs.msg import Image
+
+    return Image()
+
+  def test_rgb_image(self):
+    self.do_test('rgb_image', self.get_old_rgb_image, self.get_new_rgb_image)
+
+
+
 ########### RobotBase2DOdom ###############
 
   def get_old_robot_base_2d_odom(self):
