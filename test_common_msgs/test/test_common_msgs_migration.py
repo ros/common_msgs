@@ -214,12 +214,12 @@ class TestCommonMsgsMigration(unittest.TestCase):
     r = random.Random(1234)
 
     return Image(None,
-                 'mono8',
-                 640,
-                 [r.randint(0,255) for x in xrange(0,307200)],
                  480,
                  640,
-                 0)
+                 'mono8',
+                 0,
+                 640,
+                 [r.randint(0,255) for x in xrange(0,307200)])
 
   def test_mono_image(self):
     self.do_test('mono_image', self.get_old_mono_image, self.get_new_mono_image)
@@ -274,12 +274,12 @@ class TestCommonMsgsMigration(unittest.TestCase):
     r = random.Random(1234)
 
     return Image(None,
-                 'rgb8',
-                 1920,
-                 [r.randint(0,255) for x in xrange(0,921600)],
                  480,
                  640,
-                 0)
+                 'rgb8',
+                 0,
+                 1920,
+                 [r.randint(0,255) for x in xrange(0,921600)])
 
   def test_rgb_image(self):
     self.do_test('rgb_image', self.get_old_rgb_image, self.get_new_rgb_image)
