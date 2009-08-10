@@ -333,8 +333,8 @@ float32 th
 	new_type = "nav_msgs/Odometry"
 	new_full_text = """
 Header header
-geometry_msgs/PoseWithCovariance pose_with_covariance
-geometry_msgs/TwistWithCovariance twist_with_covariance
+geometry_msgs/PoseWithCovariance pose
+geometry_msgs/TwistWithCovariance twist
 
 ================================================================================
 MSG: roslib/Header
@@ -437,26 +437,26 @@ float64 z
 	def update(self, old_msg, new_msg):
 		self.migrate(old_msg.header, new_msg.header)
 
-                new_msg.pose_with_covariance.pose.position.x = old_msg.pos.x
-                new_msg.pose_with_covariance.pose.position.y = old_msg.pos.y
-                new_msg.pose_with_covariance.pose.position.z = 0.
+                new_msg.pose.pose.position.x = old_msg.pos.x
+                new_msg.pose.pose.position.y = old_msg.pos.y
+                new_msg.pose.pose.position.z = 0.
 
                 q = self.quaternion_from_euler(0,0,old_msg.pos.th)
 
-                new_msg.pose_with_covariance.pose.orientation.x = q[0]
-                new_msg.pose_with_covariance.pose.orientation.y = q[1]
-                new_msg.pose_with_covariance.pose.orientation.z = q[2]
-                new_msg.pose_with_covariance.pose.orientation.w = q[3]
+                new_msg.pose.pose.orientation.x = q[0]
+                new_msg.pose.pose.orientation.y = q[1]
+                new_msg.pose.pose.orientation.z = q[2]
+                new_msg.pose.pose.orientation.w = q[3]
                      
-                new_msg.pose_with_covariance.covariance = [x/old_msg.residual for x in self.identity6x6]
+                new_msg.pose.covariance = [x/old_msg.residual for x in self.identity6x6]
 
-                new_msg.twist_with_covariance.twist.linear.x = old_msg.vel.x
-                new_msg.twist_with_covariance.twist.linear.y = old_msg.vel.y
-                new_msg.twist_with_covariance.twist.linear.z = 0.
+                new_msg.twist.twist.linear.x = old_msg.vel.x
+                new_msg.twist.twist.linear.y = old_msg.vel.y
+                new_msg.twist.twist.linear.z = 0.
 
-                new_msg.twist_with_covariance.twist.angular.x = 0.
-                new_msg.twist_with_covariance.twist.angular.y = 0.
-                new_msg.twist_with_covariance.twist.angular.z = old_msg.vel.th
+                new_msg.twist.twist.angular.x = 0.
+                new_msg.twist.twist.angular.y = 0.
+                new_msg.twist.twist.angular.z = old_msg.vel.th
 
-                new_msg.twist_with_covariance.covariance = [x/old_msg.residual for x in self.identity6x6]
+                new_msg.twist.covariance = [x/old_msg.residual for x in self.identity6x6]
 

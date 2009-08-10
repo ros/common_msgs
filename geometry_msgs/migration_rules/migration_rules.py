@@ -883,7 +883,7 @@ float64 z
 	new_type = "geometry_msgs/WrenchStamped"
 	new_full_text = """
 Header header
-Wrench data
+Wrench wrench
 
 ================================================================================
 MSG: roslib/Header
@@ -921,8 +921,8 @@ float64 z
 
 	def update(self, old_msg, new_msg):
 		self.migrate(old_msg.header, new_msg.header)
-		self.migrate(old_msg.force, new_msg.data.force)
-		self.migrate(old_msg.torque, new_msg.data.torque)
+		self.migrate(old_msg.force, new_msg.wrench.force)
+		self.migrate(old_msg.torque, new_msg.wrench.torque)
 
 class update_robot_msgs_PoseWithCovariance_ecf54a1a25cdc75d7a5f2b4cddd77d27(MessageUpdateRule):
 	old_type = "robot_msgs/PoseWithCovariance"
