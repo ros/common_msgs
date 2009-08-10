@@ -20,9 +20,6 @@ uint32 width
 # Region of interest (subwindow of full camera resolution), if applicable
 RegionOfInterest roi
 
-# Encoding of raw pixel data
-PixelEncoding raw_encoding
-
 ########################
 # Intrinsic parameters #
 ########################
