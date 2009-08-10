@@ -163,6 +163,45 @@ class TestCommonMsgsMigration(unittest.TestCase):
 
 
 
+
+########### CompressedImage ###############
+
+  def get_old_compressed_image(self):
+    compressed_image_classes = self.load_saved_classes('CompressedImage.saved')
+
+    compressed_image = compressed_image_classes['sensor_msgs/CompressedImage']
+
+    multi_array_layout = compressed_image_classes['std_msgs/MultiArrayLayout']
+    multi_array_dimension = compressed_image_classes['std_msgs/MultiArrayDimension']
+    uint8_multi_array = compressed_image_classes['std_msgs/UInt8MultiArray']
+
+    import random
+    r = random.Random(1234)
+
+    # This is not a jpeg, but we don't really care.  It's just a binary blob.
+    return compressed_image(None,
+                            'image',
+                            'mono',
+                            'jpeg',
+                            uint8_multi_array(multi_array_layout([multi_array_dimension('data', 1000, 1000)], 0),
+                                              [r.randint(0,255) for x in xrange(0,1000)]))
+
+  def get_new_compressed_image(self):
+    from sensor_msgs.msg import CompressedImage
+
+    import random
+    r = random.Random(1234)
+
+    return CompressedImage(None,
+                            "jpeg",
+                            [r.randint(0,255) for x in xrange(0,1000)])
+
+  def test_compressed_image(self):
+    self.do_test('compressed_image', self.get_old_compressed_image, self.get_new_compressed_image)
+
+
+
+
 ########### Image ###############
 
   def get_old_mono_image(self):
