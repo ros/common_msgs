@@ -1,12 +1,13 @@
 <package>
   <description brief="sensor_msgs">
 
-     sensor_msgs
+    This package defines messages for commonly used sensors, including
+cameras and scanning laser rangefinders.    
 
   </description>
-  <author>Tully Foote</author>
+  <author>Tully Foote/tfoote@willowgarage.com</author>
   <license>BSD</license>
-  <review status="proposal cleared" notes=""/>
+  <review status="api cleared" notes=""/>
   <url>http://pr.willowgarage.com/wiki/sensor_msgs</url>
 
   <export>

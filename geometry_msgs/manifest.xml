@@ -1,12 +1,12 @@
 <package>
-  <description brief="geometry_msgs">
+  <description brief="Messages for geometric primatives">
 
     Common geometric messages which will be used by the geometry stack. 
 
   </description>
   <author>Tully Foote</author>
   <license>BSD</license>
-  <review status="unreviewed" notes=""/>
+  <review status="api cleared" notes=""/>
   <url>http://pr.willowgarage.com/wiki/geometry_msgs</url>
 
   <depend package="rosbagmigration"/>
