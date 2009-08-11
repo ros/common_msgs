@@ -460,7 +460,7 @@ class TestCommonMsgsMigration(unittest.TestCase):
 #  def get_new_battery_state(self):
 #    from pr2_msgs.msg import BatteryState
 #
-#    return BatteryState(None, 9.87, 6.54, 3.21)
+#    return BatteryState(None, 1.23, 4.56, 7.89)
 #
 #  def test_battery_state(self):
 #    self.do_test('battery_state', self.get_old_battery_state, self.get_new_battery_state)
@@ -885,6 +885,38 @@ class TestCommonMsgsMigration(unittest.TestCase):
 
   def test_pose_dot(self):
     self.do_test('pose_dot', self.get_old_pose_dot, self.get_new_pose_dot)
+
+
+
+
+########### Particle Cloud ###############
+
+
+  def get_old_particle_cloud(self):
+    particle_cloud_classes = self.load_saved_classes('ParticleCloud.saved')
+    
+    particle_cloud  = particle_cloud_classes['robot_msgs/ParticleCloud']
+    pose  = particle_cloud_classes['robot_msgs/Pose']
+    point  = particle_cloud_classes['robot_msgs/Point']
+    quaternion  = particle_cloud_classes['robot_msgs/Quaternion']
+    
+    return particle_cloud([pose(point(1.23, 4.56, 7.89), quaternion(1,0,0,1)),
+                           pose(point(1.25, 4.58, 7.91), quaternion(0,1,0,1)),
+                           pose(point(1.27, 4.60, 7.93), quaternion(0,0,1,1))])
+
+  def get_new_particle_cloud(self):
+    from geometry_msgs.msg import PoseArray
+    from geometry_msgs.msg import Pose
+    from geometry_msgs.msg import Point
+    from geometry_msgs.msg import Quaternion
+    
+    return PoseArray(None, [Pose(Point(1.23, 4.56, 7.89), Quaternion(1,0,0,1)),
+                            Pose(Point(1.25, 4.58, 7.91), Quaternion(0,1,0,1)),
+                            Pose(Point(1.27, 4.60, 7.93), Quaternion(0,0,1,1))])
+
+
+  def test_particle_cloud(self):
+    self.do_test('particle_cloud', self.get_old_particle_cloud, self.get_new_particle_cloud)
 
 
 
