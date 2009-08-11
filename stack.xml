@@ -1,5 +1,5 @@
 <stack name="common_msgs" version="0.1">
-  <description brief="common messages personal robots">
+  <description brief="common messages">
     A set of code and messages that are widely useful to all robots. Things
     like generic robot messages (i.e., kinematics, transforms), a generic 
     transform library (tf), laser-scan utilities, etc.
@@ -8,6 +8,6 @@
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://pr.willowgarage.com/wiki/common_msgs</url>
-  <depend stack="ros"/> <!-- rospy, rosrecord, rostest, rosbagmigration, std_msgs, std_msgs, rosbagmigration, rosbagmigration, std_msgs, rosbagmigration, std_msgs --> 
+  <depend stack="ros"/> <!-- rospy, rosrecord, rostest, rosbagmigration, std_msgs --> 
 
 </stack>
