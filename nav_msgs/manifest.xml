@@ -1,7 +1,8 @@
 <package>
-  <description brief="Messages for the nav stack">
+  <description brief="Messages for the navigation stack">
 
-    These messages are the common messages used to interact with the nav stack
+    These messages are the common messages used to interact with the 
+navigation stack.
 
   </description>
   <author>Tully Foote</author>
