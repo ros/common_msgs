@@ -1,8 +1,12 @@
 <stack name="common_msgs" version="0.1">
   <description brief="common messages">
-    A set of code and messages that are widely useful to all robots. Things
-    like generic robot messages (i.e., kinematics, transforms), a generic 
-    transform library (tf), laser-scan utilities, etc.
+    A set of code and messages that are widely useful within the ROS ecosystem.
+The messages for diagnostics within ROS are defined in the diagnostic_msgs 
+packge.  There are geometric primitaves in the geometry_msgs package.  
+Commonly used navigation related messages are in the nav_msgs package.  
+And the sensor_msgs package defines messages for interacting with common 
+sensors, such as cameras, scanning laser range finders, and generic 
+3d sensors with point clouds.  
   </description>
   <author>Maintained by Tully Foote tfoote@willowgarage.com</author>
   <license>BSD</license>
