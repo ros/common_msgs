@@ -1,6 +1,6 @@
-# This expresses a transform between coordinate frames labeled by parent_id 
-# and the frame_id field of the header.  
+# This expresses a transform from coordinate frame header.frame_id
+# to the coordinate frame child_frame_id
 
 Header header
-string parent_id # the frame id of the parent frame
+string child_frame_id # the frame id of the child frame
 Transform transform
