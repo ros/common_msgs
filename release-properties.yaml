@@ -1,0 +1,8 @@
+# url where the releasable code is being developed
+# you may use the %(name)s key to substitute in the name of your stack/app
+svn-dev: https://personalrobots.svn.sourceforge.net/svnroot/personalrobots/pkg/trunk/stacks/%(name)s/
+# url where the released code should be tagged, e.g. your_stack-1.2.3
+# you may use the %(name)s key to substitute in the name of your stack/app
+# you may use the %(version)s key to substitute in the version number
+svn-tags: https://personalrobots.svn.sourceforge.net/svnroot/personalrobots/stacks/%(name)s/tags/%(name)s-%(version)s
+tarball-url: https://personalrobots.sourceforge.net/files/%(name)s/%(version)s/%(file)s
