@@ -45,6 +45,7 @@ namespace sensor_msgs
     const std::string MONO8="mono8";
     const std::string MONO16="mono16";
 
+    // OpenCV CvMat encodings
     const std::string TYPE_8UC1="8UC1";
     const std::string TYPE_8UC2="8UC2";
     const std::string TYPE_8UC3="8UC3";
@@ -73,5 +74,11 @@ namespace sensor_msgs
     const std::string TYPE_64FC2="64FC2";
     const std::string TYPE_64FC3="64FC3";
     const std::string TYPE_64FC4="64FC4";
+
+    // Bayer encodings
+    const std::string BAYER_RGGB8="bayer_rggb8";
+    const std::string BAYER_BGGR8="bayer_bggr8";
+    const std::string BAYER_GBRG8="bayer_gbrg8";
+    const std::string BAYER_GRBG8="bayer_grbg8";
   }
 }

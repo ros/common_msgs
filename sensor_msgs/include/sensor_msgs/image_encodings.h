@@ -45,6 +45,8 @@ namespace sensor_msgs
     extern const std::string BGRA8;
     extern const std::string MONO8;
     extern const std::string MONO16;
+
+    // OpenCV CvMat types
     extern const std::string TYPE_8UC1;
     extern const std::string TYPE_8UC2;
     extern const std::string TYPE_8UC3;
@@ -73,5 +75,11 @@ namespace sensor_msgs
     extern const std::string TYPE_64FC2;
     extern const std::string TYPE_64FC3;
     extern const std::string TYPE_64FC4;
+
+    // Bayer encodings
+    extern const std::string BAYER_RGGB8;
+    extern const std::string BAYER_BGGR8;
+    extern const std::string BAYER_GBRG8;
+    extern const std::string BAYER_GRBG8;
   }
 }
