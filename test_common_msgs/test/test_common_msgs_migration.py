@@ -108,6 +108,7 @@ class TestCommonMsgsMigration(unittest.TestCase):
 # (*) QuaternionStamped.saved
 # (*) Transform.saved
 # (*) TransformStamped.saved
+# ( ) TransformStamped_parent_id.saved
 # (*) Twist.saved
 # (*) Vector3.saved
 # (*) Vector3Stamped.saved
@@ -349,7 +350,7 @@ class TestCommonMsgsMigration(unittest.TestCase):
     p = PoseWithCovariance(Pose(Point(repack(3.33), repack(2.22), 0), apply(Quaternion,quaternion_from_euler(0,0,repack(1.11)))), 36*[0.])
     t = TwistWithCovariance(Twist(Vector3(repack(.1), repack(.2), 0), Vector3(0, 0, repack(.3))), 36*[0.])
 
-    return Odometry(None, p, t)
+    return Odometry(None, 'base_footprint', p, t)
 
   def test_robot_base_2d_odom(self):
     self.do_test('robot_base_2d_odom', self.get_old_robot_base_2d_odom, self.get_new_robot_base_2d_odom)
@@ -743,19 +744,37 @@ class TestCommonMsgsMigration(unittest.TestCase):
     vector3  = transform_classes['robot_msgs/Vector3']
     quaternion  = transform_classes['robot_msgs/Quaternion']
     
-    return transform_stamped(None, "parent_frame", transform(vector3(1.23, 4.56, 7.89), quaternion(0,0,0,1)))
+    ts = transform_stamped(None, "parent_frame", transform(vector3(1.23, 4.56, 7.89), quaternion(0,0,0,1)))
+    ts.header.frame_id = "child_frame"
+    return ts
+
+  def get_old_transform_stamped_parent_id(self):
+    transform_classes = self.load_saved_classes('TransformStamped_parent_id.saved')
+    
+    transform_stamped  = transform_classes['geometry_msgs/TransformStamped']
+    transform  = transform_classes['geometry_msgs/Transform']
+    vector3  = transform_classes['geometry_msgs/Vector3']
+    quaternion  = transform_classes['geometry_msgs/Quaternion']
+    header  = transform_classes['roslib/Header']
+
+    ts = transform_stamped(None, "parent_frame", transform(vector3(1.23, 4.56, 7.89), quaternion(0,0,0,1)))
+    ts.header.frame_id = "child_frame"
+    return ts
 
   def get_new_transform_stamped(self):
     from geometry_msgs.msg import TransformStamped
     from geometry_msgs.msg import Transform
     from geometry_msgs.msg import Vector3
     from geometry_msgs.msg import Quaternion
-    
-    return TransformStamped(None, "parent_frame", Transform(Vector3(1.23, 4.56, 7.89), Quaternion(0,0,0,1)))
-
+    ts = TransformStamped(None, "child_frame", Transform(Vector3(1.23, 4.56, 7.89), Quaternion(0,0,0,1)))
+    ts.header.frame_id = "parent_frame"
+    return ts
 
   def test_transform_stamped(self):
     self.do_test('transform_stamped', self.get_old_transform_stamped, self.get_new_transform_stamped)
+
+  def test_transform_stamped_parent_id(self):
+    self.do_test('transform_stamped_parent_id', self.get_old_transform_stamped_parent_id, self.get_new_transform_stamped)
 
 
 ########### Pose ###############
@@ -947,7 +966,7 @@ class TestCommonMsgsMigration(unittest.TestCase):
     from geometry_msgs.msg import Point
     from geometry_msgs.msg import Quaternion
     
-    return Path([PoseStamped(Header(0,rospy.Time(0,0),'foo'),    Pose(Point(1.23, 4.56, 7.89), Quaternion(1,0,0,1))),
+    return Path(None, [PoseStamped(Header(0,rospy.Time(0,0),'foo'),    Pose(Point(1.23, 4.56, 7.89), Quaternion(1,0,0,1))),
                        PoseStamped(Header(0,rospy.Time(0,1000),'foo'), Pose(Point(1.25, 4.58, 7.91), Quaternion(0,1,0,1))),
                        PoseStamped(Header(0,rospy.Time(0,2000),'foo'), Pose(Point(1.27, 4.60, 7.93), Quaternion(0,0,1,1)))])
 
