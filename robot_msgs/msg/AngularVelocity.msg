@@ -1,3 +1,0 @@
-float64 vx ##Axis angle format 
-float64 vy ##Axis is defined by direction of x,y,z
-float64 vz ## magnitude in radians/second

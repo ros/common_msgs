@@ -1,0 +1,24 @@
+<package>
+  <description brief="test_common_msgs">
+    A package containing original saved messages and verifying that
+    migration rules behave as anticipated.
+  </description>
+  <author>Jeremy Leibs</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  
+  <depend package="rospy"/>
+  <depend package="rosrecord"/>
+  <depend package="rostest"/>
+  <depend package="rosbagmigration"/>
+
+  <depend package="diagnostic_msgs"/>
+  <depend package="geometry_msgs"/>
+  <depend package="sensor_msgs"/>
+  <depend package="nav_msgs"/>
+
+  <url>http://pr.willowgarage.com/wiki/test_common_msgs</url>
+
+</package>
+
+

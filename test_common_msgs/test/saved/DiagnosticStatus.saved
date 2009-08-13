@@ -1,0 +1,18 @@
+[diagnostic_msgs/DiagnosticStatus]:
+byte level #(OK=0, WARN=1, ERROR=2)
+string name # a description of the test/component reporting
+string message # a description of the status
+DiagnosticValue[] values # an array of values associated with the status
+DiagnosticString[] strings # an array of string associated with the status
+
+================================================================================
+MSG: diagnostic_msgs/DiagnosticValue
+float32 value # a value to track over time
+string label # what to label this value when viewing
+
+================================================================================
+MSG: diagnostic_msgs/DiagnosticString
+string value # a string data type
+string label # what to label this value when viewing
+
+

@@ -1,0 +1,741 @@
+class update_robot_msgs_MapMetaData_10cfc8a2818024d3248802c00c95f11b(MessageUpdateRule):
+	old_type = "robot_msgs/MapMetaData"
+	old_full_text = """
+# The time at which the map was loaded
+time map_load_time
+# The map resolution [m/cell]
+float32 resolution
+# Map width [cells]
+uint32 width
+# Map height [cells]
+uint32 height
+# The origin of the map [m, m, rad].  This is the real-world pose of the
+# cell (0,0) in the map.
+robot_msgs/Pose origin
+================================================================================
+MSG: robot_msgs/Pose
+Point position
+Quaternion orientation
+
+================================================================================
+MSG: robot_msgs/Point
+float64 x
+float64 y
+float64 z
+
+================================================================================
+MSG: robot_msgs/Quaternion
+# xyz - vector rotation axis, w - scalar term (cos(ang/2))
+float64 x
+float64 y
+float64 z
+float64 w
+"""
+
+	new_type = "nav_msgs/MapMetaData"
+	new_full_text = """
+# The time at which the map was loaded
+time map_load_time
+# The map resolution [m/cell]
+float32 resolution
+# Map width [cells]
+uint32 width
+# Map height [cells]
+uint32 height
+# The origin of the map [m, m, rad].  This is the real-world pose of the
+# cell (0,0) in the map.
+geometry_msgs/Pose origin
+================================================================================
+MSG: geometry_msgs/Pose
+Point position
+Quaternion orientation
+
+================================================================================
+MSG: geometry_msgs/Point
+float64 x
+float64 y
+float64 z
+
+================================================================================
+MSG: geometry_msgs/Quaternion
+# xyz - vector rotation axis, w - scalar term (cos(ang/2))
+float64 x
+float64 y
+float64 z
+float64 w
+"""
+
+	order = 0
+	migrated_types = [
+		("Pose","geometry_msgs/Pose"),]
+
+	valid = True
+
+	def update(self, old_msg, new_msg):
+		new_msg.map_load_time = old_msg.map_load_time
+		new_msg.resolution = old_msg.resolution
+		new_msg.width = old_msg.width
+		new_msg.height = old_msg.height
+		self.migrate(old_msg.origin, new_msg.origin)
+class update_robot_msgs_OccGrid_97b32e1f188a9205cdc57db3617fc4ca(MessageUpdateRule):
+	old_type = "robot_msgs/OccGrid"
+	old_full_text = """
+# A 2-D grid map, in which each cell represents the probability of
+# occupancy.  Occupancy values are integers in the range [0,100], or -1 
+# for unknown.
+
+#MetaData for the map
+MapMetaData info
+
+# The map data, in row-major order, starting with (0,0).  Occupancy
+# probabilities are in the range [0,100].  Unknown is -1.
+byte[] data
+
+================================================================================
+MSG: robot_msgs/MapMetaData
+# The time at which the map was loaded
+time map_load_time
+# The map resolution [m/cell]
+float32 resolution
+# Map width [cells]
+uint32 width
+# Map height [cells]
+uint32 height
+# The origin of the map [m, m, rad].  This is the real-world pose of the
+# cell (0,0) in the map.
+robot_msgs/Pose origin
+================================================================================
+MSG: robot_msgs/Pose
+Point position
+Quaternion orientation
+
+================================================================================
+MSG: robot_msgs/Point
+float64 x
+float64 y
+float64 z
+
+================================================================================
+MSG: robot_msgs/Quaternion
+# xyz - vector rotation axis, w - scalar term (cos(ang/2))
+float64 x
+float64 y
+float64 z
+float64 w
+"""
+
+	new_type = "nav_msgs/OccupancyGrid"
+	new_full_text = """
+# A 2-D grid map, in which each cell represents the probability of
+# occupancy.  Occupancy values are integers in the range [0,100], or -1 
+# for unknown.
+
+Header header 
+
+#MetaData for the map
+MapMetaData info
+
+# The map data, in row-major order, starting with (0,0).  Occupancy
+# probabilities are in the range [0,100].  Unknown is -1.
+byte[] data
+
+================================================================================
+MSG: roslib/Header
+#Standard metadata for higher-level flow data types
+#sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+
+================================================================================
+MSG: nav_msgs/MapMetaData
+# The time at which the map was loaded
+time map_load_time
+# The map resolution [m/cell]
+float32 resolution
+# Map width [cells]
+uint32 width
+# Map height [cells]
+uint32 height
+# The origin of the map [m, m, rad].  This is the real-world pose of the
+# cell (0,0) in the map.
+geometry_msgs/Pose origin
+================================================================================
+MSG: geometry_msgs/Pose
+Point position
+Quaternion orientation
+
+================================================================================
+MSG: geometry_msgs/Point
+float64 x
+float64 y
+float64 z
+
+================================================================================
+MSG: geometry_msgs/Quaternion
+# xyz - vector rotation axis, w - scalar term (cos(ang/2))
+float64 x
+float64 y
+float64 z
+float64 w
+"""
+
+	order = 0
+	migrated_types = [
+		("MapMetaData","MapMetaData"),]
+
+	valid = True
+
+	def update(self, old_msg, new_msg):
+                import rospy
+		new_msg.header = self.get_new_class('Header')(0, rospy.Time(0,0), "/map")
+		self.migrate(old_msg.info, new_msg.info)
+		new_msg.data = old_msg.data
+
+class update_robot_msgs_Path_f4bbbec105a3dc69d6c5974def547813(MessageUpdateRule):
+	old_type = "robot_msgs/Path"
+	old_full_text = """
+PoseStamped[] poses
+
+================================================================================
+MSG: robot_msgs/PoseStamped
+Header header
+Pose pose
+
+================================================================================
+MSG: roslib/Header
+#Standard metadata for higher-level flow data types
+#sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+
+================================================================================
+MSG: robot_msgs/Pose
+Point position
+Quaternion orientation
+
+================================================================================
+MSG: robot_msgs/Point
+float64 x
+float64 y
+float64 z
+
+================================================================================
+MSG: robot_msgs/Quaternion
+# xyz - vector rotation axis, w - scalar term (cos(ang/2))
+float64 x
+float64 y
+float64 z
+float64 w
+"""
+
+	new_type = "nav_msgs/Path"
+	new_full_text = """
+geometry_msgs/PoseStamped[] poses
+
+================================================================================
+MSG: geometry_msgs/PoseStamped
+Header header
+Pose pose
+
+================================================================================
+MSG: roslib/Header
+#Standard metadata for higher-level flow data types
+#sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+
+================================================================================
+MSG: geometry_msgs/Pose
+Point position
+Quaternion orientation
+
+================================================================================
+MSG: geometry_msgs/Point
+float64 x
+float64 y
+float64 z
+
+================================================================================
+MSG: geometry_msgs/Quaternion
+# xyz - vector rotation axis, w - scalar term (cos(ang/2))
+float64 x
+float64 y
+float64 z
+float64 w
+"""
+
+	order = 0
+	migrated_types = [
+		("PoseStamped","geometry_msgs/PoseStamped"),]
+
+	valid = True
+
+	def update(self, old_msg, new_msg):
+		self.migrate_array(old_msg.poses, new_msg.poses, "geometry_msgs/PoseStamped")
+
+
+import math
+
+class update_deprecated_msgs_RobotBase2DOdom_c3caa47ad9e2bbe7b59c0cfdba67172f(MessageUpdateRule):
+	old_type = "deprecated_msgs/RobotBase2DOdom"
+	old_full_text = """
+Header header
+Pose2DFloat32 pos
+Pose2DFloat32 vel
+byte stall
+float32 residual
+================================================================================
+MSG: roslib/Header
+#Standard metadata for higher-level flow data types
+#sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+
+================================================================================
+MSG: deprecated_msgs/Pose2DFloat32
+float32 x
+float32 y
+float32 th
+"""
+
+	new_type = "nav_msgs/Odometry"
+	new_full_text = """
+Header header
+geometry_msgs/PoseWithCovariance pose
+geometry_msgs/TwistWithCovariance twist
+
+================================================================================
+MSG: roslib/Header
+#Standard metadata for higher-level flow data types
+#sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+
+================================================================================
+MSG: geometry_msgs/PoseWithCovariance
+Pose pose
+
+# Row-major representation of the 6x6 covariance matrix
+# The orientation parameters use a fixed-axis representation.
+# In order, the parameters are:
+# (x, y, z, rotation about Z axis, rotation about Y axis, rotation about X axis)
+float64[36] covariance
+
+================================================================================
+MSG: geometry_msgs/Pose
+Point position
+Quaternion orientation
+
+================================================================================
+MSG: geometry_msgs/Point
+float64 x
+float64 y
+float64 z
+
+================================================================================
+MSG: geometry_msgs/Quaternion
+# xyz - vector rotation axis, w - scalar term (cos(ang/2))
+float64 x
+float64 y
+float64 z
+float64 w
+
+================================================================================
+MSG: geometry_msgs/TwistWithCovariance
+Twist twist
+
+# Row-major representation of the 6x6 covariance matrix
+# The orientation parameters use a fixed-axis representation.
+# In order, the parameters are:
+# (x, y, z, rotation about Z axis, rotation about Y axis, rotation about X axis)
+float64[36] covariance
+
+================================================================================
+MSG: geometry_msgs/Twist
+Vector3  linear
+Vector3  angular
+
+================================================================================
+MSG: geometry_msgs/Vector3
+float64 x
+float64 y
+float64 z
+"""
+
+	order = 0
+	migrated_types = [
+		("Header","Header"),]
+
+	valid = True
+
+        def quaternion_from_euler(self, x, y, z):
+                x /= 2.0
+                y /= 2.0
+                z /= 2.0
+                ci = math.cos(x)
+                si = math.sin(x)
+                cj = math.cos(y)
+                sj = math.sin(y)
+                ck = math.cos(z)
+                sk = math.sin(z)
+                cc = ci*ck
+                cs = ci*sk
+                sc = si*ck
+                ss = si*sk
+                
+                quaternion = [0.0,0.0,0.0,0.0]
+                
+                quaternion[0] = cj*sc - sj*cs
+                quaternion[1] = cj*ss + sj*cc
+                quaternion[2] = cj*cs - sj*sc
+                quaternion[3] = cj*cc + sj*ss
+
+                return quaternion
+
+        identity6x6 = [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0]
+
+	def update(self, old_msg, new_msg):
+		self.migrate(old_msg.header, new_msg.header)
+
+                new_msg.pose.pose.position.x = old_msg.pos.x
+                new_msg.pose.pose.position.y = old_msg.pos.y
+                new_msg.pose.pose.position.z = 0.
+
+                q = self.quaternion_from_euler(0,0,old_msg.pos.th)
+
+                new_msg.pose.pose.orientation.x = q[0]
+                new_msg.pose.pose.orientation.y = q[1]
+                new_msg.pose.pose.orientation.z = q[2]
+                new_msg.pose.pose.orientation.w = q[3]
+                     
+#                new_msg.pose.covariance = [x/old_msg.residual for x in self.identity6x6]
+                new_msg.pose.covariance = 36*[0.0]
+
+                new_msg.twist.twist.linear.x = old_msg.vel.x
+                new_msg.twist.twist.linear.y = old_msg.vel.y
+                new_msg.twist.twist.linear.z = 0.
+
+                new_msg.twist.twist.angular.x = 0.
+                new_msg.twist.twist.angular.y = 0.
+                new_msg.twist.twist.angular.z = old_msg.vel.th
+
+#                new_msg.twist.covariance = [x/old_msg.residual for x in self.identity6x6]
+                new_msg.twist.covariance = 36*[0.0]
+
+class update_nav_msgs_Odometry_3d9d984f898011a94dbf4db7092b3d83(MessageUpdateRule):
+	old_type = "nav_msgs/Odometry"
+	old_full_text = """
+Header header
+geometry_msgs/PoseWithCovariance pose
+geometry_msgs/TwistWithCovariance twist
+
+================================================================================
+MSG: roslib/Header
+#Standard metadata for higher-level flow data types
+#sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+
+================================================================================
+MSG: geometry_msgs/PoseWithCovariance
+Pose pose
+
+# Row-major representation of the 6x6 covariance matrix
+# The orientation parameters use a fixed-axis representation.
+# In order, the parameters are:
+# (x, y, z, rotation about Z axis, rotation about Y axis, rotation about X axis)
+float64[36] covariance
+
+================================================================================
+MSG: geometry_msgs/Pose
+Point position
+Quaternion orientation
+
+================================================================================
+MSG: geometry_msgs/Point
+float64 x
+float64 y
+float64 z
+
+================================================================================
+MSG: geometry_msgs/Quaternion
+# xyz - vector rotation axis, w - scalar term (cos(ang/2))
+float64 x
+float64 y
+float64 z
+float64 w
+
+================================================================================
+MSG: geometry_msgs/TwistWithCovariance
+Twist twist
+
+# Row-major representation of the 6x6 covariance matrix
+# The orientation parameters use a fixed-axis representation.
+# In order, the parameters are:
+# (x, y, z, rotation about Z axis, rotation about Y axis, rotation about X axis)
+float64[36] covariance
+
+================================================================================
+MSG: geometry_msgs/Twist
+Vector3  linear
+Vector3  angular
+
+================================================================================
+MSG: geometry_msgs/Vector3
+float64 x
+float64 y
+float64 z
+"""
+
+	new_type = "nav_msgs/Odometry"
+	new_full_text = """
+# This represents an estimate of a position and velocity in free space.  
+Header header
+string child_frame_id
+geometry_msgs/PoseWithCovariance pose
+geometry_msgs/TwistWithCovariance twist
+
+================================================================================
+MSG: roslib/Header
+#Standard metadata for higher-level flow data types
+#sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+
+================================================================================
+MSG: geometry_msgs/PoseWithCovariance
+# This represents a pose in free space with uncertainty.
+
+Pose pose
+
+# Row-major representation of the 6x6 covariance matrix
+# The orientation parameters use a fixed-axis representation.
+# In order, the parameters are:
+# (x, y, z, rotation about X axis, rotation about Y axis, rotation about Z axis)
+float64[36] covariance
+
+================================================================================
+MSG: geometry_msgs/Pose
+# A representation of pose in free space, composed of postion and orientation. 
+Point position
+Quaternion orientation
+
+================================================================================
+MSG: geometry_msgs/Point
+# This contains the position of a point in free space
+float64 x
+float64 y
+float64 z
+
+================================================================================
+MSG: geometry_msgs/Quaternion
+# This represents an orientation in free space in quaternion form.
+
+float64 x
+float64 y
+float64 z
+float64 w
+
+================================================================================
+MSG: geometry_msgs/TwistWithCovariance
+# This expresses velocity in free space with uncertianty.
+
+Twist twist
+
+# Row-major representation of the 6x6 covariance matrix
+# The orientation parameters use a fixed-axis representation.
+# In order, the parameters are:
+# (x, y, z, rotation about X axis, rotation about Y axis, rotation about Z axis)
+float64[36] covariance
+
+================================================================================
+MSG: geometry_msgs/Twist
+# This expresses velocity in free space broken into it's linear and angular parts. 
+Vector3  linear
+Vector3  angular
+
+================================================================================
+MSG: geometry_msgs/Vector3
+# This represents a vector in free space. 
+
+float64 x
+float64 y
+float64 z
+"""
+
+	order = 0
+	migrated_types = [
+		("Header","Header"),
+		("geometry_msgs/PoseWithCovariance","geometry_msgs/PoseWithCovariance"),
+		("geometry_msgs/TwistWithCovariance","geometry_msgs/TwistWithCovariance"),]
+
+	valid = True
+
+	def update(self, old_msg, new_msg):
+		self.migrate(old_msg.header, new_msg.header)
+		#No matching field name in old message
+		new_msg.child_frame_id = 'base_footprint'
+		self.migrate(old_msg.pose, new_msg.pose)
+		self.migrate(old_msg.twist, new_msg.twist)
+
+class update_nav_msgs_Path_f4bbbec105a3dc69d6c5974def547813(MessageUpdateRule):
+	old_type = "nav_msgs/Path"
+	old_full_text = """
+geometry_msgs/PoseStamped[] poses
+
+================================================================================
+MSG: geometry_msgs/PoseStamped
+Header header
+Pose pose
+
+================================================================================
+MSG: roslib/Header
+#Standard metadata for higher-level flow data types
+#sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+
+================================================================================
+MSG: geometry_msgs/Pose
+Point position
+Quaternion orientation
+
+================================================================================
+MSG: geometry_msgs/Point
+float64 x
+float64 y
+float64 z
+
+================================================================================
+MSG: geometry_msgs/Quaternion
+# xyz - vector rotation axis, w - scalar term (cos(ang/2))
+float64 x
+float64 y
+float64 z
+float64 w
+"""
+
+	new_type = "nav_msgs/Path"
+	new_full_text = """
+#An array of poses that represents a Path for a robot to follow
+Header header
+geometry_msgs/PoseStamped[] poses
+
+================================================================================
+MSG: roslib/Header
+#Standard metadata for higher-level flow data types
+#sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+
+================================================================================
+MSG: geometry_msgs/PoseStamped
+# A Pose with reference coordinate frame and timestamp
+Header header
+Pose pose
+
+================================================================================
+MSG: geometry_msgs/Pose
+# A representation of pose in free space, composed of postion and orientation. 
+Point position
+Quaternion orientation
+
+================================================================================
+MSG: geometry_msgs/Point
+# This contains the position of a point in free space
+float64 x
+float64 y
+float64 z
+
+================================================================================
+MSG: geometry_msgs/Quaternion
+# This represents an orientation in free space in quaternion form.
+
+float64 x
+float64 y
+float64 z
+float64 w
+"""
+
+	order = 0
+	migrated_types = [
+		("geometry_msgs/PoseStamped","geometry_msgs/PoseStamped"),]
+
+	valid = True
+
+	def update(self, old_msg, new_msg):
+		#No matching field name in old message
+		new_msg.header = self.get_new_class('Header')()
+		self.migrate_array(old_msg.poses, new_msg.poses, "geometry_msgs/PoseStamped")

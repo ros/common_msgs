@@ -1,2 +1,0 @@
-Acceleration acc
-AngularAcceleration ang_acc

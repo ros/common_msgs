@@ -1,38 +1,27 @@
-Header header        # Header
-string label         # Label for the image
-string encoding      # Specifies the color encoding of the data
-                     #   Acceptable values are:
-                     #    1 channel types:
-                     #     mono, bayer_rggb, bayer_gbrg, bayer_grbg, bayer_bggr
-                     #    3 channel types:
-                     #     rgb, bgr
-                     #    4 channel types:
-                     #     rgba, bgra, yuv422
-                     #    6 channel types:
-                     #     yuv411
-                     #    N channel types:
-                     #     other
-string depth         # Specifies the depth of the data:
-                     #   Acceptable values:
-                     #    uint8, int8, uint16, int16, uint32, int32, uint64, int64, float32, float64
-
-# Based on depth ONE of the following MultiArrays may contain data.
-# The multi-array MUST have 3 dimensions, labeled as "height",
-# "width", and "channel", though depending on usage the ordering of
-# the dimensions may very.  Note that IPL Image convention will order
-# these as: height, width, channel, which is the preferred ordering
-# unless performance dictates otherwise.
+# This message contains an uncompressed image
+# (0, 0) is at top-left corner of image
 #
-# Height, width, and number of channels are specified in the dimension
-# sizes within the appropriate MultiArray
 
-std_msgs/UInt8MultiArray   uint8_data
-std_msgs/Int8MultiArray    int8_data
-std_msgs/UInt16MultiArray  uint16_data   
-std_msgs/Int16MultiArray   int16_data
-std_msgs/UInt32MultiArray  uint32_data
-std_msgs/Int32MultiArray   int32_data
-std_msgs/UInt64MultiArray  uint64_data
-std_msgs/Int64MultiArray   int64_data
-std_msgs/Float32MultiArray float32_data
-std_msgs/Float64MultiArray float64_data
+Header header        # Header timestamp should be acquisition time of image
+                     # Header frame_id should be optical frame of camera
+                     # origin of frame should be optical center of cameara
+                     # +x should point to the right in the image
+                     # +y should point down in the image
+                     # +z should point into to plane of the image
+                     # If the frame_id here and the frame_id of the CameraInfo
+                     # message associated with the image conflict
+                     # the behavior is undefined
+
+uint32 height         # image height, that is, number of rows
+uint32 width          # image width, that is, number of columns
+
+# The legal values for encoding are in file src/image_encodings.cpp
+# If you want to standardize a new string format, join
+# ros-users@lists.sourceforge.net and send an email proposing a new encoding.
+
+string encoding       # Encoding of pixels -- channel meaning, ordering, size
+                      # taken from the list of strings in src/image_encodings.cpp
+
+uint8 is_bigendian    # is this data bigendian?
+uint32 step           # Full row length in bytes
+uint8[] data          # actual matrix data, size is (step * rows)

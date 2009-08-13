@@ -1,15 +1,20 @@
 <package>
   <description brief="A package for diagnostic_msgs">
 
-     diagnostic_msgs is the package which provides the messages used by the diagnostic system in ROS.
+     diagnostic_msgs defines messages used by the ROS diagnostic system.  
+These message are designed to be used with the packages in the diagnostic
+stack.  In that stack there are classes which provide simple ways to set and
+access the messages, as well as automated ways to process the diagnostic data.
 
   </description>
   <author>Tully Foote/ tfoote@willowgarage.com</author>
   <license>BSD</license>
   <review status="api cleared" notes=""/>
   <url>http://pr.willowgarage.com/wiki/diagnostic_msgs</url>
+  <depend package="rosbagmigration"/>
   <export>
     <cpp cflags="-I${prefix}/msg/cpp -I${prefix}/srv/cpp"/>
+    <rosbagmigration rule_file="migration_rules/diagnostic_msgs.bmr"/>
   </export>
 
 </package>

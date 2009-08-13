@@ -1,5 +1,14 @@
-byte level #(OK=0, WARN=1, ERROR=2)
+# This message holds the status of an individual component of the robot.
+# 
+
+# Possible levels of operations
+byte OK=0
+byte WARN=1
+byte ERROR=2
+
+byte level # level of operation enumerated above 
 string name # a description of the test/component reporting
 string message # a description of the status
-DiagnosticValue[] values # an array of values associated with the status
-DiagnosticString[] strings # an array of string associated with the status
+string hardware_id # a hardware unique string
+KeyValue[] values # an array of values associated with the status
+
