@@ -1,14 +1,14 @@
 <package>
   <description brief="Messages for the navigation stack">
 
-    These messages are the common messages used to interact with the 
-navigation stack.
+    This package defines the common messages used to interact with the 
+<a href="http://ros.org/wiki/navigation">navigation</a> stack.
 
   </description>
   <author>Tully Foote</author>
   <license>BSD</license>
   <review status="api cleared" notes=""/>
-  <url>http://pr.willowgarage.com/wiki/nav_msgs</url>
+  <url>http://ros.org/wiki/nav_msgs</url>
   <depend package="geometry_msgs"/>
 
   <depend package="rosbagmigration"/>
