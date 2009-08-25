@@ -1,0 +1,16 @@
+<package>
+  <description brief="Messages for actionlib">
+     actionlib_msgs defines the common messages to interact
+     with an action server and an action client
+  </description>
+  <author>Vijay Pradeep</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://pr.willowgarage.com/wiki/actionlib_msgs</url>
+
+  <export>
+    <cpp cflags="-I${prefix}/msg/cpp"/>
+  </export>
+</package>
+
+
