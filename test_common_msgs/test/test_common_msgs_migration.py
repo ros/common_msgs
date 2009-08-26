@@ -449,24 +449,6 @@ class TestCommonMsgsMigration(unittest.TestCase):
     self.do_test('angular_acceleration', self.get_old_angular_acceleration, self.get_new_angular_acceleration)
 
 
-########### BatteryState ###############
-
-#  def get_old_battery_state(self):
-#    battery_state_classes = self.load_saved_classes('BatteryState.saved')
-#
-#    battery_state = battery_state_classes['robot_msgs/BatteryState']
-#
-#    return battery_state(None, 1.23, 4.56, 7.89)
-#
-#  def get_new_battery_state(self):
-#    from pr2_msgs.msg import BatteryState
-#
-#    return BatteryState(None, 1.23, 4.56, 7.89)
-#
-#  def test_battery_state(self):
-#    self.do_test('battery_state', self.get_old_battery_state, self.get_new_battery_state)
-
-
 ########### DiagnosticValue ###############
 
   def get_old_diagnostic_value(self):
