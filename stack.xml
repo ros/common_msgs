@@ -1,4 +1,4 @@
-<stack name="common_msgs" version="0.9.0">
+<stack name="common_msgs" version="0.9.1">
   <description brief="common messages">
     A set of code and messages that are widely useful within the ROS ecosystem.
 The messages for diagnostics within ROS are defined in the diagnostic_msgs 
