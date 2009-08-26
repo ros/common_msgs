@@ -11,7 +11,7 @@ sensors, such as cameras, scanning laser range finders, and generic
   <author>Maintained by Tully Foote tfoote@willowgarage.com</author>
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
-  <url>http://pr.willowgarage.com/wiki/common_msgs</url>
+  <url>http://ros.org/wiki/common_msgs</url>
   <depend stack="ros"/> <!-- rospy, rosrecord, rostest, rosbagmigration, std_msgs --> 
 
 </stack>
