@@ -76,7 +76,7 @@ def quaternion_from_euler(x, y, z):
 
   return quaternion
 
-
+migrator = rosbagmigration.MessageMigrator()
 
 identity6x6 = [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0]
 
@@ -1105,7 +1105,6 @@ class TestCommonMsgsMigration(unittest.TestCase):
 
 ########### Helper functions ###########
 
-
   def setUp(self):
     self.pkg_dir = roslib.packages.get_pkg_dir("test_common_msgs")
 
@@ -1140,9 +1139,9 @@ class TestCommonMsgsMigration(unittest.TestCase):
     bag.close()
 
     # Check and migrate
-    res = rosbagmigration.checkbag(oldbag, [])
-    self.assertTrue(res is None or res == [], 'Bag not ready to be migrated')
-    res = rosbagmigration.fixbag(oldbag, newbag, [])
+    res = rosbagmigration.checkbag(migrator, oldbag)
+    self.assertTrue(not False in [m[1] == [] for m in res], 'Bag not ready to be migrated')
+    res = rosbagmigration.fixbag(migrator, oldbag, newbag)
     self.assertTrue(res, 'Bag not converted successfully')
 
     # Pull the first message out of the bag
