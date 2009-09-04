@@ -1,19 +1,23 @@
 <package>
   <description brief="sensor_msgs">
 
-     sensor_msgs
+    This package defines messages for commonly used sensors, including
+cameras and scanning laser rangefinders.    
 
   </description>
-  <author>Tully Foote</author>
+  <author>Tully Foote/tfoote@willowgarage.com</author>
   <license>BSD</license>
-  <review status="proposal cleared" notes=""/>
-  <url>http://pr.willowgarage.com/wiki/sensor_msgs</url>
+  <review status="api cleared" notes=""/>
+  <url>http://ros.org/wiki/sensor_msgs</url>
 
   <export>
-    <cpp cflags="-I${prefix}/include -I${prefix}/msg/cpp"/>
+    <cpp cflags="-I${prefix}/include -I${prefix}/msg/cpp" lflags="-L${prefix}/lib -lsensor_msgs -Wl,-rpath,${prefix}/lib"/>
+    <rosbagmigration rule_file="migration_rules/sensor_msgs.bmr"/>
   </export>
 
   <depend package="std_msgs"/>
+  <depend package="geometry_msgs"/>
+  <depend package="rosbagmigration"/>
 
 </package>
 

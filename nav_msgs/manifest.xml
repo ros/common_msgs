@@ -1,18 +1,21 @@
 <package>
-  <description brief="Messages for the nav stack">
+  <description brief="Messages for the navigation stack">
 
-    These messages are the common messages used to interact with the nav stack
+    nav_msgs defines the common messages used to interact with the 
+<a href="http://ros.org/wiki/navigation">navigation</a> stack.
 
   </description>
   <author>Tully Foote</author>
   <license>BSD</license>
-  <review status="API conditionally cleared" notes="http://pr.willowgarage.com/wiki/robot_msgs/2009-05-05_API_Reviewx"/>
-  <url>http://pr.willowgarage.com/wiki/nav_msgs</url>
-  <depend package="robot_msgs"/>
-  <export>
-    <cpp cflags="-I${prefix}/msg/cpp"/>
-  </export>
+  <review status="api cleared" notes=""/>
+  <url>http://ros.org/wiki/nav_msgs</url>
+  <depend package="geometry_msgs"/>
 
+  <depend package="rosbagmigration"/>
+  <export>
+    <cpp cflags="-I${prefix}/msg/cpp -I${prefix}/srv/cpp"/>
+    <rosbagmigration rule_file="migration_rules/nav_msgs.bmr"/>
+  </export>
 </package>
 
 

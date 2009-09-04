@@ -1,2 +1,0 @@
-Point position
-Quaternion orientation

@@ -1,15 +1,18 @@
 <package>
   <description brief="A package for diagnostic_msgs">
 
-     diagnostic_msgs is the package which provides the messages used by the diagnostic system in ROS.
+     This package holds the diagnostic messages which provide the standardized interface for the diagnostic and runtime monitoring systems in ROS. These messages are currently used by the <a href="http://ros.org/wiki/hardware-test">hardware_test</a> Stack, 
+which provides libraries for simple ways to set and access the messages, as well as automated ways to process the diagnostic data.
 
   </description>
   <author>Tully Foote/ tfoote@willowgarage.com</author>
   <license>BSD</license>
   <review status="api cleared" notes=""/>
-  <url>http://pr.willowgarage.com/wiki/diagnostic_msgs</url>
+  <url>http://ros.org/wiki/diagnostic_msgs</url>
+  <depend package="rosbagmigration"/>
   <export>
     <cpp cflags="-I${prefix}/msg/cpp -I${prefix}/srv/cpp"/>
+    <rosbagmigration rule_file="migration_rules/diagnostic_msgs.bmr"/>
   </export>
 
 </package>

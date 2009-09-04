@@ -1,0 +1,1314 @@
+class update_robot_msgs_PointCloud_c47b5cedd2b77d241b27547ed7624840(MessageUpdateRule):
+	old_type = "robot_msgs/PointCloud"
+	old_full_text = """
+Header header
+Point32[] pts
+ChannelFloat32[] chan
+
+================================================================================
+MSG: roslib/Header
+#Standard metadata for higher-level flow data types
+#sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+
+================================================================================
+MSG: robot_msgs/Point32
+float32 x
+float32 y
+float32 z
+================================================================================
+MSG: robot_msgs/ChannelFloat32
+string name
+float32[] vals
+"""
+
+	new_type = "sensor_msgs/PointCloud"
+	new_full_text = """
+Header header
+geometry_msgs/Point32[] points
+ChannelFloat32[] channels
+
+================================================================================
+MSG: roslib/Header
+#Standard metadata for higher-level flow data types
+#sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+
+================================================================================
+MSG: geometry_msgs/Point32
+float32 x
+float32 y
+float32 z
+================================================================================
+MSG: sensor_msgs/ChannelFloat32
+string name
+float32[] values
+"""
+
+	order = 0
+	migrated_types = [
+		("Header","Header"),
+                ("Point32","geometry_msgs/Point32"),
+                ("ChannelFloat32","ChannelFloat32")]
+
+	valid = True
+
+	def update(self, old_msg, new_msg):
+		self.migrate(old_msg.header, new_msg.header)
+		self.migrate_array(old_msg.pts, new_msg.points, "geometry_msgs/Point32")
+		self.migrate_array(old_msg.chan, new_msg.channels, "ChannelFloat32")
+
+
+class update_robot_msgs_ChannelFloat32_61c47e4621e471c885edb248b5dcafd5(MessageUpdateRule):
+	old_type = "robot_msgs/ChannelFloat32"
+	old_full_text = """
+string name
+float32[] vals
+"""
+
+	new_type = "sensor_msgs/ChannelFloat32"
+	new_full_text = """
+string name
+float32[] values
+"""
+
+	order = 0
+	migrated_types = []
+
+	valid = True
+
+	def update(self, old_msg, new_msg):
+		new_msg.name = old_msg.name
+		new_msg.values = old_msg.vals
+
+
+
+
+
+class update_image_msgs_CamInfo_a48ffa77e74ab6901331e50745dff353(MessageUpdateRule):
+	old_type = "image_msgs/CamInfo"
+	old_full_text = """
+# This message defines meta information for a camera. It should be in a
+# camera namespace and accompanied by up to 5 image topics named:
+# 
+# image_raw, image, image_color, image_rect, and image_rect_color
+
+Header header
+
+uint32 height
+uint32 width
+
+float64[5]  D # Distortion: k1, k2, t1, t2, k3
+float64[9]  K # original camera matrix
+float64[9]  R # rectification matrix
+float64[12] P # projection/camera matrix
+
+# Should put exposure, gain, etc. information here as well
+
+================================================================================
+MSG: roslib/Header
+#Standard metadata for higher-level flow data types
+#sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+"""
+
+	new_type = "sensor_msgs/CameraInfo"
+	new_full_text = """
+# This message defines meta information for a camera. It should be in a
+# camera namespace and accompanied by up to 5 image topics named:
+# 
+# image_raw, image, image_color, image_rect, and image_rect_color
+#
+# The meaning of the camera parameters are described in detail at
+# http://pr.willowgarage.com/wiki/Camera_Calibration.
+
+Header header
+
+# Resolution in pixels
+uint32 height
+uint32 width
+
+########################
+# Intrinsic parameters #
+########################
+
+# Distortion parameters: k1, k2, t1, t2, k3
+# These model radial and tangential distortion of the camera.
+float64[5]  D # 5x1 vector
+
+# Original camera matrix
+# Projects 3D points in the camera coordinate frame to 2D pixel
+# coordinates using the focal lengths (fx, fy) and principal point
+# (cx, cy):
+#     [fx  0 cx]
+# K = [ 0 fy cy]
+#     [ 0  0  1]
+float64[9]  K # 3x3 row-major matrix
+
+########################
+# Extrinsic parameters #
+########################
+
+# Rectification matrix (stereo cameras only)
+# A homography which takes an image to the ideal stereo image plane
+# so that epipolar lines in both stereo images are parallel.
+float64[9]  R # 3x3 row-major matrix
+
+# Projection/camera matrix
+# Projects 3D points in a world coordinate frame to 2D pixel coordinates.
+float64[12] P # 3x4 row-major matrix
+
+================================================================================
+MSG: roslib/Header
+#Standard metadata for higher-level flow data types
+#sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+"""
+
+	order = 0
+	migrated_types = [
+		("Header","Header"),]
+
+	valid = True
+
+	def update(self, old_msg, new_msg):
+		self.migrate(old_msg.header, new_msg.header)
+		new_msg.height = old_msg.height
+		new_msg.width = old_msg.width
+		new_msg.D = old_msg.D
+		new_msg.K = old_msg.K
+		new_msg.R = old_msg.R
+		new_msg.P = old_msg.P
+
+
+class update_sensor_msgs_CameraInfo_a48ffa77e74ab6901331e50745dff353(MessageUpdateRule):
+
+	old_type = "sensor_msgs/CameraInfo"
+	old_full_text = """
+# This message defines meta information for a camera. It should be in a
+# camera namespace and accompanied by up to 5 image topics named:
+# 
+# image_raw, image, image_color, image_rect, and image_rect_color
+#
+# The meaning of the camera parameters are described in detail at
+# http://pr.willowgarage.com/wiki/Camera_Calibration.
+
+Header header
+
+# Resolution in pixels
+uint32 height
+uint32 width
+
+########################
+# Intrinsic parameters #
+########################
+
+# Distortion parameters: k1, k2, t1, t2, k3
+# These model radial and tangential distortion of the camera.
+float64[5]  D # 5x1 vector
+
+# Original camera matrix
+# Projects 3D points in the camera coordinate frame to 2D pixel
+# coordinates using the focal lengths (fx, fy) and principal point
+# (cx, cy):
+#     [fx  0 cx]
+# K = [ 0 fy cy]
+#     [ 0  0  1]
+float64[9]  K # 3x3 row-major matrix
+
+########################
+# Extrinsic parameters #
+########################
+
+# Rectification matrix (stereo cameras only)
+# A homography which takes an image to the ideal stereo image plane
+# so that epipolar lines in both stereo images are parallel.
+float64[9]  R # 3x3 row-major matrix
+
+# Projection/camera matrix
+# Projects 3D points in a world coordinate frame to 2D pixel coordinates.
+float64[12] P # 3x4 row-major matrix
+
+================================================================================
+MSG: roslib/Header
+#Standard metadata for higher-level flow data types
+#sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+"""
+
+	new_type = "sensor_msgs/CameraInfo"
+	new_full_text = """
+# This message defines meta information for a camera. It should be in a
+# camera namespace and accompanied by up to 5 image topics named:
+# 
+# image_raw, image, image_color, image_rect, and image_rect_color
+#
+# The meaning of the camera parameters are described in detail at
+# http://pr.willowgarage.com/wiki/Camera_Calibration.
+
+##########################
+# Image acquisition info #
+##########################
+
+# Time of image acquisition, camera coordinate frame ID
+Header header
+
+# Camera resolution in pixels
+uint32 height
+uint32 width
+
+# Region of interest (subwindow of full camera resolution), if applicable
+RegionOfInterest roi
+
+########################
+# Intrinsic parameters #
+########################
+
+# Distortion parameters: k1, k2, t1, t2, k3
+# These model radial and tangential distortion of the camera.
+float64[5]  D # 5x1 vector
+
+# Original camera matrix
+# Projects 3D points in the camera coordinate frame to 2D pixel
+# coordinates using the focal lengths (fx, fy) and principal point
+# (cx, cy):
+#     [fx  0 cx]
+# K = [ 0 fy cy]
+#     [ 0  0  1]
+float64[9]  K # 3x3 row-major matrix
+
+########################
+# Extrinsic parameters #
+########################
+
+# Rectification matrix (stereo cameras only)
+# A homography which takes an image to the ideal stereo image plane
+# so that epipolar lines in both stereo images are parallel.
+float64[9]  R # 3x3 row-major matrix
+
+# Projection/camera matrix
+# Projects 3D points in a world coordinate frame to 2D pixel coordinates.
+float64[12] P # 3x4 row-major matrix
+
+================================================================================
+MSG: roslib/Header
+#Standard metadata for higher-level flow data types
+#sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+
+================================================================================
+MSG: sensor_msgs/RegionOfInterest
+uint32 x_offset
+uint32 y_offset
+uint32 height
+uint32 width
+"""
+
+	order = 0
+	migrated_types = [
+		("Header","Header"),]
+
+	valid = True
+
+	def update(self, old_msg, new_msg):
+		self.migrate(old_msg.header, new_msg.header)
+		new_msg.height = old_msg.height
+		new_msg.width = old_msg.width
+		new_msg.roi = self.get_new_class('sensor_msgs/RegionOfInterest')(0,0,old_msg.height,old_msg.width)
+		new_msg.D = old_msg.D
+		new_msg.K = old_msg.K
+		new_msg.R = old_msg.R
+		new_msg.P = old_msg.P
+
+
+class update_sensor_msgs_Image_97d4ca3868dc81af4a2403bcb6558cb0(MessageUpdateRule):
+	old_type = "sensor_msgs/Image"
+	old_full_text = """
+Header header        # Header
+string label         # Label for the image
+string encoding      # Specifies the color encoding of the data
+                     #   Acceptable values are:
+                     #    1 channel types:
+                     #     mono, bayer_rggb, bayer_gbrg, bayer_grbg, bayer_bggr
+                     #    3 channel types:
+                     #     rgb, bgr
+                     #    4 channel types:
+                     #     rgba, bgra, yuv422
+                     #    6 channel types:
+                     #     yuv411
+                     #    N channel types:
+                     #     other
+string depth         # Specifies the depth of the data:
+                     #   Acceptable values:
+                     #    uint8, int8, uint16, int16, uint32, int32, uint64, int64, float32, float64
+
+# Based on depth ONE of the following MultiArrays may contain data.
+# The multi-array MUST have 3 dimensions, labeled as "height",
+# "width", and "channel", though depending on usage the ordering of
+# the dimensions may very.  Note that IPL Image convention will order
+# these as: height, width, channel, which is the preferred ordering
+# unless performance dictates otherwise.
+#
+# Height, width, and number of channels are specified in the dimension
+# sizes within the appropriate MultiArray
+
+std_msgs/UInt8MultiArray   uint8_data
+std_msgs/Int8MultiArray    int8_data
+std_msgs/UInt16MultiArray  uint16_data   
+std_msgs/Int16MultiArray   int16_data
+std_msgs/UInt32MultiArray  uint32_data
+std_msgs/Int32MultiArray   int32_data
+std_msgs/UInt64MultiArray  uint64_data
+std_msgs/Int64MultiArray   int64_data
+std_msgs/Float32MultiArray float32_data
+std_msgs/Float64MultiArray float64_data
+
+================================================================================
+MSG: roslib/Header
+#Standard metadata for higher-level flow data types
+#sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+
+================================================================================
+MSG: std_msgs/UInt8MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+uint8[]           data          # array of data
+
+
+================================================================================
+MSG: std_msgs/MultiArrayLayout
+# The multiarray declares a generic multi-dimensional array of a
+# particular data type.  Dimensions are ordered from outer most
+# to inner most.
+
+MultiArrayDimension[] dim # Array of dimension properties
+uint32 data_offset        # padding bytes at front of data
+
+# Accessors should ALWAYS be written in terms of dimension stride
+# and specified outer-most dimension first.
+# 
+# multiarray(i,j,k) = data[data_offset + dim_stride[1]*i + dim_stride[2]*j + k]
+#
+# A standard, 3-channel 640x480 image with interleaved color channels
+# would be specified as:
+#
+# dim[0].label  = "height"
+# dim[0].size   = 480
+# dim[0].stride = 3*640*480 = 921600  (note dim[0] stride is just size of image)
+# dim[1].label  = "width"
+# dim[1].size   = 640
+# dim[1].stride = 3*640 = 1920
+# dim[2].label  = "channel"
+# dim[2].size   = 3
+# dim[2].stride = 3
+#
+# multiarray(i,j,k) refers to the ith row, jth column, and kth channel.
+================================================================================
+MSG: std_msgs/MultiArrayDimension
+string label   # label of given dimension
+uint32 size    # size of given dimension (in type units)
+uint32 stride  # stride of given dimension
+================================================================================
+MSG: std_msgs/Int8MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+int8[]            data          # array of data
+
+
+================================================================================
+MSG: std_msgs/UInt16MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+uint16[]            data        # array of data
+
+
+================================================================================
+MSG: std_msgs/Int16MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+int16[]           data          # array of data
+
+
+================================================================================
+MSG: std_msgs/UInt32MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+uint32[]          data          # array of data
+
+
+================================================================================
+MSG: std_msgs/Int32MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+int32[]           data          # array of data
+
+
+================================================================================
+MSG: std_msgs/UInt64MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+uint64[]          data          # array of data
+
+
+================================================================================
+MSG: std_msgs/Int64MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+int64[]           data          # array of data
+
+
+================================================================================
+MSG: std_msgs/Float32MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+float32[]         data          # array of data
+
+
+================================================================================
+MSG: std_msgs/Float64MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+float64[]         data          # array of data
+"""
+
+	new_type = "sensor_msgs/Image"
+	new_full_text = """
+Header header        # Header
+
+uint32 height         # image height, that is, number of rows
+uint32 width          # image width, that is, number of columns
+
+# The legal values for encoding are in file src/image_encodings.cpp
+# If you want to standardize a new string format, join ros-users@lists.sourceforge.net and send an email proposing a new encoding.
+
+string encoding       # Encoding of pixels -- channel meaning, ordering, size -- taken from the list of strings in src/image_encodings.cpp
+uint8 is_bigendian    # is this data bigendian
+uint32 step           # Full row length in bytes
+uint8[] data          # actual matrix data, size is (step * rows)
+
+================================================================================
+MSG: roslib/Header
+#Standard metadata for higher-level flow data types
+#sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+"""
+
+	order = 0
+	migrated_types = [
+		("Header","Header"),]
+
+	valid = True
+
+
+        def update_empty(self, old_msg, new_msg):
+                pass
+
+	def update_mono_uint8(self, old_msg, new_msg):
+                assert (len(old_msg.uint8_data.layout.dim) == 3 and
+                        old_msg.uint8_data.layout.dim[0].label == 'height' and
+                        old_msg.uint8_data.layout.dim[1].label == 'width' and
+                        old_msg.uint8_data.layout.dim[2].label == 'channel'), \
+                        'This rule only supports migration images with 3 dimensions ordered: height, width, channel'
+
+		self.migrate(old_msg.header, new_msg.header)
+		new_msg.encoding = 'mono8'
+		new_msg.step = old_msg.uint8_data.layout.dim[1].stride
+		new_msg.data = old_msg.uint8_data.data
+		new_msg.height = old_msg.uint8_data.layout.dim[0].size
+		new_msg.width = old_msg.uint8_data.layout.dim[1].size
+		new_msg.is_bigendian = 0
+
+	def update_rgb_uint8(self, old_msg, new_msg):
+                assert (len(old_msg.uint8_data.layout.dim) == 3 and
+                        old_msg.uint8_data.layout.dim[0].label == 'height' and
+                        old_msg.uint8_data.layout.dim[1].label == 'width' and
+                        old_msg.uint8_data.layout.dim[2].label == 'channel'), \
+                        'This rule only supports migration images with 3 dimensions ordered: height, width, channel'
+
+		self.migrate(old_msg.header, new_msg.header)
+		new_msg.encoding = 'rgb8'
+		new_msg.step = old_msg.uint8_data.layout.dim[1].stride
+		new_msg.data = old_msg.uint8_data.data
+		new_msg.height = old_msg.uint8_data.layout.dim[0].size
+		new_msg.width = old_msg.uint8_data.layout.dim[1].size
+		new_msg.is_bigendian = 0
+
+	def update_bgr_uint8(self, old_msg, new_msg):
+                assert (len(old_msg.uint8_data.layout.dim) == 3 and
+                        old_msg.uint8_data.layout.dim[0].label == 'height' and
+                        old_msg.uint8_data.layout.dim[1].label == 'width' and
+                        old_msg.uint8_data.layout.dim[2].label == 'channel'), \
+                        'This rule only supports migration images with 3 dimensions ordered: height, width, channel'
+
+		self.migrate(old_msg.header, new_msg.header)
+		new_msg.encoding = 'bgr8'
+		new_msg.step = old_msg.uint8_data.layout.dim[1].stride
+		new_msg.data = old_msg.uint8_data.data
+		new_msg.height = old_msg.uint8_data.layout.dim[0].size
+		new_msg.width = old_msg.uint8_data.layout.dim[1].size
+		new_msg.is_bigendian = 0
+
+        def update(self, old_msg, new_msg):
+                encoding_map = {('',''): self.update_empty,
+                                ('other','none'): self.update_empty,
+                                ('mono', 'uint8'): self.update_mono_uint8,
+                                ('rgb', 'uint8'): self.update_rgb_uint8,
+                                ('bgr', 'uint8'): self.update_bgr_uint8}
+                key = (old_msg.encoding, old_msg.depth)
+        
+                assert key in encoding_map, 'This rule does not support migrating from %s %s'%key
+
+                encoding_map[key](old_msg, new_msg)
+
+
+
+
+
+class update_image_msgs_Image_97d4ca3868dc81af4a2403bcb6558cb0(MessageUpdateRule):
+	old_type = "image_msgs/Image"
+	old_full_text = """
+Header header        # Header
+string label         # Label for the image
+string encoding      # Specifies the color encoding of the data
+                     #   Acceptable values are:
+                     #    1 channel types:
+                     #     mono, bayer_rggb, bayer_gbrg, bayer_grbg, bayer_bggr
+                     #    3 channel types:
+                     #     rgb, bgr
+                     #    4 channel types:
+                     #     rgba, bgra, yuv422
+                     #    6 channel types:
+                     #     yuv411
+                     #    N channel types:
+                     #     other
+string depth         # Specifies the depth of the data:
+                     #   Acceptable values:
+                     #    uint8, int8, uint16, int16, uint32, int32, uint64, int64, float32, float64
+
+# Based on depth ONE of the following MultiArrays may contain data.
+# The multi-array MUST have 3 dimensions, labeled as "height",
+# "width", and "channel", though depending on usage the ordering of
+# the dimensions may very.  Note that IPL Image convention will order
+# these as: height, width, channel, which is the preferred ordering
+# unless performance dictates otherwise.
+#
+# Height, width, and number of channels are specified in the dimension
+# sizes within the appropriate MultiArray
+
+std_msgs/UInt8MultiArray   uint8_data
+std_msgs/Int8MultiArray    int8_data
+std_msgs/UInt16MultiArray  uint16_data   
+std_msgs/Int16MultiArray   int16_data
+std_msgs/UInt32MultiArray  uint32_data
+std_msgs/Int32MultiArray   int32_data
+std_msgs/UInt64MultiArray  uint64_data
+std_msgs/Int64MultiArray   int64_data
+std_msgs/Float32MultiArray float32_data
+std_msgs/Float64MultiArray float64_data
+
+================================================================================
+MSG: roslib/Header
+#Standard metadata for higher-level flow data types
+#sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+
+================================================================================
+MSG: std_msgs/UInt8MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+uint8[]           data          # array of data
+
+
+================================================================================
+MSG: std_msgs/MultiArrayLayout
+# The multiarray declares a generic multi-dimensional array of a
+# particular data type.  Dimensions are ordered from outer most
+# to inner most.
+
+MultiArrayDimension[] dim # Array of dimension properties
+uint32 data_offset        # padding bytes at front of data
+
+# Accessors should ALWAYS be written in terms of dimension stride
+# and specified outer-most dimension first.
+# 
+# multiarray(i,j,k) = data[data_offset + dim_stride[1]*i + dim_stride[2]*j + k]
+#
+# A standard, 3-channel 640x480 image with interleaved color channels
+# would be specified as:
+#
+# dim[0].label  = "height"
+# dim[0].size   = 480
+# dim[0].stride = 3*640*480 = 921600  (note dim[0] stride is just size of image)
+# dim[1].label  = "width"
+# dim[1].size   = 640
+# dim[1].stride = 3*640 = 1920
+# dim[2].label  = "channel"
+# dim[2].size   = 3
+# dim[2].stride = 3
+#
+# multiarray(i,j,k) refers to the ith row, jth column, and kth channel.
+================================================================================
+MSG: std_msgs/MultiArrayDimension
+string label   # label of given dimension
+uint32 size    # size of given dimension (in type units)
+uint32 stride  # stride of given dimension
+================================================================================
+MSG: std_msgs/Int8MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+int8[]            data          # array of data
+
+
+================================================================================
+MSG: std_msgs/UInt16MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+uint16[]            data        # array of data
+
+
+================================================================================
+MSG: std_msgs/Int16MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+int16[]           data          # array of data
+
+
+================================================================================
+MSG: std_msgs/UInt32MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+uint32[]          data          # array of data
+
+
+================================================================================
+MSG: std_msgs/Int32MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+int32[]           data          # array of data
+
+
+================================================================================
+MSG: std_msgs/UInt64MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+uint64[]          data          # array of data
+
+
+================================================================================
+MSG: std_msgs/Int64MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+int64[]           data          # array of data
+
+
+================================================================================
+MSG: std_msgs/Float32MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+float32[]         data          # array of data
+
+
+================================================================================
+MSG: std_msgs/Float64MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+float64[]         data          # array of data
+"""
+
+
+	new_type = "sensor_msgs/Image"
+	new_full_text = """
+Header header        # Header
+string label         # Label for the image
+string encoding      # Specifies the color encoding of the data
+                     #   Acceptable values are:
+                     #    1 channel types:
+                     #     mono, bayer_rggb, bayer_gbrg, bayer_grbg, bayer_bggr
+                     #    3 channel types:
+                     #     rgb, bgr
+                     #    4 channel types:
+                     #     rgba, bgra, yuv422
+                     #    6 channel types:
+                     #     yuv411
+                     #    N channel types:
+                     #     other
+string depth         # Specifies the depth of the data:
+                     #   Acceptable values:
+                     #    uint8, int8, uint16, int16, uint32, int32, uint64, int64, float32, float64
+
+# Based on depth ONE of the following MultiArrays may contain data.
+# The multi-array MUST have 3 dimensions, labeled as "height",
+# "width", and "channel", though depending on usage the ordering of
+# the dimensions may very.  Note that IPL Image convention will order
+# these as: height, width, channel, which is the preferred ordering
+# unless performance dictates otherwise.
+#
+# Height, width, and number of channels are specified in the dimension
+# sizes within the appropriate MultiArray
+
+std_msgs/UInt8MultiArray   uint8_data
+std_msgs/Int8MultiArray    int8_data
+std_msgs/UInt16MultiArray  uint16_data   
+std_msgs/Int16MultiArray   int16_data
+std_msgs/UInt32MultiArray  uint32_data
+std_msgs/Int32MultiArray   int32_data
+std_msgs/UInt64MultiArray  uint64_data
+std_msgs/Int64MultiArray   int64_data
+std_msgs/Float32MultiArray float32_data
+std_msgs/Float64MultiArray float64_data
+
+================================================================================
+MSG: roslib/Header
+#Standard metadata for higher-level flow data types
+#sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+
+================================================================================
+MSG: std_msgs/UInt8MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+uint8[]           data          # array of data
+
+
+================================================================================
+MSG: std_msgs/MultiArrayLayout
+# The multiarray declares a generic multi-dimensional array of a
+# particular data type.  Dimensions are ordered from outer most
+# to inner most.
+
+MultiArrayDimension[] dim # Array of dimension properties
+uint32 data_offset        # padding bytes at front of data
+
+# Accessors should ALWAYS be written in terms of dimension stride
+# and specified outer-most dimension first.
+# 
+# multiarray(i,j,k) = data[data_offset + dim_stride[1]*i + dim_stride[2]*j + k]
+#
+# A standard, 3-channel 640x480 image with interleaved color channels
+# would be specified as:
+#
+# dim[0].label  = "height"
+# dim[0].size   = 480
+# dim[0].stride = 3*640*480 = 921600  (note dim[0] stride is just size of image)
+# dim[1].label  = "width"
+# dim[1].size   = 640
+# dim[1].stride = 3*640 = 1920
+# dim[2].label  = "channel"
+# dim[2].size   = 3
+# dim[2].stride = 3
+#
+# multiarray(i,j,k) refers to the ith row, jth column, and kth channel.
+================================================================================
+MSG: std_msgs/MultiArrayDimension
+string label   # label of given dimension
+uint32 size    # size of given dimension (in type units)
+uint32 stride  # stride of given dimension
+================================================================================
+MSG: std_msgs/Int8MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+int8[]            data          # array of data
+
+
+================================================================================
+MSG: std_msgs/UInt16MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+uint16[]            data        # array of data
+
+
+================================================================================
+MSG: std_msgs/Int16MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+int16[]           data          # array of data
+
+
+================================================================================
+MSG: std_msgs/UInt32MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+uint32[]          data          # array of data
+
+
+================================================================================
+MSG: std_msgs/Int32MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+int32[]           data          # array of data
+
+
+================================================================================
+MSG: std_msgs/UInt64MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+uint64[]          data          # array of data
+
+
+================================================================================
+MSG: std_msgs/Int64MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+int64[]           data          # array of data
+
+
+================================================================================
+MSG: std_msgs/Float32MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+float32[]         data          # array of data
+
+
+================================================================================
+MSG: std_msgs/Float64MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+float64[]         data          # array of data
+"""
+
+	order = 0
+	migrated_types = [
+		("Header","Header"),
+                ("Image","Image")]
+
+	valid = True
+
+	def update(self, old_msg, new_msg):
+		self.migrate(old_msg, new_msg)
+
+
+
+
+class update_sensor_msgs_CompressedImage_9f25a34569b1b807704b985d4396ad35(MessageUpdateRule):
+	old_type = "sensor_msgs/CompressedImage"
+	old_full_text = """
+Header header        # Header
+string label         # Label for the image
+string encoding      # Specifies the color encoding of the data
+                     #   Acceptable values are:
+                     #    1 channel types:
+                     #     mono
+                     #    3 channel types:
+                     #     rgb, bgr
+string format        # Specifies the format of the data
+                     #   Acceptable values:
+                     #     jpeg
+
+std_msgs/UInt8MultiArray   uint8_data
+
+================================================================================
+MSG: roslib/Header
+#Standard metadata for higher-level flow data types
+#sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+
+================================================================================
+MSG: std_msgs/UInt8MultiArray
+# Please look at the MultiArrayLayout message definition for
+# documentation on all multiarrays.
+
+MultiArrayLayout  layout        # specification of data layout
+uint8[]           data          # array of data
+
+
+================================================================================
+MSG: std_msgs/MultiArrayLayout
+# The multiarray declares a generic multi-dimensional array of a
+# particular data type.  Dimensions are ordered from outer most
+# to inner most.
+
+MultiArrayDimension[] dim # Array of dimension properties
+uint32 data_offset        # padding bytes at front of data
+
+# Accessors should ALWAYS be written in terms of dimension stride
+# and specified outer-most dimension first.
+# 
+# multiarray(i,j,k) = data[data_offset + dim_stride[1]*i + dim_stride[2]*j + k]
+#
+# A standard, 3-channel 640x480 image with interleaved color channels
+# would be specified as:
+#
+# dim[0].label  = "height"
+# dim[0].size   = 480
+# dim[0].stride = 3*640*480 = 921600  (note dim[0] stride is just size of image)
+# dim[1].label  = "width"
+# dim[1].size   = 640
+# dim[1].stride = 3*640 = 1920
+# dim[2].label  = "channel"
+# dim[2].size   = 3
+# dim[2].stride = 3
+#
+# multiarray(i,j,k) refers to the ith row, jth column, and kth channel.
+
+================================================================================
+MSG: std_msgs/MultiArrayDimension
+string label   # label of given dimension
+uint32 size    # size of given dimension (in type units)
+uint32 stride  # stride of given dimension
+"""
+
+	new_type = "sensor_msgs/CompressedImage"
+	new_full_text = """
+Header header        # Header
+string format        # Specifies the format of the data
+                     #   Acceptable values:
+                     #     jpeg, png
+uint8[] data         # Compressed image buffer
+
+================================================================================
+MSG: roslib/Header
+#Standard metadata for higher-level flow data types
+#sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+"""
+
+	order = 0
+	migrated_types = [
+		("Header","Header"),]
+
+	valid = True
+
+	def update(self, old_msg, new_msg):
+		self.migrate(old_msg.header, new_msg.header)
+		new_msg.format = old_msg.format
+		new_msg.data = old_msg.uint8_data.data
+
+class update_laser_scan_LaserScan_90c7ef2dc6895d81024acba2ac42f369(MessageUpdateRule):
+	old_type = "laser_scan/LaserScan"
+	old_full_text = """
+#
+# Laser scans angles are measured counter clockwise, with 0 facing forward
+# (along the x-axis) of the device frame
+#
+
+Header header
+float32 angle_min        # start angle of the scan [rad]
+float32 angle_max        # end angle of the scan [rad]
+float32 angle_increment  # angular distance between measurements [rad]
+float32 time_increment   # time between measurements [seconds]
+float32 scan_time        # time between scans [seconds]
+float32 range_min        # minimum range value [m]
+float32 range_max        # maximum range value [m]
+float32[] ranges         # range data [m] (Note: values < range_min or > range_max should be discarded)
+float32[] intensities    # intensity data [device-specific units]
+
+================================================================================
+MSG: roslib/Header
+#Standard metadata for higher-level flow data types
+#sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+"""
+
+	new_type = "sensor_msgs/LaserScan"
+	new_full_text = """
+# Single scan from a planar laser range-finder
+#
+# If you have another ranging device with different behavior (e.g. a sonar
+# array), please find or create a different message, since applications
+# will make fairly laser-specific assumptions about this data
+
+Header header            # timestamp in the header is the acquisition time of 
+                         # the first ray in the scan.
+                         #
+                         # in frame frame_id, laser is assumed to spin around 
+                         # the positive Z axis (counterclockwise, if Z is up)
+                         # with zero angle being forward along the x axis
+                         
+float32 angle_min        # start angle of the scan [rad]
+float32 angle_max        # end angle of the scan [rad]
+float32 angle_increment  # angular distance between measurements [rad]
+
+float32 time_increment   # time between measurements [seconds] - if your scanner
+                         # is moving, this will be used in interpolating position
+                         # of 3d points
+float32 scan_time        # time between scans [seconds]
+
+float32 range_min        # minimum range value [m]
+float32 range_max        # maximum range value [m]
+
+float32[] ranges         # range data [m] (Note: values < range_min or > range_max should be discarded)
+float32[] intensities    # intensity data [device-specific units].  If your
+                         # device does not provide intensities, please leave
+                         # the array empty.
+
+================================================================================
+MSG: roslib/Header
+#Standard metadata for higher-level flow data types
+#sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+"""
+
+	order = 0
+	migrated_types = [
+		("Header","Header"),]
+
+	valid = True
+
+	def update(self, old_msg, new_msg):
+		self.migrate(old_msg.header, new_msg.header)
+		new_msg.angle_min = old_msg.angle_min
+		new_msg.angle_max = old_msg.angle_max
+		new_msg.angle_increment = old_msg.angle_increment
+		new_msg.time_increment = old_msg.time_increment
+		new_msg.scan_time = old_msg.scan_time
+		new_msg.range_min = old_msg.range_min
+		new_msg.range_max = old_msg.range_max
+		new_msg.ranges = old_msg.ranges
+		new_msg.intensities = old_msg.intensities
+
+class update_mechanism_msgs_JointStates_6def7c223229ab1e340258092e485703(MessageUpdateRule):
+	old_type = "mechanism_msgs/JointStates"
+	old_full_text = """
+Header header
+mechanism_msgs/JointState[] joints
+
+================================================================================
+MSG: roslib/Header
+#Standard metadata for higher-level flow data types
+#sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+
+================================================================================
+MSG: mechanism_msgs/JointState
+string name
+float64 position
+float64 velocity
+float64 applied_effort
+float64 commanded_effort
+byte is_calibrated
+"""
+
+	new_type = "sensor_msgs/JointState"
+	new_full_text = """
+Header header
+
+string[] name
+float64[] position
+float64[] velocity
+float64[] effort
+
+================================================================================
+MSG: roslib/Header
+#Standard metadata for higher-level flow data types
+#sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+"""
+
+	order = 0
+	migrated_types = [
+		("Header","Header"),]
+
+	valid = True
+
+	def update(self, old_msg, new_msg):
+		self.migrate(old_msg.header, new_msg.header)
+		new_msg.name = [j.name for j in old_msg.joints]
+		new_msg.position = [j.position for j in old_msg.joints]
+		new_msg.velocity = [j.velocity for j in old_msg.joints]
+		new_msg.effort = [j.applied_effort for j in old_msg.joints]
+

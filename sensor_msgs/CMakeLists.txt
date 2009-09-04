@@ -16,8 +16,10 @@ genmsg()
 #uncomment if you have defined services
 #gensrv()
 
+include_directories(include)
+
 #common commands for building c++ executables and libraries
-#rospack_add_library(${PROJECT_NAME} src/example.cpp)
+rospack_add_library(${PROJECT_NAME} src/image_encodings.cpp)
 #target_link_libraries(${PROJECT_NAME} another_library)
 #rospack_add_boost_directories()
 #rospack_link_boost(${PROJECT_NAME} thread)

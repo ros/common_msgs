@@ -1,0 +1,4 @@
+geometry_msgs/PoseStamped goal
+float32 tolerance
+---
+nav_msgs/Path plan
