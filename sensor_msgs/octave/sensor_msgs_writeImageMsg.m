@@ -14,9 +14,10 @@ s = size(I);
 image_msg = sensor_msgs_Image();
 image_msg.width = s(2);
 image_msg.height = s(1);
-if( lenght(s) >= 3 && s(3) == 3 )
+if( length(s) >= 3 && s(3) == 3 )
     image_msg.encoding = 'rgb8';
 else
     image_msg.encoding = 'mono8';
+end
 
 image_msg.data = reshape(permute(uint8(I),length(s):-1:1),[prod(s) 1]); %% reverse the dimension order
