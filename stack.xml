@@ -2,8 +2,8 @@
   <description brief="common messages">
     common_msgs contains messages that are widely used by other ROS packages.
 These includes messages for 
-actions (<a href="http//ros.org/wiki/actionlib_msgs">actionlib_msgs</a>), 
-diagnostics (<a href="http//ros.org/wiki/diagnostic_msgs">diagnostic_msgs</a>), 
+actions (<a href="http://ros.org/wiki/actionlib_msgs">actionlib_msgs</a>), 
+diagnostics (<a href="http://ros.org/wiki/diagnostic_msgs">diagnostic_msgs</a>), 
 geometric primitives (<a href="http://ros.org/wiki/geometry_msgs">geometry_msgs</a>), 
 robot navigation (<a href="http://ros.org/wiki/nav_msgs">nav_msgs</a>),
 and common sensors (<a href="http://ros.org/wiki/sensor_msgs">sensor_msgs</a>), such as laser range finders, cameras, point clouds.
