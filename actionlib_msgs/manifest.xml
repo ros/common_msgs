@@ -1,7 +1,10 @@
 <package>
   <description brief="Messages for actionlib">
-     actionlib_msgs defines the common messages to interact
-     with an action server and an action client
+     actionlib_msgs defines the common messages to interact with an
+     action server and an action client.  For full documentation of
+     the actionlib API see
+     the <a href="http://www.ros.org/wiki/actionlib">actionlib</a>
+     package.
   </description>
   <author>Vijay Pradeep</author>
   <license>BSD</license>
