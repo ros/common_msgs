@@ -1,7 +1,10 @@
 <package>
   <description brief="Messages for geometric primatives">
 
-geometry_msgs provides messages for common geometric primatives such as points, vectors, and poses. These primatives are designed to provide a common data type and facilitate interoperability throughout the system. 
+    geometry_msgs provides messages for common geometric primatives
+    such as points, vectors, and poses. These primatives are designed
+    to provide a common data type and facilitate interoperability
+    throughout the system. 
 
   </description>
   <author>Tully Foote</author>
