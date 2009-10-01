@@ -1,8 +1,13 @@
 <package>
   <description brief="A package for diagnostic_msgs">
 
-     This package holds the diagnostic messages which provide the standardized interface for the diagnostic and runtime monitoring systems in ROS. These messages are currently used by the <a href="http://ros.org/wiki/hardware-test">hardware_test</a> Stack, 
-which provides libraries for simple ways to set and access the messages, as well as automated ways to process the diagnostic data.
+     This package holds the diagnostic messages which provide the
+     standardized interface for the diagnostic and runtime monitoring
+     systems in ROS. These messages are currently used by
+     the <a href="http://ros.org/wiki/diagnostics">diagnostics</a>
+     Stack, which provides libraries for simple ways to set and access
+     the messages, as well as automated ways to process the diagnostic
+     data.
 
   </description>
   <author>Tully Foote/ tfoote@willowgarage.com</author>
