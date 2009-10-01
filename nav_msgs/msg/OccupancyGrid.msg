@@ -1,6 +1,5 @@
 # This represents a 2-D grid map, in which each cell represents the probability of
-# occupancy.  Occupancy values are integers in the range [0,100], or -1 
-# for unknown.
+# occupancy.
 
 Header header 
 

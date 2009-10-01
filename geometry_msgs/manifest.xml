@@ -1,12 +1,15 @@
 <package>
   <description brief="Messages for geometric primatives">
 
-geometry_msgs provides messages for common geometric primatives such as points, vectors, and poses. These primatives are designed to provide a common data type and facilitate interoperability throughout the system. 
+    geometry_msgs provides messages for common geometric primatives
+    such as points, vectors, and poses. These primatives are designed
+    to provide a common data type and facilitate interoperability
+    throughout the system. 
 
   </description>
   <author>Tully Foote</author>
   <license>BSD</license>
-  <review status="api cleared" notes=""/>
+  <review status="doc reviewed" notes="http://www.ros.org/wiki/geometry_msgs/Reviews/2009-09-30_Doc_Review"/>
   <url>http://ros.org/wiki/geometry_msgs</url>
 
   <depend package="rosbagmigration"/>
