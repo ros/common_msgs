@@ -8,7 +8,10 @@
      Stack, which provides libraries for simple ways to set and access
      the messages, as well as automated ways to process the diagnostic
      data.
-
+     <li>
+     These messages are used for long term logging and will not be
+     changed unless there is a very important reason.
+     </li>
   </description>
   <author>Tully Foote/ tfoote@willowgarage.com</author>
   <license>BSD</license>
