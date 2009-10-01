@@ -8,7 +8,7 @@
   </description>
   <author>Vijay Pradeep</author>
   <license>BSD</license>
-  <review status="unreviewed" notes=""/>
+  <review status="doc reviewed" notes="http://www.ros.org/wiki/actionlib_msgs/Reviews/2009-09-30_Doc_Review"/>
   <url>http://pr.willowgarage.com/wiki/actionlib_msgs</url>
 
   <export>
