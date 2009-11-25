@@ -14,7 +14,7 @@ rospack(sensor_msgs)
 #uncomment if you have defined messages
 genmsg()
 #uncomment if you have defined services
-#gensrv()
+gensrv()
 
 include_directories(include)
 
