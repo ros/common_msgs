@@ -1,4 +1,4 @@
-<stack name="common_msgs" version="0.9.2">
+<stack>
   <description brief="common messages">
     common_msgs contains messages that are widely used by other ROS packages.
 These includes messages for 
@@ -9,9 +9,9 @@ robot navigation (<a href="http://ros.org/wiki/nav_msgs">nav_msgs</a>),
 and common sensors (<a href="http://ros.org/wiki/sensor_msgs">sensor_msgs</a>), such as laser range finders, cameras, point clouds.
   </description>
   <author>Maintained by Tully Foote tfoote@willowgarage.com</author>
-  <license>BSD</license>
-  <review status="doc reviewed" notes="http://www.ros.org/wiki/common_msgs/Reviews/2009-09-30_Doc_Review"/>
+  <license>BSD</license>  
+  <review status="doc reviewed" notes="2009/09/30" />
   <url>http://ros.org/wiki/common_msgs</url>
-  <depend stack="ros"/> <!-- rospy, rosrecord, rostest, rosbagmigration, std_msgs --> 
+  <depend stack="ros" /> <!-- std_msgs, rostest, rospy, rosbagmigration, rosrecord -->
 
 </stack>
