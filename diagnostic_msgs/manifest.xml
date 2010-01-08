@@ -1,6 +1,6 @@
 <package>
   <description brief="A package for diagnostic_msgs">
-
+     <p>
      This package holds the diagnostic messages which provide the
      standardized interface for the diagnostic and runtime monitoring
      systems in ROS. These messages are currently used by
@@ -8,10 +8,11 @@
      Stack, which provides libraries for simple ways to set and access
      the messages, as well as automated ways to process the diagnostic
      data.
-     <li>
+     </p>
+     <p>
      These messages are used for long term logging and will not be
      changed unless there is a very important reason.
-     </li>
+     </p>
   </description>
   <author>Tully Foote/ tfoote@willowgarage.com</author>
   <license>BSD</license>
