@@ -11,3 +11,4 @@ uint8 FLOAT64 = 8
 string name
 uint32 offset
 uint8  datatype
+uint32 size
