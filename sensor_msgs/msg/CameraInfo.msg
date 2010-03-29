@@ -4,7 +4,7 @@
 # image_raw, image, image_color, image_rect, and image_rect_color
 #
 # The meaning of the camera parameters are described in detail at
-# http://pr.willowgarage.com/wiki/Camera_Calibration.
+# http://pr.willowgarage.com/wiki/camera_calibration.
 
 ##########################
 # Image acquisition info #
