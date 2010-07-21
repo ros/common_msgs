@@ -35,6 +35,9 @@
  *
  */
 
+#ifndef SENSOR_MSGS_POINT_CLOUD_CONVERSION_H
+#define SENSOR_MSGS_POINT_CLOUD_CONVERSION_H
+
 #include <sensor_msgs/PointCloud.h>
 #include <sensor_msgs/PointCloud2.h>
 
@@ -164,3 +167,5 @@ namespace sensor_msgs
     return (true);
   }
 }
+
+#endif// SENSOR_MSGS_POINT_CLOUD_CONVERSION_H
