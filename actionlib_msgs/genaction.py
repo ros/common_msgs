@@ -33,6 +33,7 @@ import cStringIO
 import re
 import roslib, roslib.msgs
 import os, os.path
+import errno
 
 IODELIM   = '---'
 COMMENTCHAR = roslib.msgs.COMMENTCHAR
@@ -67,8 +68,15 @@ def main():
         sys.exit(1)
     
     output_dir = os.path.join(pkg, 'msg')
-    if not os.path.exists(output_dir):
+
+    # Try to make the directory, but silently continue if it already exists
+    try:
         os.makedirs(output_dir)
+    except OSError, e:
+        if e.errno == errno.EEXIST:
+            pass
+        else:
+            raise
 
     action_dir = os.path.join(pkg, 'action')
     action_file = os.path.join(action_dir, filename)
