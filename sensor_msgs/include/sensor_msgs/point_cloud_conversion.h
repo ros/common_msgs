@@ -82,6 +82,7 @@ namespace sensor_msgs
     {
       output.fields[d].offset = offset;
       output.fields[d].datatype = sensor_msgs::PointField::FLOAT32;
+      output.fields[d].count  = 1;
     }
     output.point_step = offset;
     output.row_step   = output.point_step * output.width;
