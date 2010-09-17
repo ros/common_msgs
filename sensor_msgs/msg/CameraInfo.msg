@@ -1,10 +1,25 @@
 # This message defines meta information for a camera. It should be in a
-# camera namespace and accompanied by up to 5 image topics named:
-# 
-# image_raw, image, image_color, image_rect, and image_rect_color
+# camera namespace on topic "camera_info" and accompanied by up to five
+# image topics named:
 #
+#   image_raw - raw data from the camera driver, possibly Bayer encoded
+#   image            - monochrome, distorted
+#   image_color      - color, distorted
+#   image_rect       - monochrome, rectified
+#   image_rect_color - color, rectified
+#
+# The image_pipeline contains packages (image_proc, stereo_image_proc) for
+# producing the four processed image topics from image_raw and camera_info.
 # The meaning of the camera parameters are described in detail at
-# http://pr.willowgarage.com/wiki/camera_calibration.
+# http://www.ros.org/wiki/image_pipeline/CameraInfo.
+#
+# The image_geometry package provides a user-friendly interface to common
+# operations using this meta information. If you want to, e.g., project a
+# 3d point into image coordinates, we strongly recommend using image_geometry.
+#
+# If the camera is uncalibrated, the matrices D, K, R, P should be left zeroed
+# out. In particular, clients may assume that K[0] == 0.0 indicates an
+# uncalibrated camera.
 
 ##########################
 # Image acquisition info #
@@ -16,7 +31,7 @@ Header header        # Header timestamp should be acquisition time of image
                      # origin of frame should be optical center of camera
                      # +x should point to the right in the image
                      # +y should point down in the image
-                     # +z should point into to plane of the image
+                     # +z should point into the plane of the image
 
 # Camera resolution in pixels
 uint32 height
