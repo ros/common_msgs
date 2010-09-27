@@ -52,121 +52,20 @@ namespace sensor_msgs
     * \param points the the point cloud message
     * \param field_name the string defining the field name
     */
-inline int
-    getPointCloud2FieldIndex (const sensor_msgs::PointCloud2 &cloud, const std::string &field_name)
-  {
-    // Get the index we need
-    for (size_t d = 0; d < cloud.fields.size (); ++d)
-      if (cloud.fields[d].name == field_name)
-        return (d);
-    return (-1);
-  }
+int getPointCloud2FieldIndex (const sensor_msgs::PointCloud2 &cloud, const std::string &field_name);
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   /** \brief Convert a sensor_msgs::PointCloud message to a sensor_msgs::PointCloud2 message.
     * \param input the message in the sensor_msgs::PointCloud format
     * \param output the resultant message in the sensor_msgs::PointCloud2 format
     */ 
-inline bool
-    convertPointCloudToPointCloud2 (const sensor_msgs::PointCloud &input, sensor_msgs::PointCloud2 &output)
-  {
-    output.header = input.header;
-    output.width  = input.points.size ();
-    output.height = 1;
-    output.fields.resize (3 + input.channels.size ());
-    // Convert x/y/z to fields
-    output.fields[0].name = "x"; output.fields[1].name = "y"; output.fields[2].name = "z";
-    int offset = 0;
-    // All offsets are *4, as all field data types are float32
-    for (size_t d = 0; d < output.fields.size (); ++d, offset += 4)
-    {
-      output.fields[d].offset = offset;
-      output.fields[d].datatype = sensor_msgs::PointField::FLOAT32;
-      output.fields[d].count  = 1;
-    }
-    output.point_step = offset;
-    output.row_step   = output.point_step * output.width;
-    // Convert the remaining of the channels to fields
-    for (size_t d = 0; d < input.channels.size (); ++d)
-      output.fields[3 + d].name = input.channels[d].name;
-    output.data.resize (input.points.size () * output.point_step);
-    output.is_bigendian = false;  // @todo ?
-    output.is_dense     = false;
-
-    // Copy the data points
-    for (size_t cp = 0; cp < input.points.size (); ++cp)
-    {
-      memcpy (&output.data[cp * output.point_step + output.fields[0].offset], &input.points[cp].x, sizeof (float));
-      memcpy (&output.data[cp * output.point_step + output.fields[1].offset], &input.points[cp].y, sizeof (float));
-      memcpy (&output.data[cp * output.point_step + output.fields[2].offset], &input.points[cp].z, sizeof (float));
-      for (size_t d = 0; d < input.channels.size (); ++d)
-        memcpy (&output.data[cp * output.point_step + output.fields[3 + d].offset], &input.channels[d].values[cp], sizeof (float));
-    }
-    return (true);
-  }
+bool convertPointCloudToPointCloud2 (const sensor_msgs::PointCloud &input, sensor_msgs::PointCloud2 &output);
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   /** \brief Convert a sensor_msgs::PointCloud2 message to a sensor_msgs::PointCloud message.
     * \param input the message in the sensor_msgs::PointCloud2 format
     * \param output the resultant message in the sensor_msgs::PointCloud format
     */ 
-inline bool
-    convertPointCloud2ToPointCloud (const sensor_msgs::PointCloud2 &input, sensor_msgs::PointCloud &output)
-  {
-    // Get all fields size and check if we have non-float32 values
-    for (size_t d = 0; d < input.fields.size (); ++d)
-    {
-      if (input.fields[d].datatype != sensor_msgs::PointField::FLOAT32)
-      {
-        ROS_WARN ("sensor_msgs::PointCloud accepts only float32 values, but field %d (%s) has field type %d!", (int)d, input.fields[d].name.c_str (), input.fields[d].datatype);
-      }
-    }
-
-    output.header = input.header;
-    output.points.resize (input.width * input.height);
-    output.channels.resize (input.fields.size () - 3);
-    // Get the x/y/z field offsets
-    int x_idx = getPointCloud2FieldIndex (input, "x");
-    int y_idx = getPointCloud2FieldIndex (input, "y");
-    int z_idx = getPointCloud2FieldIndex (input, "z");
-    if (x_idx == -1 || y_idx == -1 || z_idx == -1)
-    {
-      ROS_ERROR ("x/y/z coordinates not found! Cannot convert to sensor_msgs::PointCloud!");
-      return (false);
-    }
-    int x_offset = input.fields[x_idx].offset;
-    int y_offset = input.fields[y_idx].offset;
-    int z_offset = input.fields[z_idx].offset;
-   
-    // Convert the fields to channels
-    int cur_c = 0;
-    for (size_t d = 0; d < input.fields.size (); ++d)
-    {
-      if ((int)input.fields[d].offset == x_offset || (int)input.fields[d].offset == y_offset || (int)input.fields[d].offset == z_offset)
-        continue;
-      output.channels[cur_c].name = input.fields[d].name;
-      output.channels[cur_c].values.resize (output.points.size ());
-      cur_c++;
-    }
-
-    // Copy the data points
-    for (size_t cp = 0; cp < output.points.size (); ++cp)
-    {
-      // Copy x/y/z
-      memcpy (&output.points[cp].x, &input.data[cp * input.point_step + x_offset], sizeof (float));
-      memcpy (&output.points[cp].y, &input.data[cp * input.point_step + y_offset], sizeof (float));
-      memcpy (&output.points[cp].z, &input.data[cp * input.point_step + z_offset], sizeof (float));
-      // Copy the rest of the data
-      int cur_c = 0;
-      for (size_t d = 0; d < input.fields.size (); ++d)
-      {
-        if ((int)input.fields[d].offset == x_offset || (int)input.fields[d].offset == y_offset || (int)input.fields[d].offset == z_offset)
-          continue;
-        memcpy (&output.channels[cur_c++].values[cp], &input.data[cp * input.point_step + input.fields[d].offset], sizeof (float));
-      }
-    }
-    return (true);
-  }
+bool convertPointCloud2ToPointCloud (const sensor_msgs::PointCloud2 &input, sensor_msgs::PointCloud &output);
 }
-
 #endif// SENSOR_MSGS_POINT_CLOUD_CONVERSION_H
