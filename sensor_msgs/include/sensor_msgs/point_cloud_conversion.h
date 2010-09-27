@@ -52,7 +52,7 @@ namespace sensor_msgs
     * \param points the the point cloud message
     * \param field_name the string defining the field name
     */
-  int
+inline int
     getPointCloud2FieldIndex (const sensor_msgs::PointCloud2 &cloud, const std::string &field_name)
   {
     // Get the index we need
@@ -67,7 +67,7 @@ namespace sensor_msgs
     * \param input the message in the sensor_msgs::PointCloud format
     * \param output the resultant message in the sensor_msgs::PointCloud2 format
     */ 
-  bool
+inline bool
     convertPointCloudToPointCloud2 (const sensor_msgs::PointCloud &input, sensor_msgs::PointCloud2 &output)
   {
     output.header = input.header;
@@ -110,7 +110,7 @@ namespace sensor_msgs
     * \param input the message in the sensor_msgs::PointCloud2 format
     * \param output the resultant message in the sensor_msgs::PointCloud format
     */ 
-  bool
+inline bool
     convertPointCloud2ToPointCloud (const sensor_msgs::PointCloud2 &input, sensor_msgs::PointCloud &output)
   {
     // Get all fields size and check if we have non-float32 values
