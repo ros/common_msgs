@@ -41,7 +41,7 @@ import struct
 import unittest
 
 import rostest
-import rosrecord
+import rosbag
 import rosbagmigration
 
 import re
@@ -1134,8 +1134,8 @@ class TestCommonMsgsMigration(unittest.TestCase):
     newbag = "%s/test/%s_new.bag"%(self.pkg_dir,name)
 
     # Create an old message
-    bag = rosrecord.Rebagger(oldbag)
-    bag.add("topic", old_msg(), roslib.rostime.Time())
+    bag = rosbag.Bag(oldbag, 'w')
+    bag.write("topic", old_msg(), roslib.rostime.Time())
     bag.close()
 
     # Check and migrate
@@ -1145,7 +1145,7 @@ class TestCommonMsgsMigration(unittest.TestCase):
     self.assertTrue(res, 'Bag not converted successfully')
 
     # Pull the first message out of the bag
-    msgs = [msg for msg in rosrecord.logplayer(newbag)]
+    topic, msg, t = rosbag.Bag(newbag).read_messages().next()
 
     # Reserialize the new message so that floats get screwed up, etc.
     m = new_msg()
@@ -1153,14 +1153,8 @@ class TestCommonMsgsMigration(unittest.TestCase):
     m.serialize(buff)
     m.deserialize(buff.getvalue())
     
-    #Compare
-#    print "old"
-#    print roslib.message.strify_message(msgs[0][1])
-#    print "new"
-#    print roslib.message.strify_message(m)
-
     # Strifying them helps make the comparison easier until I figure out why the equality operator is failing
-    self.assertTrue(roslib.message.strify_message(msgs[0][1]) == roslib.message.strify_message(m))
+    self.assertTrue(roslib.message.strify_message(msg) == roslib.message.strify_message(m))
 #    self.assertTrue(msgs[0][1] == m)
 
     #Cleanup
