@@ -8,16 +8,16 @@
   <review status="unreviewed" notes=""/>
   
   <depend package="rospy"/>
-  <depend package="rosrecord"/>
   <depend package="rostest"/>
   <depend package="rosbagmigration"/>
+  <depend package="rosbag"/>
 
   <depend package="diagnostic_msgs"/>
   <depend package="geometry_msgs"/>
   <depend package="sensor_msgs"/>
   <depend package="nav_msgs"/>
 
-  <url>http://pr.willowgarage.com/wiki/test_common_msgs</url>
+  <url>http://ros.org/wiki/test_common_msgs</url>
 
   <platform os="ubuntu" version="9.04"/>
   <platform os="ubuntu" version="9.10"/>
