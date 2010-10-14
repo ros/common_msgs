@@ -10,8 +10,8 @@ and common sensors (<a href="http://ros.org/wiki/sensor_msgs">sensor_msgs</a>), 
   </description>
   <author>Maintained by Tully Foote tfoote@willowgarage.com</author>
   <license>BSD</license>  
-  <review status="doc reviewed" notes="2009/09/30" />
+  <review status="doc reviewed" notes="2009/09/30"/>
   <url>http://ros.org/wiki/common_msgs</url>
-  <depend stack="ros" /> <!-- std_msgs, rostest, rospy, rosbagmigration, rosrecord -->
+  <depend stack="ros" /> <!-- std_msgs, rosbag, rostest, rospy, rosbagmigration -->
 
 </stack>
