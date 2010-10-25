@@ -1,0 +1,443 @@
+class update_visualization_msgs_Marker_39a0c1293620decbc276ba135f4be147(MessageUpdateRule):
+	old_type = "visualization_msgs/Marker"
+	old_full_text = """
+# See http://pr.willowgarage.com/wiki/rviz/UsingVisualizationMarkers for more information on using this message with rviz
+
+byte ARROW=0
+byte CUBE=1
+byte SPHERE=2
+byte CYLINDER=3
+byte LINE_STRIP=4
+byte LINE_LIST=5
+byte CUBE_LIST=6
+byte SPHERE_LIST=7
+byte POINTS=8
+
+byte ADD=0
+byte MODIFY=0
+byte DELETE=2
+
+Header header                        # header for time/frame information
+string ns                            # Namespace to place this object in... used in conjunction with id to create a unique name for the object
+int32 id 		                         # object ID useful in conjunction with the namespace for manipulating and deleting the object later
+int32 type 		                       # Type of object
+int32 action 	                       # 0 add/modify an object, 1 (deprecated), 2 deletes an object
+geometry_msgs/Pose pose                 # Pose of the object
+geometry_msgs/Vector3 scale             # Scale of the object 1,1,1 means default (usually 1 meter square)
+std_msgs/ColorRGBA color             # Color [0.0-1.0]
+duration lifetime                    # How long the object should last before being automatically deleted.  0 means forever
+
+#Only used if the type specified has some use for them (eg. LINE_STRIP)
+geometry_msgs/Point[] points
+
+================================================================================
+MSG: roslib/Header
+# Standard metadata for higher-level stamped data types.
+# This is generally used to communicate timestamped data 
+# in a particular coordinate frame.
+# 
+# sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+
+================================================================================
+MSG: geometry_msgs/Pose
+# A representation of pose in free space, composed of postion and orientation. 
+Point position
+Quaternion orientation
+
+================================================================================
+MSG: geometry_msgs/Point
+# This contains the position of a point in free space
+float64 x
+float64 y
+float64 z
+
+================================================================================
+MSG: geometry_msgs/Quaternion
+# This represents an orientation in free space in quaternion form.
+
+float64 x
+float64 y
+float64 z
+float64 w
+
+================================================================================
+MSG: geometry_msgs/Vector3
+# This represents a vector in free space. 
+
+float64 x
+float64 y
+float64 z
+================================================================================
+MSG: std_msgs/ColorRGBA
+float32 r
+float32 g
+float32 b
+float32 a
+"""
+
+	new_type = "visualization_msgs/Marker"
+	new_full_text = """
+# See http://www.ros.org/wiki/rviz/DisplayTypes/Marker and http://www.ros.org/wiki/rviz/Tutorials/Markers%3A%20Basic%20Shapes for more information on using this message with rviz
+
+byte ARROW=0
+byte CUBE=1
+byte SPHERE=2
+byte CYLINDER=3
+byte LINE_STRIP=4
+byte LINE_LIST=5
+byte CUBE_LIST=6
+byte SPHERE_LIST=7
+byte POINTS=8
+byte TEXT_VIEW_FACING=9
+byte MESH_RESOURCE=10
+
+byte ADD=0
+byte MODIFY=0
+byte DELETE=2
+
+Header header                        # header for time/frame information
+string ns                            # Namespace to place this object in... used in conjunction with id to create a unique name for the object
+int32 id 		                         # object ID useful in conjunction with the namespace for manipulating and deleting the object later
+int32 type 		                       # Type of object
+int32 action 	                       # 0 add/modify an object, 1 (deprecated), 2 deletes an object
+geometry_msgs/Pose pose                 # Pose of the object
+geometry_msgs/Vector3 scale             # Scale of the object 1,1,1 means default (usually 1 meter square)
+std_msgs/ColorRGBA color             # Color [0.0-1.0]
+duration lifetime                    # How long the object should last before being automatically deleted.  0 means forever
+bool frame_locked                    # If this marker should be frame-locked, i.e. retransformed into its frame every timestep
+
+#Only used if the type specified has some use for them (eg. POINTS, LINE_STRIP, ...)
+geometry_msgs/Point[] points
+#Only used if the type specified has some use for them (eg. POINTS, LINE_STRIP, ...)
+#number of colors must either be 0 or equal to the number of points
+#NOTE: alpha is not yet used
+std_msgs/ColorRGBA[] colors
+
+# NOTE: only used for text markers
+string text
+
+# NOTE: only used for MESH_RESOURCE markers
+string mesh_resource
+
+================================================================================
+MSG: roslib/Header
+# Standard metadata for higher-level stamped data types.
+# This is generally used to communicate timestamped data 
+# in a particular coordinate frame.
+# 
+# sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+
+================================================================================
+MSG: geometry_msgs/Pose
+# A representation of pose in free space, composed of postion and orientation. 
+Point position
+Quaternion orientation
+
+================================================================================
+MSG: geometry_msgs/Point
+# This contains the position of a point in free space
+float64 x
+float64 y
+float64 z
+
+================================================================================
+MSG: geometry_msgs/Quaternion
+# This represents an orientation in free space in quaternion form.
+
+float64 x
+float64 y
+float64 z
+float64 w
+
+================================================================================
+MSG: geometry_msgs/Vector3
+# This represents a vector in free space. 
+
+float64 x
+float64 y
+float64 z
+================================================================================
+MSG: std_msgs/ColorRGBA
+float32 r
+float32 g
+float32 b
+float32 a
+"""
+
+	order = 0
+	migrated_types = [
+		("Header","Header"),
+		("geometry_msgs/Pose","geometry_msgs/Pose"),
+		("geometry_msgs/Vector3","geometry_msgs/Vector3"),
+		("std_msgs/ColorRGBA","std_msgs/ColorRGBA"),
+		("geometry_msgs/Point","geometry_msgs/Point"),]
+
+	valid = True
+
+	def update(self, old_msg, new_msg):
+		self.migrate(old_msg.header, new_msg.header)
+		new_msg.ns = old_msg.ns
+		new_msg.id = old_msg.id
+		new_msg.type = old_msg.type
+		new_msg.action = old_msg.action
+		self.migrate(old_msg.pose, new_msg.pose)
+		self.migrate(old_msg.scale, new_msg.scale)
+		self.migrate(old_msg.color, new_msg.color)
+		new_msg.lifetime = old_msg.lifetime
+		#No matching field name in old message
+		new_msg.frame_locked = 0
+		self.migrate_array(old_msg.points, new_msg.points, "geometry_msgs/Point")
+		#No matching field name in old message
+		new_msg.colors = []
+		#No matching field name in old message
+		new_msg.text = ''
+		#No matching field name in old message
+		new_msg.mesh_resource = ''
+class update_visualization_msgs_Marker_f623369ab613b38d06adf06ef4e1ef67(MessageUpdateRule):
+	old_type = "visualization_msgs/Marker"
+	old_full_text = """
+# See http://www.ros.org/wiki/rviz/DisplayTypes/Marker and http://www.ros.org/wiki/rviz/Tutorials/Markers%3A%20Basic%20Shapes for more information on using this message with rviz
+
+byte ARROW=0
+byte CUBE=1
+byte SPHERE=2
+byte CYLINDER=3
+byte LINE_STRIP=4
+byte LINE_LIST=5
+byte CUBE_LIST=6
+byte SPHERE_LIST=7
+byte POINTS=8
+byte TEXT_VIEW_FACING=9
+byte MESH_RESOURCE=10
+
+byte ADD=0
+byte MODIFY=0
+byte DELETE=2
+
+Header header                        # header for time/frame information
+string ns                            # Namespace to place this object in... used in conjunction with id to create a unique name for the object
+int32 id 		                         # object ID useful in conjunction with the namespace for manipulating and deleting the object later
+int32 type 		                       # Type of object
+int32 action 	                       # 0 add/modify an object, 1 (deprecated), 2 deletes an object
+geometry_msgs/Pose pose                 # Pose of the object
+geometry_msgs/Vector3 scale             # Scale of the object 1,1,1 means default (usually 1 meter square)
+std_msgs/ColorRGBA color             # Color [0.0-1.0]
+duration lifetime                    # How long the object should last before being automatically deleted.  0 means forever
+bool frame_locked                    # If this marker should be frame-locked, i.e. retransformed into its frame every timestep
+
+#Only used if the type specified has some use for them (eg. POINTS, LINE_STRIP, ...)
+geometry_msgs/Point[] points
+#Only used if the type specified has some use for them (eg. POINTS, LINE_STRIP, ...)
+#number of colors must either be 0 or equal to the number of points
+#NOTE: alpha is not yet used
+std_msgs/ColorRGBA[] colors
+
+# NOTE: only used for text markers
+string text
+
+# NOTE: only used for MESH_RESOURCE markers
+string mesh_resource
+
+================================================================================
+MSG: roslib/Header
+# Standard metadata for higher-level stamped data types.
+# This is generally used to communicate timestamped data 
+# in a particular coordinate frame.
+# 
+# sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+
+================================================================================
+MSG: geometry_msgs/Pose
+# A representation of pose in free space, composed of postion and orientation. 
+Point position
+Quaternion orientation
+
+================================================================================
+MSG: geometry_msgs/Point
+# This contains the position of a point in free space
+float64 x
+float64 y
+float64 z
+
+================================================================================
+MSG: geometry_msgs/Quaternion
+# This represents an orientation in free space in quaternion form.
+
+float64 x
+float64 y
+float64 z
+float64 w
+
+================================================================================
+MSG: geometry_msgs/Vector3
+# This represents a vector in free space. 
+
+float64 x
+float64 y
+float64 z
+================================================================================
+MSG: std_msgs/ColorRGBA
+float32 r
+float32 g
+float32 b
+float32 a
+"""
+
+	new_type = "visualization_msgs/Marker"
+	new_full_text = """
+# See http://www.ros.org/wiki/rviz/DisplayTypes/Marker and http://www.ros.org/wiki/rviz/Tutorials/Markers%3A%20Basic%20Shapes for more information on using this message with rviz
+
+byte ARROW=0
+byte CUBE=1
+byte SPHERE=2
+byte CYLINDER=3
+byte LINE_STRIP=4
+byte LINE_LIST=5
+byte CUBE_LIST=6
+byte SPHERE_LIST=7
+byte POINTS=8
+byte TEXT_VIEW_FACING=9
+byte MESH_RESOURCE=10
+byte TRIANGLE_LIST=11
+
+byte ADD=0
+byte MODIFY=0
+byte DELETE=2
+
+Header header                        # header for time/frame information
+string ns                            # Namespace to place this object in... used in conjunction with id to create a unique name for the object
+int32 id 		                         # object ID useful in conjunction with the namespace for manipulating and deleting the object later
+int32 type 		                       # Type of object
+int32 action 	                       # 0 add/modify an object, 1 (deprecated), 2 deletes an object
+geometry_msgs/Pose pose                 # Pose of the object
+geometry_msgs/Vector3 scale             # Scale of the object 1,1,1 means default (usually 1 meter square)
+std_msgs/ColorRGBA color             # Color [0.0-1.0]
+duration lifetime                    # How long the object should last before being automatically deleted.  0 means forever
+bool frame_locked                    # If this marker should be frame-locked, i.e. retransformed into its frame every timestep
+
+#Only used if the type specified has some use for them (eg. POINTS, LINE_STRIP, ...)
+geometry_msgs/Point[] points
+#Only used if the type specified has some use for them (eg. POINTS, LINE_STRIP, ...)
+#number of colors must either be 0 or equal to the number of points
+#NOTE: alpha is not yet used
+std_msgs/ColorRGBA[] colors
+
+# NOTE: only used for text markers
+string text
+
+# NOTE: only used for MESH_RESOURCE markers
+string mesh_resource
+bool mesh_use_embedded_materials
+
+================================================================================
+MSG: roslib/Header
+# Standard metadata for higher-level stamped data types.
+# This is generally used to communicate timestamped data 
+# in a particular coordinate frame.
+# 
+# sequence ID: consecutively increasing ID 
+uint32 seq
+#Two-integer timestamp that is expressed as:
+# * stamp.secs: seconds (stamp_secs) since epoch
+# * stamp.nsecs: nanoseconds since stamp_secs
+# time-handling sugar is provided by the client library
+time stamp
+#Frame this data is associated with
+# 0: no frame
+# 1: global frame
+string frame_id
+
+================================================================================
+MSG: geometry_msgs/Pose
+# A representation of pose in free space, composed of postion and orientation. 
+Point position
+Quaternion orientation
+
+================================================================================
+MSG: geometry_msgs/Point
+# This contains the position of a point in free space
+float64 x
+float64 y
+float64 z
+
+================================================================================
+MSG: geometry_msgs/Quaternion
+# This represents an orientation in free space in quaternion form.
+
+float64 x
+float64 y
+float64 z
+float64 w
+
+================================================================================
+MSG: geometry_msgs/Vector3
+# This represents a vector in free space. 
+
+float64 x
+float64 y
+float64 z
+================================================================================
+MSG: std_msgs/ColorRGBA
+float32 r
+float32 g
+float32 b
+float32 a
+"""
+
+	order = 1
+	migrated_types = [
+		("Header","Header"),
+		("geometry_msgs/Pose","geometry_msgs/Pose"),
+		("geometry_msgs/Vector3","geometry_msgs/Vector3"),
+		("std_msgs/ColorRGBA","std_msgs/ColorRGBA"),
+		("geometry_msgs/Point","geometry_msgs/Point"),]
+
+	valid = True
+
+	def update(self, old_msg, new_msg):
+		self.migrate(old_msg.header, new_msg.header)
+		new_msg.ns = old_msg.ns
+		new_msg.id = old_msg.id
+		new_msg.type = old_msg.type
+		new_msg.action = old_msg.action
+		self.migrate(old_msg.pose, new_msg.pose)
+		self.migrate(old_msg.scale, new_msg.scale)
+		self.migrate(old_msg.color, new_msg.color)
+		new_msg.lifetime = old_msg.lifetime
+		new_msg.frame_locked = old_msg.frame_locked
+		self.migrate_array(old_msg.points, new_msg.points, "geometry_msgs/Point")
+		self.migrate_array(old_msg.colors, new_msg.colors, "std_msgs/ColorRGBA")
+		new_msg.text = old_msg.text
+		new_msg.mesh_resource = old_msg.mesh_resource
+		#No matching field name in old message
+		new_msg.mesh_use_embedded_materials = 0
