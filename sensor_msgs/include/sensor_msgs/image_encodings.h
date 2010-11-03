@@ -33,6 +33,9 @@
 *  POSSIBILITY OF SUCH DAMAGE.
 *********************************************************************/
 
+#ifndef SENSOR_MSGS_IMAGE_ENCODINGS_H
+#define SENSOR_MSGS_IMAGE_ENCODINGS_H
+
 #include <string>
 
 namespace sensor_msgs
@@ -83,3 +86,5 @@ namespace sensor_msgs
     extern const std::string BAYER_GRBG8;
   }
 }
+
+#endif
