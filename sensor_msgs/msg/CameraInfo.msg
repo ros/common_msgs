@@ -33,12 +33,13 @@ Header header        # Header timestamp should be acquisition time of image
                      # +y should point down in the image
                      # +z should point into the plane of the image
 
+##########################################
+# Calibration Parameters
+##########################################
+
 # Camera resolution in pixels
 uint32 height
 uint32 width
-
-# Region of interest (subwindow of full camera resolution), if applicable
-RegionOfInterest roi
 
 ##########################################
 # Internal parameters                    #
@@ -50,7 +51,8 @@ RegionOfInterest roi
 
 # Distortion parameters: k1, k2, t1, t2, k3
 # These model radial and tangential distortion of the camera.
-float64[5]  D # 5x1 vector
+string distortion_model
+float64[]  D # 5x1 vector
 
 # Intrinsic camera matrix for the raw (distorted) images
 # Projects 3D points in the camera coordinate frame to 2D pixel
@@ -95,3 +97,10 @@ float64[9]  R # 3x3 row-major matrix
 #  For monocular cameras and the left image of a stereo pair, P[4,1] is always 0.
 
 float64[12] P # 3x4 row-major matrix
+
+uint32 binning_x
+uint32 binning_y
+
+# Region of interest (subwindow of full camera resolution), if applicable
+RegionOfInterest roi
+
