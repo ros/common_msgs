@@ -2,7 +2,7 @@
 /*********************************************************************
 * Software License Agreement (BSD License)
 * 
-*  Copyright (c) 2009, Willow Garage, Inc.
+*  Copyright (c) 2010, Willow Garage, Inc.
 *  All rights reserved.
 * 
 *  Redistribution and use in source and binary forms, with or without
@@ -33,57 +33,17 @@
 *  POSSIBILITY OF SUCH DAMAGE.
 *********************************************************************/
 
-#ifndef SENSOR_MSGS_IMAGE_ENCODINGS_H
-#define SENSOR_MSGS_IMAGE_ENCODINGS_H
+#ifndef SENSOR_MSGS_DISTORTION_MODELS_H
+#define SENSOR_MSGS_DISTORTION_MODELS_H
 
 #include <string>
 
 namespace sensor_msgs
 {
-  namespace image_encodings
+  namespace distortion_models
   {
-    extern const std::string RGB8;
-    extern const std::string RGBA8;
-    extern const std::string BGR8;
-    extern const std::string BGRA8;
-    extern const std::string MONO8;
-    extern const std::string MONO16;
-
-    // OpenCV CvMat types
-    extern const std::string TYPE_8UC1;
-    extern const std::string TYPE_8UC2;
-    extern const std::string TYPE_8UC3;
-    extern const std::string TYPE_8UC4;
-    extern const std::string TYPE_8SC1;
-    extern const std::string TYPE_8SC2;
-    extern const std::string TYPE_8SC3;
-    extern const std::string TYPE_8SC4;
-    extern const std::string TYPE_16UC1;
-    extern const std::string TYPE_16UC2;
-    extern const std::string TYPE_16UC3;
-    extern const std::string TYPE_16UC4;
-    extern const std::string TYPE_16SC1;
-    extern const std::string TYPE_16SC2;
-    extern const std::string TYPE_16SC3;
-    extern const std::string TYPE_16SC4;
-    extern const std::string TYPE_32SC1;
-    extern const std::string TYPE_32SC2;
-    extern const std::string TYPE_32SC3;
-    extern const std::string TYPE_32SC4;
-    extern const std::string TYPE_32FC1;
-    extern const std::string TYPE_32FC2;
-    extern const std::string TYPE_32FC3;
-    extern const std::string TYPE_32FC4;
-    extern const std::string TYPE_64FC1;
-    extern const std::string TYPE_64FC2;
-    extern const std::string TYPE_64FC3;
-    extern const std::string TYPE_64FC4;
-
-    // Bayer encodings
-    extern const std::string BAYER_RGGB8;
-    extern const std::string BAYER_BGGR8;
-    extern const std::string BAYER_GBRG8;
-    extern const std::string BAYER_GRBG8;
+    extern const std::string PLUMB_BOB;
+    extern const std::string RATIONAL_POLYNOMIAL;
   }
 }
 

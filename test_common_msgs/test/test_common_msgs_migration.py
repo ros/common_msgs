@@ -147,7 +147,7 @@ class TestCommonMsgsMigration(unittest.TestCase):
 
     return CameraInfo(None,
                       480, 640,
-                      RegionOfInterest(0,0,480,640),
+                      "plumb_bob",
                       (-0.45795000000000002, 0.29532999999999998, 0.0, 0.0, 0.0),
                       (734.37707999999998, 0.0, 343.25992000000002,
                        0.0, 734.37707999999998, 229.65119999999999,
@@ -157,10 +157,60 @@ class TestCommonMsgsMigration(unittest.TestCase):
                        0.0057400000000000003, -0.00147, 0.99997999999999998),
                       (722.28197999999998, 0.0, 309.70123000000001, 0.0,
                        0.0, 722.28197999999998, 240.53899000000001, 0.0,
-                       0.0, 0.0, 1.0, 0.0))
+                       0.0, 0.0, 1.0, 0.0),
+                      1, 1,
+                      RegionOfInterest(0,0,480,640,False))
 
   def test_cam_info(self):
     self.do_test('cam_info', self.get_old_cam_info, self.get_new_cam_info)
+
+
+
+
+########### CameraInfo ###############
+
+  def get_old_camera_info(self):
+    camera_info_classes = self.load_saved_classes('CameraInfo.saved')
+
+    camera_info = camera_info_classes['sensor_msgs/CameraInfo']
+    region_of_interest = camera_info_classes['sensor_msgs/RegionOfInterest']
+
+    return camera_info(None,
+                       480, 640,
+                       region_of_interest(0,0,480,640),
+                       (-0.45795000000000002, 0.29532999999999998, 0.0, 0.0, 0.0),
+                       (734.37707999999998, 0.0, 343.25992000000002,
+                        0.0, 734.37707999999998, 229.65119999999999,
+                        0.0, 0.0, 1.0),
+                       (0.99997999999999998, 0.0012800000000000001, -0.0057400000000000003,
+                        -0.0012700000000000001, 1.0, 0.00148,
+                        0.0057400000000000003, -0.00147, 0.99997999999999998),
+                       (722.28197999999998, 0.0, 309.70123000000001, 0.0,
+                        0.0, 722.28197999999998, 240.53899000000001, 0.0,
+                        0.0, 0.0, 1.0, 0.0))
+
+  def get_new_camera_info(self):
+    from sensor_msgs.msg import CameraInfo
+    from sensor_msgs.msg import RegionOfInterest
+
+    return CameraInfo(None,
+                      480, 640,
+                      "plumb_bob",
+                      (-0.45795000000000002, 0.29532999999999998, 0.0, 0.0, 0.0),
+                      (734.37707999999998, 0.0, 343.25992000000002,
+                       0.0, 734.37707999999998, 229.65119999999999,
+                       0.0, 0.0, 1.0),
+                      (0.99997999999999998, 0.0012800000000000001, -0.0057400000000000003,
+                       -0.0012700000000000001, 1.0, 0.00148,
+                       0.0057400000000000003, -0.00147, 0.99997999999999998),
+                      (722.28197999999998, 0.0, 309.70123000000001, 0.0,
+                       0.0, 722.28197999999998, 240.53899000000001, 0.0,
+                       0.0, 0.0, 1.0, 0.0),
+                      1, 1,
+                      RegionOfInterest(0,0,480,640,False))
+
+  def test_camera_info(self):
+    self.do_test('camera_info', self.get_old_camera_info, self.get_new_camera_info)
 
 
 
