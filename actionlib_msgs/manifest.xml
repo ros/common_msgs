@@ -11,9 +11,6 @@
   <review status="doc reviewed" notes="http://www.ros.org/wiki/actionlib_msgs/Reviews/2009-09-30_Doc_Review"/>
   <url>http://pr.willowgarage.com/wiki/actionlib_msgs</url>
 
-  <export>
-    <cpp cflags="-I${prefix}/msg/cpp"/>
-  </export>
   <platform os="ubuntu" version="9.04"/>
   <platform os="ubuntu" version="9.10"/>
   <platform os="ubuntu" version="10.04"/>

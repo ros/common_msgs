@@ -14,7 +14,7 @@
 
   <depend package="rosbagmigration"/>
   <export>
-    <cpp cflags="-I${prefix}/msg/cpp"/>
+    <cpp cflags=""/>
     <rosbagmigration rule_file="migration_rules/geometry_msgs.bmr"/>
   </export>
 
