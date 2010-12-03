@@ -787,7 +787,7 @@ class TestCommonMsgsMigration(unittest.TestCase):
     transform  = transform_classes['geometry_msgs/Transform']
     vector3  = transform_classes['geometry_msgs/Vector3']
     quaternion  = transform_classes['geometry_msgs/Quaternion']
-    header  = transform_classes['roslib/Header']
+    header  = transform_classes['std_msgs/Header']
 
     ts = transform_stamped(None, "parent_frame", transform(vector3(1.23, 4.56, 7.89), quaternion(0,0,0,1)))
     ts.header.frame_id = "child_frame"
@@ -980,7 +980,7 @@ class TestCommonMsgsMigration(unittest.TestCase):
 
 
     path  = path_classes['robot_msgs/Path']
-    header = path_classes['roslib/Header']
+    header = path_classes['std_msgs/Header']
     pose_stamped  = path_classes['robot_msgs/PoseStamped']
     pose  = path_classes['robot_msgs/Pose']
     point  = path_classes['robot_msgs/Point']

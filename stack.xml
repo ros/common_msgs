@@ -12,6 +12,7 @@ and common sensors (<a href="http://ros.org/wiki/sensor_msgs">sensor_msgs</a>), 
   <license>BSD</license>  
   <review status="doc reviewed" notes="2009/09/30"/>
   <url>http://ros.org/wiki/common_msgs</url>
-  <depend stack="ros" /> <!-- std_msgs, rosbag, rostest, rospy, rosbagmigration -->
+  <depend stack="ros" /> <!-- rosbag, rostest, std_msgs, rosbagmigration, rospy -->
+  <depend stack="ros_comm" /> <!-- REQUIRED for message generate.  roscreate-stack will not detect this do not delete -->
 
 </stack>
