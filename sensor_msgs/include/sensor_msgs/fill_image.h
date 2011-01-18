@@ -42,11 +42,11 @@ namespace sensor_msgs
 {
 
   bool fillImage(Image& image,
-                 std::string encoding_arg,
+                 const std::string& encoding_arg,
                  uint32_t rows_arg,
                  uint32_t cols_arg,
                  uint32_t step_arg,
-                 void* data_arg)
+                 const void* data_arg)
   {
     image.encoding = encoding_arg;
     image.height   = rows_arg;
@@ -54,7 +54,7 @@ namespace sensor_msgs
     image.step     = step_arg;
     size_t st0 = (step_arg * rows_arg);
     image.data.resize(st0);
-    memcpy((char*)(&image.data[0]), (char*)(data_arg), st0);
+    memcpy(&image.data[0], data_arg, st0);
 
     image.is_bigendian = 0;
     return true;
