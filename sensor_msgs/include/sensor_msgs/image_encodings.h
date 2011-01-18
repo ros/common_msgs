@@ -84,6 +84,14 @@ namespace sensor_msgs
     extern const std::string BAYER_BGGR8;
     extern const std::string BAYER_GBRG8;
     extern const std::string BAYER_GRBG8;
+
+    // Utility functions for inspecting an encoding string
+    bool isColor(const std::string& encoding);
+    bool isMono(const std::string& encoding);
+    bool isBayer(const std::string& encoding);
+    bool hasAlpha(const std::string& encoding);
+    int numChannels(const std::string& encoding);
+    int bitDepth(const std::string& encoding);
   }
 }
 

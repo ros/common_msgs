@@ -33,6 +33,7 @@
 *********************************************************************/
 
 #include "sensor_msgs/image_encodings.h"
+#include <stdexcept>
 
 namespace sensor_msgs
 {
@@ -80,5 +81,106 @@ namespace sensor_msgs
     const std::string BAYER_BGGR8="bayer_bggr8";
     const std::string BAYER_GBRG8="bayer_gbrg8";
     const std::string BAYER_GRBG8="bayer_grbg8";
+
+    bool isColor(const std::string& encoding)
+    {
+      return encoding == RGB8  || encoding == BGR8 ||
+             encoding == RGBA8 || encoding == BGRA8;
+    }
+
+    bool isMono(const std::string& encoding)
+    {
+      return encoding == MONO8 || encoding == MONO16;
+    }
+
+    bool isBayer(const std::string& encoding)
+    {
+      return encoding == BAYER_RGGB8 || encoding == BAYER_BGGR8 ||
+             encoding == BAYER_GBRG8 || encoding == BAYER_GRBG8;
+    }
+
+    bool hasAlpha(const std::string& encoding)
+    {
+      return encoding == RGBA8 || encoding == BGRA8;
+    }
+
+    int numChannels(const std::string& encoding)
+    {
+      // First do the common-case encodings
+      if (encoding == MONO8 ||
+          encoding == MONO16)
+        return 1;
+      if (encoding == BGR8 ||
+          encoding == RGB8)
+        return 3;
+      if (encoding == BGRA8 ||
+          encoding == RGBA8)
+        return 4;
+      if (encoding == BAYER_RGGB8 ||
+          encoding == BAYER_BGGR8 ||
+          encoding == BAYER_GBRG8 ||
+          encoding == BAYER_GRBG8)
+        return 1;
+
+      // Now all the generic content encodings
+#define CHECK_CHANNELS(N)                       \
+      if (encoding == TYPE_8UC##N  ||           \
+          encoding == TYPE_8SC##N  ||           \
+          encoding == TYPE_16UC##N ||           \
+          encoding == TYPE_16SC##N ||           \
+          encoding == TYPE_32SC##N ||           \
+          encoding == TYPE_32FC##N ||           \
+          encoding == TYPE_64FC##N)             \
+        return N;                               \
+      /***/
+      
+      CHECK_CHANNELS(1);
+      CHECK_CHANNELS(2);
+      CHECK_CHANNELS(3);
+      CHECK_CHANNELS(4);
+
+#undef CHECK_CHANNELS
+
+      throw std::runtime_error("Unknown encoding " + encoding);
+      return -1;
+    }
+
+    int bitDepth(const std::string& encoding)
+    {
+      if (encoding == MONO16)
+        return 16;
+      if (encoding == MONO8       ||
+          encoding == BGR8        ||
+          encoding == RGB8        ||
+          encoding == BGRA8       ||
+          encoding == RGBA8       ||
+          encoding == BAYER_RGGB8 ||
+          encoding == BAYER_BGGR8 ||
+          encoding == BAYER_GBRG8 ||
+          encoding == BAYER_GRBG8)
+        return 8;
+
+      // B = bits (8, 16, ...), T = type (U, S, F)
+#define CHECK_BIT_DEPTH(B, T)                   \
+      if (encoding == TYPE_##B##T##C1 ||        \
+          encoding == TYPE_##B##T##C2 ||        \
+          encoding == TYPE_##B##T##C3 ||        \
+          encoding == TYPE_##B##T##C4)          \
+        return B;                               \
+      /***/
+
+      CHECK_BIT_DEPTH(8, U);
+      CHECK_BIT_DEPTH(8, S);
+      CHECK_BIT_DEPTH(16, U);
+      CHECK_BIT_DEPTH(16, S);
+      CHECK_BIT_DEPTH(32, S);
+      CHECK_BIT_DEPTH(32, F);
+      CHECK_BIT_DEPTH(64, F);
+
+#undef CHECK_BIT_DEPTH;
+
+      throw std::runtime_error("Unknown encoding " + encoding);
+      return -1;
+    }
   }
 }
