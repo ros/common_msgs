@@ -9,10 +9,6 @@
   <review status="Doc reviewed" notes="http://www.ros.org/wiki/robot_mechanism_controllers/Reviews/2009-10-16_Traj_API_Review"/>
   <url>http://ros.org/wiki/trajectory_msgs</url>
 
-  <export>
-    <cpp cflags="-I${prefix}/msg/cpp" />
-  </export>
-
   <platform os="ubuntu" version="9.04"/>
   <platform os="ubuntu" version="9.10"/>
   <platform os="ubuntu" version="10.04"/>
