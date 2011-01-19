@@ -14,7 +14,6 @@ The main message in visualization_msgs is <tt>visualization_msgs/Marker</tt>.  T
   <url>http://ros.org/wiki/visualization_msgs</url>
 
   <export>
-    <cpp cflags="-I${prefix}/msg/cpp"/>
     <rosbag migration_rule_file="migration_rules/visualization_msgs.bmr"/>
   </export>
 
