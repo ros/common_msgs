@@ -26,6 +26,15 @@
   <platform os="ubuntu" version="9.04"/>
   <platform os="ubuntu" version="9.10"/>
   <platform os="ubuntu" version="10.04"/>
+
+  <rosbuild2>
+    <msgs>
+      msg/DiagnosticArray.msg  msg/DiagnosticStatus.msg  msg/KeyValue.msg
+    </msgs>
+    <srvs>
+      srv/SelfTest.srv
+    </srvs>
+  </rosbuild2>
 </package>
 
 

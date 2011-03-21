@@ -17,4 +17,16 @@
   <platform os="ubuntu" version="9.04"/>
   <platform os="ubuntu" version="9.10"/>
   <platform os="ubuntu" version="10.04"/>
+
+  <rosbuild2>
+    <depend package="sensor_msgs"/>
+    <depend package="rosbagmigration"/>
+
+    <msgs>
+      msg/DisparityImage.msg
+    </msgs>
+    <srvs>
+    </srvs>
+  </rosbuild2>
+
 </package>
