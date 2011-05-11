@@ -83,7 +83,7 @@ inline visualization_msgs::Marker makeArrow( visualization_msgs::InteractiveMark
 
 void makeDisc( visualization_msgs::InteractiveMarker &msg,
     visualization_msgs::InteractiveMarkerControl &control,
-    float x, float y, float z )
+    float x, float y, float z, bool fancy=false )
 {
   visualization_msgs::Marker marker;
   std::vector<visualization_msgs::Marker> markers;
@@ -115,8 +115,6 @@ void makeDisc( visualization_msgs::InteractiveMarker &msg,
   x1 = 0;
   y1 = z0;
   z1 = -y0;
-
-  ROS_INFO_STREAM( x0*x1+y0*y1+z0*z1 );
 
   if (y1*y1 + z1*z1 < 1e-06 * 1e-06)
   {
@@ -168,7 +166,7 @@ void makeDisc( visualization_msgs::InteractiveMarker &msg,
 
   for ( int i=0; i<steps; i++ )
   {
-    marker.color.a = i%2 ? 0.7 : 0.4;
+    marker.color.a = fancy ? (i%2 ? 0.7 : 0.4) : 0.5;
 
     marker.points[0] = circle1[i];
     marker.points[1] = circle2[i];
@@ -219,8 +217,6 @@ inline visualization_msgs::InteractiveMarkerControl makeRotatePlaneControl( visu
   int_marker_control.vec.z = z;
   makeDisc( msg, int_marker_control, x, y, z);
 
-  ROS_INFO_STREAM(int_marker_control.markers[0].type);
-
   return int_marker_control;
 }
 
@@ -232,7 +228,7 @@ inline visualization_msgs::InteractiveMarkerControl makeMoveRotatePlaneControl( 
   int_marker_control.vec.x = x;
   int_marker_control.vec.y = y;
   int_marker_control.vec.z = z;
-  makeDisc( msg, int_marker_control, x, y, z);
+  makeDisc( msg, int_marker_control, x, y, z, true );
 
   return int_marker_control;
 }
