@@ -64,49 +64,40 @@ inline visualization_msgs::Marker makeArrow( visualization_msgs::InteractiveMark
   marker.header = msg.header;
   marker.pose = msg.pose;
   marker.type = visualization_msgs::Marker::ARROW;
-  marker.scale.x = msg.size * 0.2;
-  marker.scale.y = msg.size * 0.3;
+  marker.scale.x = msg.size * 0.25;
+  marker.scale.y = msg.size * 0.45;
   marker.scale.z = msg.size * 0.2;
 
   assignDefaultColor(marker,x,y,z);
 
   marker.points.resize(2);
-  marker.points[0].x = x * 0.5;
-  marker.points[0].y = y * 0.5;
-  marker.points[0].z = z * 0.5;
-  marker.points[1].x = x * 0.5 + msg.size * 0.3 * x_norm;
-  marker.points[1].y = y * 0.5 + msg.size * 0.3 * y_norm;
-  marker.points[1].z = z * 0.5 + msg.size * 0.3 * z_norm;
+  marker.points[0].x = x_norm * 0.5;
+  marker.points[0].y = y_norm * 0.5;
+  marker.points[0].z = z_norm * 0.5;
+  marker.points[1].x = x_norm * 0.5 + msg.size * 0.4 * x_norm;
+  marker.points[1].y = y_norm * 0.5 + msg.size * 0.4 * y_norm;
+  marker.points[1].z = z_norm * 0.5 + msg.size * 0.4 * z_norm;
 
   return marker;
 }
 
-inline visualization_msgs::Marker makeBox( visualization_msgs::InteractiveMarker &msg )
+void makeDisc( visualization_msgs::InteractiveMarker &msg,
+    visualization_msgs::InteractiveMarkerControl &control,
+    float x, float y, float z )
 {
   visualization_msgs::Marker marker;
-
-  marker.header = msg.header;
-  marker.pose = msg.pose;
-  marker.type = visualization_msgs::Marker::CUBE;
-  marker.scale.x = msg.size * 0.7;
-  marker.scale.y = msg.size * 0.7;
-  marker.scale.z = msg.size * 0.7;
-  marker.color.r = 0.5;
-  marker.color.g = 0.5;
-  marker.color.b = 0.5;
-  marker.color.a = 1.0;
-
-  return marker;
-}
-
-inline visualization_msgs::Marker makeDisc( visualization_msgs::InteractiveMarker &msg, float x, float y, float z )
-{
-  visualization_msgs::Marker marker;
+  std::vector<visualization_msgs::Marker> markers;
 
   if ( x==0 && y==0 && z==0 )
   {
     x = 1;
   }
+
+  float l = sqrt(x*x+y*y+z*z);
+
+  float x0 = x / l;
+  float y0 = y / l;
+  float z0 = z / l;
 
   marker.header = msg.header;
   marker.pose = msg.pose;
@@ -115,34 +106,35 @@ inline visualization_msgs::Marker makeDisc( visualization_msgs::InteractiveMarke
   marker.scale.y = 1;
   marker.scale.x = 1;
 
-  // make perpendicular vectors
-  geometry_msgs::Vector3 y_axis,z_axis;
-  if ( x!=0 )
+  // make perpendicular vector
+  // algorithm stolen from Ogre::Vector::perpendicular
+
+  float x1,y1,z1,x2,y2,z2;
+
+  // take cross product with (1,0,0), if unstable use (0,0,1)
+  x1 = 0;
+  y1 = z0;
+  z1 = -y0;
+
+  ROS_INFO_STREAM( x0*x1+y0*y1+z0*z1 );
+
+  if (y1*y1 + z1*z1 < 1e-06 * 1e-06)
   {
-    y_axis.x = y;
-    y_axis.y = -x;
-    y_axis.z = z;
-    z_axis.x = z;
-    z_axis.y = y;
-    z_axis.z = -x;
+    x1 = -z0;
+    y1 = 0;
+    z1 = x0;
   }
-  else if ( y!=0 )
-  {
-    y_axis.x = -y;
-    y_axis.y = x;
-    y_axis.z = z;
-    z_axis.x = x;
-    z_axis.y = z;
-    z_axis.z = -y;
-  } else
-  {
-    y_axis.x = -z;
-    y_axis.y = y;
-    y_axis.z = x;
-    z_axis.x = x;
-    z_axis.y = -z;
-    z_axis.z = y;
-  }
+
+  // normalise
+  l = sqrt( x1*x1 + y1*y1 + z1*z1 );
+  x1 /= l;
+  y1 /= l;
+  z1 /= l;
+
+  // construct 3rd perpendicular vector by taking cross product
+  x2 = y0*z1 - z0*y1;
+  y2 = z0*x1 - x0*z1;
+  z2 = x0*y1 - y0*x1;
 
   // compute points on a circle
   int steps = 20;
@@ -156,9 +148,9 @@ inline visualization_msgs::Marker makeDisc( visualization_msgs::InteractiveMarke
 
     geometry_msgs::Point v1,v2;
 
-    v1.x = msg.size * (sin(a)*y_axis.x + cos(a)*z_axis.x);
-    v1.y = msg.size * (sin(a)*y_axis.y + cos(a)*z_axis.y);
-    v1.z = msg.size * (sin(a)*y_axis.z + cos(a)*z_axis.z);
+    v1.x = 0.5 * msg.size * (sin(a)*x1 + cos(a)*x2);
+    v1.y = 0.5 * msg.size * (sin(a)*y1 + cos(a)*y2);
+    v1.z = 0.5 * msg.size * (sin(a)*z1 + cos(a)*z2);
 
     v2.x = 1.3 * v1.x;
     v2.y = 1.3 * v1.y;
@@ -168,20 +160,26 @@ inline visualization_msgs::Marker makeDisc( visualization_msgs::InteractiveMarke
     circle2.push_back( v2 );
   }
 
-  for ( int i=0; i<steps; i++ )
-  {
-    marker.points.push_back( circle1[i] );
-    marker.points.push_back( circle2[i] );
-    marker.points.push_back( circle1[i+1] );
-
-    marker.points.push_back( circle2[i] );
-    marker.points.push_back( circle2[i+1] );
-    marker.points.push_back( circle1[i+1] );
-  }
-
   assignDefaultColor(marker,x,y,z);
 
-  return marker;
+  //construct disc from many pieces, as otherwise z sorting won't work with alpha
+  control.markers.reserve( control.markers.size() + steps );
+  marker.points.resize(6);
+
+  for ( int i=0; i<steps; i++ )
+  {
+    marker.color.a = i%2 ? 0.7 : 0.4;
+
+    marker.points[0] = circle1[i];
+    marker.points[1] = circle2[i];
+    marker.points[2] = circle1[i+1];
+
+    marker.points[3] = circle2[i];
+    marker.points[4] = circle2[i+1];
+    marker.points[5] = circle1[i+1];
+
+    control.markers.push_back(marker);
+  }
 }
 
 
@@ -206,7 +204,7 @@ inline visualization_msgs::InteractiveMarkerControl makeMovePlaneControl( visual
   int_marker_control.vec.x = x;
   int_marker_control.vec.y = y;
   int_marker_control.vec.z = z;
-  int_marker_control.markers.push_back( makeDisc( msg, x, y, z) );
+  makeDisc( msg, int_marker_control, x, y, z);
 
   return int_marker_control;
 }
@@ -219,7 +217,7 @@ inline visualization_msgs::InteractiveMarkerControl makeRotatePlaneControl( visu
   int_marker_control.vec.x = x;
   int_marker_control.vec.y = y;
   int_marker_control.vec.z = z;
-  int_marker_control.markers.push_back( makeDisc( msg, x, y, z) );
+  makeDisc( msg, int_marker_control, x, y, z);
 
   ROS_INFO_STREAM(int_marker_control.markers[0].type);
 
@@ -234,18 +232,7 @@ inline visualization_msgs::InteractiveMarkerControl makeMoveRotatePlaneControl( 
   int_marker_control.vec.x = x;
   int_marker_control.vec.y = y;
   int_marker_control.vec.z = z;
-  int_marker_control.markers.push_back( makeDisc( msg, x, y, z) );
-
-  return int_marker_control;
-}
-
-
-inline visualization_msgs::InteractiveMarkerControl makeBoxControl( visualization_msgs::InteractiveMarker &msg )
-{
-  visualization_msgs::InteractiveMarkerControl int_marker_control;
-  int_marker_control.mode = int_marker_control.NONE;
-  int_marker_control.always_visible = true;
-  int_marker_control.markers.push_back( makeBox(msg) );
+  makeDisc( msg, int_marker_control, x, y, z);
 
   return int_marker_control;
 }
