@@ -10,7 +10,7 @@ string name
 # Initial pose of the interactive marker. Defines the pivot point for rotations.
 geometry_msgs/Pose pose
 
-# Scale to be used for default controls (0=auto).
+# Scale to be used for default controls (default=1).
 float32 size
 
 # Menu associated with this marker (max. depth is 2).

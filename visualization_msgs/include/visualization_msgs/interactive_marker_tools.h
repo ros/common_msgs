@@ -27,210 +27,73 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <visualization_msgs/InteractiveMarker.h>
+#ifndef VISUALIZATION_MSGS_INTERACTIVE_MARKER_H
+#define VISUALIZATION_MSGS_INTERACTIVE_MARKER_H
 
-#include <math.h>
+#include <visualization_msgs/InteractiveMarker.h>
 
 namespace visualization_msgs
 {
 
-inline void assignDefaultColor(visualization_msgs::Marker &marker, float x, float y, float z)
+/// @brief fill in default values & insert default controls when none are specified
+/// @param msg      interactive marker to be completed
+void autoComplete( InteractiveMarker &msg );
+
+/// @brief fill in default values & insert default controls when none are specified
+/// @param msg      interactive marker which contains the control
+/// @param control  the control to be completed
+void autoComplete( const InteractiveMarker &msg, InteractiveMarkerControl &control );
+
+/// --- marker helpers ---
+
+/// @brief make a default-style arrow marker based on the properties of the given interactive marker
+/// @param msg      the interactive marker that this will go into
+/// @param control  the control where to insert the arrow marker
+/// @param pos      how far from the center should the arrow be, and on which side
+void makeArrow( const InteractiveMarker &msg, InteractiveMarkerControl &control, float pos );
+
+/// @brief make a default-style disc marker (e.g for rotating) based on the properties of the given interactive marker
+/// @param msg      the interactive marker that this will go into
+/// @param width    width of the disc, relative to its inner radius
+void makeDisc( const InteractiveMarker &msg, InteractiveMarkerControl &control, float width = 0.3 );
+
+/// assign an RGB value to the given marker based on the given orientation
+void assignDefaultColor(Marker &marker, const geometry_msgs::Quaternion &quat );
+
+/// --- quaternion helpers ---
+
+/// get the local x-axis of the given quaternion
+void getXAxis( const geometry_msgs::Quaternion &quat, geometry_msgs::Vector3 &v );
+
+/// make a quaternion from an angle / axis pair (the angle is given in radians)
+void makeAngleAxis( const geometry_msgs::Vector3 &v, float angle, geometry_msgs::Quaternion &quat );
+
+/// normalize quaternion to length 1
+void normalize( geometry_msgs::Quaternion &quat );
+
+/// apply quaternion to vector
+void rotate( const geometry_msgs::Quaternion &quat, geometry_msgs::Point &p );
+
+/// cross product (c=a*b)
+geometry_msgs::Vector3 cross( const geometry_msgs::Vector3 &a, const geometry_msgs::Vector3 &b );
+
+/// add vectors (c=a+b)
+template< class Vector3T >
+Vector3T add( const Vector3T& a, const Vector3T& b )
 {
-  float max_xy = fabs(x)>fabs(y) ? fabs(x) : fabs(y);
-  float max_yz = fabs(y)>fabs(z) ? fabs(y) : fabs(z);
-  float max_xyz = max_xy > max_yz ? max_xy : max_yz;
-
-  marker.color.r = fabs(x) / max_xyz;
-  marker.color.g = fabs(y) / max_xyz;
-  marker.color.b = fabs(z) / max_xyz;
-  marker.color.a = 0.5;
+  Vector3T c;
+  c.x = a.x + b.x;
+  c.y = a.y + b.y;
+  c.z = a.z + b.z;
+  return c;
 }
 
-inline visualization_msgs::Marker makeArrow( visualization_msgs::InteractiveMarker &msg, float x, float y, float z )
-{
-  visualization_msgs::Marker marker;
+/// scalar multiplication (in-place)
+void mul( geometry_msgs::Vector3 &vec, float s );
 
-  if ( x==0 && y==0 && z==0 )
-  {
-    x = 1;
-  }
-
-  float l = sqrt(x*x+y*y+z*z);
-
-  float x_norm = x / l;
-  float y_norm = y / l;
-  float z_norm = z / l;
-
-  marker.header = msg.header;
-  marker.pose = msg.pose;
-  marker.type = visualization_msgs::Marker::ARROW;
-  marker.scale.x = msg.size * 0.25;
-  marker.scale.y = msg.size * 0.45;
-  marker.scale.z = msg.size * 0.2;
-
-  assignDefaultColor(marker,x,y,z);
-
-  marker.points.resize(2);
-  marker.points[0].x = x_norm * 0.5;
-  marker.points[0].y = y_norm * 0.5;
-  marker.points[0].z = z_norm * 0.5;
-  marker.points[1].x = x_norm * 0.5 + msg.size * 0.4 * x_norm;
-  marker.points[1].y = y_norm * 0.5 + msg.size * 0.4 * y_norm;
-  marker.points[1].z = z_norm * 0.5 + msg.size * 0.4 * z_norm;
-
-  return marker;
-}
-
-void makeDisc( visualization_msgs::InteractiveMarker &msg,
-    visualization_msgs::InteractiveMarkerControl &control,
-    float x, float y, float z, bool fancy=false )
-{
-  visualization_msgs::Marker marker;
-  std::vector<visualization_msgs::Marker> markers;
-
-  if ( x==0 && y==0 && z==0 )
-  {
-    x = 1;
-  }
-
-  float l = sqrt(x*x+y*y+z*z);
-
-  float x0 = x / l;
-  float y0 = y / l;
-  float z0 = z / l;
-
-  marker.header = msg.header;
-  marker.pose = msg.pose;
-  marker.type = visualization_msgs::Marker::TRIANGLE_LIST;
-  marker.scale.z = 1;
-  marker.scale.y = 1;
-  marker.scale.x = 1;
-
-  // make perpendicular vector
-  // algorithm stolen from Ogre::Vector::perpendicular
-
-  float x1,y1,z1,x2,y2,z2;
-
-  // take cross product with (1,0,0), if unstable use (0,0,1)
-  x1 = 0;
-  y1 = z0;
-  z1 = -y0;
-
-  if (y1*y1 + z1*z1 < 1e-06 * 1e-06)
-  {
-    x1 = -z0;
-    y1 = 0;
-    z1 = x0;
-  }
-
-  // normalise
-  l = sqrt( x1*x1 + y1*y1 + z1*z1 );
-  x1 /= l;
-  y1 /= l;
-  z1 /= l;
-
-  // construct 3rd perpendicular vector by taking cross product
-  x2 = y0*z1 - z0*y1;
-  y2 = z0*x1 - x0*z1;
-  z2 = x0*y1 - y0*x1;
-
-  // compute points on a circle
-  int steps = 20;
-  std::vector<geometry_msgs::Point> circle1, circle2;
-  circle1.reserve(steps+1);
-  circle2.reserve(steps+1);
-
-  for ( int i=0; i<=steps; i++ )
-  {
-    float a = float(i)/float(steps) * M_PI * 2.0;
-
-    geometry_msgs::Point v1,v2;
-
-    v1.x = 0.5 * msg.size * (sin(a)*x1 + cos(a)*x2);
-    v1.y = 0.5 * msg.size * (sin(a)*y1 + cos(a)*y2);
-    v1.z = 0.5 * msg.size * (sin(a)*z1 + cos(a)*z2);
-
-    v2.x = 1.3 * v1.x;
-    v2.y = 1.3 * v1.y;
-    v2.z = 1.3 * v1.z;
-
-    circle1.push_back( v1 );
-    circle2.push_back( v2 );
-  }
-
-  assignDefaultColor(marker,x,y,z);
-
-  //construct disc from many pieces, as otherwise z sorting won't work with alpha
-  control.markers.reserve( control.markers.size() + steps );
-  marker.points.resize(6);
-
-  for ( int i=0; i<steps; i++ )
-  {
-    marker.color.a = fancy ? (i%2 ? 0.7 : 0.4) : 0.5;
-
-    marker.points[0] = circle1[i];
-    marker.points[1] = circle2[i];
-    marker.points[2] = circle1[i+1];
-
-    marker.points[3] = circle2[i];
-    marker.points[4] = circle2[i+1];
-    marker.points[5] = circle1[i+1];
-
-    control.markers.push_back(marker);
-  }
-}
-
-
-inline visualization_msgs::InteractiveMarkerControl makeMoveAxisControl( visualization_msgs::InteractiveMarker &msg, float x, float y, float z )
-{
-  visualization_msgs::InteractiveMarkerControl int_marker_control;
-  int_marker_control.mode = int_marker_control.MOVE_AXIS;
-  int_marker_control.vec.x = x;
-  int_marker_control.vec.y = y;
-  int_marker_control.vec.z = z;
-  int_marker_control.markers.push_back( makeArrow( msg, x, y, z) );
-  int_marker_control.markers.push_back( makeArrow( msg, -x, -y, -z) );
-
-  return int_marker_control;
-}
-
-
-inline visualization_msgs::InteractiveMarkerControl makeMovePlaneControl( visualization_msgs::InteractiveMarker &msg, float x, float y, float z )
-{
-  visualization_msgs::InteractiveMarkerControl int_marker_control;
-  int_marker_control.mode = int_marker_control.MOVE_PLANE;
-  int_marker_control.vec.x = x;
-  int_marker_control.vec.y = y;
-  int_marker_control.vec.z = z;
-  makeDisc( msg, int_marker_control, x, y, z);
-
-  return int_marker_control;
-}
-
-
-inline visualization_msgs::InteractiveMarkerControl makeRotatePlaneControl( visualization_msgs::InteractiveMarker &msg, float x, float y, float z )
-{
-  visualization_msgs::InteractiveMarkerControl int_marker_control;
-  int_marker_control.mode = int_marker_control.ROTATE_PLANE;
-  int_marker_control.vec.x = x;
-  int_marker_control.vec.y = y;
-  int_marker_control.vec.z = z;
-  makeDisc( msg, int_marker_control, x, y, z);
-
-  return int_marker_control;
-}
-
-
-inline visualization_msgs::InteractiveMarkerControl makeMoveRotatePlaneControl( visualization_msgs::InteractiveMarker &msg, float x, float y, float z )
-{
-  visualization_msgs::InteractiveMarkerControl int_marker_control;
-  int_marker_control.mode = int_marker_control.MOVE_ROTATE_PLANE;
-  int_marker_control.vec.x = x;
-  int_marker_control.vec.y = y;
-  int_marker_control.vec.z = z;
-  makeDisc( msg, int_marker_control, x, y, z, true );
-
-  return int_marker_control;
-}
+/// get length
+float len( const geometry_msgs::Vector3 &vec );
 
 }
+
+#endif
