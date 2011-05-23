@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?eclipse-pydev version="1.0"?>
+
+<pydev_project>
+<pydev_property name="org.python.pydev.PYTHON_PROJECT_INTERPRETER">Default</pydev_property>
+<pydev_property name="org.python.pydev.PYTHON_PROJECT_VERSION">python 2.6</pydev_property>
+<pydev_pathproperty name="org.python.pydev.PROJECT_EXTERNAL_SOURCE_PATH">
+<path>/opt/ros/diamondback/stacks/common_msgs/geometry_msgs/src</path>
+<path>/opt/ros/diamondback/stacks/ros_comm/tools/rosbagmigration/src</path>
+<path>/opt/ros/diamondback/stacks/ros_comm/tools/rosbag/src</path>
+<path>/opt/ros/diamondback/stacks/ros_comm/tools/rosbag/lib</path>
+<path>/opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/src</path>
+<path>/opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/lib</path>
+<path>/opt/ros/diamondback/stacks/ros_comm/utilities/cpp_common/src</path>
+<path>/opt/ros/diamondback/stacks/ros_comm/utilities/cpp_common/lib</path>
+<path>/opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp_serialization/src</path>
+<path>/opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp_serialization/lib</path>
+<path>/opt/ros/diamondback/stacks/ros_comm/utilities/rostime/src</path>
+<path>/opt/ros/diamondback/stacks/ros_comm/utilities/rostime/lib</path>
+<path>/opt/ros/diamondback/ros/core/roslib/src</path>
+<path>/opt/ros/diamondback/ros/core/roslib/lib</path>
+<path>/opt/ros/diamondback/ros/tools/rospack/lib</path>
+<path>/opt/ros/diamondback/stacks/ros_comm/utilities/xmlrpcpp/src</path>
+<path>/opt/ros/diamondback/stacks/ros_comm/utilities/xmlrpcpp/lib</path>
+<path>/opt/ros/diamondback/stacks/ros_comm/tools/rosconsole/src</path>
+<path>/opt/ros/diamondback/stacks/ros_comm/tools/rosconsole/lib</path>
+<path>/opt/ros/diamondback/stacks/ros_comm/messages/std_msgs/src</path>
+<path>/opt/ros/diamondback/stacks/ros_comm/messages/rosgraph_msgs/src</path>
+<path>/opt/ros/diamondback/stacks/ros_comm/clients/rospy/src</path>
+<path>/opt/ros/diamondback/stacks/ros_comm/tools/topic_tools/src</path>
+<path>/opt/ros/diamondback/stacks/ros_comm/tools/topic_tools/lib</path>
+<path>/opt/ros/diamondback/stacks/ros_comm/tools/rostest/src</path>
+<path>/opt/ros/diamondback/stacks/ros_comm/tools/roslaunch/src</path>
+<path>/opt/ros/diamondback/ros/tools/rosclean/src</path>
+<path>/opt/ros/diamondback/stacks/ros_comm/tools/rosgraph/src</path>
+<path>/opt/ros/diamondback/stacks/ros_comm/tools/rosmaster/src</path>
+<path>/opt/ros/diamondback/ros/tools/rosunit/src</path>
+<path>/opt/ros/diamondback/ros/core/mk</path>
+<path>/usr/local/lib/python2.6/dist-packages/rosinstall-0.5.7-py2.6.egg</path>
+<path>/opt/ros/diamondback/ros/core/roslib/src</path>
+<path>/wg/stor2a/dgossow/ros_sandbox/visualization_msgs</path>
+<path>/usr/lib/python2.6</path>
+<path>/usr/lib/python2.6/plat-linux2</path>
+<path>/usr/lib/python2.6/lib-tk</path>
+<path>/usr/lib/python2.6/lib-dynload</path>
+<path>/usr/lib/python2.6/dist-packages</path>
+<path>/usr/lib/python2.6/dist-packages/Numeric</path>
+<path>/usr/lib/python2.6/dist-packages/PIL</path>
+<path>/usr/lib/python2.6/dist-packages/gst-0.10</path>
+<path>/usr/lib/pymodules/python2.6</path>
+<path>/usr/lib/python2.6/dist-packages/gtk-2.0</path>
+<path>/usr/lib/pymodules/python2.6/gtk-2.0</path>
+<path>/usr/lib/python2.6/dist-packages/wx-2.8-gtk2-unicode</path>
+<path>/usr/local/lib/python2.6/dist-packages</path>
+</pydev_pathproperty>
+</pydev_project>

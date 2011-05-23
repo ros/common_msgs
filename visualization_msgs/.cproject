@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?fileVersion 4.0.0?>
+
+<cproject>
+	<storageModule moduleId="org.eclipse.cdt.core.settings">
+		<cconfiguration id="org.eclipse.cdt.core.default.config.1">
+			<storageModule buildSystemId="org.eclipse.cdt.core.defaultConfigDataProvider" id="org.eclipse.cdt.core.default.config.1" moduleId="org.eclipse.cdt.core.settings" name="Configuration">
+				<externalSettings/>
+				<extensions>
+					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+					<extension id="org.eclipse.cdt.core.GNU_ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+				</extensions>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.language.mapping">
+				<project-mappings/>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+			<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets">
+				<buildTargets>
+					<target name=": ROSBUILD_genmsg_cpp" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+						<buildCommand>/usr/bin/make</buildCommand>
+						<buildArguments/>
+						<buildTarget>ROSBUILD_genmsg_cpp</buildTarget>
+						<stopOnError>true</stopOnError>
+						<useDefaultCommand>false</useDefaultCommand>
+					</target>
+					<target name=": ROSBUILD_genmsg_lisp" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+						<buildCommand>/usr/bin/make</buildCommand>
+						<buildArguments/>
+						<buildTarget>ROSBUILD_genmsg_lisp</buildTarget>
+						<stopOnError>true</stopOnError>
+						<useDefaultCommand>false</useDefaultCommand>
+					</target>
+					<target name=": ROSBUILD_genmsg_py" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+						<buildCommand>/usr/bin/make</buildCommand>
+						<buildArguments/>
+						<buildTarget>ROSBUILD_genmsg_py</buildTarget>
+						<stopOnError>true</stopOnError>
+						<useDefaultCommand>false</useDefaultCommand>
+					</target>
+					<target name=": ROSBUILD_gensrv_cpp" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+						<buildCommand>/usr/bin/make</buildCommand>
+						<buildArguments/>
+						<buildTarget>ROSBUILD_gensrv_cpp</buildTarget>
+						<stopOnError>true</stopOnError>
+						<useDefaultCommand>false</useDefaultCommand>
+					</target>
+					<target name=": ROSBUILD_gensrv_lisp" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+						<buildCommand>/usr/bin/make</buildCommand>
+						<buildArguments/>
+						<buildTarget>ROSBUILD_gensrv_lisp</buildTarget>
+						<stopOnError>true</stopOnError>
+						<useDefaultCommand>false</useDefaultCommand>
+					</target>
+					<target name=": clean-test-results" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+						<buildCommand>/usr/bin/make</buildCommand>
+						<buildArguments/>
+						<buildTarget>clean-test-results</buildTarget>
+						<stopOnError>true</stopOnError>
+						<useDefaultCommand>false</useDefaultCommand>
+					</target>
+					<target name=": rebuild_cache" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+						<buildCommand>/usr/bin/make</buildCommand>
+						<buildArguments/>
+						<buildTarget>rebuild_cache</buildTarget>
+						<stopOnError>true</stopOnError>
+						<useDefaultCommand>false</useDefaultCommand>
+					</target>
+					<target name=": rosbuild_precompile" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+						<buildCommand>/usr/bin/make</buildCommand>
+						<buildArguments/>
+						<buildTarget>rosbuild_precompile</buildTarget>
+						<stopOnError>true</stopOnError>
+						<useDefaultCommand>false</useDefaultCommand>
+					</target>
+					<target name=": rosbuild_premsgsrvgen" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+						<buildCommand>/usr/bin/make</buildCommand>
+						<buildArguments/>
+						<buildTarget>rosbuild_premsgsrvgen</buildTarget>
+						<stopOnError>true</stopOnError>
+						<useDefaultCommand>false</useDefaultCommand>
+					</target>
+					<target name=": rospack_genmsg" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+						<buildCommand>/usr/bin/make</buildCommand>
+						<buildArguments/>
+						<buildTarget>rospack_genmsg</buildTarget>
+						<stopOnError>true</stopOnError>
+						<useDefaultCommand>false</useDefaultCommand>
+					</target>
+					<target name=": rospack_genmsg_all" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+						<buildCommand>/usr/bin/make</buildCommand>
+						<buildArguments/>
+						<buildTarget>rospack_genmsg_all</buildTarget>
+						<stopOnError>true</stopOnError>
+						<useDefaultCommand>false</useDefaultCommand>
+					</target>
+					<target name=": rospack_genmsg_libexe" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+						<buildCommand>/usr/bin/make</buildCommand>
+						<buildArguments/>
+						<buildTarget>rospack_genmsg_libexe</buildTarget>
+						<stopOnError>true</stopOnError>
+						<useDefaultCommand>false</useDefaultCommand>
+					</target>
+					<target name=": rospack_gensrv" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+						<buildCommand>/usr/bin/make</buildCommand>
+						<buildArguments/>
+						<buildTarget>rospack_gensrv</buildTarget>
+						<stopOnError>true</stopOnError>
+						<useDefaultCommand>false</useDefaultCommand>
+					</target>
+					<target name=": test" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+						<buildCommand>/usr/bin/make</buildCommand>
+						<buildArguments/>
+						<buildTarget>test</buildTarget>
+						<stopOnError>true</stopOnError>
+						<useDefaultCommand>false</useDefaultCommand>
+					</target>
+					<target name=": test-future" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+						<buildCommand>/usr/bin/make</buildCommand>
+						<buildArguments/>
+						<buildTarget>test-future</buildTarget>
+						<stopOnError>true</stopOnError>
+						<useDefaultCommand>false</useDefaultCommand>
+					</target>
+					<target name=": test-results" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+						<buildCommand>/usr/bin/make</buildCommand>
+						<buildArguments/>
+						<buildTarget>test-results</buildTarget>
+						<stopOnError>true</stopOnError>
+						<useDefaultCommand>false</useDefaultCommand>
+					</target>
+					<target name=": test-results-run" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+						<buildCommand>/usr/bin/make</buildCommand>
+						<buildArguments/>
+						<buildTarget>test-results-run</buildTarget>
+						<stopOnError>true</stopOnError>
+						<useDefaultCommand>false</useDefaultCommand>
+					</target>
+					<target name=": tests" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+						<buildCommand>/usr/bin/make</buildCommand>
+						<buildArguments/>
+						<buildTarget>tests</buildTarget>
+						<stopOnError>true</stopOnError>
+						<useDefaultCommand>false</useDefaultCommand>
+					</target>
+					<target name=": all" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+						<buildCommand>/usr/bin/make</buildCommand>
+						<buildArguments/>
+						<buildTarget>all</buildTarget>
+						<stopOnError>true</stopOnError>
+						<useDefaultCommand>false</useDefaultCommand>
+					</target>
+					<target name=": clean" path="" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+						<buildCommand>/usr/bin/make</buildCommand>
+						<buildArguments/>
+						<buildTarget>clean</buildTarget>
+						<stopOnError>true</stopOnError>
+						<useDefaultCommand>false</useDefaultCommand>
+					</target>
+				</buildTargets>
+			</storageModule>
+			<storageModule moduleId="scannerConfiguration">
+				<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile"/>
+				<profile id="org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile">
+					<buildOutputProvider>
+						<openAction enabled="true" filePath=""/>
+						<parser enabled="true"/>
+					</buildOutputProvider>
+					<scannerInfoProvider id="specsFile">
+						<runAction arguments="-E -P -v -dD ${plugin_state_location}/${specs_file}" command="/usr/bin/gcc" useDefault="true"/>
+						<parser enabled="true"/>
+					</scannerInfoProvider>
+				</profile>
+				<profile id="org.eclipse.cdt.make.core.GCCStandardMakePerFileProfile">
+					<buildOutputProvider>
+						<openAction enabled="true" filePath=""/>
+						<parser enabled="true"/>
+					</buildOutputProvider>
+					<scannerInfoProvider id="makefileGenerator">
+						<runAction arguments="-f ${project_name}_scd.mk" command="/usr/bin/make" useDefault="true"/>
+						<parser enabled="true"/>
+					</scannerInfoProvider>
+				</profile>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.pathentry">
+				<pathentry excluding="**/CMakeFiles/" kind="out" path=""/>
+				<pathentry kind="src" path=""/>
+				<pathentry kind="mac" name="__STDC__" path="" value="1"/>
+				<pathentry kind="mac" name="__STDC_HOSTED__" path="" value="1"/>
+				<pathentry kind="mac" name="__GNUC__" path="" value="4"/>
+				<pathentry kind="mac" name="__GNUC_MINOR__" path="" value="4"/>
+				<pathentry kind="mac" name="__GNUC_PATCHLEVEL__" path="" value="3"/>
+				<pathentry kind="mac" name="__SIZE_TYPE__" path="" value="long"/>
+				<pathentry kind="mac" name="unsigned" path="" value="int"/>
+				<pathentry kind="mac" name="__PTRDIFF_TYPE__" path="" value="long"/>
+				<pathentry kind="mac" name="int" path="" value="__WCHAR_TYPE__"/>
+				<pathentry kind="mac" name="__INTMAX_TYPE__" path="" value="long"/>
+				<pathentry kind="mac" name="long" path="" value="unsigned"/>
+				<pathentry kind="mac" name="short" path="" value="unsigned"/>
+				<pathentry kind="mac" name="__GXX_ABI_VERSION" path="" value="1002"/>
+				<pathentry kind="mac" name="__SCHAR_MAX__" path="" value="127"/>
+				<pathentry kind="mac" name="__SHRT_MAX__" path="" value="32767"/>
+				<pathentry kind="mac" name="__INT_MAX__" path="" value="2147483647"/>
+				<pathentry kind="mac" name="__LONG_MAX__" path="" value="9223372036854775807L"/>
+				<pathentry kind="mac" name="__LONG_LONG_MAX__" path="" value="9223372036854775807LL"/>
+				<pathentry kind="mac" name="__WCHAR_MAX__" path="" value="2147483647"/>
+				<pathentry kind="mac" name="__CHAR_BIT__" path="" value="8"/>
+				<pathentry kind="mac" name="__INTMAX_MAX__" path="" value="9223372036854775807L"/>
+				<pathentry kind="mac" name="__FLT_EVAL_METHOD__" path="" value="0"/>
+				<pathentry kind="mac" name="__DEC_EVAL_METHOD__" path="" value="2"/>
+				<pathentry kind="mac" name="__FLT_RADIX__" path="" value="2"/>
+				<pathentry kind="mac" name="__FLT_MANT_DIG__" path="" value="24"/>
+				<pathentry kind="mac" name="__FLT_DIG__" path="" value="6"/>
+				<pathentry kind="mac" name="__FLT_MIN_EXP__" path="" value="(-125)"/>
+				<pathentry kind="mac" name="__FLT_MIN_10_EXP__" path="" value="(-37)"/>
+				<pathentry kind="mac" name="__FLT_MAX_EXP__" path="" value="128"/>
+				<pathentry kind="mac" name="__FLT_MAX_10_EXP__" path="" value="38"/>
+				<pathentry kind="mac" name="__FLT_MAX__" path="" value="3.40282347e+38F"/>
+				<pathentry kind="mac" name="__FLT_MIN__" path="" value="1.17549435e-38F"/>
+				<pathentry kind="mac" name="__FLT_EPSILON__" path="" value="1.19209290e-7F"/>
+				<pathentry kind="mac" name="__FLT_DENORM_MIN__" path="" value="1.40129846e-45F"/>
+				<pathentry kind="mac" name="__FLT_HAS_DENORM__" path="" value="1"/>
+				<pathentry kind="mac" name="__FLT_HAS_INFINITY__" path="" value="1"/>
+				<pathentry kind="mac" name="__FLT_HAS_QUIET_NAN__" path="" value="1"/>
+				<pathentry kind="mac" name="__DBL_MANT_DIG__" path="" value="53"/>
+				<pathentry kind="mac" name="__DBL_DIG__" path="" value="15"/>
+				<pathentry kind="mac" name="__DBL_MIN_EXP__" path="" value="(-1021)"/>
+				<pathentry kind="mac" name="__DBL_MIN_10_EXP__" path="" value="(-307)"/>
+				<pathentry kind="mac" name="__DBL_MAX_EXP__" path="" value="1024"/>
+				<pathentry kind="mac" name="__DBL_MAX_10_EXP__" path="" value="308"/>
+				<pathentry kind="mac" name="__DBL_MAX__" path="" value="1.7976931348623157e+308"/>
+				<pathentry kind="mac" name="__DBL_MIN__" path="" value="2.2250738585072014e-308"/>
+				<pathentry kind="mac" name="__DBL_EPSILON__" path="" value="2.2204460492503131e-16"/>
+				<pathentry kind="mac" name="__DBL_DENORM_MIN__" path="" value="4.9406564584124654e-324"/>
+				<pathentry kind="mac" name="__DBL_HAS_DENORM__" path="" value="1"/>
+				<pathentry kind="mac" name="__DBL_HAS_INFINITY__" path="" value="1"/>
+				<pathentry kind="mac" name="__DBL_HAS_QUIET_NAN__" path="" value="1"/>
+				<pathentry kind="mac" name="__LDBL_MANT_DIG__" path="" value="64"/>
+				<pathentry kind="mac" name="__LDBL_DIG__" path="" value="18"/>
+				<pathentry kind="mac" name="__LDBL_MIN_EXP__" path="" value="(-16381)"/>
+				<pathentry kind="mac" name="__LDBL_MIN_10_EXP__" path="" value="(-4931)"/>
+				<pathentry kind="mac" name="__LDBL_MAX_EXP__" path="" value="16384"/>
+				<pathentry kind="mac" name="__LDBL_MAX_10_EXP__" path="" value="4932"/>
+				<pathentry kind="mac" name="__DECIMAL_DIG__" path="" value="21"/>
+				<pathentry kind="mac" name="__LDBL_MAX__" path="" value="1.18973149535723176502e+4932L"/>
+				<pathentry kind="mac" name="__LDBL_MIN__" path="" value="3.36210314311209350626e-4932L"/>
+				<pathentry kind="mac" name="__LDBL_EPSILON__" path="" value="1.08420217248550443401e-19L"/>
+				<pathentry kind="mac" name="__LDBL_DENORM_MIN__" path="" value="3.64519953188247460253e-4951L"/>
+				<pathentry kind="mac" name="__LDBL_HAS_DENORM__" path="" value="1"/>
+				<pathentry kind="mac" name="__LDBL_HAS_INFINITY__" path="" value="1"/>
+				<pathentry kind="mac" name="__LDBL_HAS_QUIET_NAN__" path="" value="1"/>
+				<pathentry kind="mac" name="__DEC32_MANT_DIG__" path="" value="7"/>
+				<pathentry kind="mac" name="__DEC32_MIN_EXP__" path="" value="(-94)"/>
+				<pathentry kind="mac" name="__DEC32_MAX_EXP__" path="" value="97"/>
+				<pathentry kind="mac" name="__DEC32_MIN__" path="" value="1E-95DF"/>
+				<pathentry kind="mac" name="__DEC32_MAX__" path="" value="9.999999E96DF"/>
+				<pathentry kind="mac" name="__DEC32_EPSILON__" path="" value="1E-6DF"/>
+				<pathentry kind="mac" name="__DEC32_SUBNORMAL_MIN__" path="" value="0.000001E-95DF"/>
+				<pathentry kind="mac" name="__DEC64_MANT_DIG__" path="" value="16"/>
+				<pathentry kind="mac" name="__DEC64_MIN_EXP__" path="" value="(-382)"/>
+				<pathentry kind="mac" name="__DEC64_MAX_EXP__" path="" value="385"/>
+				<pathentry kind="mac" name="__DEC64_MIN__" path="" value="1E-383DD"/>
+				<pathentry kind="mac" name="__DEC64_MAX__" path="" value="9.999999999999999E384DD"/>
+				<pathentry kind="mac" name="__DEC64_EPSILON__" path="" value="1E-15DD"/>
+				<pathentry kind="mac" name="__DEC64_SUBNORMAL_MIN__" path="" value="0.000000000000001E-383DD"/>
+				<pathentry kind="mac" name="__DEC128_MANT_DIG__" path="" value="34"/>
+				<pathentry kind="mac" name="__DEC128_MIN_EXP__" path="" value="(-6142)"/>
+				<pathentry kind="mac" name="__DEC128_MAX_EXP__" path="" value="6145"/>
+				<pathentry kind="mac" name="__DEC128_MIN__" path="" value="1E-6143DL"/>
+				<pathentry kind="mac" name="__DEC128_MAX__" path="" value="9.999999999999999999999999999999999E6144DL"/>
+				<pathentry kind="mac" name="__DEC128_EPSILON__" path="" value="1E-33DL"/>
+				<pathentry kind="mac" name="__DEC128_SUBNORMAL_MIN__" path="" value="0.000000000000000000000000000000001E-6143DL"/>
+				<pathentry kind="mac" name="__REGISTER_PREFIX__" path="" value=""/>
+				<pathentry kind="mac" name="__USER_LABEL_PREFIX__" path="" value=""/>
+				<pathentry kind="mac" name="__VERSION__" path="" value="&quot;4.4.3&quot;"/>
+				<pathentry kind="mac" name="__GNUC_GNU_INLINE__" path="" value="1"/>
+				<pathentry kind="mac" name="_LP64" path="" value="1"/>
+				<pathentry kind="mac" name="__LP64__" path="" value="1"/>
+				<pathentry kind="mac" name="__NO_INLINE__" path="" value="1"/>
+				<pathentry kind="mac" name="__FINITE_MATH_ONLY__" path="" value="0"/>
+				<pathentry kind="mac" name="__GCC_HAVE_SYNC_COMPARE_AND_SWAP_1" path="" value="1"/>
+				<pathentry kind="mac" name="__GCC_HAVE_SYNC_COMPARE_AND_SWAP_2" path="" value="1"/>
+				<pathentry kind="mac" name="__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4" path="" value="1"/>
+				<pathentry kind="mac" name="__GCC_HAVE_SYNC_COMPARE_AND_SWAP_8" path="" value="1"/>
+				<pathentry kind="mac" name="__GCC_HAVE_DWARF2_CFI_ASM" path="" value="1"/>
+				<pathentry kind="mac" name="__SSP__" path="" value="1"/>
+				<pathentry kind="mac" name="__SIZEOF_INT__" path="" value="4"/>
+				<pathentry kind="mac" name="__SIZEOF_LONG__" path="" value="8"/>
+				<pathentry kind="mac" name="__SIZEOF_LONG_LONG__" path="" value="8"/>
+				<pathentry kind="mac" name="__SIZEOF_SHORT__" path="" value="2"/>
+				<pathentry kind="mac" name="__SIZEOF_FLOAT__" path="" value="4"/>
+				<pathentry kind="mac" name="__SIZEOF_DOUBLE__" path="" value="8"/>
+				<pathentry kind="mac" name="__SIZEOF_LONG_DOUBLE__" path="" value="16"/>
+				<pathentry kind="mac" name="__SIZEOF_SIZE_T__" path="" value="8"/>
+				<pathentry kind="mac" name="__SIZEOF_WCHAR_T__" path="" value="4"/>
+				<pathentry kind="mac" name="__SIZEOF_WINT_T__" path="" value="4"/>
+				<pathentry kind="mac" name="__SIZEOF_PTRDIFF_T__" path="" value="8"/>
+				<pathentry kind="mac" name="__SIZEOF_POINTER__" path="" value="8"/>
+				<pathentry kind="mac" name="__amd64" path="" value="1"/>
+				<pathentry kind="mac" name="__amd64__" path="" value="1"/>
+				<pathentry kind="mac" name="__x86_64" path="" value="1"/>
+				<pathentry kind="mac" name="__x86_64__" path="" value="1"/>
+				<pathentry kind="mac" name="__k8" path="" value="1"/>
+				<pathentry kind="mac" name="__k8__" path="" value="1"/>
+				<pathentry kind="mac" name="__MMX__" path="" value="1"/>
+				<pathentry kind="mac" name="__SSE__" path="" value="1"/>
+				<pathentry kind="mac" name="__SSE2__" path="" value="1"/>
+				<pathentry kind="mac" name="__SSE_MATH__" path="" value="1"/>
+				<pathentry kind="mac" name="__SSE2_MATH__" path="" value="1"/>
+				<pathentry kind="mac" name="__gnu_linux__" path="" value="1"/>
+				<pathentry kind="mac" name="__linux" path="" value="1"/>
+				<pathentry kind="mac" name="__linux__" path="" value="1"/>
+				<pathentry kind="mac" name="linux" path="" value="1"/>
+				<pathentry kind="mac" name="__unix" path="" value="1"/>
+				<pathentry kind="mac" name="__unix__" path="" value="1"/>
+				<pathentry kind="mac" name="unix" path="" value="1"/>
+				<pathentry kind="mac" name="__ELF__" path="" value="1"/>
+				<pathentry kind="mac" name="__DECIMAL_BID_FORMAT__" path="" value="1"/>
+				<pathentry kind="mac" name="__BIGGEST_ALIGNMENT__" path="" value="16"/>
+				<pathentry kind="mac" name="_FORTIFY_SOURCE" path="" value="2"/>
+				<pathentry kind="mac" name="__cplusplus" path="" value="1"/>
+				<pathentry kind="mac" name="__GNUG__" path="" value="4"/>
+				<pathentry kind="mac" name="__GXX_WEAK__" path="" value="1"/>
+				<pathentry kind="mac" name="__DEPRECATED" path="" value="1"/>
+				<pathentry kind="mac" name="__GXX_RTTI" path="" value="1"/>
+				<pathentry kind="mac" name="__EXCEPTIONS" path="" value="1"/>
+				<pathentry kind="mac" name="_GNU_SOURCE" path="" value="1"/>
+				<pathentry include="/wg/stor2a/dgossow/ros_sandbox/visualization_msgs/include" kind="inc" path="" system="true"/>
+				<pathentry include="/opt/ros/diamondback/stacks/common_msgs/geometry_msgs/msg_gen/cpp/include" kind="inc" path="" system="true"/>
+				<pathentry include="/opt/ros/diamondback/stacks/ros_comm/tools/rosbag/include" kind="inc" path="" system="true"/>
+				<pathentry include="/opt/ros/diamondback/stacks/ros_comm/messages/std_msgs/include" kind="inc" path="" system="true"/>
+				<pathentry include="/opt/ros/diamondback/stacks/ros_comm/messages/std_msgs/msg_gen/cpp/include" kind="inc" path="" system="true"/>
+				<pathentry include="/opt/ros/diamondback/stacks/ros_comm/tools/topic_tools/include" kind="inc" path="" system="true"/>
+				<pathentry include="/opt/ros/diamondback/stacks/ros_comm/tools/topic_tools/srv_gen/cpp/include" kind="inc" path="" system="true"/>
+				<pathentry include="/opt/ros/diamondback/stacks/ros_comm/tools/rostest/include" kind="inc" path="" system="true"/>
+				<pathentry include="/opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/include" kind="inc" path="" system="true"/>
+				<pathentry include="/opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/msg_gen/cpp/include" kind="inc" path="" system="true"/>
+				<pathentry include="/opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp/srv_gen/cpp/include" kind="inc" path="" system="true"/>
+				<pathentry include="/opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp_serialization/include" kind="inc" path="" system="true"/>
+				<pathentry include="/opt/ros/diamondback/stacks/ros_comm/clients/cpp/roscpp_traits/include" kind="inc" path="" system="true"/>
+				<pathentry include="/opt/ros/diamondback/stacks/ros_comm/utilities/xmlrpcpp/src" kind="inc" path="" system="true"/>
+				<pathentry include="/opt/ros/diamondback/stacks/ros_comm/tools/rosconsole/include" kind="inc" path="" system="true"/>
+				<pathentry include="/opt/ros/diamondback/stacks/ros_comm/utilities/rostime/include" kind="inc" path="" system="true"/>
+				<pathentry include="/opt/ros/diamondback/stacks/ros_comm/utilities/cpp_common/include" kind="inc" path="" system="true"/>
+				<pathentry include="/opt/ros/diamondback/stacks/ros_comm/messages/rosgraph_msgs/msg_gen/cpp/include" kind="inc" path="" system="true"/>
+				<pathentry include="/opt/ros/diamondback/ros/core/roslib/msg_gen/cpp/include" kind="inc" path="" system="true"/>
+				<pathentry include="/opt/ros/diamondback/ros/core/roslib/include" kind="inc" path="" system="true"/>
+				<pathentry include="/opt/ros/diamondback/ros/tools/rospack" kind="inc" path="" system="true"/>
+				<pathentry include="/opt/ros/diamondback/ros/tools/rospack/include" kind="inc" path="" system="true"/>
+				<pathentry include="/usr/include" kind="inc" path="" system="true"/>
+				<pathentry include="/wg/stor2a/dgossow/ros_sandbox/visualization_msgs/msg_gen/cpp/include" kind="inc" path="" system="true"/>
+				<pathentry include="/usr/local/include" kind="inc" path="" system="true"/>
+				<pathentry include="/usr/lib/gcc/x86_64-linux-gnu/4.4/include" kind="inc" path="" system="true"/>
+				<pathentry include="/usr/lib/gcc/x86_64-linux-gnu/4.4/include-fixed" kind="inc" path="" system="true"/>
+				<pathentry include="/usr/include/x86_64-linux-gnu" kind="inc" path="" system="true"/>
+				<pathentry include="/usr/include/c++/4.4" kind="inc" path="" system="true"/>
+				<pathentry include="/usr/include/c++/4.4/x86_64-linux-gnu" kind="inc" path="" system="true"/>
+				<pathentry include="/usr/include/c++/4.4/backward" kind="inc" path="" system="true"/>
+			</storageModule>
+		</cconfiguration>
+	</storageModule>
+	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+		<project id="visualization_msgs.null.1" name="visualization_msgs"/>
+	</storageModule>
+</cproject>
