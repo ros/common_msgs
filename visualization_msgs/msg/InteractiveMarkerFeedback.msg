@@ -11,10 +11,8 @@ string control_name
 # BUTTON_CLICK: a button control has been clicked
 # POSE_UPDATE: the pose has been changed using one of the controls
 byte POSE_UPDATE = 0
-byte RECEIVE_FOCUS = 1
-byte LOSE_FOCUS = 2
-byte MENU_SELECT = 3
-byte BUTTON_CLICK = 4
+byte MENU_SELECT = 1
+byte BUTTON_CLICK = 2
 
 byte event_type
 
@@ -25,3 +23,6 @@ geometry_msgs/Pose pose
 # first entry: selected top-level item (if any)
 # second entry: selected second-level item (if any)
 string[] selected_menu_entry
+
+# indicates if the marker is currently being dragged by the user
+bool dragging
