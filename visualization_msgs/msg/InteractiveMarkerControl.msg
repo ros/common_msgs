@@ -1,24 +1,36 @@
-# represents a control that is to be displayed together with an interactive marker
+# Represents a control that is to be displayed together with an interactive marker
 
 # Identifying string for this control.
 # You need to assign a unique value to this to receive feedback from the GUI
 # on what actions the user performs on this control (e.g. a button click).
 string name
 
+
 # Defines the local coordinate frame (relative to the pose of the parent
 # interactive marker) in which is being rotated and translated.
-# Note: Does not influence the pose of the contained markers.
+# Default: Identity
 geometry_msgs/Quaternion orientation
+
+
+# How should the orientation be updated?
+# INHERIT: Follow orientation of interactive marker
+# FIXED: Keep orientation fixed at initial state
+# VIEW_FACING: Align y-z plane with screen (x: forward, y:left, z:up).
+byte INHERIT = 0 
+byte FIXED = 1
+byte VIEW_FACING = 2
+
+byte orientation_mode
 
 # Interaction mode for this control
 # 
-# NONE: this control is only meant for visualization, context menu is deactivated
-# MENU: like none, but right-click menu is active
-# BUTTON: element can be left-clicked
-# MOVE_AXIS: Translate along local x-axis
-# MOVE_PLANE: Translate in local y-z plane
-# ROTATE_AXIS: Rotate around local x-axis
-# MOVE_ROTATE: Combines MOVE_PLANE and ROTATE_AXIS
+# NONE: This control is only meant for visualization; no context menu.
+# MENU: Like NONW, but right-click menu is active.
+# BUTTON: Element can be left-clicked.
+# MOVE_AXIS: Translate along local x-axis.
+# MOVE_PLANE: Translate in local y-z plane.
+# ROTATE_AXIS: Rotate around local x-axis.
+# MOVE_ROTATE: Combines MOVE_PLANE and ROTATE_AXIS.
 byte NONE = 0 
 byte MENU = 1
 byte BUTTON = 2
@@ -29,19 +41,11 @@ byte MOVE_ROTATE = 6
 
 byte interaction_mode
 
-# how should the orientation be updated?
-# INHERIT: follow orientation of interactive marker
-# FIXED: keep orientation fixed at initial state
-# VIEW_FACING: align y-z plane with screen (x: forward, y:left, z:up)
-byte INHERIT = 0 
-byte FIXED = 1
-byte VIEW_FACING = 2 
 
-byte orientation_mode
-
-# if true, the contained markers will also be visible
-# when the gui is not in interactive mode
+# If true, the contained markers will also be visible
+# when the gui is not in interactive mode.
 bool always_visible
+
 
 # Markers to be displayed as custom visual representation.
 # Leave this empty to use the default control handles.
@@ -52,6 +56,13 @@ bool always_visible
 # - If the header of a marker is empty, its pose will be interpreted as 
 #   relative to the pose of the parent interactive marker.
 Marker[] markers
+
+
+# In VIEW_FACING mode, set this to true if you don't want the markers
+# to be aligned with the camera view point. The markers will show up
+# as in INHERIT mode, but move in the camera plane.
+bool independent_marker_orientation
+
 
 # Short description (<80 characters) of what this control does,
 # e.g. "Move the robot". If no tool tip is given, a generic description
