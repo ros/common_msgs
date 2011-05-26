@@ -41,8 +41,12 @@ namespace sensor_msgs
   {
     const std::string RGB8 = "rgb8";
     const std::string RGBA8 = "rgba8";
+    const std::string RGB16 = "rgb16";
+    const std::string RGBA16 = "rgba16";
     const std::string BGR8 = "bgr8";
     const std::string BGRA8 = "bgra8";
+    const std::string BGR16 = "bgr16";
+    const std::string BGRA16 = "bgra16";
     const std::string MONO8="mono8";
     const std::string MONO16="mono16";
 
@@ -81,11 +85,17 @@ namespace sensor_msgs
     const std::string BAYER_BGGR8="bayer_bggr8";
     const std::string BAYER_GBRG8="bayer_gbrg8";
     const std::string BAYER_GRBG8="bayer_grbg8";
+    const std::string BAYER_RGGB16="bayer_rggb16";
+    const std::string BAYER_BGGR16="bayer_bggr16";
+    const std::string BAYER_GBRG16="bayer_gbrg16";
+    const std::string BAYER_GRBG16="bayer_grbg16";
 
     bool isColor(const std::string& encoding)
     {
       return encoding == RGB8  || encoding == BGR8 ||
-             encoding == RGBA8 || encoding == BGRA8;
+             encoding == RGBA8 || encoding == BGRA8 ||
+             encoding == RGB16 || encoding == BGR16 ||
+             encoding == RGBA16 || encoding == BGRA16;
     }
 
     bool isMono(const std::string& encoding)
@@ -96,12 +106,15 @@ namespace sensor_msgs
     bool isBayer(const std::string& encoding)
     {
       return encoding == BAYER_RGGB8 || encoding == BAYER_BGGR8 ||
-             encoding == BAYER_GBRG8 || encoding == BAYER_GRBG8;
+             encoding == BAYER_GBRG8 || encoding == BAYER_GRBG8 ||
+             encoding == BAYER_RGGB16 || encoding == BAYER_BGGR16 ||
+             encoding == BAYER_GBRG16 || encoding == BAYER_GRBG16;
     }
 
     bool hasAlpha(const std::string& encoding)
     {
-      return encoding == RGBA8 || encoding == BGRA8;
+      return encoding == RGBA8 || encoding == BGRA8 ||
+             encoding == RGBA16 || encoding == BGRA16;
     }
 
     int numChannels(const std::string& encoding)
@@ -111,15 +124,23 @@ namespace sensor_msgs
           encoding == MONO16)
         return 1;
       if (encoding == BGR8 ||
-          encoding == RGB8)
+          encoding == RGB8 ||
+          encoding == BGR16 ||
+          encoding == RGB16)
         return 3;
       if (encoding == BGRA8 ||
-          encoding == RGBA8)
+          encoding == RGBA8 ||
+          encoding == BGRA16 ||
+          encoding == RGBA16)
         return 4;
       if (encoding == BAYER_RGGB8 ||
           encoding == BAYER_BGGR8 ||
           encoding == BAYER_GBRG8 ||
-          encoding == BAYER_GRBG8)
+          encoding == BAYER_GRBG8 ||
+          encoding == BAYER_RGGB16 ||
+          encoding == BAYER_BGGR16 ||
+          encoding == BAYER_GBRG16 ||
+          encoding == BAYER_GRBG16)
         return 1;
 
       // Now all the generic content encodings
@@ -160,6 +181,17 @@ namespace sensor_msgs
           encoding == BAYER_GRBG8)
         return 8;
 
+      if (encoding == MONO16       ||
+          encoding == BGR16        ||
+          encoding == RGB16        ||
+          encoding == BGRA16       ||
+          encoding == RGBA16       ||
+          encoding == BAYER_RGGB16 ||
+          encoding == BAYER_BGGR16 ||
+          encoding == BAYER_GBRG16 ||
+          encoding == BAYER_GRBG16)
+        return 16;
+
       // B = bits (8, 16, ...), T = type (U, S, F)
 #define CHECK_BIT_DEPTH(B, T)                   \
       if (encoding == TYPE_##B##T##C1 ||        \
@@ -177,7 +209,7 @@ namespace sensor_msgs
       CHECK_BIT_DEPTH(32, F);
       CHECK_BIT_DEPTH(64, F);
 
-#undef CHECK_BIT_DEPTH;
+#undef CHECK_BIT_DEPTH
 
       throw std::runtime_error("Unknown encoding " + encoding);
       return -1;
