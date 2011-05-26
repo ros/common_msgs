@@ -6,11 +6,11 @@ string marker_name
 string control_name
 
 # specifies what type of event happened
-# PING: sent while dragging to keep up control of the marker
+# KEEP_ALIVE: sent while dragging to keep up control of the marker
 # MENU_SELECT: a menu entry has been selected
 # BUTTON_CLICK: a button control has been clicked
 # POSE_UPDATE: the pose has been changed using one of the controls
-byte PING = 0
+byte KEEP_ALIVE = 0
 byte POSE_UPDATE = 1
 byte MENU_SELECT = 2
 byte BUTTON_CLICK = 3
