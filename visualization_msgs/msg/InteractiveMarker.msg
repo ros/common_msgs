@@ -1,6 +1,4 @@
 #Time/frame info
-#The frame_id of this pose is used as 'parent frame' for the controls
-#which have a fixed orientation.
 Header header
 
 # Name of this marker. Only necessary if you are sending multiple markers.
