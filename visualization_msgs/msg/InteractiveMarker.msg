@@ -21,10 +21,5 @@ Menu[] menu
 InteractiveMarkerControl[] controls
 
 # If this marker should be frame-locked, i.e. retransformed 
-# into the reference frame
+# into the frame specified in the header.
 bool frame_locked
-
-# Reference frame to be used for pose feedback and 
-# retransforming (see above).
-# Default: same as header.frame_id
-string reference_frame_id
