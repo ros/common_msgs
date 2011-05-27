@@ -60,11 +60,11 @@ Marker[] markers
 
 # In VIEW_FACING mode, set this to true if you don't want the markers
 # to be aligned with the camera view point. The markers will show up
-# as in INHERIT mode, but move in the camera plane.
+# as in INHERIT mode.
 bool independent_marker_orientation
 
 
-# Short description (<80 characters) of what this control does,
-# e.g. "Move the robot". If no tool tip is given, a generic description
-# based on the interaction mode is assigned.
-string tool_tip
+# Short description (< 40 characters) of what this control does,
+# e.g. "Move the robot". 
+# Default: A generic description based on the interaction mode
+string description

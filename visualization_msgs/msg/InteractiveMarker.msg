@@ -1,11 +1,14 @@
-#Time/frame info
+# Time/frame info.
 Header header
 
-# Name of this marker. Only necessary if you are sending multiple markers.
-# See InteractiveMarkerArray for details.
+# Identifying string. Must be globally unique in
+# the topic that this message is sent through.
 string name
 
-# Initial pose of the interactive marker. Defines the pivot point for rotations.
+# Short description (< 40 characters).
+string description
+
+# Initial pose. Also, defines the pivot point for rotations.
 geometry_msgs/Pose pose
 
 # Scale to be used for default controls (default=1).
@@ -15,9 +18,8 @@ float32 scale
 Menu[] menu
 
 # List of controls displayed for this marker.
-# To delete an interactive marker, send one without controls.
 InteractiveMarkerControl[] controls
 
 # If this marker should be frame-locked, i.e. retransformed 
-# into its parent frame every timestep.
+# into the frame specified in the header on every timestep.
 bool frame_locked
