@@ -1,3 +1,6 @@
+# Time/frame info.
+Header header
+
 # Feedback message sent back from the GUI, e.g.
 # when the status of an interactive marker was modified by the user.
 

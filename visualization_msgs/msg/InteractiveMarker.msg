@@ -22,4 +22,9 @@ InteractiveMarkerControl[] controls
 
 # If this marker should be frame-locked, i.e. retransformed 
 # into the frame specified in the header.
+# Note: If this is set to true, you will receive pose feedback
+# in the frame specified in the header of this message.
+# If set to false, you can receive feedback in any arbitrary
+# frame.
+# For rviz, this will be the current 'fixed frame' set by the user.
 bool frame_locked
