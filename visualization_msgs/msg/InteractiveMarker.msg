@@ -1,15 +1,15 @@
 # Time/frame info.
 Header header
 
+# Initial pose. Also, defines the pivot point for rotations.
+geometry_msgs/Pose pose
+
 # Identifying string. Must be globally unique in
 # the topic that this message is sent through.
 string name
 
 # Short description (< 40 characters).
 string description
-
-# Initial pose. Also, defines the pivot point for rotations.
-geometry_msgs/Pose pose
 
 # Scale to be used for default controls (default=1).
 float32 scale
@@ -21,5 +21,10 @@ Menu[] menu
 InteractiveMarkerControl[] controls
 
 # If this marker should be frame-locked, i.e. retransformed 
-# into the frame specified in the header on every timestep.
+# into the reference frame
 bool frame_locked
+
+# Reference frame to be used for pose feedback and 
+# retransforming (see above).
+# Default: same as header.frame_id
+string reference_frame_id
