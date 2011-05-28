@@ -1,4 +1,9 @@
 # Time/frame info.
+# If this is set to 0, the marker will be retransformed into
+# its frame on each timestep. You will receive the pose feedback
+# in the same frame.
+# Otherwise, you might receive feedback in a different frame.
+# For rviz, this will be the current 'fixed frame' set by the user.
 Header header
 
 # Initial pose. Also, defines the pivot point for rotations.
@@ -19,12 +24,3 @@ Menu[] menu
 
 # List of controls displayed for this marker.
 InteractiveMarkerControl[] controls
-
-# If this marker should be frame-locked, i.e. retransformed 
-# into the frame specified in the header.
-# Note: If this is set to true, you will receive pose feedback
-# in the frame specified in the header of this message.
-# If set to false, you can receive feedback in any arbitrary
-# frame.
-# For rviz, this will be the current 'fixed frame' set by the user.
-bool frame_locked

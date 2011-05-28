@@ -1,3 +1,6 @@
+# Identifying string. Must be unique in the topic namespace.
+string client_id
+
 # Time/frame info.
 Header header
 
