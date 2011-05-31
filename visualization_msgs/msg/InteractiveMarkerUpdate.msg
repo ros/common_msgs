@@ -29,5 +29,5 @@ InteractiveMarker[] markers
 #Poses of markers that should be moved
 InteractiveMarkerPose[] poses
 
-#Names of markers that should be areased
+#Names of markers to be erased
 string[] erases
