@@ -27,10 +27,9 @@ byte event_type
 # Note: Has to be valid for all feedback types.
 geometry_msgs/Pose pose
 
-# Contains the text of a menu / sub menu entry, if one has been selected
-# First entry: Selected top-level item (if any)
-# Second entry: Selected second-level item (if any)
-string[] selected_menu_entry
+# Contains the command of the selected menu entry
+# Only valid for MENU_SELECT events.
+string command
 
 # Indicates if the marker is currently being dragged by the user
 bool dragging
