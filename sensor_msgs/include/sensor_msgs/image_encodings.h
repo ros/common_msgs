@@ -44,8 +44,12 @@ namespace sensor_msgs
   {
     extern const std::string RGB8;
     extern const std::string RGBA8;
+    extern const std::string RGB16;
+    extern const std::string RGBA16;
     extern const std::string BGR8;
     extern const std::string BGRA8;
+    extern const std::string BGR16;
+    extern const std::string BGRA16;
     extern const std::string MONO8;
     extern const std::string MONO16;
 
@@ -84,6 +88,10 @@ namespace sensor_msgs
     extern const std::string BAYER_BGGR8;
     extern const std::string BAYER_GBRG8;
     extern const std::string BAYER_GRBG8;
+    extern const std::string BAYER_RGGB16;
+    extern const std::string BAYER_BGGR16;
+    extern const std::string BAYER_GBRG16;
+    extern const std::string BAYER_GRBG16;
 
     // Utility functions for inspecting an encoding string
     bool isColor(const std::string& encoding);
