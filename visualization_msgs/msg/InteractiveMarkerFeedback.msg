@@ -21,6 +21,9 @@ byte POSE_UPDATE = 1
 byte MENU_SELECT = 2
 byte BUTTON_CLICK = 3
 
+byte MOUSE_DOWN = 4
+byte MOUSE_UP = 5
+
 byte event_type
 
 # Current pose of the marker
@@ -30,6 +33,3 @@ geometry_msgs/Pose pose
 # Contains the command of the selected menu entry
 # Only valid for MENU_SELECT events.
 string command
-
-# Indicates if the marker is currently being dragged by the user
-bool dragging
