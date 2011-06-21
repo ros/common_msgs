@@ -14,11 +14,11 @@ uint64 seq_num
 #         the previous update.
 # KEEP_ALIVE: Indicates the that the server is still living.
 #             The sequence number does not increase.
-byte KEEP_ALIVE = 0
-byte UPDATE = 1
-byte INIT = 2
+uint8 KEEP_ALIVE = 0
+uint8 UPDATE = 1
+uint8 INIT = 2
 
-byte type
+uint8 type
 
 #Note: No guarantees on the order of processing.
 #      Contents must be kept consistent by sender.

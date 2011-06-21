@@ -16,11 +16,11 @@ geometry_msgs/Quaternion orientation
 # INHERIT: Follow orientation of interactive marker
 # FIXED: Keep orientation fixed at initial state
 # VIEW_FACING: Align y-z plane with screen (x: forward, y:left, z:up).
-byte INHERIT = 0 
-byte FIXED = 1
-byte VIEW_FACING = 2
+uint8 INHERIT = 0 
+uint8 FIXED = 1
+uint8 VIEW_FACING = 2
 
-byte orientation_mode
+uint8 orientation_mode
 
 # Interaction mode for this control
 # 
@@ -31,15 +31,15 @@ byte orientation_mode
 # MOVE_PLANE: Translate in local y-z plane.
 # ROTATE_AXIS: Rotate around local x-axis.
 # MOVE_ROTATE: Combines MOVE_PLANE and ROTATE_AXIS.
-byte NONE = 0 
-byte MENU = 1
-byte BUTTON = 2
-byte MOVE_AXIS = 3 
-byte MOVE_PLANE = 4
-byte ROTATE_AXIS = 5
-byte MOVE_ROTATE = 6
+uint8 NONE = 0 
+uint8 MENU = 1
+uint8 BUTTON = 2
+uint8 MOVE_AXIS = 3 
+uint8 MOVE_PLANE = 4
+uint8 ROTATE_AXIS = 5
+uint8 MOVE_ROTATE = 6
 
-byte interaction_mode
+uint8 interaction_mode
 
 
 # If true, the contained markers will also be visible

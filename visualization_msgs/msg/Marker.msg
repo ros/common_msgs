@@ -1,21 +1,21 @@
 # See http://www.ros.org/wiki/rviz/DisplayTypes/Marker and http://www.ros.org/wiki/rviz/Tutorials/Markers%3A%20Basic%20Shapes for more information on using this message with rviz
 
-byte ARROW=0
-byte CUBE=1
-byte SPHERE=2
-byte CYLINDER=3
-byte LINE_STRIP=4
-byte LINE_LIST=5
-byte CUBE_LIST=6
-byte SPHERE_LIST=7
-byte POINTS=8
-byte TEXT_VIEW_FACING=9
-byte MESH_RESOURCE=10
-byte TRIANGLE_LIST=11
+uint8 ARROW=0
+uint8 CUBE=1
+uint8 SPHERE=2
+uint8 CYLINDER=3
+uint8 LINE_STRIP=4
+uint8 LINE_LIST=5
+uint8 CUBE_LIST=6
+uint8 SPHERE_LIST=7
+uint8 POINTS=8
+uint8 TEXT_VIEW_FACING=9
+uint8 MESH_RESOURCE=10
+uint8 TRIANGLE_LIST=11
 
-byte ADD=0
-byte MODIFY=0
-byte DELETE=2
+uint8 ADD=0
+uint8 MODIFY=0
+uint8 DELETE=2
 
 Header header                        # header for time/frame information
 string ns                            # Namespace to place this object in... used in conjunction with id to create a unique name for the object
