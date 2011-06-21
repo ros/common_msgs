@@ -1,5 +1,5 @@
 # Time/frame info.
-# If this is set to 0, the marker will be retransformed into
+# If header.time is set to 0, the marker will be retransformed into
 # its frame on each timestep. You will receive the pose feedback
 # in the same frame.
 # Otherwise, you might receive feedback in a different frame.
