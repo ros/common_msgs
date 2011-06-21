@@ -12,7 +12,7 @@ string name
 geometry_msgs/Quaternion orientation
 
 
-# How should the orientation be updated?
+# Orientation mode: controls how orientation changes.
 # INHERIT: Follow orientation of interactive marker
 # FIXED: Keep orientation fixed at initial state
 # VIEW_FACING: Align y-z plane with screen (x: forward, y:left, z:up).

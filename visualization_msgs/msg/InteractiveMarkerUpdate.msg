@@ -6,7 +6,7 @@ string server_id
 # The client will use this to detect if it has missed an update.
 uint64 seq_num
 
-# What purpose serves this message?
+# Type holds the purpose of this message.  It must be one of INIT, UPDATE, or KEEP_ALIVE.
 # INIT: Will cause the client to erase all markers previously 
 #       received from this server. Initialize sequence number.
 # UPDATE: Incremental update to previous state. 
