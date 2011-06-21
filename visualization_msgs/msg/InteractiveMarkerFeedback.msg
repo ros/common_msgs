@@ -1,8 +1,8 @@
-# Identifying string. Must be unique in the topic namespace.
-string client_id
-
 # Time/frame info.
 Header header
+
+# Identifying string. Must be unique in the topic namespace.
+string client_id
 
 # Feedback message sent back from the GUI, e.g.
 # when the status of an interactive marker was modified by the user.
