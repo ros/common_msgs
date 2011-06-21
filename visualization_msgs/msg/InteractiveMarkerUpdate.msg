@@ -14,9 +14,9 @@ uint64 seq_num
 #         the previous update.
 # KEEP_ALIVE: Indicates the that the server is still living.
 #             The sequence number does not increase.
-byte INIT = 0
+byte KEEP_ALIVE = 0
 byte UPDATE = 1
-byte KEEP_ALIVE = 2
+byte INIT = 2
 
 byte type
 
