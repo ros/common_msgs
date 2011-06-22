@@ -94,7 +94,6 @@ class TestCommonMsgsMigration(unittest.TestCase):
 # (*) ChannelFloat32.saved
 # (*) DiagnosticMessage.saved
 # (*) DiagnosticStatus.saved
-# (*) Joy.saved
 # (*) Path.saved
 # (*) Point32.saved
 # (*) PointCloud.saved
@@ -1096,25 +1095,6 @@ class TestCommonMsgsMigration(unittest.TestCase):
 
   def test_wrench(self):
     self.do_test('wrench', self.get_old_wrench, self.get_new_wrench)
-
-
-
-########### Joy ###############
-
-
-#  def get_old_joy(self):
-#    joy_classes = self.load_saved_classes('Joy.saved')
-#    joy  = joy_classes['joy/Joy']
-#    return joy([0.1,0.2,0.3,0.4,0.5],[0,1,0,1,0])
-
-#  def get_new_joy(self):
-#    from sensor_msgs.msg import Joy
-#    from roslib.msg import Header
-#    return Joy(Header(),[0.1,0.2,0.3,0.4,0.5],[0,1,0,1,0])
-
-
-#  def test_joy(self):
-#    self.do_test('joy', self.get_old_joy, self.get_new_joy)
 
 
 ########### Channelfloat32 ###############
