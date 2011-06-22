@@ -12,7 +12,7 @@ cameras and scanning laser rangefinders.
 
   <export>
     <cpp cflags="-I${prefix}/include" lflags="-L${prefix}/lib -lsensor_msgs -Wl,-rpath,${prefix}/lib"/>
-    <rosbagmigration rule_file="migration_rules/sensor_msgs.bmr"/>
+    <rosbag migration_rule_file="migration_rules/sensor_msgs.bmr"/>
   </export>
 
   <depend package="std_msgs"/>
