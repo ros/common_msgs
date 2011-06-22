@@ -30,6 +30,6 @@ uint8 event_type
 # Note: Has to be valid for all feedback types.
 geometry_msgs/Pose pose
 
-# Contains the command of the selected menu entry
+# Contains the ID of the selected menu entry
 # Only valid for MENU_SELECT events.
-string command
+uint32 menu_entry_id

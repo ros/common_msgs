@@ -19,8 +19,8 @@ string description
 # Scale to be used for default controls (default=1).
 float32 scale
 
-# Menu associated with this marker (max. depth is 2).
-Menu[] menu
+# All menu and submenu entries associated with this marker.
+MenuEntry[] menu_entries
 
 # List of controls displayed for this marker.
 InteractiveMarkerControl[] controls
