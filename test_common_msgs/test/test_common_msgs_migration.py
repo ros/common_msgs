@@ -1097,10 +1097,6 @@ class TestCommonMsgsMigration(unittest.TestCase):
     self.do_test('wrench', self.get_old_wrench, self.get_new_wrench)
 
 
-
-
-
-
 ########### Channelfloat32 ###############
 
 

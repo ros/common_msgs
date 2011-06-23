@@ -12,7 +12,7 @@ cameras and scanning laser rangefinders.
 
   <export>
     <cpp cflags="-I${prefix}/include" lflags="-L${prefix}/lib -lsensor_msgs -Wl,-rpath,${prefix}/lib"/>
-    <rosbagmigration rule_file="migration_rules/sensor_msgs.bmr"/>
+    <rosbag migration_rule_file="migration_rules/sensor_msgs.bmr"/>
   </export>
 
   <depend package="std_msgs"/>
@@ -33,9 +33,9 @@ cameras and scanning laser rangefinders.
     <msgs>
       msg/CameraInfo.msg	 msg/JointState.msg    msg/PointCloud.msg
       msg/ChannelFloat32.msg	 msg/LaserScan.msg     msg/PointField.msg
-      msg/CompressedImage.msg  msg/NavSatFix.msg     msg/Range.msg
+      msg/CompressedImage.msg    msg/NavSatFix.msg     msg/Range.msg
       msg/Image.msg		 msg/NavSatStatus.msg  msg/RegionOfInterest.msg
-      msg/Imu.msg		 msg/PointCloud2.msg
+      msg/Imu.msg		 msg/PointCloud2.msg   msg/Joy.msg
     </msgs>
   </rosbuild2>
 </package>

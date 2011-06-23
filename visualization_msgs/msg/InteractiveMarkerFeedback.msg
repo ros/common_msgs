@@ -1,8 +1,8 @@
-# Identifying string. Must be unique in the topic namespace.
-string client_id
-
 # Time/frame info.
 Header header
+
+# Identifying string. Must be unique in the topic namespace.
+string client_id
 
 # Feedback message sent back from the GUI, e.g.
 # when the status of an interactive marker was modified by the user.
@@ -16,20 +16,20 @@ string control_name
 # MENU_SELECT: a menu entry has been selected
 # BUTTON_CLICK: a button control has been clicked
 # POSE_UPDATE: the pose has been changed using one of the controls
-byte KEEP_ALIVE = 0
-byte POSE_UPDATE = 1
-byte MENU_SELECT = 2
-byte BUTTON_CLICK = 3
+uint8 KEEP_ALIVE = 0
+uint8 POSE_UPDATE = 1
+uint8 MENU_SELECT = 2
+uint8 BUTTON_CLICK = 3
 
-byte MOUSE_DOWN = 4
-byte MOUSE_UP = 5
+uint8 MOUSE_DOWN = 4
+uint8 MOUSE_UP = 5
 
-byte event_type
+uint8 event_type
 
 # Current pose of the marker
 # Note: Has to be valid for all feedback types.
 geometry_msgs/Pose pose
 
-# Contains the command of the selected menu entry
+# Contains the ID of the selected menu entry
 # Only valid for MENU_SELECT events.
-string command
+uint32 menu_entry_id
