@@ -6,17 +6,15 @@ string server_id
 # The client will use this to detect if it has missed an update.
 uint64 seq_num
 
-# Type holds the purpose of this message.  It must be one of INIT, UPDATE, or KEEP_ALIVE.
-# INIT: Will cause the client to erase all markers previously 
-#       received from this server. Initialize sequence number.
+# Type holds the purpose of this message.  It must be one of UPDATE or KEEP_ALIVE.
 # UPDATE: Incremental update to previous state. 
 #         The sequence number must be 1 higher than for
 #         the previous update.
 # KEEP_ALIVE: Indicates the that the server is still living.
 #             The sequence number does not increase.
+#             No payload data should be filled out (markers, poses, or erases).
 uint8 KEEP_ALIVE = 0
 uint8 UPDATE = 1
-uint8 INIT = 2
 
 uint8 type
 
