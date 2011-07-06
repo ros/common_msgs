@@ -31,11 +31,12 @@ cameras and scanning laser rangefinders.
       srv/SetCameraInfo.srv
     </srvs>
     <msgs>
-      msg/CameraInfo.msg	 msg/JointState.msg    msg/PointCloud.msg
-      msg/ChannelFloat32.msg	 msg/LaserScan.msg     msg/PointField.msg
-      msg/CompressedImage.msg    msg/NavSatFix.msg     msg/Range.msg
-      msg/Image.msg		 msg/NavSatStatus.msg  msg/RegionOfInterest.msg
-      msg/Imu.msg		 msg/PointCloud2.msg   msg/Joy.msg
+      msg/CameraInfo.msg	 msg/JointState.msg        msg/PointCloud.msg
+      msg/ChannelFloat32.msg	 msg/LaserScan.msg         msg/PointField.msg
+      msg/CompressedImage.msg    msg/NavSatFix.msg         msg/Range.msg
+      msg/Image.msg		 msg/NavSatStatus.msg      msg/RegionOfInterest.msg
+      msg/Imu.msg		 msg/PointCloud2.msg       msg/Joy.msg
+      msg/JoyFeedback.msg        msg/JoyFeedbackArray.msg
     </msgs>
   </rosbuild2>
 </package>
