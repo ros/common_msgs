@@ -25,7 +25,7 @@ uint8 orientation_mode
 # Interaction mode for this control
 # 
 # NONE: This control is only meant for visualization; no context menu.
-# MENU: Like NONW, but right-click menu is active.
+# MENU: Like NONE, but right-click menu is active.
 # BUTTON: Element can be left-clicked.
 # MOVE_AXIS: Translate along local x-axis.
 # MOVE_PLANE: Translate in local y-z plane.

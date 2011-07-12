@@ -33,3 +33,10 @@ geometry_msgs/Pose pose
 # Contains the ID of the selected menu entry
 # Only valid for MENU_SELECT events.
 uint32 menu_entry_id
+
+# If event_type is BUTTON_CLICK, MOUSE_DOWN, or MOUSE_UP, mouse_point
+# may contain the 3 dimensional position of the event on the
+# control.  If it does, mouse_point_valid will be true.  mouse_point
+# will be relative to the frame listed in the header.
+geometry_msgs/Point mouse_point
+bool mouse_point_valid
