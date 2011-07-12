@@ -35,6 +35,7 @@
  *
  */
 
+#include <ros/console.h>
 #include <sensor_msgs/point_cloud_conversion.h>
 
 int
