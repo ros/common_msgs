@@ -90,6 +90,9 @@ namespace sensor_msgs
     const std::string BAYER_GBRG16="bayer_gbrg16";
     const std::string BAYER_GRBG16="bayer_grbg16";
 
+    // Miscellaneous
+    const std::string YUV422="yuv422";
+
     bool isColor(const std::string& encoding)
     {
       return encoding == RGB8  || encoding == BGR8 ||

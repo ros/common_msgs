@@ -93,6 +93,9 @@ namespace sensor_msgs
     extern const std::string BAYER_GBRG16;
     extern const std::string BAYER_GRBG16;
 
+    // Miscellaneous
+    extern const std::string YUV422;
+
     // Utility functions for inspecting an encoding string
     bool isColor(const std::string& encoding);
     bool isMono(const std::string& encoding);
