@@ -15,7 +15,7 @@
   <depend package="rosbagmigration"/>
   <export>
     <cpp cflags=""/>
-    <rosbagmigration rule_file="migration_rules/geometry_msgs.bmr"/>
+    <rosbag migration_rule_file="migration_rules/geometry_msgs.bmr"/>
   </export>
 
   <platform os="ubuntu" version="9.04"/>
