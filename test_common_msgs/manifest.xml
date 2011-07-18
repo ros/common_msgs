@@ -9,7 +9,6 @@
   
   <depend package="rospy"/>
   <depend package="rostest"/>
-  <depend package="rosbagmigration"/>
   <depend package="rosbag"/>
 
   <depend package="diagnostic_msgs"/>
