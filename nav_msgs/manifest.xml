@@ -11,6 +11,7 @@
   <url>http://ros.org/wiki/nav_msgs</url>
   <depend package="geometry_msgs"/>
   <depend package="rosbagmigration"/>
+  <depend package="rosbag"/>
   <export>
     <rosbag migration_rule_file="migration_rules/nav_msgs.bmr"/>
   </export>

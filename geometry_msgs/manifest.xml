@@ -13,6 +13,7 @@
   <url>http://ros.org/wiki/geometry_msgs</url>
 
   <depend package="rosbagmigration"/>
+  <depend package="rosbag"/>
   <export>
     <cpp cflags=""/>
     <rosbag migration_rule_file="migration_rules/geometry_msgs.bmr"/>
