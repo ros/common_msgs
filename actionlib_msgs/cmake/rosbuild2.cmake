@@ -1,4 +1,9 @@
 
+find_package(PythonInterp)
+if (NOT PYTHONINTERP_FOUND)
+  message(FATAL_ERROR "could not find python interpreter")
+endif()
+
 macro(rosbuild_actions OUTPUT_VAR)
 
   set(${OUTPUT_VAR} "")
@@ -38,7 +43,7 @@ macro(rosbuild_actions OUTPUT_VAR)
       OUTPUT ${_output_action} ${_output_goal} ${_output_action_goal} 
       ${_output_result} ${_output_action_result} ${_output_feedback} 
       ${_output_action_feedback} 
-      COMMAND ${ROSBUILD_SUBSHELL} ${genaction_exe} 
+      COMMAND ${ROSBUILD_SUBSHELL} ${PYTHON_EXECUTABLE} ${genaction_exe} 
       ${_input}
       -o ${_output_dir}
       DEPENDS ${_input} ${genaction_exe} ${ROS_MANIFEST_LIST}
