@@ -42,7 +42,6 @@ import unittest
 
 import rostest
 import rosbag
-import rosbagmigration
 
 import re
 from cStringIO import StringIO
@@ -76,7 +75,7 @@ def quaternion_from_euler(x, y, z):
 
   return quaternion
 
-migrator = rosbagmigration.MessageMigrator()
+migrator = rosbag.migration.MessageMigrator()
 
 identity6x6 = [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0] + 6*[0] + [1.0]
 
@@ -427,7 +426,7 @@ class TestCommonMsgsMigration(unittest.TestCase):
   def get_new_occupancy_grid(self):
     from nav_msgs.msg import OccupancyGrid
     from nav_msgs.msg import MapMetaData
-    from roslib.msg import Header
+    from std_msgs.msg import Header
     from geometry_msgs.msg import Pose
     from geometry_msgs.msg import Point
     from geometry_msgs.msg import Quaternion
@@ -992,7 +991,7 @@ class TestCommonMsgsMigration(unittest.TestCase):
 
   def get_new_path(self):
     from nav_msgs.msg import Path
-    from roslib.msg import Header
+    from std_msgs.msg import Header
     from geometry_msgs.msg import PoseStamped
     from geometry_msgs.msg import Pose
     from geometry_msgs.msg import Point
@@ -1185,9 +1184,9 @@ class TestCommonMsgsMigration(unittest.TestCase):
     bag.close()
 
     # Check and migrate
-    res = rosbagmigration.checkbag(migrator, oldbag)
+    res = rosbag.migration.checkbag(migrator, oldbag)
     self.assertTrue(not False in [m[1] == [] for m in res], 'Bag not ready to be migrated')
-    res = rosbagmigration.fixbag(migrator, oldbag, newbag)
+    res = rosbag.migration.fixbag(migrator, oldbag, newbag)
     self.assertTrue(res, 'Bag not converted successfully')
 
     # Pull the first message out of the bag

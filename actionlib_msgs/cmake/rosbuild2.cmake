@@ -1,4 +1,9 @@
 
+find_package(PythonInterp)
+if (NOT PYTHONINTERP_FOUND)
+  message(FATAL_ERROR "could not find python interpreter")
+endif()
+
 macro(rosbuild_actions OUTPUT_VAR)
 
   set(${OUTPUT_VAR} "")
@@ -25,20 +30,20 @@ macro(rosbuild_actions OUTPUT_VAR)
     set(_base_output_feedback ${_action_bare}Feedback.msg)
     set(_base_output_action_feedback ${_action_bare}ActionFeedback.msg)
    
-    set(_output_dir ${CMAKE_CURRENT_BINARY_DIR}/msg/)
-    set(_output_action ${_output_dir}${_base_output_action})
-    set(_output_goal ${_output_dir}${_base_output_goal})
-    set(_output_action_goal ${_output_dir}${_base_output_action_goal})
-    set(_output_result ${_output_dir}${_base_output_result})
-    set(_output_action_result ${_output_dir}${_base_output_action_result})
-    set(_output_feedback ${_output_dir}${_base_output_feedback})
-    set(_output_action_feedback ${_output_dir}${_base_output_action_feedback})
+    set(_output_dir ${CMAKE_CURRENT_BINARY_DIR}/msg)
+    set(_output_action ${_output_dir}/${_base_output_action})
+    set(_output_goal ${_output_dir}/${_base_output_goal})
+    set(_output_action_goal ${_output_dir}/${_base_output_action_goal})
+    set(_output_result ${_output_dir}/${_base_output_result})
+    set(_output_action_result ${_output_dir}/${_base_output_action_result})
+    set(_output_feedback ${_output_dir}/${_base_output_feedback})
+    set(_output_action_feedback ${_output_dir}/${_base_output_action_feedback})
 
     add_custom_command(
       OUTPUT ${_output_action} ${_output_goal} ${_output_action_goal} 
       ${_output_result} ${_output_action_result} ${_output_feedback} 
       ${_output_action_feedback} 
-      COMMAND ${ROSBUILD_SUBSHELL} ${genaction_exe} 
+      COMMAND ${ROSBUILD_SUBSHELL} ${PYTHON_EXECUTABLE} ${genaction_exe} 
       ${_input}
       -o ${_output_dir}
       DEPENDS ${_input} ${genaction_exe} ${ROS_MANIFEST_LIST}
