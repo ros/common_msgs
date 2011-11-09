@@ -2,7 +2,7 @@ Source: common_msgs
 Section: misc
 Priority: extra
 Maintainer: Troy Straszheim <straszheim@willowgarage.com>
-Build-Depends: debhelper (>= 7), cmake, gcc, make, rosbuild
+Build-Depends: debhelper (>= 7), cmake, gcc, make, catkin
 Homepage: <insert the upstream URL, if relevant>
 
 Package: common_msgs
@@ -12,5 +12,5 @@ Description: <insert up to 60 chars description>
  <insert long description, indented with spaces>
 
 X-ROS-Pkg-Name: common_msgs
-X-ROS-Pkg-Depends: rosbuild, genmsg
+X-ROS-Pkg-Depends: catkin, genmsg
 X-ROS-System-Depends:
