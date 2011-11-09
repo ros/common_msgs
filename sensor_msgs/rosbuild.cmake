@@ -5,6 +5,7 @@ include_directories(include)
 
 generate_msgs(${PROJECT_NAME}
   PATH msg
+
   MESSAGES 
   msg/CameraInfo.msg	 msg/JoyFeedbackArray.msg  msg/PointCloud2.msg
   msg/ChannelFloat32.msg	 msg/JoyFeedback.msg	   msg/PointCloud.msg
@@ -12,6 +13,10 @@ generate_msgs(${PROJECT_NAME}
   msg/Image.msg		 msg/LaserScan.msg	   msg/Range.msg
   msg/Imu.msg		 msg/NavSatFix.msg	   msg/RegionOfInterest.msg
   msg/JointState.msg	 msg/NavSatStatus.msg
+
+  SERVICES
+  srv/SetCameraInfo.srv
+
   DEPENDENCIES std_msgs geometry_msgs 
   )
 

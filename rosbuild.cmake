@@ -7,6 +7,7 @@ find_package(genmsg)
 foreach(subdir
     geometry_msgs
     sensor_msgs
+    nav_msgs
     )
 
   message("common_msgs: ${subdir}")
