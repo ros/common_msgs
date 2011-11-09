@@ -10,6 +10,5 @@ foreach(subdir
     nav_msgs
     )
 
-  message("common_msgs: ${subdir}")
   add_subdirectory(${subdir})
 endforeach()

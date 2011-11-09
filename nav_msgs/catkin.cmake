@@ -16,6 +16,7 @@ generate_msgs(${PROJECT_NAME}
   DEPENDENCIES std_msgs geometry_msgs 
   )
 
-#add_library(${PROJECT_NAME} 
-#  src/image_encodings.cpp src/point_cloud_conversion.cpp src/distortion_models.cpp
-#  )
+install_cmake_infrastructure(${PROJECT_NAME}
+  VERSION 0.0.1
+  MSG_DIRS msg
+  )
