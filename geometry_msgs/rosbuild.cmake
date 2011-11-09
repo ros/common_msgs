@@ -1,12 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 project(geometry_msgs)
 
-find_package(rosbuild)
-find_package(std_msgs)
-find_package(genmsg)
-
-#add_subdirectory(msg)
-set(ROSBUILD_LOG 9)
 generate_msgs(${PROJECT_NAME}
   PATH msg
   MESSAGES 

@@ -1,11 +1,11 @@
-Source: ros-fuerte-genmsg
+Source: common_msgs
 Section: misc
 Priority: extra
 Maintainer: Troy Straszheim <straszheim@willowgarage.com>
 Build-Depends: debhelper (>= 7), cmake, gcc, make, rosbuild
 Homepage: <insert the upstream URL, if relevant>
 
-Package: ros-fuerte-genmsg
+Package: common_msgs
 Architecture: all
 Depends: ${misc:Depends}
 Description: <insert up to 60 chars description>
