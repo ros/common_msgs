@@ -1,4 +1,4 @@
-ros-common-msgs (1.0.0) natty; urgency=low
+@(CATKIN_PACKAGE_PREFIX)common-msgs (1.0.0) @(CATKIN_LINUX_DISTRIBUTIONS); urgency=low
 
   * override targets
 

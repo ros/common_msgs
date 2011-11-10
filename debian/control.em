@@ -1,11 +1,11 @@
-Source: ros-common-msgs
+Source: @(CATKIN_PACKAGE_PREFIX)common-msgs
 Section: misc
 Priority: extra
-Maintainer: Troy Straszheim <straszheim@willowgarage.com>
+Maintainer: Troy Straszheim <straszheim@@willowgarage.com>
 Build-Depends: debhelper (>= 7), cmake, gcc, make, catkin
 Homepage: <insert the upstream URL, if relevant>
 
-Package: ros-common-msgs
+Package: @(CATKIN_PACKAGE_PREFIX)common-msgs
 Architecture: all
 Depends: ${misc:Depends}
 Description: <insert up to 60 chars description>

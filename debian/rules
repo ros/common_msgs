@@ -6,27 +6,18 @@
 # dh-make output file, you may use that output file without restriction.
 # This special exception was added by Craig Small in version 0.37 of dh-make.
 
-#export DH_VERBOSE=1
-#export DH_OPTIONS=-v
 # Uncomment this to turn on verbose mode.
-include $(catkin_DIR)/debian.rules
+export DH_VERBOSE=1
+export DH_OPTIONS=-v
 
-# 
-# %:
-# 	dh  $@
-# 
-# override_dh_auto_configure:
-# 	dh_auto_configure -Scmake
-# 	dh_auto_configure -Spython_distutils
-# 
-# override_dh_auto_install:
-# 	dh_auto_install -Scmake
-# 	dh_auto_install -Spython_distutils
-# 
+%:
+	dh  $@
 
-override_dh_auto_build:
-	dh_auto_build -Scmake
+override_dh_auto_configure:
+	dh_auto_configure -Scmake -- \
+	-DCMAKE_INSTALL_PREFIX=$(CMAKE_INSTALL_PREFIX) \
+	-DCMAKE_PREFIX_PATH=$(CMAKE_PREFIX_PATH) \
+	-DCATKIN_PACKAGE_PREFIX=$(CATKIN_PACKAGE_PREFIX) \
+	-DCATKIN_LINUX_DISTRIBUTIONS="$(CATKIN_LINUX_DISTRIBUTIONS)" \
+	-DCATKIN=YES
 
-# 	dh_auto_build -Spython_distutils
-# 
-# 
