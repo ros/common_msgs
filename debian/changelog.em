@@ -2,4 +2,4 @@
 
   * override targets
 
- -- Troy Straszheim <straszheim@willowgarage.com>  Mon, 24 Oct 2011 13:56:11 -0700
+ -- Troy Straszheim <straszheim@@willowgarage.com>  Mon, 24 Oct 2011 13:56:11 -0700
