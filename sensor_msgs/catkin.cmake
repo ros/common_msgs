@@ -1,9 +1,8 @@
 project(sensor_msgs)
-find_package(geometry_msgs)
 
 include_directories(include)
 
-generate_msgs(${PROJECT_NAME}
+generate_msgs(sensor_msgs
   PATH msg
 
   MESSAGES 
@@ -20,7 +19,7 @@ generate_msgs(${PROJECT_NAME}
   DEPENDENCIES std_msgs geometry_msgs 
   )
 
-install_cmake_infrastructure(${PROJECT_NAME}
+install_cmake_infrastructure(sensor_msgs
   VERSION 0.0.1
   MSG_DIRS msg
   )

@@ -4,7 +4,7 @@ if(ROSBUILD)
 endif()
 
 if(CATKIN)
-  include(rosbuild.cmake)
+  include(catkin.cmake)
   return()
 endif()
 
