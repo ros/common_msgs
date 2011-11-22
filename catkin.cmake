@@ -1,8 +1,9 @@
 cmake_minimum_required(VERSION 2.8)
+project(common_msgs)
 
-find_package(catkin)
-find_package(std_msgs)
-find_package(genmsg)
+find_package(catkin REQUIRED)
+find_package(genmsg REQUIRED)
+find_package(std_msgs REQUIRED)
 
 foreach(subdir
     geometry_msgs
