@@ -3,18 +3,15 @@ find_package(geometry_msgs)
 
 include_directories(include)
 
-generate_msgs(${PROJECT_NAME}
-  PATH msg
+add_message_files(
+  DIRECTORY msg
+  FILES GridCells.msg OccupancyGrid.msg Path.msg MapMetaData.msg Odometry.msg)
 
-  MESSAGES 
-  msg/GridCells.msg    msg/OccupancyGrid.msg  msg/Path.msg
-  msg/MapMetaData.msg  msg/Odometry.msg
+add_service_files(
+  DIRECTORY srv
+  FILES GetMap.srv GetPlan.srv)
 
-  SERVICES
-  srv/GetMap.srv	srv/GetPlan.srv
-
-  DEPENDENCIES std_msgs geometry_msgs 
-  )
+generate_messages(DEPENDENCIES std_msgs geometry_msgs)
 
 install_cmake_infrastructure(${PROJECT_NAME}
   VERSION 0.0.1

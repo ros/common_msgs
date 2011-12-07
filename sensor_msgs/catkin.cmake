@@ -2,22 +2,23 @@ project(sensor_msgs)
 
 include_directories(include)
 
-generate_msgs(sensor_msgs
-  PATH msg
+add_message_files(
+  DIRECTORY msg
+  FILES 
+  CameraInfo.msg      JoyFeedbackArray.msg PointCloud2.msg
+  ChannelFloat32.msg  JoyFeedback.msg      PointCloud.msg
+  CompressedImage.msg Joy.msg              PointField.msg
+  Image.msg           LaserScan.msg        Range.msg
+  Imu.msg             NavSatFix.msg        RegionOfInterest.msg
+  JointState.msg      NavSatStatus.msg
+)
 
-  MESSAGES 
-  msg/CameraInfo.msg	 msg/JoyFeedbackArray.msg  msg/PointCloud2.msg
-  msg/ChannelFloat32.msg	 msg/JoyFeedback.msg	   msg/PointCloud.msg
-  msg/CompressedImage.msg  msg/Joy.msg		   msg/PointField.msg
-  msg/Image.msg		 msg/LaserScan.msg	   msg/Range.msg
-  msg/Imu.msg		 msg/NavSatFix.msg	   msg/RegionOfInterest.msg
-  msg/JointState.msg	 msg/NavSatStatus.msg
+add_service_files(
+  DIRECTORY srv
+  FILES SetCameraInfo.srv
+)
 
-  SERVICES
-  srv/SetCameraInfo.srv
-
-  DEPENDENCIES std_msgs geometry_msgs 
-  )
+generate_messages(DEPENDENCIES std_msgs geometry_msgs)
 
 install_cmake_infrastructure(sensor_msgs
   VERSION 0.0.1
