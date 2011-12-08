@@ -1,0 +1,57 @@
+if(@PACKAGE_NAME@_SOURCE_DIR)
+  find_program_required(GENACTION_BIN genaction.py PATHS ${@PACKAGE_NAME@_SOURCE_DIR}/scripts)
+else()
+  find_program_required(GENACTION_BIN genaction.py)
+endif()
+
+macro(add_action_files)
+  parse_arguments(ARG "PACKAGE;FILES;DIRECTORY" "NOINSTALL" ${ARGN})
+
+  if(NOT ARG_PACKAGE)
+    set(ARG_PACKAGE ${PROJECT_NAME})
+  endif()
+
+  string(REGEX MATCH "^/.*" IS_FULL_PATH ${ARG_DIRECTORY})
+
+  if(IS_FULL_PATH)
+    set(DIRECTORY_FULL_PATH ${ARG_DIRECTORY})
+  else()
+    set(DIRECTORY_FULL_PATH ${CMAKE_CURRENT_SOURCE_DIR}/${ARG_DIRECTORY})
+  endif()
+
+  # todo, handle relative vs full path
+  _prepend_path(${DIRECTORY_FULL_PATH} "${ARG_FILES}" FILES_W_PATH)
+
+  list(APPEND ${PROJECT_NAME}_ACTION_FILES ${FILES_W_PATH})
+
+  if(NOT ARG_NOINSTALL)
+    install(FILES ${FILES_W_PATH} DESTINATION share/${PROJECT_NAME}/${ARG_DIRECTORY})
+  endif()
+
+  foreach(actionfile ${FILES_W_PATH})
+    get_filename_component(ACTION_SHORT_NAME ${actionfile} NAME_WE)
+    set(OUTPUT_DIR ${CMAKE_CURRENT_BINARY_DIR}/actions_gen)
+    set(OUTPUT_FILES
+      ${ACTION_SHORT_NAME}Action.msg
+      ${ACTION_SHORT_NAME}ActionGoal.msg
+      ${ACTION_SHORT_NAME}ActionResult.msg
+      ${ACTION_SHORT_NAME}ActionFeedback.msg
+      ${ACTION_SHORT_NAME}Goal.msg
+      ${ACTION_SHORT_NAME}Result.msg
+      ${ACTION_SHORT_NAME}Feedback.msg)
+
+    _prepend_path(${OUTPUT_DIR}/ "${OUTPUT_FILES}" OUTPUT_FILES_W_PATH)
+
+    add_custom_command(OUTPUT ${OUTPUT_FILES_W_PATH}
+      COMMAND ${CATKIN_ENV} ${GENACTION_BIN} ${actionfile}
+      -o ${OUTPUT_DIR}
+      COMMENT "Generating .msg files for action ${ARG_PACKAGE}/${ACTION_SHORT_NAME} ${actionfile}"
+      )
+
+#    add_message_files(
+#      DIRECTORY ${OUTPUT_DIR}
+#      FILES ${OUTPUT_FILES})
+
+  endforeach()
+
+endmacro()
