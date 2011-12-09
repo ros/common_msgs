@@ -42,15 +42,16 @@ macro(add_action_files)
 
     _prepend_path(${OUTPUT_DIR}/ "${OUTPUT_FILES}" OUTPUT_FILES_W_PATH)
 
-    add_custom_command(OUTPUT ${OUTPUT_FILES_W_PATH}
-      COMMAND ${CATKIN_ENV} ${GENACTION_BIN} ${actionfile}
-      -o ${OUTPUT_DIR}
-      COMMENT "Generating .msg files for action ${ARG_PACKAGE}/${ACTION_SHORT_NAME} ${actionfile}"
+    message(STATUS "Generating .msg files for action ${ARG_PACKAGE}/${ACTION_SHORT_NAME} ${actionfile}")
+
+    stamp(${actionfile})
+
+    safe_execute_process(COMMAND ${CATKIN_ENV} ${GENACTION_BIN} ${actionfile} -o ${OUTPUT_DIR}
       )
 
-#    add_message_files(
-#      DIRECTORY ${OUTPUT_DIR}
-#      FILES ${OUTPUT_FILES})
+    add_message_files(
+      DIRECTORY ${OUTPUT_DIR}
+      FILES ${OUTPUT_FILES})
 
   endforeach()
 

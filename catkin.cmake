@@ -9,6 +9,7 @@ foreach(subdir
     geometry_msgs
     sensor_msgs
     nav_msgs
+    actionlib_msgs
     )
 
   add_subdirectory(${subdir})
