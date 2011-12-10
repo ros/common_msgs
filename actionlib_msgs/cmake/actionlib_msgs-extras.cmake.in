@@ -46,8 +46,9 @@ macro(add_action_files)
 
     stamp(${actionfile})
 
-    safe_execute_process(COMMAND ${CATKIN_ENV} ${GENACTION_BIN} ${actionfile} -o ${OUTPUT_DIR}
-      )
+    if( ${actionfile} IS_NEWER_THAN ${OUTPUT_DIR}/${ACTION_SHORT_NAME}Action.msg )
+      safe_execute_process(COMMAND ${CATKIN_ENV} ${GENACTION_BIN} ${actionfile} -o ${OUTPUT_DIR})
+    endif()
 
     add_message_files(
       DIRECTORY ${OUTPUT_DIR}
