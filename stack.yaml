@@ -8,13 +8,7 @@ Version: 3.4.5
 Section: misc
 Priority: extra
 Architecture: all
-Depends: ${misc:Depends} python-empy, cmake, make,
-         @(PackagePrefix)genmsg, @(PackagePrefix)genpy, @(PackagePrefix)gencpp,
-         @(PackagePrefix)std-msgs
-Build-Depends: debhelper (>= 7), cmake, gcc, make, python, python-empy, python-setuptools,
-               @(PackagePrefix)catkin, @(PackagePrefix)genmsg,
-               @(PackagePrefix)genpy, @(PackagePrefix)gencpp, @(PackagePrefix)genpybindings,
-               @(PackagePrefix)std-msgs
+Depends: catkin, genmsg, std_msgs
 Description: Common ROS Messages
 Author: Troy Straszheim <straszheim@willowgarage.com>, Morten Kjaergaard, Ken Conley
 Maintainer: Troy Straszheim <straszheim@willowgarage.com>
@@ -22,5 +16,4 @@ Homepage: http://www.ros.org
 
 Catkin-ProjectName: common_msgs
 Catkin-CopyrightType:  willowgarage
-Catkin-Depends: catkin, genmsg, std_msgs
 Catkin-DebRulesType: cmake
