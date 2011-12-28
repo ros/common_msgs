@@ -1,16 +1,14 @@
 Catkin-ProjectName: common_msgs
 Version: 0.0.2
 Description: Common ROS Messages
-
-Depends: catkin, genmsg, gencpp, genpy, gentypelibxml, genpybindings, std_msgs
 Author: Troy Straszheim <straszheim@willowgarage.com>, Morten Kjaergaard, Ken Conley
 Maintainer: Troy Straszheim <straszheim@willowgarage.com>
 Homepage: http://www.ros.org
 
-Version: 0.0.0
-
 Catkin-CopyrightType:  willowgarage
 Catkin-DebRulesType: cmake.catkin
+
+Depends: catkin, genmsg, gencpp, genpy, gentypelibxml, genpybindings, std_msgs
 
 Release-Pull: git://github.com/wg-debs/common_msgs.git
 Release-Push: git@github.com:wg-debs/common_msgs.git
