@@ -4,11 +4,11 @@
 #  If you are surprised to see this here, just ignore it.
 #
 Package: common-msgs
-Version: 3.4.5
+Version: 0.0.1
 Section: misc
 Priority: extra
 Architecture: all
-Depends: catkin, genmsg, std_msgs
+Depends: catkin, genmsg, gencpp, genpy, gentypelibxml, genpybindings, std_msgs
 Description: Common ROS Messages
 Author: Troy Straszheim <straszheim@willowgarage.com>, Morten Kjaergaard, Ken Conley
 Maintainer: Troy Straszheim <straszheim@willowgarage.com>
