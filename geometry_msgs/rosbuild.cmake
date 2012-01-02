@@ -19,7 +19,7 @@ generate_msgs(${PROJECT_NAME}
   DEPENDENCIES std_msgs
   )
 
-install_cmake_infrastructure(${PROJECT_NAME}
+catkin_project(${PROJECT_NAME}
   VERSION 0.0.1
   MSG_DIRS msg
   )

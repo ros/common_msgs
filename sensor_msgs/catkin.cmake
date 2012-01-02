@@ -20,7 +20,7 @@ add_service_files(
 
 generate_messages(DEPENDENCIES std_msgs geometry_msgs)
 
-install_cmake_infrastructure(sensor_msgs
+catkin_project(sensor_msgs
   VERSION 0.0.1
   MSG_DIRS msg
   )

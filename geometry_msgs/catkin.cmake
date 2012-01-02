@@ -19,7 +19,7 @@ add_message_files(
 
 generate_messages(DEPENDENCIES std_msgs)
 
-install_cmake_infrastructure(geometry_msgs
+catkin_project(geometry_msgs
   VERSION 0.0.1
   MSG_DIRS msg
   )

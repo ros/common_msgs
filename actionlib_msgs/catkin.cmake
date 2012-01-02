@@ -10,7 +10,7 @@ add_message_files(
 
 generate_messages(DEPENDENCIES std_msgs)
 
-install_cmake_infrastructure(actionlib_msgs
+catkin_project(actionlib_msgs
   VERSION 0.0.0
   CFG_EXTRAS actionlib_msgs-extras.cmake
   MSG_DIRS msg
