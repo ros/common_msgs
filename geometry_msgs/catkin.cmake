@@ -2,7 +2,7 @@ project(geometry_msgs)
 
 add_message_files(
   DIRECTORY msg
-  FILES 
+  FILES
   Point32.msg QuaternionStamped.msg
   Point.msg Transform.msg
   PointStamped.msg TransformStamped.msg
@@ -20,7 +20,6 @@ add_message_files(
 generate_messages(DEPENDENCIES std_msgs)
 
 catkin_project(geometry_msgs
-  VERSION 0.0.1
   MSG_DIRS msg
   )
 

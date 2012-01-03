@@ -4,7 +4,7 @@ include_directories(include)
 
 add_message_files(
   DIRECTORY msg
-  FILES 
+  FILES
   CameraInfo.msg      JoyFeedbackArray.msg PointCloud2.msg
   ChannelFloat32.msg  JoyFeedback.msg      PointCloud.msg
   CompressedImage.msg Joy.msg              PointField.msg
@@ -21,10 +21,9 @@ add_service_files(
 generate_messages(DEPENDENCIES std_msgs geometry_msgs)
 
 catkin_project(sensor_msgs
-  VERSION 0.0.1
   MSG_DIRS msg
   )
 
-#add_library(${PROJECT_NAME} 
+#add_library(${PROJECT_NAME}
 #  src/image_encodings.cpp src/point_cloud_conversion.cpp src/distortion_models.cpp
 #  )
