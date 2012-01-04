@@ -14,11 +14,6 @@
   <platform os="ubuntu" version="9.04"/>
   <platform os="ubuntu" version="9.10"/>
   <platform os="ubuntu" version="10.04"/>
-  <rosbuild2>
-    <msgs>
-      msg/GoalID.msg	msg/GoalStatusArray.msg  msg/GoalStatus.msg
-    </msgs>
-  </rosbuild2>
 </package>
 
 

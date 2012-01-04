@@ -2,7 +2,7 @@
   <description brief="sensor_msgs">
 
     This package defines messages for commonly used sensors, including
-cameras and scanning laser rangefinders.    
+cameras and scanning laser rangefinders.
 
   </description>
   <author>Maintained by Tully Foote/tfoote@willowgarage.com</author>
@@ -24,24 +24,6 @@ cameras and scanning laser rangefinders.
   <platform os="ubuntu" version="9.04"/>
   <platform os="ubuntu" version="9.10"/>
   <platform os="ubuntu" version="10.04"/>
-  <rosbuild2>
-    <depend package="rosbag"/>
-    <depend package="std_msgs"/>
-    <depend package="geometry_msgs"/>
-    <depend package="rosbagmigration"/>
-
-    <srvs>
-      srv/SetCameraInfo.srv
-    </srvs>
-    <msgs>
-      msg/CameraInfo.msg	 msg/JointState.msg        msg/PointCloud.msg
-      msg/ChannelFloat32.msg	 msg/LaserScan.msg         msg/PointField.msg
-      msg/CompressedImage.msg    msg/NavSatFix.msg         msg/Range.msg
-      msg/Image.msg		 msg/NavSatStatus.msg      msg/RegionOfInterest.msg
-      msg/Imu.msg		 msg/PointCloud2.msg       msg/Joy.msg
-      msg/JoyFeedback.msg        msg/JoyFeedbackArray.msg
-    </msgs>
-  </rosbuild2>
 </package>
 
 

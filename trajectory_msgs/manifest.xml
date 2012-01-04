@@ -13,14 +13,6 @@
   <platform os="ubuntu" version="9.10"/>
   <platform os="ubuntu" version="10.04"/>
 
-  <rosbuild2>
-    <msgs>
-      msg/JointTrajectory.msg
-      msg/JointTrajectoryPoint.msg
-    </msgs>
-    <srvs>
-    </srvs>
-  </rosbuild2>
 </package>
 
 
