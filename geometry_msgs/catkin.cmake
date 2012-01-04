@@ -22,5 +22,3 @@ generate_messages(DEPENDENCIES std_msgs)
 catkin_project(geometry_msgs
   MSG_DIRS msg
   )
-
-enable_python(geometry_msgs)
