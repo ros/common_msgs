@@ -1,36 +1,30 @@
-if(ROSBUILD)
-  include(rosbuild.cmake)
-  return()
-endif()
-
-if(CATKIN)
-  include(catkin.cmake)
-  return()
-endif()
-cmake_minimum_required(VERSION 2.4.6)
-include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
-
-# Set the build type.  Options are:
-#  Coverage       : w/ debug symbols, w/o optimization, w/ code-coverage
-#  Debug          : w/ debug symbols, w/o optimization
-#  Release        : w/o debug symbols, w/ optimization
-#  RelWithDebInfo : w/ debug symbols, w/ optimization
-#  MinSizeRel     : w/o debug symbols, w/ optimization, stripped binaries
-#set(ROS_BUILD_TYPE RelWithDebInfo)
-
-rosbuild_init()
-
-#uncomment if you have defined messages
-rosbuild_genmsg()
-#uncomment if you have defined services
-rosbuild_gensrv()
+project(sensor_msgs)
 
 include_directories(include)
 
-#common commands for building c++ executables and libraries
-rosbuild_add_library(${PROJECT_NAME} src/image_encodings.cpp src/point_cloud_conversion.cpp src/distortion_models.cpp)
-#target_link_libraries(${PROJECT_NAME} another_library)
-#rosbuild_add_boost_directories()
-#rosbuild_link_boost(${PROJECT_NAME} thread)
-#rosbuild_add_executable(example examples/example.cpp)
-#target_link_libraries(example ${PROJECT_NAME})
+add_message_files(
+  DIRECTORY msg
+  FILES
+  CameraInfo.msg      JoyFeedbackArray.msg PointCloud2.msg
+  ChannelFloat32.msg  JoyFeedback.msg      PointCloud.msg
+  CompressedImage.msg Joy.msg              PointField.msg
+  Image.msg           LaserScan.msg        Range.msg
+  Imu.msg             NavSatFix.msg        RegionOfInterest.msg
+  JointState.msg      NavSatStatus.msg
+)
+
+add_service_files(
+  DIRECTORY srv
+  FILES SetCameraInfo.srv
+)
+
+generate_messages(DEPENDENCIES std_msgs geometry_msgs)
+
+catkin_project(sensor_msgs
+  MSG_DIRS msg
+  )
+
+message("TODO: re-enable sensor_msgs library")
+#add_library(${PROJECT_NAME}
+#  src/image_encodings.cpp src/point_cloud_conversion.cpp src/distortion_models.cpp
+#  )
