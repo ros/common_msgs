@@ -1,8 +1,8 @@
 Catkin-ProjectName: common_msgs
 Version: 1.6.1
 Description: Common ROS Messages
-Author: Troy Straszheim <straszheim@willowgarage.com>, Morten Kjaergaard, Ken Conley
-Maintainer: Troy Straszheim <straszheim@willowgarage.com>
+Author: ROS community process
+Maintainer:  Tully Foote <tfoote@willowgarage.com>
 Homepage: http://www.ros.org
 
 Catkin-CopyrightType:  willowgarage
