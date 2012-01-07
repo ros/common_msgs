@@ -15,3 +15,6 @@ foreach(subdir
   add_subdirectory(${subdir})
 endforeach()
 
+# install all manifests
+install_matching_to_share(manifest.xml)
+
