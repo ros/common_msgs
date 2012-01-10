@@ -9,6 +9,5 @@ add_message_files(
 generate_messages(DEPENDENCIES std_msgs sensor_msgs)
 
 catkin_project(stereo_msgs
-  MSG_DIRS msg
   )
- 
+

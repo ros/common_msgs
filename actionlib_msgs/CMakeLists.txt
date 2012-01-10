@@ -10,6 +10,5 @@ generate_messages(DEPENDENCIES std_msgs)
 
 catkin_project(actionlib_msgs
   CFG_EXTRAS actionlib_msgs-extras.cmake
-  MSG_DIRS msg
   )
- 
+

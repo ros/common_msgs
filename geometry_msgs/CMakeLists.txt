@@ -20,5 +20,4 @@ add_message_files(
 generate_messages(DEPENDENCIES std_msgs)
 
 catkin_project(geometry_msgs
-  MSG_DIRS msg
   )
