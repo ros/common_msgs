@@ -1,4 +1,0 @@
-[robot_msgs/ChannelFloat32]:
-string name
-float32[] vals
-
