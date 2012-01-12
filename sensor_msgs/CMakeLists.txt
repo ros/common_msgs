@@ -1,4 +1,8 @@
 project(sensor_msgs)
+catkin_project(sensor_msgs
+  LIBRARIES sensor_msgs
+  INCLUDE_DIRS include
+  )
 
 include_directories(include)
 
@@ -20,10 +24,8 @@ add_service_files(
 
 generate_messages(DEPENDENCIES std_msgs geometry_msgs)
 
-catkin_project(sensor_msgs
-  )
-
-message("TODO: re-enable sensor_msgs library")
-#add_library(${PROJECT_NAME}
-#  src/image_encodings.cpp src/point_cloud_conversion.cpp src/distortion_models.cpp
-#  )
+add_library(sensor_msgs SHARED
+  src/image_encodings.cpp src/point_cloud_conversion.cpp src/distortion_models.cpp
+)
+install(TARGETS sensor_msgs
+        LIBRARY DESTINATION lib)

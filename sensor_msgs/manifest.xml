@@ -11,7 +11,8 @@ cameras and scanning laser rangefinders.
   <url>http://ros.org/wiki/sensor_msgs</url>
 
   <export>
-    <cpp cflags="-I${prefix}/include" lflags="-L${prefix}/lib -lsensor_msgs -Wl,-rpath,${prefix}/lib"/>
+    <cpp cflags="`PKG_CONFIG_PATH=${prefix}/../../lib/pkgconfig pkg-config --cflags sensor_msgs`"
+         lflags="`PKG_CONFIG_PATH=${prefix}/../../lib/pkgconfig pkg-config --libs sensor_msgs`"/>
     <rosbag migration_rule_file="migration_rules/sensor_msgs.bmr"/>
   </export>
 
