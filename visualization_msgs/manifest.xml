@@ -13,14 +13,6 @@ The main messages in visualization_msgs is <tt>visualization_msgs/Marker</tt>.  
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/visualization_msgs</url>
 
-  <export>
-    <rosbag migration_rule_file="migration_rules/visualization_msgs.bmr"/>
-  </export>
-
-  <depend package="geometry_msgs"/>
-  <depend package="std_msgs"/>
-  <depend package="rosbag"/>
-
 </package>
 
 

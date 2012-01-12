@@ -12,12 +12,6 @@
   <review status="doc reviewed" notes="http://www.ros.org/wiki/geometry_msgs/Reviews/2009-09-30_Doc_Review"/>
   <url>http://ros.org/wiki/geometry_msgs</url>
 
-  <depend package="rosbagmigration"/>
-  <depend package="rosbag"/>
-  <export>
-    <rosbag migration_rule_file="migration_rules/geometry_msgs.bmr"/>
-  </export>
-
 </package>
 
 

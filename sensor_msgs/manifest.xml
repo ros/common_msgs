@@ -13,18 +13,8 @@ cameras and scanning laser rangefinders.
   <export>
     <cpp cflags="`PKG_CONFIG_PATH=${prefix}/../../lib/pkgconfig pkg-config --cflags sensor_msgs`"
          lflags="`PKG_CONFIG_PATH=${prefix}/../../lib/pkgconfig pkg-config --libs sensor_msgs`"/>
-    <rosbag migration_rule_file="migration_rules/sensor_msgs.bmr"/>
   </export>
 
-  <depend package="rosbag"/>
-  <depend package="std_msgs"/>
-  <depend package="geometry_msgs"/>
-  <depend package="rosbagmigration"/>
-  <depend package="rosconsole"/>
-
-  <platform os="ubuntu" version="9.04"/>
-  <platform os="ubuntu" version="9.10"/>
-  <platform os="ubuntu" version="10.04"/>
 </package>
 
 

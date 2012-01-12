@@ -8,11 +8,5 @@
   <license>BSD</license>
   <review status="Doc reviewed" notes="2010/01/18"/>
   <url>http://www.ros.org/wiki/stereo_msgs</url>
-  <depend package="sensor_msgs"/>
-  <depend package="rosbagmigration"/>
-  <depend package="rosbag"/>
-  <export>
-    <rosbag migration_rule_file="migration_rules/stereo_msgs.bmr"/>
-  </export>
 
 </package>
