@@ -35,8 +35,8 @@
  *
  */
 
-#include <ros/console.h>
 #include <sensor_msgs/point_cloud_conversion.h>
+#include <boost/format.hpp>
 
 int
 sensor_msgs::getPointCloud2FieldIndex (const sensor_msgs::PointCloud2 &cloud, 
@@ -100,7 +100,7 @@ sensor_msgs::convertPointCloud2ToPointCloud (const sensor_msgs::PointCloud2 &inp
   {
     if (input.fields[d].datatype != sensor_msgs::PointField::FLOAT32)
     {
-      ROS_WARN ("sensor_msgs::PointCloud accepts only float32 values, but field %d (%s) has field type %d!", (int)d, input.fields[d].name.c_str (), input.fields[d].datatype);
+      std::cerr << boost::str(boost::format("sensor_msgs::PointCloud accepts only float32 values, but field %d (%s) has field type %d!")%(int)d% input.fields[d].name%input.fields[d].datatype) << std::endl;
     }
   }
 
@@ -113,7 +113,7 @@ sensor_msgs::convertPointCloud2ToPointCloud (const sensor_msgs::PointCloud2 &inp
   int z_idx = getPointCloud2FieldIndex (input, "z");
   if (x_idx == -1 || y_idx == -1 || z_idx == -1)
   {
-    ROS_ERROR ("x/y/z coordinates not found! Cannot convert to sensor_msgs::PointCloud!");
+    std::cerr << "x/y/z coordinates not found! Cannot convert to sensor_msgs::PointCloud!" << std::endl;
     return (false);
   }
   int x_offset = input.fields[x_idx].offset;
