@@ -12,3 +12,5 @@ catkin_project(actionlib_msgs
   CFG_EXTRAS actionlib_msgs-extras.cmake
   )
 
+install(FILES cmake/actionbuild.cmake
+        DESTINATION share/actionlib_msgs/cmake)
