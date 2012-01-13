@@ -23,7 +23,8 @@ add_service_files(
 )
 
 generate_messages(DEPENDENCIES std_msgs geometry_msgs)
-find_package(Boost COMPONENTS format)
+# We want boost/format.hpp, which isn't in its own component.
+find_package(Boost)
 
 find_package(ROS COMPONENTS
   cpp_common
