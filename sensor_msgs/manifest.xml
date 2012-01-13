@@ -15,8 +15,6 @@ cameras and scanning laser rangefinders.
     <cpp cflags="`PKG_CONFIG_PATH=${prefix}/../../lib/pkgconfig pkg-config --cflags sensor_msgs`"
          lflags="`PKG_CONFIG_PATH=${prefix}/../../lib/pkgconfig pkg-config --libs sensor_msgs`"/>
   </export>
-  <catkin/>
-
 
 </package>
 

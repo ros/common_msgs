@@ -14,6 +14,11 @@ The main messages in visualization_msgs is <tt>visualization_msgs/Marker</tt>.  
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/visualization_msgs</url>
 
+  <export>
+    <cpp cflags="`PKG_CONFIG_PATH=${prefix}/../../lib/pkgconfig pkg-config --cflags visualization_msgs`"
+         lflags="`PKG_CONFIG_PATH=${prefix}/../../lib/pkgconfig pkg-config --libs visualization_msgs`"/>
+  </export>
+
 </package>
 
 
