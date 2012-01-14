@@ -46,3 +46,7 @@ target_link_libraries(sensor_msgs
 add_dependencies(sensor_msgs sensor_msgs_gencpp)
 install(TARGETS sensor_msgs
         LIBRARY DESTINATION lib)
+install(DIRECTORY include/
+        DESTINATION include
+        FILES_MATCHING PATTERN "*.h"
+        PATTERN ".svn" EXCLUDE)
