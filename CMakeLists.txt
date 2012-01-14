@@ -10,6 +10,9 @@ foreach(subdir
     sensor_msgs
     nav_msgs
     actionlib_msgs
+    visualization_msgs
+    stereo_msgs
+    diagnostic_msgs
     )
 
   add_subdirectory(${subdir})
