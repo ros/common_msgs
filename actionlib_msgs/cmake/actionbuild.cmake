@@ -1,3 +1,7 @@
+# THIS FILE CANNOT BE MOVED.  Users include it like so:
+#     rosbuild_find_ros_package(actionlib_msgs)
+#     include(${actionlib_msgs_PACKAGE_PATH}/cmake/actionbuild.cmake)
+
 macro(get_actions actionvar)
   file(GLOB _action_files RELATIVE "${PROJECT_SOURCE_DIR}/action" "${PROJECT_SOURCE_DIR}/action/*.action")
   message(STATUS "Action Files:" ${_action_files})
@@ -23,7 +27,7 @@ macro(genaction)
     string(REPLACE ".action" "" _action_bare ${_action})
 
     rosbuild_find_ros_package(actionlib_msgs)
-    set(genaction_exe ${actionlib_msgs_PACKAGE_PATH}/genaction.py)
+    set(genaction_exe ${actionlib_msgs_PACKAGE_PATH}/rosbuild/scripts/genaction.py)
 
     #We have to do this because message generation assumes filenames without full paths
     set(_base_output_action ${_action_bare}Action.msg)
