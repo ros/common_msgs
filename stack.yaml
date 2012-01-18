@@ -1,5 +1,5 @@
 Catkin-ProjectName: common_msgs
-Version: 1.6.1
+Version: 1.6.2
 Description: Common ROS Messages
 Author: ROS community process
 Maintainer:  Tully Foote <tfoote@willowgarage.com>
@@ -8,7 +8,5 @@ Homepage: http://www.ros.org
 Catkin-CopyrightType:  willowgarage
 Catkin-DebRulesType: cmake.catkin
 
-Depends: catkin, genmsg, gencpp, genpy, gentypelibxml, genpybindings, std_msgs
+Depends: catkin, genmsg, std_msgs
 
-Release-Pull: git://github.com/wg-debs/common_msgs.git
-Release-Push: git@github.com:wg-debs/common_msgs.git
