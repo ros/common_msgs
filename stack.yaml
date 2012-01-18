@@ -8,5 +8,5 @@ Homepage: http://www.ros.org
 Catkin-CopyrightType:  willowgarage
 Catkin-DebRulesType: cmake.catkin
 
-Depends: catkin, genmsg, std_msgs
+Depends: catkin, genmsg, langs, std_msgs
 
