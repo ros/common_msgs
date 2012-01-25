@@ -1,7 +1,10 @@
+# need genmsg for _prepend_path()
+find_package(ROS COMPONENTS genmsg)
+
 if(@PACKAGE_NAME@_SOURCE_DIR)
   find_program_required(GENACTION_BIN genaction.py PATHS ${@PACKAGE_NAME@_SOURCE_DIR}/scripts)
 else()
-  find_program_required(GENACTION_BIN genaction.py)
+  find_program_required(GENACTION_BIN genaction.py PATHS @CMAKE_INSTALL_PREFIX@/share/@PACKAGE_NAME@/scripts)
 endif()
 
 macro(add_action_files)
