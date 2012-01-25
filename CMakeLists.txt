@@ -21,5 +21,5 @@ endforeach()
 # install all manifests
 install_matching_to_share(manifest.xml)
 
-install(FILES stack.xml
+install(FILES stack.xml stack.yaml
         DESTINATION share/common_msgs)
