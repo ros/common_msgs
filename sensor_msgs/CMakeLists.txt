@@ -14,7 +14,7 @@ add_message_files(
   CompressedImage.msg Joy.msg              PointField.msg
   Image.msg           LaserScan.msg        Range.msg
   Imu.msg             NavSatFix.msg        RegionOfInterest.msg
-  JointState.msg      NavSatStatus.msg
+  JointState.msg      NavSatStatus.msg     TimeReference.msg
 )
 
 add_service_files(
