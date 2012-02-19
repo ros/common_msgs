@@ -35,7 +35,7 @@ find_package(ROS COMPONENTS
 include_directories(${ROS_INCLUDE_DIRS}
   ${Boost_INCLUDE_DIRS} )
 
-add_library(sensor_msgs SHARED
+add_library(sensor_msgs 
   src/image_encodings.cpp src/point_cloud_conversion.cpp src/distortion_models.cpp
 )
 target_link_libraries(sensor_msgs
@@ -45,6 +45,7 @@ target_link_libraries(sensor_msgs
 
 add_dependencies(sensor_msgs sensor_msgs_gencpp)
 install(TARGETS sensor_msgs
+        ARCHIVE DESTINATION lib
         LIBRARY DESTINATION lib)
 install(DIRECTORY include/
         DESTINATION include
