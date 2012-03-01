@@ -1,12 +1,12 @@
 Catkin-ProjectName: common_msgs
-Version: 1.8.1
+Version: 1.8.2
 Description: Common ROS Messages
 Author: ROS community process
 Maintainer:  Tully Foote <tfoote@willowgarage.com>
 Homepage: http://www.ros.org
 
 Catkin-CopyrightType:  willowgarage
-Catkin-DebRulesType: cmake.catkin
+Catkin-DebRulesType: cmake
 
 Depends: catkin, genmsg, langs, std_msgs, ros_comm
 
