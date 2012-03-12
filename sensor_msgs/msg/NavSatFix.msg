@@ -2,7 +2,14 @@
 #
 # Specified using the WGS 84 reference ellipsoid
 
-# Header specifies ROS time and frame of reference for this fix.
+# header.stamp specifies the ROS time for this measurement (the
+#        corresponding satellite time may be reported using the
+#        sensor_msgs/TimeReference message).
+#
+# header.frame_id is the frame of reference reported by the satellite
+#        receiver, usually the location of the antenna.  This is a
+#        Euclidean frame relative to the vehicle, not a reference
+#        ellipsoid.
 Header header
 
 # satellite fix status information
@@ -14,7 +21,8 @@ float64 latitude
 # Longitude [degrees]. Positive is east of prime meridian; negative is west.
 float64 longitude
 
-# Altitude [m]. Positive is above the WGS 84 ellipsoid.
+# Altitude [m]. Positive is above the WGS 84 ellipsoid
+# (quiet NaN if no altitude is available).
 float64 altitude
 
 # Position covariance [m^2] defined relative to a tangential plane
