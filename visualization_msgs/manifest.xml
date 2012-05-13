@@ -15,6 +15,7 @@ The main messages in visualization_msgs is <tt>visualization_msgs/Marker</tt>.  
   <url>http://ros.org/wiki/visualization_msgs</url>
 
   <depend package="geometry_msgs"/>
+  <depend package="std_msgs"/>
 
   <export>
     <cpp cflags="`PKG_CONFIG_PATH=${prefix}/../../lib/pkgconfig pkg-config --cflags visualization_msgs`"

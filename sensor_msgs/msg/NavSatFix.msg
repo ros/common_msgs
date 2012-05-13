@@ -13,7 +13,7 @@
 Header header
 
 # satellite fix status information
-sensor_msgs/NavSatStatus status
+NavSatStatus status
 
 # Latitude [degrees]. Positive is north of equator; negative is south.
 float64 latitude
