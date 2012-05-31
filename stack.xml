@@ -11,8 +11,8 @@
     and common sensors (<a href="http://ros.org/wiki/sensor_msgs">sensor_msgs</a>), such as laser range finders, cameras, point clouds.
   </description>
   <author>ROS community process</author>
-  <maintainer>Tully Foote tfoote@willowgarage.com</maintainer>
-  <license>BSD</license>  
+  <maintainer email="tfoote@willowgarage.com">Tully Foote</maintainer>
+  <license>BSD</license>
   <copyright>Willow Garage</copyright>
   <url>http://www.ros.org/wiki/common_msgs</url>
   <review status="doc reviewed" notes="2009/09/30"/>
