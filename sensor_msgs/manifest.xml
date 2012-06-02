@@ -1,5 +1,4 @@
 <package>
-  <catkin/>
   <description brief="sensor_msgs">
 
     This package defines messages for commonly used sensors, including

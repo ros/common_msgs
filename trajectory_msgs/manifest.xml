@@ -1,5 +1,4 @@
 <package>
-  <catkin/>
   <description brief="trajectory_msgs">
 
      trajectory_msgs

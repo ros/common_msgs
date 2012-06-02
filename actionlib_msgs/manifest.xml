@@ -1,5 +1,4 @@
 <package>
-  <catkin/>
   <description brief="Messages for actionlib">
      actionlib_msgs defines the common messages to interact with an
      action server and an action client.  For full documentation of

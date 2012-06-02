@@ -1,5 +1,4 @@
 <package>
-  <catkin/>
   <description brief="Messages for the navigation stack">
 
     nav_msgs defines the common messages used to interact with the

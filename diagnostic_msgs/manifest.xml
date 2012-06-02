@@ -1,5 +1,4 @@
 <package>
-  <catkin/>
   <description brief="A package for diagnostic_msgs">
      <p>
      This package holds the diagnostic messages which provide the

@@ -1,5 +1,4 @@
 <package>
-  <catkin/>
   <description brief="Messages for geometric primatives">
 
     geometry_msgs provides messages for common geometric primatives
