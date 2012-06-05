@@ -24,9 +24,9 @@ add_service_files(
 
 generate_messages(DEPENDENCIES std_msgs geometry_msgs)
 # We want boost/format.hpp, which isn't in its own component.
-find_package(Boost)
+find_package(Boost REQUIRED)
 
-find_package(ROS COMPONENTS
+find_package(ROS REQUIRED COMPONENTS
   cpp_common
   roscpp_serialization
   rostime

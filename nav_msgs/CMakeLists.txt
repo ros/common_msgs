@@ -1,5 +1,5 @@
 project(nav_msgs)
-find_package(geometry_msgs)
+find_package(ROS REQUIRED COMPONENTS geometry_msgs)
 
 add_message_files(
   DIRECTORY msg

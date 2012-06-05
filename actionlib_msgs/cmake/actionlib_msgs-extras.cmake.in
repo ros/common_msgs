@@ -1,5 +1,5 @@
 # need genmsg for _prepend_path()
-find_package(ROS COMPONENTS genmsg)
+find_package(ROS REQUIRED COMPONENTS genmsg)
 
 if(@PACKAGE_NAME@_SOURCE_DIR)
   find_program_required(GENACTION_BIN genaction.py PATHS ${@PACKAGE_NAME@_SOURCE_DIR}/scripts)

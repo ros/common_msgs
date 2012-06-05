@@ -2,8 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 project(common_msgs)
 
 find_package(catkin REQUIRED)
-find_package(genmsg REQUIRED)
-find_package(std_msgs REQUIRED)
+find_package(ROS REQUIRED COMPONENTS genmsg std_msgs)
 
 catkin_stack()
 
