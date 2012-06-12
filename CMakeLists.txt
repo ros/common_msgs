@@ -15,6 +15,7 @@ foreach(subdir
     stereo_msgs
     diagnostic_msgs
     trajectory_msgs
+    shape_msgs
     )
 
   add_subdirectory(${subdir})

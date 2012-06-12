@@ -1,0 +1,21 @@
+<stack>
+  <name>shape_msgs</name>
+  <version>0.1.3</version>
+  <description brief="Shape Messages">Messages for representing shapes.</description>
+  <author email="isucan@willowgarage.edu">Ioan Sucan</author>
+  <maintainer email="isucan@willowgarage.com">Ioan Sucan</maintainer>
+
+  <license>BSD</license>  
+  <copyright>Willow Garage</copyright>
+  <url>http://www.ros.org/wiki/shape_msgs</url>
+
+  <review status="unreviewed" notes=""/>
+
+  <build_depends>catkin</build_depends>
+  <build_depends>genmsg</build_depends>
+  <build_depends>langs</build_depends>
+  <build_depends>common_msgs</build_depends>
+
+  <depends>common_msgs</depends>
+
+</stack>
