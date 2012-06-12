@@ -1,9 +1,9 @@
-uint16 SPHERE=0
 uint16 BOX=1
-uint16 CYLINDER=2
-uint16 CONE=3
-uint16 MESH=4
-uint16 PLANE=5
+uint16 SPHERE=2
+uint16 CYLINDER=3
+uint16 PLANE=4
+uint16 CONE=5
+uint16 MESH=6
 
 uint16 type
 
