@@ -1,15 +1,15 @@
-byte SPHERE=0
-byte BOX=1
-byte CYLINDER=2
-byte CONE=3
-byte MESH=4
-byte PLANE=5
+uint16 SPHERE=0
+uint16 BOX=1
+uint16 CYLINDER=2
+uint16 CONE=3
+uint16 MESH=4
+uint16 PLANE=5
 
-byte type
+uint16 type
 
 
 #### define sphere, box, cylinder, cone, plane ####
-# the origin of each shape is considered at the shape's center
+# the origin of each shape is considered at the shape's center unless specified otherwise
 
 # for sphere
 # radius := dimensions[0]
@@ -24,12 +24,12 @@ byte type
 # length := dimensions[1]
 # the length is along the Z axis
 
-# for cone
+# for cone (the origin is at the center of the base in this case)
 # radius := dimensions[0] (of the base)
 # length := dimensions[1]
 # the length is along the Z axis
 
-# for plane ax + by + cz + d = 0
+# for plane ax + by + cz + d = 0 (there is no notion of center in this case)
 # a := dimensions[0]
 # b := dimensions[1]
 # c := dimensions[2]
