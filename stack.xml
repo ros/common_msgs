@@ -25,6 +25,7 @@
   <build_depends>std_msgs</build_depends>
 
   <depends>boost</depends>
+  <depends>langs</depends>
   <depends>roscpp_core</depends>
   <depends>std_msgs</depends>
 </stack>
