@@ -27,10 +27,7 @@ generate_messages(DEPENDENCIES std_msgs geometry_msgs)
 find_package(Boost REQUIRED)
 
 find_package(ROS REQUIRED COMPONENTS
-  cpp_common
-  roscpp_serialization
   rostime
-  roscpp_traits
   )
 include_directories(${ROS_INCLUDE_DIRS}
   ${Boost_INCLUDE_DIRS} )
