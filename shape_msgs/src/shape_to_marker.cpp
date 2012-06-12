@@ -62,6 +62,8 @@ void shape_msgs::constructMarkerFromShape(const shape_msgs::Shape &shape_msg, vi
       mk.scale.z = shape_msg.dimensions[2];
     }
     break;
+  case shape_msgs::Shape::CONE:
+    // there is no CONE marker, so this produces a cylinder marker as well
   case shape_msgs::Shape::CYLINDER:
     mk.type = visualization_msgs::Marker::CYLINDER;
     if (shape_msg.dimensions.size() != 2)
@@ -75,20 +77,28 @@ void shape_msgs::constructMarkerFromShape(const shape_msgs::Shape &shape_msg, vi
       mk.scale.z = shape_msg.dimensions[1];
     }
     break;
-    
   case shape_msgs::Shape::MESH:
-    if (shape_msg.dimensions.size() != 0) {
+    if (shape_msg.dimensions.size() != 0)
       throw std::runtime_error("Unexpected number of dimensions in mesh definition");
-    } 
-    if (shape_msg.triangles.size() % 3 != 0) {
+    if (shape_msg.triangles.size() % 3 != 0)
       throw std::runtime_error("Number of triangle indices is not divisible by 3");
-    }
-    if (shape_msg.triangles.empty() || shape_msg.vertices.empty()) {
+    if (shape_msg.triangles.empty() || shape_msg.vertices.empty())
       throw std::runtime_error("Mesh definition is empty");
+    if (use_mesh_triangle_list)
+    {
+      mk.type = visualization_msgs::Marker::TRIANGLE_LIST;
+      mk.scale.x = mk.scale.y = mk.scale.z = 1.0;
+      for (std::size_t i = 0 ; i < shape_msg.triangles.size(); i+=3)
+      {
+        mk.points.push_back(shape_msg.vertices[shape_msg.triangles[i]]);
+        mk.points.push_back(shape_msg.vertices[shape_msg.triangles[i+1]]);
+        mk.points.push_back(shape_msg.vertices[shape_msg.triangles[i+2]]);
+      }
     }
-    if(!use_mesh_triangle_list) {
+    else
+    {
       mk.type = visualization_msgs::Marker::LINE_LIST;
-      mk.scale.x = mk.scale.y = mk.scale.z = 0.01;
+      mk.scale.x = mk.scale.y = mk.scale.z = 1.0;
       std::size_t nt = shape_msg.triangles.size() / 3;
       for (std::size_t i = 0 ; i < nt ; ++i)
       {
@@ -99,22 +109,16 @@ void shape_msgs::constructMarkerFromShape(const shape_msgs::Shape &shape_msg, vi
         mk.points.push_back(shape_msg.vertices[shape_msg.triangles[3*i+1]]);
         mk.points.push_back(shape_msg.vertices[shape_msg.triangles[3*i+2]]);
       }
-    } else {
-      mk.type = visualization_msgs::Marker::TRIANGLE_LIST;
-      mk.scale.x = mk.scale.y = mk.scale.z = 1.0;
-      for (std::size_t i = 0 ; i < shape_msg.triangles.size(); i+=3)
-      {
-        mk.points.push_back(shape_msg.vertices[shape_msg.triangles[i]]);
-        mk.points.push_back(shape_msg.vertices[shape_msg.triangles[i+1]]);
-        mk.points.push_back(shape_msg.vertices[shape_msg.triangles[i+2]]);
-      }
-    }
+    }    
+    break;
+  case shape_msgs::Shape::PLANE:
+    throw std::runtime_error("Plane shape cannot be turned into a marker");
+    break;
   default:
     {
       std::stringstream ss;
       ss << shape_msg.type;
       throw std::runtime_error("Unknown shape type: " + ss.str());
     }
-    
   }
 }

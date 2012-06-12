@@ -8,7 +8,7 @@ include_directories(include)
 
 add_message_files(
   DIRECTORY msg
-  FILES Shape.msg StaticShape.msg
+  FILES Shape.msg
   )
 
 find_package(geometry_msgs)
