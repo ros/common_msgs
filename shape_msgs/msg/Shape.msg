@@ -24,7 +24,7 @@ uint16 type
 # length := dimensions[1]
 # the length is along the Z axis
 
-# for cone (the origin is at the center of the base in this case)
+# for cone (the origin is at the middle of the cone's vertical axis, straight above the center of the base)
 # radius := dimensions[0] (of the base)
 # length := dimensions[1]
 # the length is along the Z axis
