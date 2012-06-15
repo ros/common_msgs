@@ -20,12 +20,10 @@
   <build_depends>boost</build_depends>
   <build_depends>catkin</build_depends>
   <build_depends>genmsg</build_depends>
-  <build_depends>langs</build_depends>
-  <build_depends>roscpp_core</build_depends>
+  <build_depends>langs-dev</build_depends>
   <build_depends>std_msgs</build_depends>
 
   <depends>boost</depends>
   <depends>langs</depends>
-  <depends>roscpp_core</depends>
   <depends>std_msgs</depends>
 </stack>
