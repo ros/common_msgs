@@ -16,7 +16,7 @@ geometry_msgs/Vector3 dimensions
 # Therefore the Z component of dimensions gives the height of the cone or cylinder.
 # The X component of dimensions gives the diameter of the base of the cone or
 # cylinder.  Cone and cylinder primitives are defined to be circular, so the
-# Y component is ignored.
+# Y component is ignored. The tip of the cone is pointing up, along +Z axis.
 #
 # For the SPHERE type, only the X component is used, and it gives the diameter of
 # the sphere.
