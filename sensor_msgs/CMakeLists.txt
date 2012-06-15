@@ -1,6 +1,8 @@
 project(sensor_msgs)
+# We want boost/format.hpp, which isn't in its own component.
+find_package(Boost REQUIRED)
 catkin_project(sensor_msgs
-  LIBRARIES sensor_msgs
+  LIBRARIES ${Boost_LIBRARIES}
   INCLUDE_DIRS include
   )
 
@@ -23,27 +25,7 @@ add_service_files(
 )
 
 generate_messages(DEPENDENCIES std_msgs geometry_msgs)
-# We want boost/format.hpp, which isn't in its own component.
-find_package(Boost REQUIRED)
 
-find_package(ROS REQUIRED COMPONENTS
-  rostime
-  )
-include_directories(${ROS_INCLUDE_DIRS}
-  ${Boost_INCLUDE_DIRS} )
-
-add_library(sensor_msgs 
-  src/image_encodings.cpp src/point_cloud_conversion.cpp src/distortion_models.cpp
-)
-target_link_libraries(sensor_msgs
-  ${ROS_LIBRARIES}
-  ${Boost_LIBRARIES}
-  )
-
-add_dependencies(sensor_msgs sensor_msgs_gencpp)
-install(TARGETS sensor_msgs
-        ARCHIVE DESTINATION lib
-        LIBRARY DESTINATION lib)
 install(DIRECTORY include/
         DESTINATION include
         FILES_MATCHING PATTERN "*.h"

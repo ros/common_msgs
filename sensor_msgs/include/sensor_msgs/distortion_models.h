@@ -42,8 +42,8 @@ namespace sensor_msgs
 {
   namespace distortion_models
   {
-    extern const std::string PLUMB_BOB;
-    extern const std::string RATIONAL_POLYNOMIAL;
+    const std::string PLUMB_BOB = "plumb_bob";
+    const std::string RATIONAL_POLYNOMIAL = "rational_polynomial";
   }
 }
 
