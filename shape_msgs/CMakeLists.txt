@@ -6,7 +6,7 @@ catkin_project(shape_msgs
 
 add_message_files(
   DIRECTORY msg
-  FILES Shape.msg Mesh.msg Triangle.msg
+  FILES Shape.msg GeometricPrimitive.msg Mesh.msg Triangle.msg
   )
 
 find_package(geometry_msgs)
