@@ -37,10 +37,5 @@ uint16 type
 
 float64[] dimensions
 
-
-#### define mesh (dimensions[] is not used for mesh) ####
-
-# list of triangles; triangle k is defined by the vertices located
-# at indices triangles[3k], triangles[3k+1], triangles[3k+2]
-int32[] triangles
-geometry_msgs/Point[] vertices
+#### a shape can also be represented as a mesh (dimensions[] is not used for mesh) ####
+Mesh mesh
