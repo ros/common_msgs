@@ -12,10 +12,10 @@
   <review status="unreviewed" notes=""/>
 
   <build_depends>catkin</build_depends>
-  <build_depends>genmsg</build_depends>
-  <build_depends>langs</build_depends>
   <build_depends>common_msgs</build_depends>
+  <build_depends>genmsg</build_depends>
+  <build_depends>langs-dev</build_depends>
 
   <depends>common_msgs</depends>
-
+  <depends>langs</depends>
 </stack>
