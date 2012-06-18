@@ -41,7 +41,7 @@
 namespace sensor_msgs
 {
 
-  inline bool fillImage(Image& image,
+  static inline bool fillImage(Image& image,
                  const std::string& encoding_arg,
                  uint32_t rows_arg,
                  uint32_t cols_arg,
@@ -60,7 +60,7 @@ namespace sensor_msgs
     return true;
   }
 
-  inline void clearImage(Image& image)
+  static inline void clearImage(Image& image)
   {
     image.data.resize(0);
   }

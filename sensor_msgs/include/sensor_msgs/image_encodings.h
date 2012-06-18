@@ -98,7 +98,7 @@ namespace sensor_msgs
     const std::string YUV422="yuv422";
 
     // Utility functions for inspecting an encoding string
-    inline bool isColor(const std::string& encoding)
+    static inline bool isColor(const std::string& encoding)
     {
       return encoding == RGB8  || encoding == BGR8 ||
              encoding == RGBA8 || encoding == BGRA8 ||
@@ -106,12 +106,12 @@ namespace sensor_msgs
              encoding == RGBA16 || encoding == BGRA16;
     }
 
-    inline bool isMono(const std::string& encoding)
+    static inline bool isMono(const std::string& encoding)
     {
       return encoding == MONO8 || encoding == MONO16;
     }
 
-    inline bool isBayer(const std::string& encoding)
+    static inline bool isBayer(const std::string& encoding)
     {
       return encoding == BAYER_RGGB8 || encoding == BAYER_BGGR8 ||
              encoding == BAYER_GBRG8 || encoding == BAYER_GRBG8 ||
@@ -119,13 +119,13 @@ namespace sensor_msgs
              encoding == BAYER_GBRG16 || encoding == BAYER_GRBG16;
     }
 
-    inline bool hasAlpha(const std::string& encoding)
+    static inline bool hasAlpha(const std::string& encoding)
     {
       return encoding == RGBA8 || encoding == BGRA8 ||
              encoding == RGBA16 || encoding == BGRA16;
     }
 
-    inline int numChannels(const std::string& encoding)
+    static inline int numChannels(const std::string& encoding)
     {
       // First do the common-case encodings
       if (encoding == MONO8 ||
@@ -174,7 +174,7 @@ namespace sensor_msgs
       return -1;
     }
 
-    inline int bitDepth(const std::string& encoding)
+    static inline int bitDepth(const std::string& encoding)
     {
       if (encoding == MONO16)
         return 16;
