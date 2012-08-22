@@ -1,8 +1,6 @@
 project(shape_msgs)
 
-catkin_project(shape_msgs
-  INCLUDE_DIRS include
-)
+catkin_project(shape_msgs)
 
 add_message_files(
   DIRECTORY msg

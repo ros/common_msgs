@@ -1,31 +1,33 @@
 # need genmsg for _prepend_path()
-find_package(ROS REQUIRED COMPONENTS genmsg)
+find_package(catkin REQUIRED COMPONENTS genmsg)
 
-if(@PACKAGE_NAME@_SOURCE_DIR)
-  find_program_required(GENACTION_BIN genaction.py PATHS ${@PACKAGE_NAME@_SOURCE_DIR}/scripts)
+if (@PKG_BUILDSPACE@)
+  find_program_required(GENACTION_BIN genaction.py PATHS @CMAKE_CURRENT_SOURCE_DIR@/scripts NO_DEFAULT_PATH)
 else()
-  find_program_required(GENACTION_BIN genaction.py PATHS @CMAKE_INSTALL_PREFIX@/share/@PACKAGE_NAME@/scripts)
+  find_program_required(GENACTION_BIN genaction.py PATHS @CMAKE_INSTALL_PREFIX@/share/@PROJECT_NAME@/scripts NO_DEFAULT_PATH)
 endif()
 
 macro(add_action_files)
-  parse_arguments(ARG "PACKAGE;FILES;DIRECTORY" "NOINSTALL" ${ARGN})
-
-  if(NOT ARG_PACKAGE)
-    set(ARG_PACKAGE ${PROJECT_NAME})
+  parse_arguments(ARG "DIRECTORY;FILES" "NOINSTALL" ${ARGN})
+  if(ARG_DEFAULT_ARGS)
+    message(FATAL_ERROR "add_action_files() called with unused arguments: ${ARG_DEFAULT_ARGS}")
   endif()
 
-  string(REGEX MATCH "^/.*" IS_FULL_PATH ${ARG_DIRECTORY})
-
-  if(IS_FULL_PATH)
-    set(DIRECTORY_FULL_PATH ${ARG_DIRECTORY})
-  else()
-    set(DIRECTORY_FULL_PATH ${CMAKE_CURRENT_SOURCE_DIR}/${ARG_DIRECTORY})
+  if(NOT ARG_DIRECTORY)
+    set(ARG_DIRECTORY "action")
   endif()
 
-  # todo, handle relative vs full path
-  _prepend_path(${DIRECTORY_FULL_PATH} "${ARG_FILES}" FILES_W_PATH)
+  if(NOT IS_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/${ARG_DIRECTORY})
+    message(FATAL_ERROR "add_action_files() directory not found: ${CMAKE_CURRENT_SOURCE_DIR}/${ARG_DIRECTORY}")
+  endif()
+
+  _prepend_path(${CMAKE_CURRENT_SOURCE_DIR}/${ARG_DIRECTORY} "${ARG_FILES}" FILES_W_PATH)
 
   list(APPEND ${PROJECT_NAME}_ACTION_FILES ${FILES_W_PATH})
+  foreach(file ${FILES_W_PATH})
+    debug_message(2 "add_action_files() action file: ${file}")
+    assert_file_exists(${file} "action file not found")
+  endforeach()
 
   if(NOT ARG_NOINSTALL)
     install(FILES ${FILES_W_PATH} DESTINATION share/${PROJECT_NAME}/${ARG_DIRECTORY})
@@ -33,7 +35,7 @@ macro(add_action_files)
 
   foreach(actionfile ${FILES_W_PATH})
     get_filename_component(ACTION_SHORT_NAME ${actionfile} NAME_WE)
-    set(OUTPUT_DIR ${CMAKE_CURRENT_BINARY_DIR}/actions_gen)
+    set(MESSAGE_DIR ${catkin_BUILD_PREFIX}/share/${PROJECT_NAME}/msg)
     set(OUTPUT_FILES
       ${ACTION_SHORT_NAME}Action.msg
       ${ACTION_SHORT_NAME}ActionGoal.msg
@@ -43,20 +45,18 @@ macro(add_action_files)
       ${ACTION_SHORT_NAME}Result.msg
       ${ACTION_SHORT_NAME}Feedback.msg)
 
-    _prepend_path(${OUTPUT_DIR}/ "${OUTPUT_FILES}" OUTPUT_FILES_W_PATH)
+    _prepend_path(${MESSAGE_DIR}/ "${OUTPUT_FILES}" OUTPUT_FILES_W_PATH)
 
-    message(STATUS "Generating .msg files for action ${ARG_PACKAGE}/${ACTION_SHORT_NAME} ${actionfile}")
+    message(STATUS "Generating .msg files for action ${PROJECT_NAME}/${ACTION_SHORT_NAME} ${actionfile}")
 
     stamp(${actionfile})
 
-    if( ${actionfile} IS_NEWER_THAN ${OUTPUT_DIR}/${ACTION_SHORT_NAME}Action.msg )
-      safe_execute_process(COMMAND ${CATKIN_ENV} ${GENACTION_BIN} ${actionfile} -o ${OUTPUT_DIR})
+    if(${actionfile} IS_NEWER_THAN ${MESSAGE_DIR}/${ACTION_SHORT_NAME}Action.msg)
+      safe_execute_process(COMMAND ${CATKIN_ENV} ${GENACTION_BIN} ${actionfile} -o ${MESSAGE_DIR})
     endif()
 
     add_message_files(
-      DIRECTORY ${OUTPUT_DIR}
+      BASE_DIR ${MESSAGE_DIR}
       FILES ${OUTPUT_FILES})
-
   endforeach()
-
 endmacro()
