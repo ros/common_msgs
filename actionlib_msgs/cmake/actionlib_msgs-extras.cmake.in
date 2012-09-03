@@ -4,7 +4,7 @@ find_package(catkin REQUIRED COMPONENTS genmsg)
 if (@PKG_BUILDSPACE@)
   find_program_required(GENACTION_BIN genaction.py PATHS @CMAKE_CURRENT_SOURCE_DIR@/scripts NO_DEFAULT_PATH)
 else()
-  find_program_required(GENACTION_BIN genaction.py PATHS @CMAKE_INSTALL_PREFIX@/share/@PROJECT_NAME@/scripts NO_DEFAULT_PATH)
+  find_program_required(GENACTION_BIN genaction.py PATHS @CMAKE_INSTALL_PREFIX@/lib/@PROJECT_NAME@ NO_DEFAULT_PATH)
 endif()
 
 macro(add_action_files)
@@ -30,7 +30,7 @@ macro(add_action_files)
   endforeach()
 
   if(NOT ARG_NOINSTALL)
-    install(FILES ${FILES_W_PATH} DESTINATION share/${PROJECT_NAME}/${ARG_DIRECTORY})
+    install(FILES ${FILES_W_PATH} DESTINATION ${PROJECT_SHARE_DESTINATION}/${ARG_DIRECTORY})
   endif()
 
   foreach(actionfile ${FILES_W_PATH})

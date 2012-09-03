@@ -26,8 +26,8 @@ macro(genaction)
 
     string(REPLACE ".action" "" _action_bare ${_action})
 
-    rosbuild_find_ros_package(actionlib_msgs)
-    set(genaction_exe ${actionlib_msgs_PACKAGE_PATH}/scripts/genaction.py)
+    # get path to action generator script
+    find_package(actionlib_msgs)
 
     #We have to do this because message generation assumes filenames without full paths
     set(_base_output_action ${_action_bare}Action.msg)
@@ -49,8 +49,8 @@ macro(genaction)
 
     add_custom_command(
       OUTPUT ${_output_action} ${_output_goal} ${_output_action_goal} ${_output_result} ${_output_action_result} ${_output_feedback} ${_output_action_feedback} 
-      COMMAND ${genaction_exe} ${_input} -o ${PROJECT_SOURCE_DIR}/msg
-      DEPENDS ${_input} ${genaction_exe} ${ROS_MANIFEST_LIST}
+      COMMAND ${GENACTION_BIN} ${_input} -o ${PROJECT_SOURCE_DIR}/msg
+      DEPENDS ${_input} ${GENACTION_BIN} ${ROS_MANIFEST_LIST}
     )
     list(APPEND _autogen ${_output_action} ${_output_goal} ${_output_action_goal} ${_output_result} ${_output_action_result} ${_output_feedback} ${_output_action_feedback})
     list(APPEND _autogen_msg_list ${_base_output_action} ${_base_output_goal} ${_base_output_action_goal} ${_base_output_result} ${_base_output_action_result} ${_base_output_feedback} ${_base_output_action_feedback})

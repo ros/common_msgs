@@ -4,9 +4,11 @@ catkin_project(shape_msgs)
 
 add_message_files(
   DIRECTORY msg
-  FILES SolidPrimitive.msg Plane.msg Mesh.msg MeshTriangle.msg
-  )
+  FILES
+  Mesh.msg
+  MeshTriangle.msg
+  Plane.msg
+  SolidPrimitive.msg)
 
 find_package(geometry_msgs)
 generate_messages(DEPENDENCIES std_msgs geometry_msgs)
-
