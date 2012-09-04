@@ -1,6 +1,6 @@
 <stack>
   <name>common_msgs</name>
-  <version>1.9.0</version>
+  <version>1.9.1</version>
   <description brief="common messages">
     common_msgs contains messages that are widely used by other ROS packages.
     These includes messages for
