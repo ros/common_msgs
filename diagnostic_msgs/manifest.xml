@@ -20,8 +20,8 @@
   <url>http://ros.org/wiki/diagnostic_msgs</url>
 
   <export>
-    <cpp cflags="`PKG_CONFIG_PATH=${prefix}/../../lib/pkgconfig pkg-config --cflags diagnostic_msgs`"
-         lflags="`PKG_CONFIG_PATH=${prefix}/../../lib/pkgconfig pkg-config --libs diagnostic_msgs`"/>
+    <cpp cflags="`pkg-config --cflags diagnostic_msgs`"
+         lflags="`pkg-config --libs diagnostic_msgs`"/>
   </export>
 
 </package>

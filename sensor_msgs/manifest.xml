@@ -13,8 +13,8 @@ cameras and scanning laser rangefinders.
   <depend package="geometry_msgs"/>
 
   <export>
-    <cpp cflags="`PKG_CONFIG_PATH=${prefix}/../../lib/pkgconfig pkg-config --cflags sensor_msgs`"
-         lflags="`PKG_CONFIG_PATH=${prefix}/../../lib/pkgconfig pkg-config --libs sensor_msgs`"/>
+    <cpp cflags="`pkg-config --cflags sensor_msgs`"
+         lflags="`pkg-config --libs sensor_msgs`"/>
   </export>
 
 </package>

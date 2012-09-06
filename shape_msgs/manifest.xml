@@ -12,8 +12,8 @@
   <depend package="geometry_msgs"/>
 
   <export>
-    <cpp cflags="`PKG_CONFIG_PATH=${prefix}/../../lib/pkgconfig pkg-config --cflags shape_msgs`"
-         lflags="`PKG_CONFIG_PATH=${prefix}/../../lib/pkgconfig pkg-config --libs shape_msgs`"/>
+    <cpp cflags="`pkg-config --cflags shape_msgs`"
+         lflags="`pkg-config --libs shape_msgs`"/>
   </export>
 
 </package>

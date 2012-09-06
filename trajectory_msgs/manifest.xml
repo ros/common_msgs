@@ -10,8 +10,8 @@
   <url>http://ros.org/wiki/trajectory_msgs</url>
 
   <export>
-    <cpp cflags="`PKG_CONFIG_PATH=${prefix}/../../lib/pkgconfig pkg-config --cflags trajectory_msgs`"
-         lflags="`PKG_CONFIG_PATH=${prefix}/../../lib/pkgconfig pkg-config --libs trajectory_msgs`"/>
+    <cpp cflags="`pkg-config --cflags trajectory_msgs`"
+         lflags="`pkg-config --libs trajectory_msgs`"/>
   </export>
 
 </package>

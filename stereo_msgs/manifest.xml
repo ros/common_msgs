@@ -12,8 +12,8 @@
   <depend package="sensor_msgs"/>
 
   <export>
-    <cpp cflags="`PKG_CONFIG_PATH=${prefix}/../../lib/pkgconfig pkg-config --cflags stereo_msgs`"
-         lflags="`PKG_CONFIG_PATH=${prefix}/../../lib/pkgconfig pkg-config --libs stereo_msgs`"/>
+    <cpp cflags="`pkg-config --cflags stereo_msgs`"
+         lflags="`pkg-config --libs stereo_msgs`"/>
   </export>
 
 </package>
