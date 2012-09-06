@@ -1,9 +1,9 @@
 project(sensor_msgs)
 # We want boost/format.hpp, which isn't in its own component.
 find_package(Boost REQUIRED)
-catkin_project(sensor_msgs
-  LIBRARIES ${Boost_LIBRARIES}
-  INCLUDE_DIRS include)
+catkin_project(${PROJECT_NAME}
+  INCLUDE_DIRS include
+  LIBRARIES ${Boost_LIBRARIES})
 
 include_directories(include)
 
@@ -35,6 +35,6 @@ add_service_files(
 
 generate_messages(DEPENDENCIES std_msgs geometry_msgs)
 
-install(DIRECTORY include/
-  DESTINATION ${PROJECT_INCLUDE_DESTINATION}
+install(DIRECTORY include/${PROJECT_NAME}/
+  DESTINATION ${CATKIN_PROJECT_INCLUDE_DESTINATION}
   FILES_MATCHING PATTERN "*.h")

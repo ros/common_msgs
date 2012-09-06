@@ -12,8 +12,8 @@ generate_messages(DEPENDENCIES std_msgs)
 
 # install the .action -> .msg generator
 install(PROGRAMS scripts/genaction.py
-  DESTINATION ${PROJECT_LIBEXEC_DESTINATION})
+  DESTINATION ${CATKIN_PROJECT_BIN_DESTINATION})
 
 # install the legacy rosbuild cmake support
 install(FILES cmake/actionbuild.cmake
-  DESTINATION ${PROJECT_SHARE_DESTINATION}/cmake)
+  DESTINATION ${CATKIN_PROJECT_SHARE_DESTINATION}/cmake)
