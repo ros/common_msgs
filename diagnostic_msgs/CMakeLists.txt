@@ -1,5 +1,5 @@
 project(diagnostic_msgs)
-catkin_project(diagnostic_msgs)
+catkin_package_export()
 
 add_message_files(
   DIRECTORY msg

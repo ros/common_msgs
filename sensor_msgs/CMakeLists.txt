@@ -1,8 +1,7 @@
 project(sensor_msgs)
 # We want boost/format.hpp, which isn't in its own component.
 find_package(Boost REQUIRED)
-catkin_project(${PROJECT_NAME}
-  INCLUDE_DIRS include
+catkin_package_export(INCLUDE_DIRS include
   LIBRARIES ${Boost_LIBRARIES})
 
 include_directories(include)

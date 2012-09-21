@@ -1,0 +1,13 @@
+<package>
+  <name>trajectory_msgs</name>
+  <version>1.9.2</version>
+  <description brief="trajectory_msgs">
+      trajectory_msgs
+  </description>
+  <license>BSD</license>
+
+  <url>http://ros.org/wiki/trajectory_msgs</url>
+  <author>ROS Community</author>
+
+  <build_depend>catkin</build_depend>
+</package>

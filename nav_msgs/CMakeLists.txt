@@ -1,6 +1,6 @@
 project(nav_msgs)
 find_package(catkin REQUIRED COMPONENTS geometry_msgs)
-catkin_project(${PROJECT_NAME})
+catkin_package_export()
 
 add_message_files(
   DIRECTORY msg

@@ -1,6 +1,6 @@
 project(shape_msgs)
 
-catkin_project(shape_msgs)
+catkin_package_export()
 
 add_message_files(
   DIRECTORY msg

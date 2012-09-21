@@ -1,5 +1,5 @@
 project(stereo_msgs)
-catkin_project(stereo_msgs)
+catkin_package_export()
 
 add_message_files(
   DIRECTORY msg
