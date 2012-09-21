@@ -1,5 +1,9 @@
+cmake_minimum_required(VERSION 2.8)
 project(nav_msgs)
-find_package(catkin REQUIRED COMPONENTS geometry_msgs)
+
+find_package(catkin REQUIRED COMPONENTS geometry_msgs std_msgs)
+
+catkin_package()
 catkin_package_export()
 
 add_message_files(
@@ -17,4 +21,4 @@ add_service_files(
   GetMap.srv
   GetPlan.srv)
 
-generate_messages(DEPENDENCIES std_msgs geometry_msgs)
+generate_messages(DEPENDENCIES geometry_msgs std_msgs)

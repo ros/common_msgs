@@ -13,5 +13,7 @@
 
   <url>http://ros.org/wiki/actionlib_msgs</url>
   <author>Vijay Pradeep</author>
+
   <build_depend>catkin</build_depend>
+  <build_depend>std_msgs</build_depend>
 </package>

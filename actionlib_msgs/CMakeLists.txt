@@ -1,4 +1,6 @@
 project(actionlib_msgs)
+find_package(catkin REQUIRED COMPONENTS std_msgs)
+catkin_package()
 catkin_package_export(CFG_EXTRAS actionlib_msgs-extras.cmake)
 
 add_message_files(
@@ -11,8 +13,8 @@ generate_messages(DEPENDENCIES std_msgs)
 
 # install the .action -> .msg generator
 install(PROGRAMS scripts/genaction.py
-  DESTINATION ${CATKIN_PROJECT_BIN_DESTINATION})
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
 # install the legacy rosbuild cmake support
 install(FILES cmake/actionbuild.cmake
-  DESTINATION ${CATKIN_PROJECT_SHARE_DESTINATION}/cmake)
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/cmake)

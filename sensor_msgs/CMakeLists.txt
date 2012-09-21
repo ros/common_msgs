@@ -1,7 +1,13 @@
+cmake_minimum_required(VERSION 2.8)
 project(sensor_msgs)
+
+find_package(catkin REQUIRED COMPONENTS geometry_msgs std_msgs)
 # We want boost/format.hpp, which isn't in its own component.
 find_package(Boost REQUIRED)
-catkin_package_export(INCLUDE_DIRS include
+
+catkin_package()
+catkin_package_export(
+  INCLUDE_DIRS include
   LIBRARIES ${Boost_LIBRARIES})
 
 include_directories(include)
@@ -32,8 +38,8 @@ add_service_files(
   DIRECTORY srv
   FILES SetCameraInfo.srv)
 
-generate_messages(DEPENDENCIES std_msgs geometry_msgs)
+generate_messages(DEPENDENCIES geometry_msgs std_msgs)
 
 install(DIRECTORY include/${PROJECT_NAME}/
-  DESTINATION ${CATKIN_PROJECT_INCLUDE_DESTINATION}
+  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
   FILES_MATCHING PATTERN "*.h")

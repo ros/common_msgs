@@ -1,4 +1,9 @@
+cmake_minimum_required(VERSION 2.8)
 project(stereo_msgs)
+
+find_package(catkin REQUIRED COMPONENTS sensor_msgs std_msgs)
+
+catkin_package()
 catkin_package_export()
 
 add_message_files(
@@ -6,4 +11,4 @@ add_message_files(
   FILES
   DisparityImage.msg)
 
-generate_messages(DEPENDENCIES std_msgs sensor_msgs)
+generate_messages(DEPENDENCIES sensor_msgs std_msgs)

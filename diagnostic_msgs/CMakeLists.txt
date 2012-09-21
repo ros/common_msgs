@@ -1,4 +1,9 @@
+cmake_minimum_required(VERSION 2.8)
 project(diagnostic_msgs)
+
+find_package(catkin REQUIRED COMPONENTS genmsg std_msgs)
+
+catkin_package()
 catkin_package_export()
 
 add_message_files(

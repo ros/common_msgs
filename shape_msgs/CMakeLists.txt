@@ -1,5 +1,9 @@
+cmake_minimum_required(VERSION 2.8)
 project(shape_msgs)
 
+find_package(catkin REQUIRED COMPONENTS geometry_msgs std_msgs)
+
+catkin_package()
 catkin_package_export()
 
 add_message_files(
@@ -10,5 +14,4 @@ add_message_files(
   Plane.msg
   SolidPrimitive.msg)
 
-find_package(geometry_msgs)
-generate_messages(DEPENDENCIES std_msgs geometry_msgs)
+generate_messages(DEPENDENCIES geometry_msgs std_msgs)

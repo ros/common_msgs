@@ -14,4 +14,6 @@
   <author>Tully Foote</author>
   
   <build_depend>catkin</build_depend>
+  <build_depend>genmsg</build_depend>
+  <build_depend>std_msgs</build_depend>
 </package>
