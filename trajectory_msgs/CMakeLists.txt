@@ -4,7 +4,6 @@ project(trajectory_msgs)
 find_package(catkin REQUIRED COMPONENTS std_msgs)
 
 catkin_package()
-catkin_package_export()
 
 add_message_files(
   DIRECTORY msg

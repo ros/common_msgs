@@ -1,7 +1,6 @@
 project(actionlib_msgs)
 find_package(catkin REQUIRED COMPONENTS std_msgs)
-catkin_package()
-catkin_package_export(CFG_EXTRAS actionlib_msgs-extras.cmake)
+catkin_package(CFG_EXTRAS actionlib_msgs-extras.cmake)
 
 add_message_files(
   DIRECTORY msg

@@ -5,8 +5,7 @@ find_package(catkin REQUIRED COMPONENTS geometry_msgs std_msgs)
 # We want boost/format.hpp, which isn't in its own component.
 find_package(Boost REQUIRED)
 
-catkin_package()
-catkin_package_export(
+catkin_package(
   INCLUDE_DIRS include
   LIBRARIES ${Boost_LIBRARIES})
 
