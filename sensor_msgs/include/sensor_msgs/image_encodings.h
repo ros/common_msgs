@@ -103,7 +103,7 @@ namespace sensor_msgs
       return encoding == RGB8  || encoding == BGR8 ||
              encoding == RGBA8 || encoding == BGRA8 ||
              encoding == RGB16 || encoding == BGR16 ||
-             encoding == RGBA16 || encoding == BGRA16;
+             encoding == RGBA16 || encoding == BGRA16 || encoding == YUV422;
     }
 
     static inline bool isMono(const std::string& encoding)
@@ -170,6 +170,9 @@ namespace sensor_msgs
 
 #undef CHECK_CHANNELS
 
+      if (encoding == YUV422)
+        return 3;
+
       throw std::runtime_error("Unknown encoding " + encoding);
       return -1;
     }
@@ -218,6 +221,9 @@ namespace sensor_msgs
       CHECK_BIT_DEPTH(64, F);
 
 #undef CHECK_BIT_DEPTH
+
+      if (encoding == YUV422)
+        return 16;
 
       throw std::runtime_error("Unknown encoding " + encoding);
       return -1;
