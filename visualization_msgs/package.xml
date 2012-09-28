@@ -1,6 +1,6 @@
 <package>
   <name>visualization_msgs</name>
-  <version>1.9.4</version>
+  <version>1.9.5</version>
   <description>
     visualization_msgs is a set of messages used by higher level packages, such as <a href="/wiki/rviz">rviz</a>, that deal in visualization-specific data.
 
