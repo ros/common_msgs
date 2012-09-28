@@ -16,7 +16,7 @@
   <url>http://www.ros.org/wiki/common_msgs</url>
 
   <run_depend>actionlib_msgs</run_depend>
-  <run_depend>diagnostics_msgs</run_depend>
+  <run_depend>diagnostic_msgs</run_depend>
   <run_depend>geometry_msgs</run_depend>
   <run_depend>nav_msgs</run_depend>
   <run_depend>sensor_msgs</run_depend>
