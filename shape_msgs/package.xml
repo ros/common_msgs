@@ -4,7 +4,7 @@
   <description>
     shape_msgs
   </description>
-  <maintainer email="tfoote@willowgarage.com">Tully Foote</maintainer>
+  <maintainer email="isucan@willowgarage.com">Ioan Sucan</maintainer>
   <license>BSD</license>
 
   <url>http://ros.org/wiki/shape_msgs</url>
@@ -13,5 +13,10 @@
   <build_depend>catkin</build_depend>
   <build_depend>genmsg</build_depend>
   <build_depend>geometry_msgs</build_depend>
+  <build_depend>langs-dev</build_depend>
   <build_depend>std_msgs</build_depend>
+
+  <run_depend>geometry_msgs</run_depend>
+  <run_depend>langs</run_depend>
+  <run_depend>std_msgs</run_depend>
 </package>

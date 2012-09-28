@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 project(trajectory_msgs)
-
 find_package(catkin REQUIRED COMPONENTS std_msgs)
-
 catkin_package()
 
 add_message_files(

@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 project(geometry_msgs)
-
 find_package(catkin REQUIRED COMPONENTS genmsg std_msgs)
-
 catkin_package()
 
 add_message_files(
@@ -14,8 +12,8 @@ add_message_files(
   Polygon.msg
   PolygonStamped.msg
   Pose2D.msg
-  PoseArray.msg
   Pose.msg
+  PoseArray.msg
   PoseStamped.msg
   PoseWithCovariance.msg
   PoseWithCovarianceStamped.msg

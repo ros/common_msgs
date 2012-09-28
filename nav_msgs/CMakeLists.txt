@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 project(nav_msgs)
-
-find_package(catkin REQUIRED COMPONENTS geometry_msgs std_msgs)
-
+find_package(catkin REQUIRED COMPONENTS genmsg geometry_msgs std_msgs)
 catkin_package()
 
 add_message_files(

@@ -15,11 +15,15 @@
   </description>
   <maintainer email="tfoote@willowgarage.com">Tully Foote</maintainer>
   <license>BSD</license>
-  
+
   <url>http://ros.org/wiki/diagnostic_msgs</url>
   <author email="tfoote@willowgarage.com">Tully Foote</author>
 
   <build_depend>catkin</build_depend>
   <build_depend>genmsg</build_depend>
+  <build_depend>langs-dev</build_depend>
   <build_depend>std_msgs</build_depend>
+
+  <run_depend>langs</run_depend>
+  <run_depend>std_msgs</run_depend>
 </package>
