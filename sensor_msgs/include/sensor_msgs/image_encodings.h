@@ -172,7 +172,7 @@ namespace sensor_msgs
 #undef CHECK_CHANNELS
 
       if (encoding == YUV422)
-        return 3;
+        return 2;
 
       throw std::runtime_error("Unknown encoding " + encoding);
       return -1;
