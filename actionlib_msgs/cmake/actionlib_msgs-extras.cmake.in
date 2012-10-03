@@ -1,6 +1,8 @@
 # need genmsg for _prepend_path()
 find_package(catkin REQUIRED COMPONENTS genmsg)
 
+include(CMakeParseArguments)
+
 if (@BUILDSPACE@)
   find_program_required(GENACTION_BIN genaction.py PATHS @CMAKE_CURRENT_SOURCE_DIR@/scripts NO_DEFAULT_PATH)
 else()
@@ -8,9 +10,9 @@ else()
 endif()
 
 macro(add_action_files)
-  parse_arguments(ARG "DIRECTORY;FILES" "NOINSTALL" ${ARGN})
-  if(ARG_DEFAULT_ARGS)
-    message(FATAL_ERROR "add_action_files() called with unused arguments: ${ARG_DEFAULT_ARGS}")
+  cmake_parse_arguments(ARG "NOINSTALL" "DIRECTORY" "FILES" ${ARGN})
+  if(ARG_UNPARSED_ARGUMENTS)
+    message(FATAL_ERROR "add_action_files() called with unused arguments: ${ARG_UNPARSED_ARGUMENTS}")
   endif()
 
   if(NOT ARG_DIRECTORY)
