@@ -3,11 +3,13 @@ find_package(catkin REQUIRED COMPONENTS genmsg)
 
 include(CMakeParseArguments)
 
-if (@BUILDSPACE@)
-  find_program_required(GENACTION_BIN genaction.py PATHS @CMAKE_CURRENT_SOURCE_DIR@/scripts NO_DEFAULT_PATH)
-else()
-  find_program_required(GENACTION_BIN genaction.py PATHS @CMAKE_INSTALL_PREFIX@/lib/@PROJECT_NAME@ NO_DEFAULT_PATH)
-endif()
+@[if BUILDSPACE]@
+# find program in buildspace
+find_program_required(GENACTION_BIN genaction.py PATHS @(CMAKE_CURRENT_SOURCE_DIR)/scripts NO_DEFAULT_PATH)
+@[else]@
+# find program in installspace
+find_program_required(GENACTION_BIN genaction.py PATHS @(CMAKE_INSTALL_PREFIX)/lib/@(PROJECT_NAME) NO_DEFAULT_PATH)
+@[end if]@
 
 macro(add_action_files)
   cmake_parse_arguments(ARG "NOINSTALL" "DIRECTORY" "FILES" ${ARGN})
