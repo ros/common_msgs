@@ -3,8 +3,8 @@ find_package(catkin REQUIRED COMPONENTS genmsg)
 
 include(CMakeParseArguments)
 
-@[if BUILDSPACE]@
-# find program in buildspace
+@[if DEVELSPACE]@
+# find program in develspace
 find_program_required(GENACTION_BIN genaction.py PATHS @(CMAKE_CURRENT_SOURCE_DIR)/scripts NO_DEFAULT_PATH)
 @[else]@
 # find program in installspace
@@ -39,7 +39,7 @@ macro(add_action_files)
 
   foreach(actionfile ${FILES_W_PATH})
     get_filename_component(ACTION_SHORT_NAME ${actionfile} NAME_WE)
-    set(MESSAGE_DIR ${CATKIN_BUILD_PREFIX}/share/${PROJECT_NAME}/msg)
+    set(MESSAGE_DIR ${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/msg)
     set(OUTPUT_FILES
       ${ACTION_SHORT_NAME}Action.msg
       ${ACTION_SHORT_NAME}ActionGoal.msg
