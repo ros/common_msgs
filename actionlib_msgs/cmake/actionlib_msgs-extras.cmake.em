@@ -25,6 +25,12 @@ macro(add_action_files)
     message(FATAL_ERROR "add_action_files() directory not found: ${CMAKE_CURRENT_SOURCE_DIR}/${ARG_DIRECTORY}")
   endif()
 
+  # if FILES are not passed search action files in the given directory
+  list(FIND ARGV "FILES" _index)
+  if(_index EQUAL -1)
+    file(GLOB ARG_FILES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}/${ARG_DIRECTORY}" "${CMAKE_CURRENT_SOURCE_DIR}/${ARG_DIRECTORY}/*.action")
+    list(SORT ARG_FILES)
+  endif()
   _prepend_path(${CMAKE_CURRENT_SOURCE_DIR}/${ARG_DIRECTORY} "${ARG_FILES}" FILES_W_PATH)
 
   list(APPEND ${PROJECT_NAME}_ACTION_FILES ${FILES_W_PATH})
