@@ -19,7 +19,9 @@ add_message_files(
   Joy.msg
   JoyFeedback.msg
   JoyFeedbackArray.msg
+  LaserEcho.msg
   LaserScan.msg
+  MultiEchoLaserScan.msg
   NavSatFix.msg
   NavSatStatus.msg
   PointCloud.msg
