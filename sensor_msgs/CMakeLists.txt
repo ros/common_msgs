@@ -44,7 +44,7 @@ generate_messages(DEPENDENCIES geometry_msgs std_msgs)
 
 catkin_package(
   INCLUDE_DIRS include
-  CATKIN_DEPENDS message_runtime
+  CATKIN_DEPENDS geometry_msgs message_runtime std_msgs
   DEPENDS Boost)
 
 install(DIRECTORY include/${PROJECT_NAME}/

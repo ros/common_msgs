@@ -12,7 +12,7 @@ add_message_files(
 generate_messages(DEPENDENCIES std_msgs)
 
 catkin_package(
-  CATKIN_DEPENDS message_runtime
+  CATKIN_DEPENDS message_runtime std_msgs
   CFG_EXTRAS actionlib_msgs-extras.cmake)
 
 # install the .action -> .msg generator
