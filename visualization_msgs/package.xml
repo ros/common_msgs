@@ -15,7 +15,8 @@
   <author email="jfaust@willowgarage.com">Josh Faust</author>
   <author email="dgossow@willowgarage.com">Davis Gossow</author>
 
-  <build_depend>catkin</build_depend>
+  <buildtool_depend>catkin</buildtool_depend>
+
   <build_depend>geometry_msgs</build_depend>
   <build_depend>message_generation</build_depend>
   <build_depend>std_msgs</build_depend>
