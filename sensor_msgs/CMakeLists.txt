@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(sensor_msgs)
 
-find_package(catkin REQUIRED COMPONENTS genmsg geometry_msgs std_msgs)
+find_package(catkin REQUIRED COMPONENTS geometry_msgs message_generation std_msgs)
 # We want boost/format.hpp, which isn't in its own component.
 find_package(Boost REQUIRED)
 
@@ -44,6 +44,7 @@ generate_messages(DEPENDENCIES geometry_msgs std_msgs)
 
 catkin_package(
   INCLUDE_DIRS include
+  CATKIN_DEPENDS message_runtime
   DEPENDS Boost)
 
 install(DIRECTORY include/${PROJECT_NAME}/

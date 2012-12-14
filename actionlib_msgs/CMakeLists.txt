@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(actionlib_msgs)
 
-find_package(catkin REQUIRED COMPONENTS genmsg std_msgs)
+find_package(catkin REQUIRED COMPONENTS message_generation std_msgs)
 
 add_message_files(
   DIRECTORY msg
@@ -11,7 +11,9 @@ add_message_files(
   GoalStatusArray.msg)
 generate_messages(DEPENDENCIES std_msgs)
 
-catkin_package(CFG_EXTRAS actionlib_msgs-extras.cmake)
+catkin_package(
+  CATKIN_DEPENDS message_runtime
+  CFG_EXTRAS actionlib_msgs-extras.cmake)
 
 # install the .action -> .msg generator
 install(PROGRAMS scripts/genaction.py
