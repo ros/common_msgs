@@ -1,6 +1,6 @@
 <package>
   <name>sensor_msgs</name>
-  <version>1.9.11</version>
+  <version>1.9.12</version>
   <description>
     This package defines messages for commonly used sensors, including
     cameras and scanning laser rangefinders.
