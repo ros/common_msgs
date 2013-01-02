@@ -104,7 +104,7 @@ namespace sensor_msgs
       return encoding == RGB8  || encoding == BGR8 ||
              encoding == RGBA8 || encoding == BGRA8 ||
              encoding == RGB16 || encoding == BGR16 ||
-             encoding == RGBA16 || encoding == BGRA16 || encoding == YUV422;
+             encoding == RGBA16 || encoding == BGRA16;
     }
 
     static inline bool isMono(const std::string& encoding)
