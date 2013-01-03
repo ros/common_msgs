@@ -96,6 +96,7 @@ namespace sensor_msgs
 
     // Miscellaneous
     // This is the UYVY version of YUV422 codec http://www.fourcc.org/yuv.php#UYVY
+    // with an 8-bit depth
     const std::string YUV422="yuv422";
 
     // Utility functions for inspecting an encoding string
@@ -224,7 +225,7 @@ namespace sensor_msgs
 #undef CHECK_BIT_DEPTH
 
       if (encoding == YUV422)
-        return 16;
+        return 8;
 
       throw std::runtime_error("Unknown encoding " + encoding);
       return -1;
