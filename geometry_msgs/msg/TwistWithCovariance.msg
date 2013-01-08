@@ -1,4 +1,4 @@
-# This expresses velocity in free space with uncertianty.
+# This expresses velocity in free space with uncertainty.
 
 Twist twist
 
