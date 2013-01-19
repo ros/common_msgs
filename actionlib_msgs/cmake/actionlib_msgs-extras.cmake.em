@@ -26,7 +26,9 @@ macro(add_action_files)
   endif()
 
   # if FILES are not passed search action files in the given directory
-  list(FIND ARGV "FILES" _index)
+  # note: ARGV is not variable, so it can not be passed to list(FIND) directly
+  set(_argv ${ARGV})
+  list(FIND _argv "FILES" _index)
   if(_index EQUAL -1)
     file(GLOB ARG_FILES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}/${ARG_DIRECTORY}" "${CMAKE_CURRENT_SOURCE_DIR}/${ARG_DIRECTORY}/*.action")
     list(SORT ARG_FILES)
