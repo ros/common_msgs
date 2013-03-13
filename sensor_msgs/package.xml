@@ -5,7 +5,7 @@
     This package defines messages for commonly used sensors, including
     cameras and scanning laser rangefinders.
   </description>
-  <maintainer email="tfoote@willowgarage.com">Tully Foote</maintainer>
+  <maintainer email="tfoote@osrfoundation.org">Tully Foote</maintainer>
   <license>BSD</license>
 
   <url>http://ros.org/wiki/sensor_msgs</url>

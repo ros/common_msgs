@@ -7,7 +7,7 @@
     to provide a common data type and facilitate interoperability
     throughout the system.
   </description>
-  <maintainer email="tfoote@willowgarage.com">Tully Foote</maintainer>
+  <maintainer email="tfoote@osrfoundation.org">Tully Foote</maintainer>
   <license>BSD</license>
 
   <url>http://ros.org/wiki/geometry_msgs</url>

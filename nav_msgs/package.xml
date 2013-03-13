@@ -5,7 +5,7 @@
     nav_msgs defines the common messages used to interact with the
     <a href="http://ros.org/wiki/navigation">navigation</a> stack.
   </description>
-  <maintainer email="tfoote@willowgarage.com">Tully Foote</maintainer>
+  <maintainer email="tfoote@osrfoundation.org">Tully Foote</maintainer>
   <license>BSD</license>
 
   <url>http://ros.org/wiki/nav_msgs</url>

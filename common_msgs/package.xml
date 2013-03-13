@@ -10,7 +10,7 @@
     robot navigation (<a href="http://ros.org/wiki/nav_msgs">nav_msgs</a>),
     and common sensors (<a href="http://ros.org/wiki/sensor_msgs">sensor_msgs</a>), such as laser range finders, cameras, point clouds.
   </description>
-  <maintainer email="tfoote@willowgarage.com">Tully Foote</maintainer>
+  <maintainer email="tfoote@osrfoundation.org">Tully Foote</maintainer>
   <license>BSD</license>
 
   <url>http://www.ros.org/wiki/common_msgs</url>

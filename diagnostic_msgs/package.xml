@@ -13,11 +13,11 @@
     These messages are used for long term logging and will not be
     changed unless there is a very important reason.
   </description>
-  <maintainer email="tfoote@willowgarage.com">Tully Foote</maintainer>
+  <maintainer email="tfoote@osrfoundation.org">Tully Foote</maintainer>
   <license>BSD</license>
 
   <url>http://ros.org/wiki/diagnostic_msgs</url>
-  <author email="tfoote@willowgarage.com">Tully Foote</author>
+  <author email="tfoote@osrfoundation.org">Tully Foote</author>
 
   <buildtool_depend>catkin</buildtool_depend>
 
