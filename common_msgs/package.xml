@@ -15,6 +15,8 @@
 
   <url>http://www.ros.org/wiki/common_msgs</url>
 
+  <buildtool_depend>catkin</buildtool_depend>
+
   <run_depend>actionlib_msgs</run_depend>
   <run_depend>diagnostic_msgs</run_depend>
   <run_depend>geometry_msgs</run_depend>
