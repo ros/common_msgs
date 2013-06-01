@@ -74,7 +74,7 @@ static inline bool convertPointCloudToPointCloud2 (const sensor_msgs::PointCloud
   output.fields.resize (3 + input.channels.size ());
   // Convert x/y/z to fields
   output.fields[0].name = "x"; output.fields[1].name = "y"; output.fields[2].name = "z";
-  int offset = 0;
+  volatile int offset = 0;
   // All offsets are *4, as all field data types are float32
   for (size_t d = 0; d < output.fields.size (); ++d, offset += 4)
   {
