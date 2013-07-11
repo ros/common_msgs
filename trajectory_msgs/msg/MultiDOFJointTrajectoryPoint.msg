@@ -2,9 +2,9 @@
 geometry_msgs/Transform[] transforms
 
 # There can be a velocity specified for the origin of the joint 
-geometry_msgs/Vector3[] velocities
+geometry_msgs/Twist[] velocities
 
 # There can be an acceleration specified for the origin of the joint 
-geometry_msgs/Vector3[] accelerations
+geometry_msgs/Twist[] accelerations
 
 duration time_from_start
