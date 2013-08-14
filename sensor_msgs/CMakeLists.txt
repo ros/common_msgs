@@ -5,6 +5,9 @@ find_package(catkin REQUIRED COMPONENTS geometry_msgs message_generation std_msg
 # We want boost/format.hpp, which isn't in its own component.
 find_package(Boost REQUIRED)
 
+# For point_cloud2.py
+catkin_python_setup()
+
 include_directories(include)
 
 add_message_files(
