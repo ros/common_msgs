@@ -2,6 +2,11 @@
 Changelog for package sensor_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* setup.py for `#11 <https://github.com/ros/common_msgs/issues/11>`_
+* adding installation of point_cloud2.py to sensor_msgs fixes `#11 <https://github.com/ros/common_msgs/issues/11>`_
+
 1.10.0 (2013-07-13)
 -------------------
 * adding MultiDOFJointState message

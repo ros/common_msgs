@@ -2,6 +2,12 @@
 Changelog for package trajectory_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* add effort for JointTrajectoryPoint `#13 <https://github.com/ros/common_msgs/issues/13>`
+* fixing maintainer
+* updating maintainer
+
 1.10.0 (2013-07-13)
 -------------------
 * add MultiDOFJointTrajectory
