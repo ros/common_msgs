@@ -19,4 +19,10 @@
   <run_depend>message_runtime</run_depend>
   <run_depend>geometry_msgs</run_depend>
   <run_depend>std_msgs</run_depend>
+  <run_depend>rosbag_migration</run_depend>
+
+  <export>
+    <rosbag_migration_rule rule_file="rules/JointTrajectoryPoint_Groovy2Hydro_08.10.2013.bmr" />
+  </export>
+
 </package>
