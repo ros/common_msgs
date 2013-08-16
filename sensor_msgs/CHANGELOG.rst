@@ -2,8 +2,8 @@
 Changelog for package sensor_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.10.1 (2013-08-16)
+-------------------
 * setup.py for `#11 <https://github.com/ros/common_msgs/issues/11>`_
 * adding installation of point_cloud2.py to sensor_msgs fixes `#11 <https://github.com/ros/common_msgs/issues/11>`_
 

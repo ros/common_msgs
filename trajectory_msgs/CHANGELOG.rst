@@ -2,8 +2,8 @@
 Changelog for package trajectory_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.10.1 (2013-08-16)
+-------------------
 * add effort for JointTrajectoryPoint `#13 <https://github.com/ros/common_msgs/issues/13>`
 * fixing maintainer
 * updating maintainer
