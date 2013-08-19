@@ -1,6 +1,6 @@
 <package>
   <name>diagnostic_msgs</name>
-  <version>1.10.1</version>
+  <version>1.10.2</version>
   <description>
     This package holds the diagnostic messages which provide the
     standardized interface for the diagnostic and runtime monitoring
