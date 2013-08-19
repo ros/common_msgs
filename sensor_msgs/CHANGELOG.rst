@@ -2,6 +2,10 @@
 Changelog for package sensor_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.10.2 (2013-08-19)
+-------------------
+* adding __init__.py `#11 <https://github.com/ros/common_msgs/issues/11>`_
+
 1.10.1 (2013-08-16)
 -------------------
 * setup.py for `#11 <https://github.com/ros/common_msgs/issues/11>`_
