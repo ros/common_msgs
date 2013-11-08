@@ -43,7 +43,7 @@ TEST(sensor_msgs, PointCloud2Iterator)
   sensor_msgs::PointCloud2 cloud_msg_1, cloud_msg_2;
   cloud_msg_1.height = n_points;
   cloud_msg_1.width = 1;
-  setPointCloud2FieldsByString(cloud_msg_1, 2, "xyz", "rgb");
+  setPointCloud2FieldsByString(&cloud_msg_1, 2, "xyz", "rgb");
   cloud_msg_2 = cloud_msg_1;
 
   // Fill 1 by hand

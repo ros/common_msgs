@@ -55,7 +55,7 @@ namespace
  * @param offset the offset of that element
  * @return the offset of the next PointField that will be added to the PointCLoud2
  */
-inline int addPointField(sensor_msgs::PointCloud2& cloud_msg, const std::string &name, int count, int datatype,
+inline int addPointField(sensor_msgs::PointCloud2* cloud_msg, const std::string &name, int count, int datatype,
     int offset)
 {
   sensor_msgs::PointField point_field;
@@ -63,7 +63,7 @@ inline int addPointField(sensor_msgs::PointCloud2& cloud_msg, const std::string 
   point_field.count = count;
   point_field.datatype = datatype;
   point_field.offset = offset;
-  cloud_msg.fields.push_back(point_field);
+  cloud_msg->fields.push_back(point_field);
 
   // Update the offset
   int point_field_type;
@@ -103,10 +103,10 @@ namespace sensor_msgs
  *          number of elements in the field, the datatype of the elements in the field
  * @return a reference to the original PointCloud2 but modified
  */
-inline sensor_msgs::PointCloud2& setPointCloud2Fields(sensor_msgs::PointCloud2& cloud_msg, int n_fields, ...)
+inline void setPointCloud2Fields(sensor_msgs::PointCloud2* cloud_msg, int n_fields, ...)
 {
-  cloud_msg.fields.clear();
-  cloud_msg.fields.reserve(n_fields);
+  cloud_msg->fields.clear();
+  cloud_msg->fields.reserve(n_fields);
   va_list vl;
   va_start(vl, n_fields);
   int offset = 0;
@@ -116,11 +116,9 @@ inline sensor_msgs::PointCloud2& setPointCloud2Fields(sensor_msgs::PointCloud2& 
     va_end(vl);
 
   // Resize the point cloud accordingly
-  cloud_msg.point_step = offset;
-  cloud_msg.row_step = cloud_msg.width * cloud_msg.point_step;
-  cloud_msg.data.resize(cloud_msg.height * cloud_msg.row_step);
-
-  return cloud_msg;
+  cloud_msg->point_step = offset;
+  cloud_msg->row_step = cloud_msg->width * cloud_msg->point_step;
+  cloud_msg->data.resize(cloud_msg->height * cloud_msg->row_step);
 }
 
 /** Function setting some fields in a PointCloud and adjusting the internals of the PointCloud2
@@ -130,10 +128,10 @@ inline sensor_msgs::PointCloud2& setPointCloud2Fields(sensor_msgs::PointCloud2& 
  *            stacked in a float), "rgba" (4 uchar stacked in a float)
  * @return a reference to the original PointCloud2 but modified
  */
-inline sensor_msgs::PointCloud2& setPointCloud2FieldsByString(sensor_msgs::PointCloud2& cloud_msg, int n_fields, ...)
+inline void setPointCloud2FieldsByString(sensor_msgs::PointCloud2* cloud_msg, int n_fields, ...)
 {
-  cloud_msg.fields.clear();
-  cloud_msg.fields.reserve(n_fields);
+  cloud_msg->fields.clear();
+  cloud_msg->fields.reserve(n_fields);
   va_list vl;
   va_start(vl, n_fields);
   int offset = 0;
@@ -160,11 +158,9 @@ inline sensor_msgs::PointCloud2& setPointCloud2FieldsByString(sensor_msgs::Point
   va_end(vl);
 
   // Resize the point cloud accordingly
-  cloud_msg.point_step = offset;
-  cloud_msg.row_step = cloud_msg.width * cloud_msg.point_step;
-  cloud_msg.data.resize(cloud_msg.height * cloud_msg.row_step);
-
-  return cloud_msg;
+  cloud_msg->point_step = offset;
+  cloud_msg->row_step = cloud_msg->width * cloud_msg->point_step;
+  cloud_msg->data.resize(cloud_msg->height * cloud_msg->row_step);
 }
 
 namespace
