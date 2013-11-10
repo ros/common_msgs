@@ -101,7 +101,7 @@ namespace sensor_msgs
  * @param cloud_msg the sensor_msgs::PointCloud2 message to modify
  * @param n_fields the number of fields to add. The fields are given as triplets: name of the field as char*,
  *          number of elements in the field, the datatype of the elements in the field
- * @return a reference to the original PointCloud2 but modified
+ * @return void
  */
 inline void setPointCloud2Fields(sensor_msgs::PointCloud2* cloud_msg, int n_fields, ...)
 {
@@ -126,7 +126,7 @@ inline void setPointCloud2Fields(sensor_msgs::PointCloud2* cloud_msg, int n_fiel
  * @param cloud_msg the sensor_msgs::PointCloud2 message to modify
  * @param n_fields the number of fields to add. The fields are given as strings: "xyz" (3 floats), "rgb" (3 uchar
  *            stacked in a float), "rgba" (4 uchar stacked in a float)
- * @return a reference to the original PointCloud2 but modified
+ * @return void
  */
 inline void setPointCloud2FieldsByString(sensor_msgs::PointCloud2* cloud_msg, int n_fields, ...)
 {

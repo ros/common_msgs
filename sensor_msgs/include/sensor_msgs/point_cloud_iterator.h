@@ -42,13 +42,52 @@
 
 /**
  * \brief Offers an iterator over a PointCloud2
- * \author Vincent Rabaud
+ * This file provides two sets of utilities to modify and parse PointCloud2
+ * The first set allows you to conveniently set the fields by hand:
+ *   #include <sensor_msgs/point_cloud_iterator.h>
+ *   // Create a PointCloud2
+ *   sensor_msgs::PointCloud2 cloud_msg;
+ *   // Fill some internals of the PoinCloud2 like the header/width/height ... 
+ *   cloud_msgs.height = 1;  cloud_msgs.width = 4; 
+ *   // Set the point fields to xyzrgb and resize the vector with the following command
+ *   // 4 is for the number of added fields. Each come in triplet: the name of the PointField,
+ *   // the number of occurences of the type in the PointField, the type of the PointField
+ *   setPointCloud2FieldsByString(cloud_msg, 4, "x", 1, sensor_msgs::PointField::FLOAT32,
+ *                                              "y", 1, sensor_msgs::PointField::FLOAT32,
+ *                                              "z", 1, sensor_msgs::PointField::FLOAT32,
+ *                                              "rgb", 1, sensor_msgs::PointField::FLOAT32);
+ *   // For convenience and the xyz, rgb, rgba fields, you can also use the following overloaded function.
+ *   // 2 is for the number of fields to add
+ *   setPointCloud2FieldsByString(cloud_msg, 2, "xyz", "rgb");
+ *
+ * The second set allow you to traverse your PointCloud using an iterator
+ *   // Define some raw data we'll put in the PointCloud2
+ *   float point_data[] = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0};
+ *   uint8_t color_data[] = {40, 80, 120, 160, 200, 240, 20, 40, 60, 80, 100, 120};
+ *   // Define the iterators. When doing so, you define the Field you would like to iterate upon and
+ *   // the type of you would like returned: it is not necessary the type of the PointField as sometimes
+ *   // you pack data in another type (e.g. 3 uchar + 1 uchar for RGB are packed in a float)
+ *   sensor_msgs::PointCloud2Iterator<float> iter_x(cloud_msg, "x");
+ *   sensor_msgs::PointCloud2Iterator<float> iter_x(cloud_msg, "y");
+ *   sensor_msgs::PointCloud2Iterator<float> iter_x(cloud_msg, "z");
+ *   sensor_msgs::PointCloud2Iterator<uint8_t> iter_rgb(cloud_msg, "rgb");
+ *   // Fill the PointCloud2
+ *   for(size_t i=0; i<n_points; ++i, ++iter_x, ++iter_y, ++iter_z, ++iter_rgb) {
+ *     *iter_x = point_data[3*i+0];
+ *     *iter_y = point_data[3*i+1];
+ *     *iter_z = point_data[3*i+2];
+ *     for(size_t j=0; j<3; ++j)
+ *       iter_rgb[j] = color_data[3*i+j];
+ *       // A speed up over using an iterator for each of x,y,z would be to use
+ *       // iter_x[j] = point_data[3*i+j];
+ *       // in that for loop as the [j] notation accesses the j^th element of the same type in the PointField
+ *   }
  */
 
 namespace sensor_msgs
 {
 /** Function setting some fields in a PointCloud and adjusting the internals of the PointCloud2
- * E.g, you create your PointClou2 message with XYZ/RGB as follows:
+ * E.g, you create your PointCloud2 message with XYZ/RGB as follows:
  *   setPointCloud2FieldsByString(cloud_msg, 4, "x", 1, sensor_msgs::PointField::FLOAT32,
  *                                              "y", 1, sensor_msgs::PointField::FLOAT32,
  *                                              "z", 1, sensor_msgs::PointField::FLOAT32,
@@ -58,7 +97,7 @@ namespace sensor_msgs
  * @param cloud_msg the sensor_msgs::PointCloud2 message to modify
  * @param n_fields the number of fields to add. The fields are given as triplets: name of the field as char*,
  *          number of elements in the field, the datatype of the elements in the field
- * @return a reference to the original PointCloud2 but modified
+ * @return void
  */
 void setPointCloud2Fields(sensor_msgs::PointCloud2* cloud_msg, int n_fields, ...);
 
@@ -67,7 +106,7 @@ void setPointCloud2Fields(sensor_msgs::PointCloud2* cloud_msg, int n_fields, ...
  * @param cloud_msg the sensor_msgs::PointCloud2 message to modify
  * @param n_fields the number of fields to add. The fields are given as strings: "xyz" (3 floats), "rgb" (3 uchar
  *            stacked in a float), "rgba" (4 uchar stacked in a float)
- * @return a reference to the original PointCloud2 but modified
+ * @return void
  */
 void setPointCloud2FieldsByString(sensor_msgs::PointCloud2* cloud_msg, int n_fields, ...);
 }
