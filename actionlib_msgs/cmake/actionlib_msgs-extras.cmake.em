@@ -4,11 +4,11 @@ find_package(genmsg REQUIRED)
 include(CMakeParseArguments)
 
 @[if DEVELSPACE]@
-# find program in develspace
-find_program_required(GENACTION_BIN genaction.py PATHS "@(CMAKE_CURRENT_SOURCE_DIR)/scripts" NO_DEFAULT_PATH)
+# program in develspace
+set(GENACTION_BIN "@(CMAKE_CURRENT_SOURCE_DIR)/scripts/genaction.py")
 @[else]@
-# find program in installspace
-find_program_required(GENACTION_BIN genaction.py PATHS "@(CMAKE_INSTALL_PREFIX)/lib/@(PROJECT_NAME)" NO_DEFAULT_PATH)
+# program in installspace
+set(GENACTION_BIN "${actionlib_msgs_DIR}/../../../@(CATKIN_PACKAGE_BIN_DESTINATION)/genaction.py")
 @[end if]@
 
 macro(add_action_files)
