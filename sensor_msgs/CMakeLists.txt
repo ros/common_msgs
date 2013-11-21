@@ -42,7 +42,8 @@ add_message_files(
 
 add_service_files(
   DIRECTORY srv
-  FILES SetCameraInfo.srv)
+  FILES SetCameraInfo.srv
+        SetPointCloud2.srv)
 
 generate_messages(DEPENDENCIES geometry_msgs std_msgs)
 
