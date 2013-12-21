@@ -34,77 +34,68 @@
 
 #include <gtest/gtest.h>
 
-#include <sensor_msgs/point_cloud2_proxy.h>
+#include <sensor_msgs/point_cloud_iterator.h>
 
-TEST(sensor_msgs, PointCloud2Proxy)
+TEST(sensor_msgs, PointCloud2Iterator)
 {
   // Create a dummy PointCloud2
   int n_points = 4;
   sensor_msgs::PointCloud2 cloud_msg_1, cloud_msg_2;
   cloud_msg_1.height = n_points;
   cloud_msg_1.width = 1;
-  sensor_msgs::setPointCloud2FieldsByString(cloud_msg_1, 2, "xyz", "rgb");
+  setPointCloud2FieldsByString(&cloud_msg_1, 2, "xyz", "rgb");
+  cloud_msg_2 = cloud_msg_1;
 
   // Fill 1 by hand
   float point_data_raw[] = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0};
-  std::vector<float> point_data(point_data_raw, point_data_raw + 3 * n_points);
+  std::vector<float> point_data(point_data_raw, point_data_raw + 3*n_points);
   uint8_t color_data_raw[] = {40, 80, 120, 160, 200, 240, 20, 40, 60, 80, 100, 120};
-  std::vector<uint8_t> color_data(color_data_raw, color_data_raw + 3 * n_points);
+  std::vector<uint8_t> color_data(color_data_raw, color_data_raw + 3*n_points);
 
-  cloud_msg_1.data.resize(n_points * sizeof(sensor_msgs::PointCloud2::_data_type::value_type));
-  float* data = reinterpret_cast<float*>(&cloud_msg_1.data.front());
-  for (size_t n = 0, i = 0, j = 0; n < n_points; ++n) {
-    for (; i < 3 * (n + 1); ++i)
+  float *data = reinterpret_cast<float*>(&cloud_msg_1.data.front());
+  for(size_t n=0, i=0, j=0; n<n_points; ++n) {
+    for(; i<3*(n+1); ++i)
       *(data++) = point_data[i];
-    uint8_t* rgb = reinterpret_cast<uint8_t*>(data++);
-    for (; j < 3 * (n + 1); ++j)
+    uint8_t *rgb = reinterpret_cast<uint8_t*>(data++);
+    for(; j<3*(n+1); ++j)
       *(rgb++) = color_data[j];
   }
 
-  // Fill 2 using a proxy
-  sensor_msgs::PointCloud2Proxy<sensor_msgs::PointXYZRGB> cloud_msgs_2_proxy(cloud_msg_2);
-  cloud_msgs_2_proxy.reserve(n_points + 1);
-  sensor_msgs::PointXYZRGB pt;
-  for (size_t i = 0; i < n_points; ++i) {
-    pt.x = point_data[3 * i];
-    pt.y = point_data[3 * i + 1];
-    pt.z = point_data[3 * i + 2];
-    pt.r = color_data[3 * i];
-    pt.g = color_data[3 * i + 1];
-    pt.b = color_data[3 * i + 2];
-    cloud_msgs_2_proxy.push_back(pt);
-  }
-  // Check that reserves works properly
-  EXPECT_EQ(cloud_msgs_2_proxy.size(), n_points);
-  // Check that resize works properly
-  cloud_msgs_2_proxy.resize(n_points + 10);
-  cloud_msgs_2_proxy.resize(n_points);
-  EXPECT_EQ(cloud_msgs_2_proxy.size(), n_points);
+  // Fill 2 using an iterator
+  sensor_msgs::PointCloud2Iterator<float> iter_x(cloud_msg_2, "x");
+  sensor_msgs::PointCloud2Iterator<uint8_t> iter_rgb(cloud_msg_2, "rgb");
+  for(size_t i=0; i<n_points; ++i, ++iter_x, ++iter_rgb)
+    for(size_t j=0; j<3; ++j) {
+      iter_x[j] = point_data[j+3*i];
+      iter_rgb[j] = color_data[j+3*i];
+    }
 
-  // Check the values using a pointer
-  sensor_msgs::PointXYZRGB* iter_1 = reinterpret_cast<sensor_msgs::PointXYZRGB*>(&cloud_msg_1.data.front());
-  sensor_msgs::PointXYZRGB* iter_2 = &cloud_msgs_2_proxy[0];
+  // Check the values using an iterator
+  sensor_msgs::PointCloud2ConstIterator<float> iter_const_1_x(cloud_msg_1, "x"), iter_const_2_x(cloud_msg_2, "x");
+  sensor_msgs::PointCloud2ConstIterator<float> iter_const_1_y(cloud_msg_1, "y"), iter_const_2_y(cloud_msg_2, "y");
+  sensor_msgs::PointCloud2ConstIterator<float> iter_const_1_z(cloud_msg_1, "z"), iter_const_2_z(cloud_msg_2, "z");
+  sensor_msgs::PointCloud2ConstIterator<uint8_t> iter_const_1_rgb(cloud_msg_1, "rgb"), iter_const_2_rgb(cloud_msg_2, "rgb");
 
-  size_t i = 0;
-  for (; i < n_points; ++i, ++iter_1, ++iter_2) {
-    EXPECT_EQ(iter_1->x, iter_2->x);
-    EXPECT_EQ(iter_1->x, point_data[0 + 3 * i]);
-    EXPECT_EQ(iter_1->y, iter_2->y);
-    EXPECT_EQ(iter_1->y, point_data[1 + 3 * i]);
-    EXPECT_EQ(iter_1->z, iter_2->z);
-    EXPECT_EQ(iter_1->z, point_data[2 + 3 * i]);
-    // Compare RGB
-    EXPECT_EQ(iter_1->r, iter_2->r);
-    EXPECT_EQ(iter_1->r, color_data[0 + 3 * i]);
-    EXPECT_EQ(iter_1->g, iter_2->g);
-    EXPECT_EQ(iter_1->g, color_data[1 + 3 * i]);
-    EXPECT_EQ(iter_1->b, iter_2->b);
-    EXPECT_EQ(iter_1->b, color_data[2 + 3 * i]);
+  size_t i=0;
+  for(; iter_const_1_x != iter_const_1_x.end(); ++i, ++iter_const_1_x,
+                               ++iter_const_2_x, ++iter_const_1_y, ++iter_const_2_y,++iter_const_1_z,
+                               ++iter_const_2_z, ++iter_const_1_rgb, ++iter_const_2_rgb) {
+    EXPECT_EQ(*iter_const_1_x, *iter_const_2_x);
+    EXPECT_EQ(*iter_const_1_x, point_data[0+3*i]);
+    EXPECT_EQ(*iter_const_1_y, *iter_const_2_y);
+    EXPECT_EQ(*iter_const_1_y, point_data[1+3*i]);
+    EXPECT_EQ(*iter_const_1_z, *iter_const_2_z);
+    EXPECT_EQ(*iter_const_1_z, point_data[2+3*i]);
+    for(size_t j=0; j<3; ++j) {
+      EXPECT_EQ(iter_const_1_rgb[j], iter_const_2_rgb[j]);
+      EXPECT_EQ(iter_const_1_rgb[j], color_data[j+3*i]);
+    }
   }
+  EXPECT_EQ(i, n_points);
 }
 
 int main(int argc, char** argv)
 {
   ::testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
+    return RUN_ALL_TESTS();
 }
