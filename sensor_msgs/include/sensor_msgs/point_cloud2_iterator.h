@@ -32,8 +32,8 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef SENSOR_MSGS_POINT_CLOUD_ITERATOR_H
-#define SENSOR_MSGS_POINT_CLOUD_ITERATOR_H
+#ifndef SENSOR_MSGS_POINT_CLOUD2_ITERATOR_H
+#define SENSOR_MSGS_POINT_CLOUD2_ITERATOR_H
 
 #include <sensor_msgs/PointCloud2.h>
 #include <cstdarg>
@@ -57,6 +57,8 @@
  *                                              "z", 1, sensor_msgs::PointField::FLOAT32,
  *                                              "rgb", 1, sensor_msgs::PointField::FLOAT32);
  *   // For convenience and the xyz, rgb, rgba fields, you can also use the following overloaded function.
+ *   // You have to be aware that the following function does add extra padding for backward compatibility though
+ *   // so it is definitely the solution of choice for PointXYZ and PointXYZRGB
  *   // 2 is for the number of fields to add
  *   setPointCloud2FieldsByString(cloud_msg, 2, "xyz", "rgb");
  *
@@ -92,6 +94,7 @@ namespace sensor_msgs
  *                                              "y", 1, sensor_msgs::PointField::FLOAT32,
  *                                              "z", 1, sensor_msgs::PointField::FLOAT32,
  *                                              "rgb", 1, sensor_msgs::PointField::FLOAT32);
+ * WARNING: THIS DOES NOT TAKE INTO ACCOUNT ANY PADDING AS DONE UNTIL HYDRO
  * For simple usual cases, the overloaded setPointCloud2FieldsByString is what you want.
  *
  * @param cloud_msg the sensor_msgs::PointCloud2 message to modify
@@ -102,10 +105,11 @@ namespace sensor_msgs
 void setPointCloud2Fields(sensor_msgs::PointCloud2* cloud_msg, int n_fields, ...);
 
 /** Function setting some fields in a PointCloud and adjusting the internals of the PointCloud2
+ * WARNING: THIS FUNCTION DOES ADD ANY NECESSARY PADDING TRANSPARENTLY
  * @param cloud_msg
  * @param cloud_msg the sensor_msgs::PointCloud2 message to modify
- * @param n_fields the number of fields to add. The fields are given as strings: "xyz" (3 floats), "rgb" (3 uchar
- *            stacked in a float), "rgba" (4 uchar stacked in a float)
+ * @param n_fields the number of fields to add. The fields are given as strings: "xyz" (3 floats),
+ * "rgb" (3 uchar stacked in a float), "rgba" (4 uchar stacked in a float)
  * @return void
  */
 void setPointCloud2FieldsByString(sensor_msgs::PointCloud2* cloud_msg, int n_fields, ...);
@@ -227,6 +231,6 @@ public:
 };
 }
 
-#include <sensor_msgs/impl/point_cloud_iterator.h>
+#include <sensor_msgs/impl/point_cloud2_iterator.h>
 
-#endif// SENSOR_MSGS_POINT_CLOUD_ITERATOR_H
+#endif// SENSOR_MSGS_POINT_CLOUD2_ITERATOR_H

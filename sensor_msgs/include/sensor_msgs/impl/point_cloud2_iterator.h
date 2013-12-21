@@ -96,6 +96,7 @@ namespace sensor_msgs
  *                                              "y", 1, sensor_msgs::PointField::FLOAT32,
  *                                              "z", 1, sensor_msgs::PointField::FLOAT32,
  *                                              "rgb", 1, sensor_msgs::PointField::FLOAT32);
+ * WARNING: THIS DOES NOT TAKE INTO ACCOUNT ANY PADDING AS DONE UNTIL HYDRO
  * For simple usual cases, the overloaded setPointCloud2FieldsByString is what you want.
  *
  * @param cloud_msg the sensor_msgs::PointCloud2 message to modify
@@ -122,6 +123,7 @@ inline void setPointCloud2Fields(sensor_msgs::PointCloud2* cloud_msg, int n_fiel
 }
 
 /** Function setting some fields in a PointCloud and adjusting the internals of the PointCloud2
+ * WARNING: THIS FUNCTION DOES ADD ANY NECESSARY PADDING TRANSPARENTLY
  * @param cloud_msg
  * @param cloud_msg the sensor_msgs::PointCloud2 message to modify
  * @param n_fields the number of fields to add. The fields are given as strings: "xyz" (3 floats), "rgb" (3 uchar
@@ -147,10 +149,12 @@ inline void setPointCloud2FieldsByString(sensor_msgs::PointCloud2* cloud_msg, in
       offset = addPointField(cloud_msg, "x", 1, sensor_msgs::PointField::FLOAT32, offset);
       offset = addPointField(cloud_msg, "y", 1, sensor_msgs::PointField::FLOAT32, offset);
       offset = addPointField(cloud_msg, "z", 1, sensor_msgs::PointField::FLOAT32, offset);
+      offset += sizeof(float);
     }
     else if ((field_name == "rgb") || (field_name == "rgba"))
     {
       offset = addPointField(cloud_msg, field_name, 1, sensor_msgs::PointField::FLOAT32, offset);
+      offset += 3*sizeof(float);
     }
     else
       throw std::runtime_error("Field " + field_name + " does not exist");

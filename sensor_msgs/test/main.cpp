@@ -34,7 +34,7 @@
 
 #include <gtest/gtest.h>
 
-#include <sensor_msgs/point_cloud_iterator.h>
+#include <sensor_msgs/point_cloud2_iterator.h>
 
 TEST(sensor_msgs, PointCloud2Iterator)
 {
@@ -56,9 +56,13 @@ TEST(sensor_msgs, PointCloud2Iterator)
   for(size_t n=0, i=0, j=0; n<n_points; ++n) {
     for(; i<3*(n+1); ++i)
       *(data++) = point_data[i];
+    // Add an extra float of padding
+    ++data;
     uint8_t *rgb = reinterpret_cast<uint8_t*>(data++);
     for(; j<3*(n+1); ++j)
       *(rgb++) = color_data[j];
+    // Add 3 extra floats of padding
+    data += 3;
   }
 
   // Fill 2 using an iterator
