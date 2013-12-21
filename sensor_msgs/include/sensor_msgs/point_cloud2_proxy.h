@@ -1,18 +1,35 @@
 /*
- * Copyright (C) 2012-2013 Open Source Robotics Foundation
+ * Software License Agreement (BSD License)
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ *  Copyright (c) 2013, Open Source Robotics Foundation, Inc.
+ *  All rights reserved.
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *  Redistribution and use in source and binary forms, with or without
+ *  modification, are permitted provided that the following conditions
+ *  are met:
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *   * Redistributions in binary form must reproduce the above
+ *     copyright notice, this list of conditions and the following
+ *     disclaimer in the documentation and/or other materials provided
+ *     with the distribution.
+ *   * Neither the name of Willow Garage, Inc. nor the names of its
+ *     contributors may be used to endorse or promote products derived
+ *     from this software without specific prior written permission.
  *
+ *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ *  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ *  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+ *  FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+ *  COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ *  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+ *  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ *  LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ *  CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ *  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+ *  ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ *  POSSIBILITY OF SUCH DAMAGE.
  */
 
 #ifndef SENSOR_MSGS_POINT_CLOUD2_PROXY_H
@@ -43,7 +60,7 @@
  *   // 2 is for the number of fields to add
  *   setPointCloud2FieldsByString(cloud_msg, 2, "xyz", "rgb");
  *
- * The second set allows you to modify your PointCloud2 using a proxy class
+ * The second set allow you to modify your PointCloud using a proxy class
  *   // Define some raw data we'll put in the PointCloud2
  *   float point_data[] = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0};
  *   uint8_t color_data[] = {40, 80, 120, 160, 200, 240, 20, 40, 60, 80, 100, 120};
@@ -51,13 +68,8 @@
  *   sensor_msgs::PointCloud2 cloud;
  *   // Create a proxy to modify the PointCloud2
  *   sensor_msgs::PointCloud2Proxy<sensor_msgs::PointXYZRGB> cloud_proxy(cloud);
- *   // The constructor checks the fields of "cloud" automatically and sets them if not set (this
- *   // is only done for the two common types: sensor_msgs::PointXYZ and sensor_msgs::PointXYZRGB)
- *   // If you have your own point type, we advise you to specialize the sensor_msgs::PointCloud2Proxy cosntructor
- *   // so that you don't have to call setPointCloud2Fields* every time you handle a cloud, by having it
- *   // called dautomatically when creating a proxy (checkout the specialized constructors for sensor_msgs::PointXYZ
- *   // and sensor_msgs::PointXYZRGB)
- *
+ *   // The constructor checks the fields of "cloud" automatically and sets them if not set (as
+ *   // this is one of the two common types: sensor_msgs::PointXYZ and sensor_msgs::PointXYZRGB)
  *   // Fill the PointCloud2
  *   sensor_msgs::PointXYZRGB pt;
  *   cloud_proxy.reserve(n_points);
@@ -186,7 +198,7 @@ public:
    * @return a reference to the T at the i^th column and j^th row
    */
   const T& operator()(size_t i, size_t j) const;
-protected:
+private:
   /** A reference to the original sensor_msgs::PointCloud2 that we read */
   const PointCloud2& cloud_msg_;
 };
@@ -244,7 +256,7 @@ public:
    * @param t the T element to copy at the end of the original sensor_msgs::PointCloud2
    */
   void push_back(const T& t);
-protected:
+private:
   /** A reference to the original sensor_msgs::PointCloud2 that we read */
   PointCloud2& cloud_msg_;
 };

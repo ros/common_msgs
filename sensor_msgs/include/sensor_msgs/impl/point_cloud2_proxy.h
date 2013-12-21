@@ -1,18 +1,35 @@
 /*
- * Copyright (C) 2012-2013 Open Source Robotics Foundation
+ * Software License Agreement (BSD License)
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ *  Copyright (c) 2013, Open Source Robotics Foundation, Inc.
+ *  All rights reserved.
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ *  Redistribution and use in source and binary forms, with or without
+ *  modification, are permitted provided that the following conditions
+ *  are met:
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ *   * Redistributions of source code must retain the above copyright
+ *     notice, this list of conditions and the following disclaimer.
+ *   * Redistributions in binary form must reproduce the above
+ *     copyright notice, this list of conditions and the following
+ *     disclaimer in the documentation and/or other materials provided
+ *     with the distribution.
+ *   * Neither the name of Willow Garage, Inc. nor the names of its
+ *     contributors may be used to endorse or promote products derived
+ *     from this software without specific prior written permission.
  *
+ *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ *  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ *  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+ *  FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+ *  COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ *  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+ *  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ *  LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ *  CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ *  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+ *  ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ *  POSSIBILITY OF SUCH DAMAGE.
  */
 
 #ifndef SENSOR_MSGS_IMPL_POINT_CLOUD2_PROXY_H
@@ -233,19 +250,20 @@ inline void PointCloud2Proxy<T>::reserve(size_t size)
 template<typename T>
 inline void PointCloud2Proxy<T>::resize(size_t size)
 {
+  if ((cloud_msg_.height < 1) && (cloud_msg_.width < 1))
+    throw std::runtime_error("Cannot resize a sensor_msgs::PointCloud2 that does not have a dimension <= to 1");
+
   cloud_msg_.data.resize(size * sizeofT<T>());
 
   // Update height/width
-  if (cloud_msg_.height == 1) {
+  if (cloud_msg_.height == 1)
     cloud_msg_.width = size;
-    cloud_msg_.row_step = size * cloud_msg_.point_step;
-  } else
+  else
     if (cloud_msg_.width == 1)
       cloud_msg_.height = size;
     else {
       cloud_msg_.height = 1;
       cloud_msg_.width = size;
-      cloud_msg_.row_step = size * cloud_msg_.point_step;
     }
 }
 
@@ -273,6 +291,7 @@ inline void PointCloud2Proxy<T>::push_back(const T& t)
 
   // Update height/width
   if ((cloud_msg_.height == 0) && (cloud_msg_.width == 0)) {
+    cloud_msg_.point_step = sizeofT<T>();
     cloud_msg_.height = cloud_msg_.width = 1;
   } else
     if (cloud_msg_.height == 1) {
@@ -281,6 +300,10 @@ inline void PointCloud2Proxy<T>::push_back(const T& t)
     } else
       if (cloud_msg_.width == 1)
         ++cloud_msg_.height;
+      else {
+        cloud_msg_.height = 1;
+        cloud_msg_.width = 1;
+      }
 }
 
 }
