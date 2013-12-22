@@ -47,8 +47,8 @@
  *   #include <sensor_msgs/point_cloud_iterator.h>
  *   // Create a PointCloud2
  *   sensor_msgs::PointCloud2 cloud_msg;
- *   // Fill some internals of the PoinCloud2 like the header/width/height ... 
- *   cloud_msgs.height = 1;  cloud_msgs.width = 4; 
+ *   // Fill some internals of the PoinCloud2 like the header/width/height ...
+ *   cloud_msgs.height = 1;  cloud_msgs.width = 4;
  *   // Set the point fields to xyzrgb and resize the vector with the following command
  *   // 4 is for the number of added fields. Each come in triplet: the name of the PointField,
  *   // the number of occurences of the type in the PointField, the type of the PointField
@@ -166,6 +166,12 @@ public:
    */
   void initialize(const sensor_msgs::PointCloud2 &cloud_msg, const std::string &field_name);
 
+  /** Assignment operator
+   * @param iter the iterator to copy data from
+   * @return a reference to *this
+   */
+  PointCloud2IteratorBase<T, U>& operator =(const  PointCloud2IteratorBase<T, U>& iter);
+
   /** Access the i th element starting at the current pointer (useful when a field has several elements of the same
    * type)
    * @param i
@@ -183,10 +189,16 @@ public:
    */
   PointCloud2IteratorBase<T, U>& operator ++();
 
-  /** Increase the iterator of a ceratin amount
+  /** Basic pointer addition
+   * @param i the amount to increase the iterator by
+   * @return an iterator with an increased position
+   */
+  PointCloud2IteratorBase<T, U> operator +(int i);
+
+  /** Increase the iterator by a certain amount
    * @return a reference to the updated iterator
    */
-  PointCloud2IteratorBase<T, U>& operator +(int i);
+  PointCloud2IteratorBase<T, U>& operator +=(int i);
 
   /** Compare to another iterator
    * @return whether the current iterator points to a different address than the other one
@@ -238,7 +250,8 @@ namespace sensor_msgs
  * and then access R,G,B through  iter_rgb[0], iter_rgb[1], iter_rgb[2]
  */
 template<typename T>
-class PointCloud2Iterator : public PointCloud2IteratorBase<T, unsigned char> {
+class PointCloud2Iterator : public PointCloud2IteratorBase<T, unsigned char>
+{
 public:
   /**
    * @param cloud_msg The PointCloud2 to iterate upon
@@ -250,7 +263,8 @@ public:
 /** Same as a PointCloud2Iterator but for const data
  */
 template<typename T>
-class PointCloud2ConstIterator : public PointCloud2IteratorBase<const T, const unsigned char> {
+class PointCloud2ConstIterator : public PointCloud2IteratorBase<const T, const unsigned char>
+{
 public:
   /**
    * @param cloud_msg The PointCloud2 to iterate upon

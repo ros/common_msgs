@@ -245,6 +245,27 @@ void PointCloud2IteratorBase<T, U>::initialize(const sensor_msgs::PointCloud2 &c
   data_end_ = reinterpret_cast<T*>(&(cloud_msg.data.back()) + 1 + offset);
 }
 
+
+/** Assignment operator
+ * @param iter the iterator to copy data from
+ * @return a reference to *this
+ */
+template<typename T, typename U>
+PointCloud2IteratorBase<T, U>& PointCloud2IteratorBase<T, U>::operator =(const  PointCloud2IteratorBase<T, U> &iter)
+{
+  if (this != &iter)
+  {
+    point_step_ = iter.point_step_;
+    field_count_ = iter.field_count_;
+    data_char_ = iter.data_char_;
+    data_ = iter.data_;
+    data_end_ = iter.data_end_;
+    is_bigendian_ = iter.is_bigendian_;
+  }
+
+  return *this;
+}
+
 /** Access the i th element starting at the current pointer (useful when a field has several elements of the same
  * type)
  * @param i
@@ -279,11 +300,26 @@ PointCloud2IteratorBase<T, U>& PointCloud2IteratorBase<T, U>::operator ++()
   return *this;
 }
 
-/** Increase the iterator of a ceratin amount
+/** Basic pointer addition
+ * @param i the amount to increase the iterator by
+ * @return an iterator with an increased position
+ */
+template<typename T, typename U>
+PointCloud2IteratorBase<T, U> PointCloud2IteratorBase<T, U>::operator +(int i)
+{
+  PointCloud2IteratorBase<T, U> res = *this;
+
+  res.data_char_ += i*point_step_;
+  res.data_ = reinterpret_cast<T*>(data_char_);
+
+  return res;
+}
+
+/** Increase the iterator by a certain amount
  * @return a reference to the updated iterator
  */
 template<typename T, typename U>
-PointCloud2IteratorBase<T, U>& PointCloud2IteratorBase<T, U>::operator +(int i)
+PointCloud2IteratorBase<T, U>& PointCloud2IteratorBase<T, U>::operator +=(int i)
 {
   data_char_ += i*point_step_;
   data_ = reinterpret_cast<T*>(data_char_);
