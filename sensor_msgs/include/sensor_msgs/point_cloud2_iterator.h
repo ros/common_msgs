@@ -52,15 +52,16 @@
  *   // Set the point fields to xyzrgb and resize the vector with the following command
  *   // 4 is for the number of added fields. Each come in triplet: the name of the PointField,
  *   // the number of occurences of the type in the PointField, the type of the PointField
- *   setPointCloud2FieldsByString(cloud_msg, 4, "x", 1, sensor_msgs::PointField::FLOAT32,
- *                                              "y", 1, sensor_msgs::PointField::FLOAT32,
- *                                              "z", 1, sensor_msgs::PointField::FLOAT32,
- *                                              "rgb", 1, sensor_msgs::PointField::FLOAT32);
+ *   sensor_msgs::PointCloud2Modifier modifier(cloud_msg);
+ *   modifier.setPointCloud2FieldsByString(4, "x", 1, sensor_msgs::PointField::FLOAT32,
+ *                                            "y", 1, sensor_msgs::PointField::FLOAT32,
+ *                                            "z", 1, sensor_msgs::PointField::FLOAT32,
+ *                                            "rgb", 1, sensor_msgs::PointField::FLOAT32);
  *   // For convenience and the xyz, rgb, rgba fields, you can also use the following overloaded function.
  *   // You have to be aware that the following function does add extra padding for backward compatibility though
  *   // so it is definitely the solution of choice for PointXYZ and PointXYZRGB
  *   // 2 is for the number of fields to add
- *   setPointCloud2FieldsByString(cloud_msg, 2, "xyz", "rgb");
+ *   modifier.setPointCloud2FieldsByString(2, "xyz", "rgb");
  *
  * The second set allow you to traverse your PointCloud using an iterator
  *   // Define some raw data we'll put in the PointCloud2
@@ -79,40 +80,68 @@
  *     *iter_y = point_data[3*i+1];
  *     *iter_z = point_data[3*i+2];
  *     for(size_t j=0; j<3; ++j)
- *       iter_rgb[j] = color_data[3*i+j];
- *       // A speed up over using an iterator for each of x,y,z would be to use
- *       // iter_x[j] = point_data[3*i+j];
- *       // in that for loop as the [j] notation accesses the j^th element of the same type in the PointField
+ *       iter_rgb[3-j] = color_data[3*i+j];
  *   }
  */
 
 namespace sensor_msgs
 {
-/** Function setting some fields in a PointCloud and adjusting the internals of the PointCloud2
- * E.g, you create your PointCloud2 message with XYZ/RGB as follows:
- *   setPointCloud2FieldsByString(cloud_msg, 4, "x", 1, sensor_msgs::PointField::FLOAT32,
- *                                              "y", 1, sensor_msgs::PointField::FLOAT32,
- *                                              "z", 1, sensor_msgs::PointField::FLOAT32,
- *                                              "rgb", 1, sensor_msgs::PointField::FLOAT32);
- * WARNING: THIS DOES NOT TAKE INTO ACCOUNT ANY PADDING AS DONE UNTIL HYDRO
- * For simple usual cases, the overloaded setPointCloud2FieldsByString is what you want.
- *
- * @param cloud_msg the sensor_msgs::PointCloud2 message to modify
- * @param n_fields the number of fields to add. The fields are given as triplets: name of the field as char*,
- *          number of elements in the field, the datatype of the elements in the field
- * @return void
+/** Class enabling to modify a sensor_msgs::PointCloud2 like a container
  */
-void setPointCloud2Fields(sensor_msgs::PointCloud2* cloud_msg, int n_fields, ...);
+class PointCloud2Modifier
+{
+public:
+  /** Default constructor
+   * @param cloud_msgs The sensor_msgs::PointCloud2 to modify
+   */
+  PointCloud2Modifier(PointCloud2& cloud_msg);
 
-/** Function setting some fields in a PointCloud and adjusting the internals of the PointCloud2
- * WARNING: THIS FUNCTION DOES ADD ANY NECESSARY PADDING TRANSPARENTLY
- * @param cloud_msg
- * @param cloud_msg the sensor_msgs::PointCloud2 message to modify
- * @param n_fields the number of fields to add. The fields are given as strings: "xyz" (3 floats),
- * "rgb" (3 uchar stacked in a float), "rgba" (4 uchar stacked in a float)
- * @return void
- */
-void setPointCloud2FieldsByString(sensor_msgs::PointCloud2* cloud_msg, int n_fields, ...);
+  /**
+   * @return the number of T's in the original sensor_msgs::PointCloud2
+   */
+  size_t size() const;
+
+  /**
+   * @param size The number of T's to reserve in the original sensor_msgs::PointCloud2 for
+   */
+  void reserve(size_t size);
+
+  /**
+   * @param size The number of T's to change the size of the original sensor_msgs::PointCloud2 by
+   */
+  void resize(size_t size);
+
+  /**
+   * @brief remove all T's from the original sensor_msgs::PointCloud2
+   */
+  void clear();
+
+  /** Function setting some fields in a PointCloud and adjusting the internals of the PointCloud2
+   * E.g, you create your PointCloud2 message with XYZ/RGB as follows:
+   *   setPointCloud2FieldsByString(cloud_msg, 4, "x", 1, sensor_msgs::PointField::FLOAT32,
+   *                                              "y", 1, sensor_msgs::PointField::FLOAT32,
+   *                                              "z", 1, sensor_msgs::PointField::FLOAT32,
+   *                                              "rgb", 1, sensor_msgs::PointField::FLOAT32);
+   * WARNING: THIS DOES NOT TAKE INTO ACCOUNT ANY PADDING AS DONE UNTIL HYDRO
+   * For simple usual cases, the overloaded setPointCloud2FieldsByString is what you want.
+   *
+   * @param n_fields the number of fields to add. The fields are given as triplets: name of the field as char*,
+   *          number of elements in the field, the datatype of the elements in the field
+   * @return void
+   */
+  void setPointCloud2Fields(int n_fields, ...);
+
+  /** Function setting some fields in a PointCloud and adjusting the internals of the PointCloud2
+   * WARNING: THIS FUNCTION DOES ADD ANY NECESSARY PADDING TRANSPARENTLY
+   * @param n_fields the number of fields to add. The fields are given as strings: "xyz" (3 floats),
+   * "rgb" (3 uchar stacked in a float), "rgba" (4 uchar stacked in a float)
+   * @return void
+   */
+  void setPointCloud2FieldsByString(int n_fields, ...);
+protected:
+  /** A reference to the original sensor_msgs::PointCloud2 that we read */
+  PointCloud2& cloud_msg_;
+};
 }
 
 namespace

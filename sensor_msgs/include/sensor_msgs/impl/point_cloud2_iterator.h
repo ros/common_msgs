@@ -55,7 +55,7 @@ namespace
  * @param offset the offset of that element
  * @return the offset of the next PointField that will be added to the PointCLoud2
  */
-inline int addPointField(sensor_msgs::PointCloud2* cloud_msg, const std::string &name, int count, int datatype,
+inline int addPointField(sensor_msgs::PointCloud2 &cloud_msg, const std::string &name, int count, int datatype,
     int offset)
 {
   sensor_msgs::PointField point_field;
@@ -63,7 +63,7 @@ inline int addPointField(sensor_msgs::PointCloud2* cloud_msg, const std::string 
   point_field.count = count;
   point_field.datatype = datatype;
   point_field.offset = offset;
-  cloud_msg->fields.push_back(point_field);
+  cloud_msg.fields.push_back(point_field);
 
   // Update the offset
   int point_field_type;
@@ -88,8 +88,58 @@ inline int addPointField(sensor_msgs::PointCloud2* cloud_msg, const std::string 
 }
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 namespace sensor_msgs
 {
+
+inline PointCloud2Modifier::PointCloud2Modifier(PointCloud2& cloud_msg) : cloud_msg_(cloud_msg)
+{
+}
+
+inline size_t PointCloud2Modifier::size() const
+{
+  return cloud_msg_.data.size() / cloud_msg_.point_step;
+}
+
+inline void PointCloud2Modifier::reserve(size_t size)
+{
+  cloud_msg_.data.reserve(size * cloud_msg_.point_step);
+}
+
+inline void PointCloud2Modifier::resize(size_t size)
+{
+  cloud_msg_.data.resize(size * cloud_msg_.point_step);
+
+  // Update height/width
+  if (cloud_msg_.height == 1) {
+    cloud_msg_.width = size;
+    cloud_msg_.row_step = size * cloud_msg_.point_step;
+  } else
+    if (cloud_msg_.width == 1)
+      cloud_msg_.height = size;
+    else {
+      cloud_msg_.height = 1;
+      cloud_msg_.width = size;
+      cloud_msg_.row_step = size * cloud_msg_.point_step;
+    }
+}
+
+inline void PointCloud2Modifier::clear()
+{
+  cloud_msg_.data.clear();
+
+  // Update height/width
+  if (cloud_msg_.height == 1)
+    cloud_msg_.row_step = cloud_msg_.width = 0;
+  else
+    if (cloud_msg_.width == 1)
+      cloud_msg_.height = 0;
+    else
+      cloud_msg_.row_step = cloud_msg_.width = cloud_msg_.height = 0;
+}
+
+
 /** Function setting some fields in a PointCloud and adjusting the internals of the PointCloud2
  * E.g, you create your PointClou2 message with XYZ/RGB as follows:
  *   setPointCloud2FieldsByString(cloud_msg, 4, "x", 1, sensor_msgs::PointField::FLOAT32,
@@ -99,80 +149,76 @@ namespace sensor_msgs
  * WARNING: THIS DOES NOT TAKE INTO ACCOUNT ANY PADDING AS DONE UNTIL HYDRO
  * For simple usual cases, the overloaded setPointCloud2FieldsByString is what you want.
  *
- * @param cloud_msg the sensor_msgs::PointCloud2 message to modify
  * @param n_fields the number of fields to add. The fields are given as triplets: name of the field as char*,
  *          number of elements in the field, the datatype of the elements in the field
  * @return void
  */
-inline void setPointCloud2Fields(sensor_msgs::PointCloud2* cloud_msg, int n_fields, ...)
+inline void PointCloud2Modifier::setPointCloud2Fields(int n_fields, ...)
 {
-  cloud_msg->fields.clear();
-  cloud_msg->fields.reserve(n_fields);
+  cloud_msg_.fields.clear();
+  cloud_msg_.fields.reserve(n_fields);
   va_list vl;
   va_start(vl, n_fields);
   int offset = 0;
   for (int i = 0; i < n_fields; ++i)
     // Create the corresponding PointField
-    offset = addPointField(cloud_msg, std::string(va_arg(vl, char *)), va_arg(vl, int), va_arg(vl, int), offset);
-    va_end(vl);
+    offset = addPointField(cloud_msg_, std::string(va_arg(vl, char*)), va_arg(vl, int), va_arg(vl, int), offset);
+  va_end(vl);
 
   // Resize the point cloud accordingly
-  cloud_msg->point_step = offset;
-  cloud_msg->row_step = cloud_msg->width * cloud_msg->point_step;
-  cloud_msg->data.resize(cloud_msg->height * cloud_msg->row_step);
+  cloud_msg_.point_step = offset;
+  cloud_msg_.row_step = cloud_msg_.width * cloud_msg_.point_step;
+  cloud_msg_.data.resize(cloud_msg_.height * cloud_msg_.row_step);
 }
 
 /** Function setting some fields in a PointCloud and adjusting the internals of the PointCloud2
  * WARNING: THIS FUNCTION DOES ADD ANY NECESSARY PADDING TRANSPARENTLY
- * @param cloud_msg
- * @param cloud_msg the sensor_msgs::PointCloud2 message to modify
  * @param n_fields the number of fields to add. The fields are given as strings: "xyz" (3 floats), "rgb" (3 uchar
  *            stacked in a float), "rgba" (4 uchar stacked in a float)
  * @return void
  */
-inline void setPointCloud2FieldsByString(sensor_msgs::PointCloud2* cloud_msg, int n_fields, ...)
+
+inline void PointCloud2Modifier::setPointCloud2FieldsByString(int n_fields, ...)
 {
-  cloud_msg->fields.clear();
-  cloud_msg->fields.reserve(n_fields);
+  cloud_msg_.fields.clear();
+  cloud_msg_.fields.reserve(n_fields);
   va_list vl;
   va_start(vl, n_fields);
   int offset = 0;
-  for (int i = 0; i < n_fields; ++i)
-  {
+  for (int i = 0; i < n_fields; ++i) {
     // Create the corresponding PointFields
     std::string
-    field_name = std::string(va_arg(vl, char *));
-    if (field_name == "xyz")
-    {
+    field_name = std::string(va_arg(vl, char*));
+    if (field_name == "xyz") {
       sensor_msgs::PointField point_field;
       // Do x, y and z
-      offset = addPointField(cloud_msg, "x", 1, sensor_msgs::PointField::FLOAT32, offset);
-      offset = addPointField(cloud_msg, "y", 1, sensor_msgs::PointField::FLOAT32, offset);
-      offset = addPointField(cloud_msg, "z", 1, sensor_msgs::PointField::FLOAT32, offset);
+      offset = addPointField(cloud_msg_, "x", 1, sensor_msgs::PointField::FLOAT32, offset);
+      offset = addPointField(cloud_msg_, "y", 1, sensor_msgs::PointField::FLOAT32, offset);
+      offset = addPointField(cloud_msg_, "z", 1, sensor_msgs::PointField::FLOAT32, offset);
       offset += sizeof(float);
-    }
-    else if ((field_name == "rgb") || (field_name == "rgba"))
-    {
-      offset = addPointField(cloud_msg, field_name, 1, sensor_msgs::PointField::FLOAT32, offset);
-      offset += 3*sizeof(float);
-    }
-    else
-      throw std::runtime_error("Field " + field_name + " does not exist");
+    } else
+      if ((field_name == "rgb") || (field_name == "rgba")) {
+        offset = addPointField(cloud_msg_, field_name, 1, sensor_msgs::PointField::FLOAT32, offset);
+        offset += 3 * sizeof(float);
+      } else
+        throw std::runtime_error("Field " + field_name + " does not exist");
   }
   va_end(vl);
 
   // Resize the point cloud accordingly
-  cloud_msg->point_step = offset;
-  cloud_msg->row_step = cloud_msg->width * cloud_msg->point_step;
-  cloud_msg->data.resize(cloud_msg->height * cloud_msg->row_step);
+  cloud_msg_.point_step = offset;
+  cloud_msg_.row_step = cloud_msg_.width * cloud_msg_.point_step;
+  cloud_msg_.data.resize(cloud_msg_.height * cloud_msg_.row_step);
 }
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 namespace
 {
 
 /**
- * @param cloud_msg The PointCloud2 to iterate upon
+ * @param cloud_msg_ The PointCloud2 to iterate upon
  * @param field_name The field to iterate upon
  */
 template<typename T, typename U>
