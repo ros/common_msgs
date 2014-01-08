@@ -2,8 +2,8 @@
 Changelog for package sensor_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.10.3 (2014-01-07)
+-------------------
 * python 3 compatibility
 * line wrap Imu.msg comments
 
