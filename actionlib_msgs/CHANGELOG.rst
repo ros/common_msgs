@@ -2,6 +2,12 @@
 Changelog for package actionlib_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* python 3 compatibility
+* prefix invocation of python script with PYTHON_EXECUTABLE (`ros/genpy#23 <https://github.com/ros/genpy/issues/23>`_)
+* make generated cmake relocatable
+
 1.10.2 (2013-08-19)
 -------------------
 
