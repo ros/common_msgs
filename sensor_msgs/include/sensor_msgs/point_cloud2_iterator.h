@@ -220,8 +220,6 @@ private:
 
   /** The "point_step" of the original cloud */
   int point_step_;
-  /** The "count" of tha specific PointField */
-  uint32_t field_count_;
   /** The raw data  in uchar* where the iterator is */
   U* data_char_;
   /** The cast data where the iterator is */

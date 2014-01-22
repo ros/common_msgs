@@ -256,7 +256,6 @@ PointCloud2IteratorBase<T, U>& PointCloud2IteratorBase<T, U>::operator =(const  
   if (this != &iter)
   {
     point_step_ = iter.point_step_;
-    field_count_ = iter.field_count_;
     data_char_ = iter.data_char_;
     data_ = iter.data_;
     data_end_ = iter.data_end_;
@@ -274,10 +273,7 @@ PointCloud2IteratorBase<T, U>& PointCloud2IteratorBase<T, U>::operator =(const  
 template<typename T, typename U>
 T& PointCloud2IteratorBase<T, U>::operator [](size_t i) const
 {
-  if (is_bigendian_)
-    return *(data_ - i);
-  else
-    return *(data_ + i);
+  return *(data_ + i);
 }
 
 /** Dereference the iterator. Equivalent to accessing it through [0]
@@ -365,13 +361,7 @@ int PointCloud2IteratorBase<T, U>::set_fields(const sensor_msgs::PointCloud2 &cl
   if (field_iter == field_end)
     throw std::runtime_error("Field " + field_name + " does not exist");
 
-  // continue filling the info
-  field_count_ = field_iter->count;
-
-  if (is_bigendian_)
-    return point_step_ - field_iter->offset;
-  else
-    return field_iter->offset;
+  return field_iter->offset;
 }
 
 }
