@@ -50,51 +50,62 @@ TEST(sensor_msgs, PointCloud2Iterator)
   // Fill 1 by hand
   float point_data_raw[] = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0};
   std::vector<float> point_data(point_data_raw, point_data_raw + 3*n_points);
+  // colors in RGB order
   uint8_t color_data_raw[] = {40, 80, 120, 160, 200, 240, 20, 40, 60, 80, 100, 120};
   std::vector<uint8_t> color_data(color_data_raw, color_data_raw + 3*n_points);
 
   float *data = reinterpret_cast<float*>(&cloud_msg_1.data.front());
-  for(size_t n=0, i=0, j=0; n<n_points; ++n) {
+  for(size_t n=0, i=0; n<n_points; ++n) {
     for(; i<3*(n+1); ++i)
       *(data++) = point_data[i];
     // Add an extra float of padding
     ++data;
-    uint8_t *rgb = reinterpret_cast<uint8_t*>(data++);
-    for(; j<3*(n+1); ++j)
-      *(rgb++) = color_data[j];
+    uint8_t *bgr = reinterpret_cast<uint8_t*>(data++);
+    // add the colors in order BGRA like PCL
+    for(size_t j = 2; j >= 0; --j)
+      *(bgr++) = color_data[3*n+j];
     // Add 3 extra floats of padding
     data += 3;
   }
 
   // Fill 2 using an iterator
   sensor_msgs::PointCloud2Iterator<float> iter_x(cloud_msg_2, "x");
-  sensor_msgs::PointCloud2Iterator<uint8_t> iter_rgb(cloud_msg_2, "rgb");
-  for(size_t i=0; i<n_points; ++i, ++iter_x, ++iter_rgb)
-    for(size_t j=0; j<3; ++j) {
+  sensor_msgs::PointCloud2Iterator<uint8_t> iter_r(cloud_msg_2, "r");
+  sensor_msgs::PointCloud2Iterator<uint8_t> iter_g(cloud_msg_2, "g");
+  sensor_msgs::PointCloud2Iterator<uint8_t> iter_b(cloud_msg_2, "b");
+  for(size_t i=0; i<n_points; ++i, ++iter_x, ++iter_r, ++iter_g, ++iter_b) {
+    for(size_t j=0; j<3; ++j)
       iter_x[j] = point_data[j+3*i];
-      iter_rgb[j] = color_data[j+3*i];
-    }
+    *iter_r = color_data[3*i];
+    *iter_g = color_data[3*i+1];
+    *iter_b = color_data[3*i+2];
+  }
+
 
   // Check the values using an iterator
   sensor_msgs::PointCloud2ConstIterator<float> iter_const_1_x(cloud_msg_1, "x"), iter_const_2_x(cloud_msg_2, "x");
   sensor_msgs::PointCloud2ConstIterator<float> iter_const_1_y(cloud_msg_1, "y"), iter_const_2_y(cloud_msg_2, "y");
   sensor_msgs::PointCloud2ConstIterator<float> iter_const_1_z(cloud_msg_1, "z"), iter_const_2_z(cloud_msg_2, "z");
-  sensor_msgs::PointCloud2ConstIterator<uint8_t> iter_const_1_rgb(cloud_msg_1, "rgb"), iter_const_2_rgb(cloud_msg_2, "rgb");
+  sensor_msgs::PointCloud2ConstIterator<uint8_t> iter_const_1_r(cloud_msg_1, "r"), iter_const_2_r(cloud_msg_2, "r");
+  sensor_msgs::PointCloud2ConstIterator<uint8_t> iter_const_1_g(cloud_msg_1, "g"), iter_const_2_g(cloud_msg_2, "g");
+  sensor_msgs::PointCloud2ConstIterator<uint8_t> iter_const_1_b(cloud_msg_1, "b"), iter_const_2_b(cloud_msg_2, "b");
 
   size_t i=0;
-  for(; iter_const_1_x != iter_const_1_x.end(); ++i, ++iter_const_1_x,
-                               ++iter_const_2_x, ++iter_const_1_y, ++iter_const_2_y,++iter_const_1_z,
-                               ++iter_const_2_z, ++iter_const_1_rgb, ++iter_const_2_rgb) {
+  for(; iter_const_1_x != iter_const_1_x.end(); ++i, ++iter_const_1_x, ++iter_const_2_x, ++iter_const_1_y, ++iter_const_2_y,
+                               ++iter_const_1_z, ++iter_const_2_z, ++iter_const_1_r, ++iter_const_2_r,
+                               ++iter_const_1_g, ++iter_const_2_g, ++iter_const_1_b, ++iter_const_2_b) {
     EXPECT_EQ(*iter_const_1_x, *iter_const_2_x);
     EXPECT_EQ(*iter_const_1_x, point_data[0+3*i]);
     EXPECT_EQ(*iter_const_1_y, *iter_const_2_y);
     EXPECT_EQ(*iter_const_1_y, point_data[1+3*i]);
     EXPECT_EQ(*iter_const_1_z, *iter_const_2_z);
     EXPECT_EQ(*iter_const_1_z, point_data[2+3*i]);
-    for(size_t j=0; j<3; ++j) {
-      EXPECT_EQ(iter_const_1_rgb[j], iter_const_2_rgb[j]);
-      EXPECT_EQ(iter_const_1_rgb[j], color_data[j+3*i]);
-    }
+    EXPECT_EQ(*iter_const_1_r, *iter_const_2_r);
+    EXPECT_EQ(*iter_const_1_r, color_data[3*i+0]);
+    EXPECT_EQ(*iter_const_1_g, *iter_const_2_g);
+    EXPECT_EQ(*iter_const_1_g, color_data[3*i+1]);
+    EXPECT_EQ(*iter_const_1_b, *iter_const_2_b);
+    EXPECT_EQ(*iter_const_1_b, color_data[3*i+2]);
   }
   EXPECT_EQ(i, n_points);
 }

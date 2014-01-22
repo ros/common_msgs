@@ -73,14 +73,20 @@
  *   sensor_msgs::PointCloud2Iterator<float> iter_x(cloud_msg, "x");
  *   sensor_msgs::PointCloud2Iterator<float> iter_x(cloud_msg, "y");
  *   sensor_msgs::PointCloud2Iterator<float> iter_x(cloud_msg, "z");
- *   sensor_msgs::PointCloud2Iterator<uint8_t> iter_rgb(cloud_msg, "rgb");
+ *   // Even though the r,g,b,a fields do not exist (it's usually rgb, rgba), you can create iterators for
+ *   // those: they will handle data packing for you (in little endian RGB is packed as *,R,G,B in a float
+ *   // and RGBA as A,R,G,B)
+ *   sensor_msgs::PointCloud2Iterator<uint8_t> iter_r(cloud_msg, "r");
+ *   sensor_msgs::PointCloud2Iterator<uint8_t> iter_g(cloud_msg, "g");
+ *   sensor_msgs::PointCloud2Iterator<uint8_t> iter_b(cloud_msg, "b");
  *   // Fill the PointCloud2
- *   for(size_t i=0; i<n_points; ++i, ++iter_x, ++iter_y, ++iter_z, ++iter_rgb) {
+ *   for(size_t i=0; i<n_points; ++i, ++iter_x, ++iter_y, ++iter_z, ++iter_r, ++iter_g, ++iter_b) {
  *     *iter_x = point_data[3*i+0];
  *     *iter_y = point_data[3*i+1];
  *     *iter_z = point_data[3*i+2];
- *     for(size_t j=0; j<3; ++j)
- *       iter_rgb[3-j] = color_data[3*i+j];
+ *     *iter_r = color_data[3*i+0];
+ *     *iter_g = color_data[3*i+1];
+ *     *iter_b = color_data[3*i+2];
  *   }
  */
 
@@ -211,12 +217,12 @@ public:
   PointCloud2IteratorBase<T, U> end() const;
 
 private:
-  /** Common code to set the fiels of the point cloud
+  /** Common code to set the field of the PointCloud2
    * @param cloud_msg the PointCloud2 to modify
    * @param field_name the name of the field to iterate upon
    * @return the offset at which the field is found
    */
-  int set_fields(const sensor_msgs::PointCloud2 &cloud_msg, const std::string &field_name);
+  int set_field(const sensor_msgs::PointCloud2 &cloud_msg, const std::string &field_name);
 
   /** The "point_step" of the original cloud */
   int point_step_;

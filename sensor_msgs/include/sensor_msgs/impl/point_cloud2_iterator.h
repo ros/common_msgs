@@ -47,6 +47,29 @@
 
 namespace
 {
+/** Return the size of a datatype (which is an enum of sensor_msgs::PointField::) in bytes
+ * @param datatype one of the enums of sensor_msgs::PointField::
+ */
+inline int sizeOfPointField(int datatype)
+{
+  if ((datatype == sensor_msgs::PointField::INT8) || (datatype == sensor_msgs::PointField::UINT8))
+    return 1;
+  else if ((datatype == sensor_msgs::PointField::INT16) || (datatype == sensor_msgs::PointField::UINT16))
+    return 2;
+  else if ((datatype == sensor_msgs::PointField::INT32) || (datatype == sensor_msgs::PointField::UINT32) ||
+      (datatype == sensor_msgs::PointField::FLOAT32))
+    return 4;
+  else if (datatype == sensor_msgs::PointField::FLOAT64)
+    return 8;
+  else
+  {
+    std::stringstream err;
+    err << "PointField of type " << datatype << " does not exist";
+    throw std::runtime_error(err.str());
+  }
+  return -1;
+}
+
 /** Private function that adds a PointField to the "fields" member of a PointCloud2
  * @param cloud_msg the PointCloud2 to add a field to
  * @param name the name of the field
@@ -66,25 +89,7 @@ inline int addPointField(sensor_msgs::PointCloud2 &cloud_msg, const std::string 
   cloud_msg.fields.push_back(point_field);
 
   // Update the offset
-  int point_field_type;
-  if (datatype == sensor_msgs::PointField::INT8)
-    point_field_type = sizeof(int8_t);
-  else if (datatype == sensor_msgs::PointField::UINT8)
-    point_field_type = sizeof(uint8_t);
-  else if (datatype == sensor_msgs::PointField::INT16)
-    point_field_type = sizeof(int16_t);
-  else if (datatype == sensor_msgs::PointField::UINT16)
-    point_field_type = sizeof(uint16_t);
-  else if (datatype == sensor_msgs::PointField::INT32)
-    point_field_type = sizeof(int32_t);
-  else if (datatype == sensor_msgs::PointField::UINT32)
-    point_field_type = sizeof(uint32_t);
-  else if (datatype == sensor_msgs::PointField::FLOAT32)
-    point_field_type = sizeof(float);
-  else
-    point_field_type = sizeof(double);
-
-  return offset + point_field.count * point_field_type / sizeof(char);
+  return offset + point_field.count * sizeOfPointField(datatype);
 }
 }
 
@@ -195,11 +200,11 @@ inline void PointCloud2Modifier::setPointCloud2FieldsByString(int n_fields, ...)
       offset = addPointField(cloud_msg_, "x", 1, sensor_msgs::PointField::FLOAT32, offset);
       offset = addPointField(cloud_msg_, "y", 1, sensor_msgs::PointField::FLOAT32, offset);
       offset = addPointField(cloud_msg_, "z", 1, sensor_msgs::PointField::FLOAT32, offset);
-      offset += sizeof(float);
+      offset += sizeOfPointField(sensor_msgs::PointField::FLOAT32);
     } else
       if ((field_name == "rgb") || (field_name == "rgba")) {
         offset = addPointField(cloud_msg_, field_name, 1, sensor_msgs::PointField::FLOAT32, offset);
-        offset += 3 * sizeof(float);
+        offset += 3 * sizeOfPointField(sensor_msgs::PointField::FLOAT32);
       } else
         throw std::runtime_error("Field " + field_name + " does not exist");
   }
@@ -224,7 +229,7 @@ namespace
 template<typename T, typename U>
 void PointCloud2IteratorBase<T, U>::initialize(sensor_msgs::PointCloud2 &cloud_msg, const std::string &field_name)
 {
-  int offset = set_fields(cloud_msg, field_name);
+  int offset = set_field(cloud_msg, field_name);
 
   data_char_ = &(cloud_msg.data.front()) + offset;
   data_ = reinterpret_cast<T*>(data_char_);
@@ -238,7 +243,7 @@ void PointCloud2IteratorBase<T, U>::initialize(sensor_msgs::PointCloud2 &cloud_m
 template<typename T, typename U>
 void PointCloud2IteratorBase<T, U>::initialize(const sensor_msgs::PointCloud2 &cloud_msg, const std::string &field_name)
 {
-  int offset = set_fields(cloud_msg, field_name);
+  int offset = set_field(cloud_msg, field_name);
 
   data_char_ = &(cloud_msg.data.front()) + offset;
   data_ = reinterpret_cast<T*>(data_char_);
@@ -342,13 +347,13 @@ PointCloud2IteratorBase<T, U> PointCloud2IteratorBase<T, U>::end() const
   return res;
 }
 
-/** Common code to set the fiels of the point cloud
+/** Common code to set the field of the PointCloud2
   * @param cloud_msg the PointCloud2 to modify
   * @param field_name the name of the field to iterate upon
   * @return the offset at which the field is found
   */
 template<typename T, typename U>
-int PointCloud2IteratorBase<T, U>::set_fields(const sensor_msgs::PointCloud2 &cloud_msg, const std::string &field_name)
+int PointCloud2IteratorBase<T, U>::set_field(const sensor_msgs::PointCloud2 &cloud_msg, const std::string &field_name)
 {
   is_bigendian_ = cloud_msg.is_bigendian;
   point_step_ = cloud_msg.point_step;
@@ -358,8 +363,47 @@ int PointCloud2IteratorBase<T, U>::set_fields(const sensor_msgs::PointCloud2 &cl
   while ((field_iter != field_end) && (field_iter->name != field_name))
     ++field_iter;
 
-  if (field_iter == field_end)
-    throw std::runtime_error("Field " + field_name + " does not exist");
+  if (field_iter == field_end) {
+    // Handle the special case of r,g,b,a (we assume they are understood as the channels of an rgb or rgba field)
+    if ((field_name == "r") || (field_name == "g") || (field_name == "b") || (field_name == "a"))
+    {
+      // Check that rgb or rgba is present
+      field_iter = cloud_msg.fields.begin();
+      while ((field_iter != field_end) && (field_iter->name != "rgb") && (field_iter->name != "rgba"))
+        ++field_iter;
+      if (field_iter == field_end)
+        throw std::runtime_error("Field " + field_name + " does not exist");
+      if (field_name == "r")
+      {
+        if (is_bigendian_)
+          return field_iter->offset + 1;
+        else
+          return field_iter->offset + 2;
+      }
+      if (field_name == "g")
+      {
+        if (is_bigendian_)
+          return field_iter->offset + 2;
+        else
+          return field_iter->offset + 1;
+      }
+      if (field_name == "b")
+      {
+        if (is_bigendian_)
+          return field_iter->offset + 3;
+        else
+          return field_iter->offset + 0;
+      }
+      if (field_name == "a")
+      {
+        if (is_bigendian_)
+          return field_iter->offset + 0;
+        else
+          return field_iter->offset + 3;
+      }
+    } else
+      throw std::runtime_error("Field " + field_name + " does not exist");
+  }
 
   return field_iter->offset;
 }
