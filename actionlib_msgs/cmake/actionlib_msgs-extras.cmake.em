@@ -1,5 +1,5 @@
 # need genmsg for _prepend_path()
-find_package(catkin REQUIRED COMPONENTS genmsg)
+find_package(genmsg REQUIRED)
 
 include(CMakeParseArguments)
 
@@ -46,6 +46,9 @@ macro(add_action_files)
   endif()
 
   foreach(actionfile ${FILES_W_PATH})
+    if(NOT CATKIN_DEVEL_PREFIX)
+      message(FATAL_ERROR "Assertion failed: 'CATKIN_DEVEL_PREFIX' is not set")
+    endif()
     get_filename_component(ACTION_SHORT_NAME ${actionfile} NAME_WE)
     set(MESSAGE_DIR ${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/msg)
     set(OUTPUT_FILES
@@ -63,6 +66,9 @@ macro(add_action_files)
 
     stamp(${actionfile})
 
+    if(NOT CATKIN_ENV)
+      message(FATAL_ERROR "Assertion failed: 'CATKIN_ENV' is not set")
+    endif()
     if(${actionfile} IS_NEWER_THAN ${MESSAGE_DIR}/${ACTION_SHORT_NAME}Action.msg)
       safe_execute_process(COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENACTION_BIN} ${actionfile} -o ${MESSAGE_DIR})
     endif()
