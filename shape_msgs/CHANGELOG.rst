@@ -2,6 +2,11 @@
 Changelog for package shape_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Add a description to shape_msgs.
+* Contributors: Michael Ferguson
+
 1.10.3 (2014-01-07)
 -------------------
 

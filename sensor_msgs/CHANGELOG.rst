@@ -2,6 +2,11 @@
 Changelog for package sensor_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Fix roslib import for message module, remove roslib.load_manifest
+* Contributors: Bence Magyar
+
 1.10.3 (2014-01-07)
 -------------------
 * python 3 compatibility
