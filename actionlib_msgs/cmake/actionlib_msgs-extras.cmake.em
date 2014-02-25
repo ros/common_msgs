@@ -37,7 +37,6 @@ macro(add_action_files)
 
   list(APPEND ${PROJECT_NAME}_ACTION_FILES ${FILES_W_PATH})
   foreach(file ${FILES_W_PATH})
-    debug_message(2 "add_action_files() action file: ${file}")
     assert_file_exists(${file} "action file not found")
   endforeach()
 
