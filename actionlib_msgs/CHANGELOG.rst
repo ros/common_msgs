@@ -2,6 +2,11 @@
 Changelog for package actionlib_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* removing usage of catkin function not guarenteed available fixes `#30 <https://github.com/ros/common_msgs/issues/30>`_
+* Contributors: Tully Foote
+
 1.10.4 (2014-02-18)
 -------------------
 * remove catkin usage from CMake extra file (fix `#27 <https://github.com/ros/common_msgs/issues/27>`_)

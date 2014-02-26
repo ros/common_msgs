@@ -2,6 +2,9 @@
 Changelog for package sensor_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 1.10.4 (2014-02-18)
 -------------------
 * Fix roslib import for message module, remove roslib.load_manifest
