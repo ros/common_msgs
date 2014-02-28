@@ -2,6 +2,12 @@
 Changelog for package actionlib_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* fix actionlib_msgs for dry
+* use catkin_install_python() to install Python scripts `#29 <https://github.com/ros/common_msgs/issues/29>`_
+* Contributors: Dirk Thomas
+
 1.10.5 (2014-02-25)
 -------------------
 * removing usage of catkin function not guarenteed available fixes `#30 <https://github.com/ros/common_msgs/issues/30>`_
