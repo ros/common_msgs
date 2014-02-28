@@ -27,7 +27,7 @@ macro(genaction)
     string(REPLACE ".action" "" _action_bare ${_action})
 
     # get path to action generator script
-    find_package(actionlib_msgs)
+    find_package(catkin REQUIRED COMPONENTS actionlib_msgs)
 
     #We have to do this because message generation assumes filenames without full paths
     set(_base_output_action ${_action_bare}Action.msg)
