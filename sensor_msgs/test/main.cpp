@@ -62,8 +62,9 @@ TEST(sensor_msgs, PointCloud2Iterator)
     ++data;
     uint8_t *bgr = reinterpret_cast<uint8_t*>(data++);
     // add the colors in order BGRA like PCL
-    for(size_t j = 2; j >= 0; --j)
-      *(bgr++) = color_data[3*n+j];
+    size_t j_max = 2;
+    for(size_t j = 0; j <= j_max; ++j)
+      *(bgr++) = color_data[3*n+(j_max - j)];
     // Add 3 extra floats of padding
     data += 3;
   }
