@@ -54,3 +54,7 @@ catkin_package(
 install(DIRECTORY include/${PROJECT_NAME}/
   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
   FILES_MATCHING PATTERN "*.h")
+
+if (CATKIN_ENABLE_TESTING)
+  add_subdirectory(test)
+endif()
