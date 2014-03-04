@@ -2,6 +2,11 @@
 Changelog for package sensor_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* add a PointCloud2 iterator and modifier
+* Contributors: Tully Foote, Vincent Rabaud
+
 1.10.6 (2014-02-27)
 -------------------
 
