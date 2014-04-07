@@ -36,6 +36,7 @@ add_message_files(
   Range.msg
   RegionOfInterest.msg
   RelativeHumidity.msg
+  SpeechRecognitionCandidates.msg
   Temperature.msg
   TimeReference.msg)
 
