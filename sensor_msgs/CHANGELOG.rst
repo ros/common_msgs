@@ -2,6 +2,11 @@
 Changelog for package sensor_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* fix missing include dirs for tests
+* Contributors: Dirk Thomas
+
 1.11.0 (2014-03-04)
 -------------------
 * add a PointCloud2 iterator and modifier
