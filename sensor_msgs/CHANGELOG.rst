@@ -2,8 +2,8 @@
 Changelog for package sensor_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.11.1 (2014-04-16)
+-------------------
 * fix missing include dirs for tests
 * Contributors: Dirk Thomas
 
