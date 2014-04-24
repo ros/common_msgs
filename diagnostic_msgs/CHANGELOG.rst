@@ -2,8 +2,8 @@
 Changelog for package diagnostic_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.11.2 (2014-04-24)
+-------------------
 * Add STALE to DiagnosticStatus level enum
 * Contributors: Austin
 
