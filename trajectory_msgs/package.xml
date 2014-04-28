@@ -25,6 +25,7 @@
 
   <export>
     <rosbag_migration_rule rule_file="rules/JointTrajectoryPoint_Groovy2Hydro_08.10.2013.bmr" />
+    <architecture_independent/>
   </export>
 
 </package>

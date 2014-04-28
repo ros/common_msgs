@@ -22,4 +22,8 @@
   <run_depend>message_generation</run_depend> <!-- provide message generation to downstream packages -->
   <run_depend>message_runtime</run_depend>
   <run_depend>std_msgs</run_depend>
+
+  <export>
+    <architecture_independent/>
+  </export>
 </package>
