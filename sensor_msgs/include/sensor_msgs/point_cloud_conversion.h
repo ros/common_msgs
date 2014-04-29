@@ -30,9 +30,6 @@
  *  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
  *  ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  *  POSSIBILITY OF SUCH DAMAGE.
- *
- * $Id$
- *
  */
 
 #ifndef SENSOR_MSGS_POINT_CLOUD_CONVERSION_H
@@ -42,7 +39,7 @@
 #include <sensor_msgs/PointCloud2.h>
 
 /** 
-  * \brief Convert between the old (sensor_msgs::PointCloud) and the new (sensor_msgs::PointCloud2) format.
+  * \file Convert between the old (sensor_msgs::PointCloud) and the new (sensor_msgs::PointCloud2) format.
   * \author Radu Bogdan Rusu
   */
 namespace sensor_msgs

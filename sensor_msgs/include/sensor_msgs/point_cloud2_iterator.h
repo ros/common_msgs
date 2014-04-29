@@ -41,9 +41,11 @@
 #include <vector>
 
 /**
- * \brief Offers an iterator over a PointCloud2
+ * \brief Tools for manipulating sensor_msgs
+ *
  * This file provides two sets of utilities to modify and parse PointCloud2
  * The first set allows you to conveniently set the fields by hand:
+ * <PRE>
  *   #include <sensor_msgs/point_cloud_iterator.h>
  *   // Create a PointCloud2
  *   sensor_msgs::PointCloud2 cloud_msg;
@@ -62,8 +64,10 @@
  *   // so it is definitely the solution of choice for PointXYZ and PointXYZRGB
  *   // 2 is for the number of fields to add
  *   modifier.setPointCloud2FieldsByString(2, "xyz", "rgb");
+ * </PRE>
  *
- * The second set allow you to traverse your PointCloud using an iterator
+ * The second set allow you to traverse your PointCloud using an iterator:
+ * <PRE>
  *   // Define some raw data we'll put in the PointCloud2
  *   float point_data[] = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0};
  *   uint8_t color_data[] = {40, 80, 120, 160, 200, 240, 20, 40, 60, 80, 100, 120};
@@ -88,17 +92,20 @@
  *     *iter_g = color_data[3*i+1];
  *     *iter_b = color_data[3*i+2];
  *   }
+ * </PRE>
  */
 
 namespace sensor_msgs
 {
-/** Class enabling to modify a sensor_msgs::PointCloud2 like a container
+/**
+ * @brief Enables modifying a sensor_msgs::PointCloud2 like a container
  */
 class PointCloud2Modifier
 {
 public:
-  /** Default constructor
-   * @param cloud_msgs The sensor_msgs::PointCloud2 to modify
+  /**
+   * @brief Default constructor
+   * @param cloud_msg The sensor_msgs::PointCloud2 to modify
    */
   PointCloud2Modifier(PointCloud2& cloud_msg);
 
@@ -122,26 +129,34 @@ public:
    */
   void clear();
 
-  /** Function setting some fields in a PointCloud and adjusting the internals of the PointCloud2
+  /**
+   * @brief Function setting some fields in a PointCloud and adjusting the
+   *        internals of the PointCloud2
+   * @param n_fields the number of fields to add. The fields are given as
+   *        triplets: name of the field as char*, number of elements in the
+   *        field, the datatype of the elements in the field
+   *
    * E.g, you create your PointCloud2 message with XYZ/RGB as follows:
+   * <PRE>
    *   setPointCloud2FieldsByString(cloud_msg, 4, "x", 1, sensor_msgs::PointField::FLOAT32,
    *                                              "y", 1, sensor_msgs::PointField::FLOAT32,
    *                                              "z", 1, sensor_msgs::PointField::FLOAT32,
    *                                              "rgb", 1, sensor_msgs::PointField::FLOAT32);
+   * </PRE>
    * WARNING: THIS DOES NOT TAKE INTO ACCOUNT ANY PADDING AS DONE UNTIL HYDRO
    * For simple usual cases, the overloaded setPointCloud2FieldsByString is what you want.
-   *
-   * @param n_fields the number of fields to add. The fields are given as triplets: name of the field as char*,
-   *          number of elements in the field, the datatype of the elements in the field
-   * @return void
    */
   void setPointCloud2Fields(int n_fields, ...);
 
-  /** Function setting some fields in a PointCloud and adjusting the internals of the PointCloud2
-   * WARNING: THIS FUNCTION DOES ADD ANY NECESSARY PADDING TRANSPARENTLY
-   * @param n_fields the number of fields to add. The fields are given as strings: "xyz" (3 floats),
-   * "rgb" (3 uchar stacked in a float), "rgba" (4 uchar stacked in a float)
+  /**
+   * @brief Function setting some fields in a PointCloud and adjusting the
+   *        internals of the PointCloud2
+   * @param n_fields the number of fields to add. The fields are given as
+   *        strings: "xyz" (3 floats), "rgb" (3 uchar stacked in a float),
+   *        "rgba" (4 uchar stacked in a float)
    * @return void
+   *
+   * WARNING: THIS FUNCTION DOES ADD ANY NECESSARY PADDING TRANSPARENTLY
    */
   void setPointCloud2FieldsByString(int n_fields, ...);
 protected:
@@ -239,18 +254,27 @@ private:
 
 namespace sensor_msgs
 {
-/** Class that can iterate over a PointCloud2
+/**
+ * \brief Class that can iterate over a PointCloud2
+ *
  * T type of the element being iterated upon
  * E.g, you create your PointClou2 message as follows:
+ * <PRE>
  *   setPointCloud2FieldsByString(cloud_msg, 2, "xyz", "rgb");
+ * </PRE>
  *
  * For iterating over XYZ, you do :
+ * <PRE>
  *   sensor_msgs::PointCloud2Iterator<float> iter_x(cloud_msg, "x");
+ * </PRE>
  * and then access X through iter_x[0] or *iter_x
- * You could create an iterator for Y and Z too but as they are consecutive, you can just use iter_x[1] and iter_x[2]
+ * You could create an iterator for Y and Z too but as they are consecutive,
+ * you can just use iter_x[1] and iter_x[2]
  *
  * For iterating over RGB, you do:
+ * <PRE>
  * sensor_msgs::PointCloud2Iterator<uint8_t> iter_rgb(cloud_msg, "rgb");
+ * </PRE>
  * and then access R,G,B through  iter_rgb[0], iter_rgb[1], iter_rgb[2]
  */
 template<typename T>
@@ -264,7 +288,8 @@ public:
   PointCloud2Iterator(sensor_msgs::PointCloud2 &cloud_msg, const std::string &field_name);
 };
 
-/** Same as a PointCloud2Iterator but for const data
+/**
+ * \brief Same as a PointCloud2Iterator but for const data
  */
 template<typename T>
 class PointCloud2ConstIterator : public PointCloud2IteratorBase<const T, const unsigned char>
