@@ -2,8 +2,8 @@
 Changelog for package trajectory_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.11.3 (2014-05-07)
+-------------------
 * Export architecture_independent flag in package.xml
 * Contributors: Scott K Logan
 
