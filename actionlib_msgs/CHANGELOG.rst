@@ -2,6 +2,11 @@
 Changelog for package actionlib_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Export architecture_independent flag in package.xml
+* Contributors: Scott K Logan
+
 1.11.2 (2014-04-24)
 -------------------
 

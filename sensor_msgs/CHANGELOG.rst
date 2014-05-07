@@ -2,6 +2,12 @@
 Changelog for package sensor_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* clean up documentation of sensor_msgs so that wiki generated doxygen is readable
+* Export architecture_independent flag in package.xml
+* Contributors: Michael Ferguson, Scott K Logan
+
 1.11.2 (2014-04-24)
 -------------------
 
