@@ -169,9 +169,13 @@ inline void PointCloud2Modifier::setPointCloud2Fields(int n_fields, ...)
   va_list vl;
   va_start(vl, n_fields);
   int offset = 0;
-  for (int i = 0; i < n_fields; ++i)
+  for (int i = 0; i < n_fields; ++i) {
     // Create the corresponding PointField
-    offset = addPointField(cloud_msg_, std::string(va_arg(vl, char*)), va_arg(vl, int), va_arg(vl, int), offset);
+    std::string name(va_arg(vl, char*));
+    int count(va_arg(vl, int));
+    int datatype(va_arg(vl, int));
+    offset = addPointField(cloud_msg_, name, count, datatype, offset);
+  }
   va_end(vl);
 
   // Resize the point cloud accordingly
