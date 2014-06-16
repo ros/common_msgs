@@ -22,7 +22,7 @@ Header header                        # header for time/frame information
 string ns                            # Namespace to place this object in... used in conjunction with id to create a unique name for the object
 int32 id 		                         # object ID useful in conjunction with the namespace for manipulating and deleting the object later
 int32 type 		                       # Type of object
-int32 action 	                       # 0 add/modify an object, 1 (deprecated), 2 deletes an object
+int32 action 	                       # 0 add/modify an object, 1 (deprecated), 2 deletes an object, 3 deletes all objects
 geometry_msgs/Pose pose                 # Pose of the object
 geometry_msgs/Vector3 scale             # Scale of the object 1,1,1 means default (usually 1 meter square)
 std_msgs/ColorRGBA color             # Color [0.0-1.0]
