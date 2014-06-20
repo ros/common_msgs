@@ -2,6 +2,11 @@
 Changelog for package visualization_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Added comment to document new Rviz Marker action
+* Contributors: Dave Coleman
+
 1.11.3 (2014-05-07)
 -------------------
 * Export architecture_independent flag in package.xml
