@@ -2,8 +2,8 @@
 Changelog for package visualization_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.11.4 (2014-06-19)
+-------------------
 * Added comment to document new Rviz Marker action
 * Contributors: Dave Coleman
 

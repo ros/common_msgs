@@ -2,8 +2,8 @@
 Changelog for package sensor_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.11.4 (2014-06-19)
+-------------------
 * Fix bug caused by use of va_arg in argument list.
 * Contributors: Daniel Maturana
 
