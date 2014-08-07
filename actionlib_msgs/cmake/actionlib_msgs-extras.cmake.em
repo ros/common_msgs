@@ -21,8 +21,15 @@ macro(add_action_files)
     set(ARG_DIRECTORY "action")
   endif()
 
-  if(NOT IS_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/${ARG_DIRECTORY})
-    message(FATAL_ERROR "add_action_files() directory not found: ${CMAKE_CURRENT_SOURCE_DIR}/${ARG_DIRECTORY}")
+  if(IS_ABSOLUTE ${ARG_DIRECTORY})
+    set(ACTION_DIR ${ARG_DIRECTORY})
+  else()
+    # Prepend CMAKE_CURRENT_SOURCE_DIR if path is not absolute
+    set(ACTION_DIR ${CMAKE_CURRENT_SOURCE_DIR}/${ARG_DIRECTORY})
+  endif()
+
+  if(NOT IS_DIRECTORY ${ACTION_DIR})
+    message(FATAL_ERROR "add_action_files() directory not found: ${ACTION_DIR}")
   endif()
 
   # if FILES are not passed search action files in the given directory
@@ -30,10 +37,10 @@ macro(add_action_files)
   set(_argv ${ARGV})
   list(FIND _argv "FILES" _index)
   if(_index EQUAL -1)
-    file(GLOB ARG_FILES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}/${ARG_DIRECTORY}" "${CMAKE_CURRENT_SOURCE_DIR}/${ARG_DIRECTORY}/*.action")
+    file(GLOB ARG_FILES RELATIVE "${ACTION_DIR}" "${ACTION_DIR}/*.action")
     list(SORT ARG_FILES)
   endif()
-  _prepend_path(${CMAKE_CURRENT_SOURCE_DIR}/${ARG_DIRECTORY} "${ARG_FILES}" FILES_W_PATH)
+  _prepend_path(${ACTION_DIR} "${ARG_FILES}" FILES_W_PATH)
 
   list(APPEND ${PROJECT_NAME}_ACTION_FILES ${FILES_W_PATH})
   foreach(file ${FILES_W_PATH})
@@ -41,7 +48,7 @@ macro(add_action_files)
   endforeach()
 
   if(NOT ARG_NOINSTALL)
-    install(FILES ${FILES_W_PATH} DESTINATION share/${PROJECT_NAME}/${ARG_DIRECTORY})
+    install(FILES ${FILES_W_PATH} DESTINATION share/${PROJECT_NAME}/${ARG_DIRECTORY}) # Shouldn't this be /action?
   endif()
 
   foreach(actionfile ${FILES_W_PATH})
@@ -73,7 +80,7 @@ macro(add_action_files)
     endif()
 
     add_message_files(
-      BASE_DIR ${MESSAGE_DIR}
+      DIRECTORY ${MESSAGE_DIR}
       FILES ${OUTPUT_FILES})
   endforeach()
 endmacro()
