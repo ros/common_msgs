@@ -5,8 +5,8 @@
 
 # This message also can represent a fixed-distance (binary) ranger.  This
 # sensor will have min_range===max_range===distance of detection.
-# These sensors follow REP 117 and will output -Inf if the object is detected
-# and +Inf if the object is outside of the detection range.
+# These sensors follow REP 117 and will output -Inf if the object is too close
+# to the sensor and +Inf if the object is outside of the detection range.
 
 Header header           # timestamp in the header is the time the ranger
                         # returned the distance reading
