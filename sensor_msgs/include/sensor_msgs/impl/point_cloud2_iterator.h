@@ -322,7 +322,7 @@ PointCloud2IteratorBase<T, U> PointCloud2IteratorBase<T, U>::operator +(int i)
   PointCloud2IteratorBase<T, U> res = *this;
 
   res.data_char_ += i*point_step_;
-  res.data_ = reinterpret_cast<T*>(data_char_);
+  res.data_ = reinterpret_cast<T*>(res.data_char_);
 
   return res;
 }
