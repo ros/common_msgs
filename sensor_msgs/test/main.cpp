@@ -93,8 +93,7 @@ TEST(sensor_msgs, PointCloud2Iterator)
 
   size_t i=0;
   for(; iter_const_1_x != iter_const_1_x.end(); ++i, ++iter_const_1_x, ++iter_const_2_x, ++iter_const_1_y, ++iter_const_2_y,
-                               ++iter_const_1_z, ++iter_const_2_z, ++iter_const_1_r, ++iter_const_2_r,
-                               ++iter_const_1_g, ++iter_const_2_g, ++iter_const_1_b, ++iter_const_2_b) {
+                               ++iter_const_1_z, ++iter_const_2_z, ++iter_const_1_r, ++iter_const_1_g, ++iter_const_1_b) {
     EXPECT_EQ(*iter_const_1_x, *iter_const_2_x);
     EXPECT_EQ(*iter_const_1_x, point_data[0+3*i]);
     EXPECT_EQ(*iter_const_1_y, *iter_const_2_y);
@@ -107,6 +106,10 @@ TEST(sensor_msgs, PointCloud2Iterator)
     EXPECT_EQ(*iter_const_1_g, color_data[3*i+1]);
     EXPECT_EQ(*iter_const_1_b, *iter_const_2_b);
     EXPECT_EQ(*iter_const_1_b, color_data[3*i+2]);
+    // This is to test the different operators
+    ++iter_const_2_r;
+    iter_const_2_g += 1;
+    iter_const_2_b = iter_const_2_b + 1;
   }
   EXPECT_EQ(i, n_points);
 }

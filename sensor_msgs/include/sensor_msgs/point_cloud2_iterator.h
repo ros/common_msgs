@@ -14,7 +14,7 @@
  *     copyright notice, this list of conditions and the following
  *     disclaimer in the documentation and/or other materials provided
  *     with the distribution.
- *   * Neither the name of Willow Garage, Inc. nor the names of its
+ *   * Neither the name of Open Source Robotics Foundation nor the names of its
  *     contributors may be used to endorse or promote products derived
  *     from this software without specific prior written permission.
  *
@@ -75,8 +75,8 @@
  *   // the type of you would like returned: it is not necessary the type of the PointField as sometimes
  *   // you pack data in another type (e.g. 3 uchar + 1 uchar for RGB are packed in a float)
  *   sensor_msgs::PointCloud2Iterator<float> iter_x(cloud_msg, "x");
- *   sensor_msgs::PointCloud2Iterator<float> iter_x(cloud_msg, "y");
- *   sensor_msgs::PointCloud2Iterator<float> iter_x(cloud_msg, "z");
+ *   sensor_msgs::PointCloud2Iterator<float> iter_y(cloud_msg, "y");
+ *   sensor_msgs::PointCloud2Iterator<float> iter_z(cloud_msg, "z");
  *   // Even though the r,g,b,a fields do not exist (it's usually rgb, rgba), you can create iterators for
  *   // those: they will handle data packing for you (in little endian RGB is packed as *,R,G,B in a float
  *   // and RGBA as A,R,G,B)
@@ -168,68 +168,69 @@ protected:
 namespace
 {
 /** Private base class for PointCloud2Iterator and PointCloud2ConstIterator
- * T is the type of the value to be retrieved
+ * T is the type of the value on which the child class will be templated
+ * TT is the type of the value to be retrieved (same as T except for constness)
  * U is the type of the raw data in PointCloud2 (only uchar and const uchar are supported)
+ * C is the type of the pointcloud to intialize from (const or not)
+ * V is the derived class (yop, curiously recurring template pattern)
  */
-template<typename T, typename U>
+template<typename T, typename TT, typename U, typename C, template <typename> class V>
 class PointCloud2IteratorBase
 {
 public:
   /**
-   * @param cloud_msg The PointCloud2 to iterate upon
-   * @param field_name The field to iterate upon
    */
-  void initialize(sensor_msgs::PointCloud2 &cloud_msg, const std::string &field_name);
+  PointCloud2IteratorBase();
 
-  /** Const version of the above
+  /**
    * @param cloud_msg The PointCloud2 to iterate upon
    * @param field_name The field to iterate upon
    */
-  void initialize(const sensor_msgs::PointCloud2 &cloud_msg, const std::string &field_name);
+  PointCloud2IteratorBase(C &cloud_msg, const std::string &field_name);
 
   /** Assignment operator
    * @param iter the iterator to copy data from
    * @return a reference to *this
    */
-  PointCloud2IteratorBase<T, U>& operator =(const  PointCloud2IteratorBase<T, U>& iter);
+  V<T>& operator =(const V<T>& iter);
 
   /** Access the i th element starting at the current pointer (useful when a field has several elements of the same
    * type)
    * @param i
    * @return a reference to the i^th value from the current position
    */
-  T& operator [](size_t i) const;
+  TT& operator [](size_t i) const;
 
   /** Dereference the iterator. Equivalent to accessing it through [0]
    * @return the value to which the iterator is pointing
    */
-  T& operator *() const;
+  TT& operator *() const;
 
   /** Increase the iterator to the next element
    * @return a reference to the updated iterator
    */
-  PointCloud2IteratorBase<T, U>& operator ++();
+  V<T>& operator ++();
 
   /** Basic pointer addition
    * @param i the amount to increase the iterator by
    * @return an iterator with an increased position
    */
-  PointCloud2IteratorBase<T, U> operator +(int i);
+  V<T> operator +(int i);
 
   /** Increase the iterator by a certain amount
    * @return a reference to the updated iterator
    */
-  PointCloud2IteratorBase<T, U>& operator +=(int i);
+  V<T>& operator +=(int i);
 
   /** Compare to another iterator
    * @return whether the current iterator points to a different address than the other one
    */
-  bool operator !=(const PointCloud2IteratorBase<T, U>& iter) const;
+  bool operator !=(const V<T>& iter) const;
 
   /** Return the end iterator
    * @return the end iterator (useful when performing normal iterator processing with ++)
    */
-  PointCloud2IteratorBase<T, U> end() const;
+  V<T> end() const;
 
 private:
   /** Common code to set the field of the PointCloud2
@@ -244,9 +245,9 @@ private:
   /** The raw data  in uchar* where the iterator is */
   U* data_char_;
   /** The cast data where the iterator is */
-  T* data_;
+  TT* data_;
   /** The end() pointer of the iterator */
-  T* data_end_;
+  TT* data_end_;
   /** Whether the fields are stored as bigendian */
   bool is_bigendian_;
 };
@@ -278,28 +279,22 @@ namespace sensor_msgs
  * and then access R,G,B through  iter_rgb[0], iter_rgb[1], iter_rgb[2]
  */
 template<typename T>
-class PointCloud2Iterator : public PointCloud2IteratorBase<T, unsigned char>
+class PointCloud2Iterator : public PointCloud2IteratorBase<T, T, unsigned char, sensor_msgs::PointCloud2, PointCloud2Iterator>
 {
 public:
-  /**
-   * @param cloud_msg The PointCloud2 to iterate upon
-   * @param field_name The field to iterate upon
-   */
-  PointCloud2Iterator(sensor_msgs::PointCloud2 &cloud_msg, const std::string &field_name);
+  PointCloud2Iterator(sensor_msgs::PointCloud2 &cloud_msg, const std::string &field_name) :
+    PointCloud2IteratorBase<T, T, unsigned char, sensor_msgs::PointCloud2, PointCloud2Iterator>::PointCloud2IteratorBase(cloud_msg, field_name) {}
 };
 
 /**
  * \brief Same as a PointCloud2Iterator but for const data
  */
 template<typename T>
-class PointCloud2ConstIterator : public PointCloud2IteratorBase<const T, const unsigned char>
+class PointCloud2ConstIterator : public PointCloud2IteratorBase<T, const T, const unsigned char, const sensor_msgs::PointCloud2, PointCloud2ConstIterator>
 {
 public:
-  /**
-   * @param cloud_msg The PointCloud2 to iterate upon
-   * @param field_name The field to iterate upon
-   */
-  PointCloud2ConstIterator(const sensor_msgs::PointCloud2 &cloud_msg, const std::string &field_name);
+  PointCloud2ConstIterator(const sensor_msgs::PointCloud2 &cloud_msg, const std::string &field_name) :
+    PointCloud2IteratorBase<T, const T, const unsigned char, const sensor_msgs::PointCloud2, PointCloud2ConstIterator>::PointCloud2IteratorBase(cloud_msg, field_name) {}
 };
 }
 
