@@ -2,6 +2,13 @@
 Changelog for package sensor_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* add a test for the operator+ fix
+  The behavior of that operator also had to be fixed to return a proper child class
+* fix critical bug with operator+
+* Contributors: Michael Ferguson, Vincent Rabaud
+
 1.11.4 (2014-06-19)
 -------------------
 * Fix bug caused by use of va_arg in argument list.
