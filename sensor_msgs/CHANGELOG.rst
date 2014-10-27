@@ -2,8 +2,8 @@
 Changelog for package sensor_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.11.5 (2014-10-27)
+-------------------
 * add a test for the operator+ fix
   The behavior of that operator also had to be fixed to return a proper child class
 * fix critical bug with operator+
