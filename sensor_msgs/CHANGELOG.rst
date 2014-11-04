@@ -2,8 +2,8 @@
 Changelog for package sensor_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.11.6 (2014-11-04)
+-------------------
 * Fix compilation with Clang
 * Contributors: jmtatsch
 
