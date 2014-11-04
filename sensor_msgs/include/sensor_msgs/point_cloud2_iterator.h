@@ -283,7 +283,7 @@ class PointCloud2Iterator : public PointCloud2IteratorBase<T, T, unsigned char, 
 {
 public:
   PointCloud2Iterator(sensor_msgs::PointCloud2 &cloud_msg, const std::string &field_name) :
-    PointCloud2IteratorBase<T, T, unsigned char, sensor_msgs::PointCloud2, PointCloud2Iterator>::PointCloud2IteratorBase(cloud_msg, field_name) {}
+    PointCloud2IteratorBase<T, T, unsigned char, sensor_msgs::PointCloud2, sensor_msgs::PointCloud2Iterator>::PointCloud2IteratorBase(cloud_msg, field_name) {}
 };
 
 /**
@@ -294,7 +294,7 @@ class PointCloud2ConstIterator : public PointCloud2IteratorBase<T, const T, cons
 {
 public:
   PointCloud2ConstIterator(const sensor_msgs::PointCloud2 &cloud_msg, const std::string &field_name) :
-    PointCloud2IteratorBase<T, const T, const unsigned char, const sensor_msgs::PointCloud2, PointCloud2ConstIterator>::PointCloud2IteratorBase(cloud_msg, field_name) {}
+    PointCloud2IteratorBase<T, const T, const unsigned char, const sensor_msgs::PointCloud2, sensor_msgs::PointCloud2ConstIterator>::PointCloud2IteratorBase(cloud_msg, field_name) {}
 };
 }
 
