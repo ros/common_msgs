@@ -6,13 +6,26 @@ find_package(catkin REQUIRED COMPONENTS message_generation std_msgs)
 add_message_files(
   DIRECTORY msg
   FILES
+  Line.msg
+  Line2D.msg
+  Line2DArray.msg
+  Line2DStamped.msg
+  LineArray.msg
+  LineStamped.msg
   Point.msg
+  Point2D.msg
+  Point2DArray.msg
+  Point2DStamped.msg
   Point32.msg
   PointStamped.msg
   Polygon.msg
   PolygonStamped.msg
   Pose2D.msg
   Pose.msg
+  Pose2D.msg
+  Pose2DArray.msg
+  Pose2DWithCovariance.msg
+  Pose2DWithCovarianceStamped.msg
   PoseArray.msg
   PoseStamped.msg
   PoseWithCovariance.msg
