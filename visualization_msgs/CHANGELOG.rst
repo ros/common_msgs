@@ -2,8 +2,8 @@
 Changelog for package visualization_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.12.0 (2014-12-29)
+-------------------
 * Enable DELETEALL=3 definition for marker action. Fixes `#39 <https://github.com/ros/common_msgs/issues/39>`_
 * Contributors: Tully Foote
 
