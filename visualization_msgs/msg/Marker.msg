@@ -16,7 +16,7 @@ uint8 TRIANGLE_LIST=11
 uint8 ADD=0
 uint8 MODIFY=0
 uint8 DELETE=2
-#uint8 DELETEALL=3 # TODO: enable for ROS-J, disabled for now but functionality is still there. Allows one to clear all markers in plugin
+uint8 DELETEALL=3
 
 Header header                        # header for time/frame information
 string ns                            # Namespace to place this object in... used in conjunction with id to create a unique name for the object
