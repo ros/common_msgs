@@ -5,7 +5,7 @@
     This package holds the diagnostic messages which provide the
     standardized interface for the diagnostic and runtime monitoring
     systems in ROS. These messages are currently used by
-    the <a href="http://ros.org/wiki/diagnostics">diagnostics</a>
+    the <a href="http://wiki.ros.org/diagnostics">diagnostics</a>
     Stack, which provides libraries for simple ways to set and access
     the messages, as well as automated ways to process the diagnostic
     data.
@@ -16,7 +16,7 @@
   <maintainer email="tfoote@osrfoundation.org">Tully Foote</maintainer>
   <license>BSD</license>
 
-  <url>http://ros.org/wiki/diagnostic_msgs</url>
+  <url>http://wiki.ros.org/diagnostic_msgs</url>
   <author email="tfoote@osrfoundation.org">Tully Foote</author>
 
   <buildtool_depend>catkin</buildtool_depend>

@@ -9,7 +9,7 @@
   <maintainer email="tfoote@osrfoundation.org">Tully Foote</maintainer>
   <license>BSD</license>
 
-  <url>http://ros.org/wiki/trajectory_msgs</url>
+  <url>http://wiki.ros.org/trajectory_msgs</url>
   <author>Stuart Glaser</author>
 
   <buildtool_depend>catkin</buildtool_depend>

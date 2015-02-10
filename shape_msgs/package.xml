@@ -8,7 +8,7 @@
   <maintainer email="isucan@willowgarage.com">Ioan Sucan</maintainer>
   <license>BSD</license>
 
-  <url>http://ros.org/wiki/shape_msgs</url>
+  <url>http://wiki.ros.org/shape_msgs</url>
   <author>Ioan Sucan</author>
 
   <buildtool_depend>catkin</buildtool_depend>

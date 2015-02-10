@@ -2,7 +2,7 @@
 # to the coordinate frame child_frame_id
 #
 # This message is mostly used by the 
-# <a href="http://www.ros.org/wiki/tf">tf</a> package. 
+# <a href="http://wiki.ros.org/tf">tf</a> package. 
 # See its documentation for more information.
 
 Header header

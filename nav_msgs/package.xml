@@ -3,12 +3,12 @@
   <version>1.12.0</version>
   <description>
     nav_msgs defines the common messages used to interact with the
-    <a href="http://ros.org/wiki/navigation">navigation</a> stack.
+    <a href="http://wiki.ros.org/navigation">navigation</a> stack.
   </description>
   <maintainer email="tfoote@osrfoundation.org">Tully Foote</maintainer>
   <license>BSD</license>
 
-  <url>http://ros.org/wiki/nav_msgs</url>
+  <url>http://wiki.ros.org/nav_msgs</url>
   <author>Tully Foote</author>
 
   <buildtool_depend>catkin</buildtool_depend>
