@@ -2,6 +2,11 @@
 Changelog for package stereo_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* updating outdated urls. fixes `#52 <https://github.com/ros/common_msgs/issues/52>`_.
+* Contributors: Tully Foote
+
 1.12.0 (2014-12-29)
 -------------------
 

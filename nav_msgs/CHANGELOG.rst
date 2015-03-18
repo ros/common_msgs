@@ -2,6 +2,12 @@
 Changelog for package nav_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* updating outdated urls. fixes `#52 <https://github.com/ros/common_msgs/issues/52>`_.
+* Adds a SetMap service message to support swap maps functionality in amcl
+* Contributors: Tully Foote, liz-murphy
+
 1.12.0 (2014-12-29)
 -------------------
 
