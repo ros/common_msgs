@@ -1,5 +1,6 @@
- nav_msgs/OccupancyGrid map
- geometry_msgs/Pose initial_pose
- ---
- bool success
+# Set a new map together with an initial pose
+nav_msgs/OccupancyGrid map
+geometry_msgs/PoseWithCovarianceStamped initial_pose
+---
+bool success
 
