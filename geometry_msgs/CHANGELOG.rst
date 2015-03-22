@@ -2,8 +2,8 @@
 Changelog for package geometry_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.12.2 (2015-03-21)
+-------------------
 * Add Accel, AccelStamped, AccelWithCovariance, AccelWithCovarianceStamped message definitions
 * Add Inertia and InertiaStamped messages
 * Contributors: Jonathan Bohren, Paul Bovbel
