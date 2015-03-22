@@ -2,6 +2,9 @@
 Changelog for package diagnostic_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 1.12.1 (2015-03-17)
 -------------------
 * updating outdated urls. fixes `#52 <https://github.com/ros/common_msgs/issues/52>`_.
