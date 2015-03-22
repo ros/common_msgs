@@ -6,6 +6,10 @@ find_package(catkin REQUIRED COMPONENTS message_generation std_msgs)
 add_message_files(
   DIRECTORY msg
   FILES
+  Accel.msg
+  AccelStamped.msg
+  AccelWithCovariance.msg
+  AccelWithCovarianceStamped.msg
   Point.msg
   Point32.msg
   PointStamped.msg
