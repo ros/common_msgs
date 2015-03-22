@@ -2,6 +2,12 @@
 Changelog for package nav_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* change type of initial_pose in SetMap service to PoseWithCovarianceStamped
+* Adds a SetMap service message to support swap maps functionality in amcl
+* Contributors: Stephan Wirth, liz-murphy
+
 1.11.6 (2014-11-04)
 -------------------
 
