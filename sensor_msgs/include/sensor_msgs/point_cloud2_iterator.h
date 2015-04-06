@@ -163,9 +163,8 @@ protected:
   /** A reference to the original sensor_msgs::PointCloud2 that we read */
   PointCloud2& cloud_msg_;
 };
-}
 
-namespace
+namespace impl
 {
 /** Private base class for PointCloud2Iterator and PointCloud2ConstIterator
  * T is the type of the value on which the child class will be templated
@@ -253,8 +252,6 @@ private:
 };
 }
 
-namespace sensor_msgs
-{
 /**
  * \brief Class that can iterate over a PointCloud2
  *
@@ -279,22 +276,22 @@ namespace sensor_msgs
  * and then access R,G,B through  iter_rgb[0], iter_rgb[1], iter_rgb[2]
  */
 template<typename T>
-class PointCloud2Iterator : public PointCloud2IteratorBase<T, T, unsigned char, sensor_msgs::PointCloud2, PointCloud2Iterator>
+class PointCloud2Iterator : public impl::PointCloud2IteratorBase<T, T, unsigned char, sensor_msgs::PointCloud2, PointCloud2Iterator>
 {
 public:
   PointCloud2Iterator(sensor_msgs::PointCloud2 &cloud_msg, const std::string &field_name) :
-    PointCloud2IteratorBase<T, T, unsigned char, sensor_msgs::PointCloud2, sensor_msgs::PointCloud2Iterator>::PointCloud2IteratorBase(cloud_msg, field_name) {}
+    impl::PointCloud2IteratorBase<T, T, unsigned char, sensor_msgs::PointCloud2, sensor_msgs::PointCloud2Iterator>::PointCloud2IteratorBase(cloud_msg, field_name) {}
 };
 
 /**
  * \brief Same as a PointCloud2Iterator but for const data
  */
 template<typename T>
-class PointCloud2ConstIterator : public PointCloud2IteratorBase<T, const T, const unsigned char, const sensor_msgs::PointCloud2, PointCloud2ConstIterator>
+class PointCloud2ConstIterator : public impl::PointCloud2IteratorBase<T, const T, const unsigned char, const sensor_msgs::PointCloud2, PointCloud2ConstIterator>
 {
 public:
   PointCloud2ConstIterator(const sensor_msgs::PointCloud2 &cloud_msg, const std::string &field_name) :
-    PointCloud2IteratorBase<T, const T, const unsigned char, const sensor_msgs::PointCloud2, sensor_msgs::PointCloud2ConstIterator>::PointCloud2IteratorBase(cloud_msg, field_name) {}
+    impl::PointCloud2IteratorBase<T, const T, const unsigned char, const sensor_msgs::PointCloud2, sensor_msgs::PointCloud2ConstIterator>::PointCloud2IteratorBase(cloud_msg, field_name) {}
 };
 }
 
