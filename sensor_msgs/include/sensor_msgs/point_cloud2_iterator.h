@@ -55,7 +55,7 @@
  *   // 4 is for the number of added fields. Each come in triplet: the name of the PointField,
  *   // the number of occurences of the type in the PointField, the type of the PointField
  *   sensor_msgs::PointCloud2Modifier modifier(cloud_msg);
- *   modifier.setPointCloud2FieldsByString(4, "x", 1, sensor_msgs::PointField::FLOAT32,
+ *   modifier.setPointCloud2Fields(4, "x", 1, sensor_msgs::PointField::FLOAT32,
  *                                            "y", 1, sensor_msgs::PointField::FLOAT32,
  *                                            "z", 1, sensor_msgs::PointField::FLOAT32,
  *                                            "rgb", 1, sensor_msgs::PointField::FLOAT32);
@@ -64,6 +64,8 @@
  *   // so it is definitely the solution of choice for PointXYZ and PointXYZRGB
  *   // 2 is for the number of fields to add
  *   modifier.setPointCloud2FieldsByString(2, "xyz", "rgb");
+ *   // You can then reserve / resize as usual
+ *   modifier.resize(100);
  * </PRE>
  *
  * The second set allow you to traverse your PointCloud using an iterator:
@@ -138,7 +140,7 @@ public:
    *
    * E.g, you create your PointCloud2 message with XYZ/RGB as follows:
    * <PRE>
-   *   setPointCloud2FieldsByString(cloud_msg, 4, "x", 1, sensor_msgs::PointField::FLOAT32,
+   *   setPointCloud2Fields(cloud_msg, 4, "x", 1, sensor_msgs::PointField::FLOAT32,
    *                                              "y", 1, sensor_msgs::PointField::FLOAT32,
    *                                              "z", 1, sensor_msgs::PointField::FLOAT32,
    *                                              "rgb", 1, sensor_msgs::PointField::FLOAT32);
