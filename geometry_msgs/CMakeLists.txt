@@ -10,6 +10,8 @@ add_message_files(
   AccelStamped.msg
   AccelWithCovariance.msg
   AccelWithCovarianceStamped.msg
+  Inertia.msg
+  InertiaStamped.msg
   Point.msg
   Point32.msg
   PointStamped.msg
