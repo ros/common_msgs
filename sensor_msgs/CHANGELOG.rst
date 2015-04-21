@@ -2,8 +2,8 @@
 Changelog for package sensor_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.11.8 (2015-04-20)
+-------------------
 * remove warning due to anonymous namespace
 * Contributors: Vincent Rabaud
 
