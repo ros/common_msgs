@@ -113,6 +113,26 @@ namespace sensor_msgs
       return encoding == MONO8 || encoding == MONO16;
     }
 
+    static inline bool isBGR(const std::string& encoding)
+    {
+      return encoding == BGR8 || encoding == BGR16;
+    }
+
+    static inline bool isRGB(const std::string& encoding)
+    {
+      return encoding == RGB8 || encoding == RGB16;
+    }
+
+    static inline bool isBGRA(const std::string& encoding)
+    {
+      return encoding == BGRA8 || encoding == BGRA16;
+    }
+
+    static inline bool isRGBA(const std::string& encoding)
+    {
+      return encoding == RGBA8 || encoding == RGBA16;
+    }
+
     static inline bool isBayer(const std::string& encoding)
     {
       return encoding == BAYER_RGGB8 || encoding == BAYER_BGGR8 ||
