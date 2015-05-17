@@ -11,6 +11,7 @@ Header header    	# timestamp in the header is the time the ranger
 # If you want a value added to this list, send an email to the ros-users list
 uint8 ULTRASOUND=0
 uint8 INFRARED=1
+uint8 LASER=2
 
 uint8 radiation_type    # the type of radiation used by the sensor
 		 	# (sound, IR, etc) [enum]
