@@ -40,6 +40,7 @@
 
 #include <sensor_msgs/PointCloud.h>
 #include <sensor_msgs/PointCloud2.h>
+#include <sensor_msgs/point_field_conversion.h>
 
 /** 
   * \brief Convert between the old (sensor_msgs::PointCloud) and the new (sensor_msgs::PointCloud2) format.
@@ -115,15 +116,6 @@ static inline bool convertPointCloudToPointCloud2 (const sensor_msgs::PointCloud
     */ 
 static inline bool convertPointCloud2ToPointCloud (const sensor_msgs::PointCloud2 &input, sensor_msgs::PointCloud &output)
 {
-  // Get all fields size and check if we have non-float32 values
-  for (size_t d = 0; d < input.fields.size (); ++d)
-  {
-    if (input.fields[d].datatype != sensor_msgs::PointField::FLOAT32)
-    {
-      std::cerr << boost::str(boost::format("sensor_msgs::PointCloud accepts only float32 values, but field %d (%s) has field type %d!")%(int)d% input.fields[d].name%input.fields[d].datatype) << std::endl;
-    }
-  }
-
   output.header = input.header;
   output.points.resize (input.width * input.height);
   output.channels.resize (input.fields.size () - 3);
@@ -139,6 +131,9 @@ static inline bool convertPointCloud2ToPointCloud (const sensor_msgs::PointCloud
   int x_offset = input.fields[x_idx].offset;
   int y_offset = input.fields[y_idx].offset;
   int z_offset = input.fields[z_idx].offset;
+  uint8_t x_datatype = input.fields[x_idx].datatype;
+  uint8_t y_datatype = input.fields[y_idx].datatype;
+  uint8_t z_datatype = input.fields[z_idx].datatype;
    
   // Convert the fields to channels
   int cur_c = 0;
@@ -155,16 +150,16 @@ static inline bool convertPointCloud2ToPointCloud (const sensor_msgs::PointCloud
   for (size_t cp = 0; cp < output.points.size (); ++cp)
   {
     // Copy x/y/z
-    memcpy (&output.points[cp].x, &input.data[cp * input.point_step + x_offset], sizeof (float));
-    memcpy (&output.points[cp].y, &input.data[cp * input.point_step + y_offset], sizeof (float));
-    memcpy (&output.points[cp].z, &input.data[cp * input.point_step + z_offset], sizeof (float));
+    output.points[cp].x = sensor_msgs::readPointCloud2BufferValue<float>(&input.data[cp * input.point_step + x_offset], x_datatype);
+    output.points[cp].y = sensor_msgs::readPointCloud2BufferValue<float>(&input.data[cp * input.point_step + y_offset], y_datatype);
+    output.points[cp].z = sensor_msgs::readPointCloud2BufferValue<float>(&input.data[cp * input.point_step + z_offset], z_datatype);
     // Copy the rest of the data
     int cur_c = 0;
     for (size_t d = 0; d < input.fields.size (); ++d)
     {
       if ((int)input.fields[d].offset == x_offset || (int)input.fields[d].offset == y_offset || (int)input.fields[d].offset == z_offset)
         continue;
-      memcpy (&output.channels[cur_c++].values[cp], &input.data[cp * input.point_step + input.fields[d].offset], sizeof (float));
+      output.channels[cur_c++].values[cp] = sensor_msgs::readPointCloud2BufferValue<float>(&input.data[cp * input.point_step + input.fields[d].offset], input.fields[d].datatype);
     }
   }
   return (true);
