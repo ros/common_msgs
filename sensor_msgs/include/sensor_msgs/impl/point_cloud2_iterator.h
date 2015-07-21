@@ -201,6 +201,8 @@ inline void PointCloud2Modifier::setPointCloud2FieldsByString(int n_fields, ...)
   va_list vl;
   va_start(vl, n_fields);
   int offset = 0;
+  bool has_xyz = false;
+  bool has_rgb = false;
   for (int i = 0; i < n_fields; ++i) {
     // Create the corresponding PointFields
     std::string
@@ -211,15 +213,20 @@ inline void PointCloud2Modifier::setPointCloud2FieldsByString(int n_fields, ...)
       offset = addPointField(cloud_msg_, "x", 1, sensor_msgs::PointField::FLOAT32, offset);
       offset = addPointField(cloud_msg_, "y", 1, sensor_msgs::PointField::FLOAT32, offset);
       offset = addPointField(cloud_msg_, "z", 1, sensor_msgs::PointField::FLOAT32, offset);
-      offset += sizeOfPointField(sensor_msgs::PointField::FLOAT32);
+      has_xyz = true;
     } else
       if ((field_name == "rgb") || (field_name == "rgba")) {
         offset = addPointField(cloud_msg_, field_name, 1, sensor_msgs::PointField::FLOAT32, offset);
-        offset += 3 * sizeOfPointField(sensor_msgs::PointField::FLOAT32);
+        has_rgb = true;
       } else
         throw std::runtime_error("Field " + field_name + " does not exist");
   }
   va_end(vl);
+
+  if (has_xyz && !has_rgb)
+    offset += sizeOfPointField(sensor_msgs::PointField::FLOAT32);
+  else if (!has_xyz && has_rgb)
+    offset += 3 * sizeOfPointField(sensor_msgs::PointField::FLOAT32);
 
   // Resize the point cloud accordingly
   cloud_msg_.point_step = offset;
