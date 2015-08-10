@@ -189,7 +189,7 @@ inline void PointCloud2Modifier::setPointCloud2Fields(int n_fields, ...)
  *        internals of the PointCloud2
  * @param n_fields the number of fields to add. The fields are given as
  *        strings: "xyz" (3 floats), "rgb" (3 uchar stacked in a float),
- *        "rgba" (4 uchar stacked in a float)
+ *        "rgba" (4 uchar stacked in a uint32)
  * @return void
  *
  * WARNING: THIS FUNCTION DOES ADD ANY NECESSARY PADDING TRANSPARENTLY
@@ -215,8 +215,11 @@ inline void PointCloud2Modifier::setPointCloud2FieldsByString(int n_fields, ...)
       offset = addPointField(cloud_msg_, "z", 1, sensor_msgs::PointField::FLOAT32, offset);
       has_xyz = true;
     } else
-      if ((field_name == "rgb") || (field_name == "rgba")) {
+      if (field_name == "rgb") {
         offset = addPointField(cloud_msg_, field_name, 1, sensor_msgs::PointField::FLOAT32, offset);
+        has_rgb = true;
+      } else if (field_name == "rgba") {
+        offset = addPointField(cloud_msg_, field_name, 1, sensor_msgs::PointField::UINT32, offset);
         has_rgb = true;
       } else
         throw std::runtime_error("Field " + field_name + " does not exist");
