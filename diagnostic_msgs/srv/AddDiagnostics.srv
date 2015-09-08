@@ -1,0 +1,6 @@
+# Namespace containing parameters to use to set up additional diagnostics, in
+# the format expected by the diagnostic aggregator.
+string load_namespace 
+---
+bool success # True if diagnostic aggregator was updated with new diagnostics
+string message # Message with information about success or failure
