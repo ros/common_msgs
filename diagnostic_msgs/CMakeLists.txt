@@ -13,10 +13,10 @@ add_message_files(
 add_service_files(
   DIRECTORY srv
   FILES
-  SelfTest.srv
   AddDiagnostics.srv
+  ListDiagnostics.srv
   RemoveDiagnostics.srv
-  ListDiagnostics.srv)
+  SelfTest.srv)
 
 generate_messages(DEPENDENCIES std_msgs)
 
