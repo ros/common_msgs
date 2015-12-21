@@ -13,6 +13,7 @@ include_directories(include)
 add_message_files(
   DIRECTORY msg
   FILES
+  BatteryState.msg
   CameraInfo.msg
   ChannelFloat32.msg
   CompressedImage.msg
