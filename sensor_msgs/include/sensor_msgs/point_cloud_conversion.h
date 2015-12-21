@@ -117,7 +117,9 @@ static inline bool convertPointCloud2ToPointCloud (const sensor_msgs::PointCloud
   {
     if (input.fields[d].datatype != sensor_msgs::PointField::FLOAT32)
     {
-      std::cerr << boost::str(boost::format("sensor_msgs::PointCloud accepts only float32 values, but field %d (%s) has field type %d!")%(int)d% input.fields[d].name%input.fields[d].datatype) << std::endl;
+      std::cerr << "sensor_msgs::PointCloud accepts only float32 values, but field "\
+                <<(int)d << "( " << input.fields[d].name <<") has field type " << input.fields[d].datatype << "!" << std::endl;
+    return (false);
     }
   }
 
