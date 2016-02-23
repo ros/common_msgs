@@ -2,6 +2,11 @@
 Changelog for package geometry_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* clarify the definition of a Vector3
+* Contributors: Vincent Rabaud
+
 1.12.3 (2015-04-20)
 -------------------
 * geometry_msgs/InertiaStamped uses geometry_msgs/Inertia.
