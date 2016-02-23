@@ -2,8 +2,8 @@
 Changelog for package geometry_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.12.4 (2016-02-22)
+-------------------
 * clarify the definition of a Vector3
 * Contributors: Vincent Rabaud
 
