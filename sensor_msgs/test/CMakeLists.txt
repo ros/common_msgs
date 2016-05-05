@@ -1,2 +1,5 @@
 include_directories(${catkin_INCLUDE_DIRS})
 catkin_add_gtest(sensor_msgs_test main.cpp)
+if(TARGET sensor_msgs_test)
+  add_dependencies(sensor_msgs_test ${sensor_msgs_EXPORTED_TARGETS})
+endif()
