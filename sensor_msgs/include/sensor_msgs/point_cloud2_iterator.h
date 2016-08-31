@@ -53,7 +53,7 @@
  *   cloud_msgs.height = 1;  cloud_msgs.width = 4;
  *   // Set the point fields to xyzrgb and resize the vector with the following command
  *   // 4 is for the number of added fields. Each come in triplet: the name of the PointField,
- *   // the number of occurences of the type in the PointField, the type of the PointField
+ *   // the number of occurrences of the type in the PointField, the type of the PointField
  *   sensor_msgs::PointCloud2Modifier modifier(cloud_msg);
  *   modifier.setPointCloud2Fields(4, "x", 1, sensor_msgs::PointField::FLOAT32,
  *                                            "y", 1, sensor_msgs::PointField::FLOAT32,

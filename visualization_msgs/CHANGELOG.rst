@@ -179,6 +179,6 @@ Changelog for package visualization_msgs
 * added more functions to include/visualization_msgs/interactive_marker_tools.h
 * added initial version of interactive marker messages
 * rosbuild2 taking shape
-* removing old exports for msg/cpp and reving to 1.3.7 in preperation for release
+* removing old exports for msg/cpp and reving to 1.3.7 in preparation for release
 * update rosbagmigration dependency (`#4510 <https://github.com/ros/common_msgs/issues/4510>`_)
 * add visualization_msgs to common_msgs
