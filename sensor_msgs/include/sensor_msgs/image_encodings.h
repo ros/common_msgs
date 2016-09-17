@@ -154,23 +154,27 @@ namespace sensor_msgs
         return 1;
 
       // Now all the generic content encodings
-#define CHECK_CHANNELS(N)                       \
-      if (encoding == TYPE_8UC##N  ||           \
-          encoding == TYPE_8SC##N  ||           \
-          encoding == TYPE_16UC##N ||           \
-          encoding == TYPE_16SC##N ||           \
-          encoding == TYPE_32SC##N ||           \
-          encoding == TYPE_32FC##N ||           \
-          encoding == TYPE_64FC##N)             \
-        return N;                               \
-      /***/
-      
-      CHECK_CHANNELS(1);
-      CHECK_CHANNELS(2);
-      CHECK_CHANNELS(3);
-      CHECK_CHANNELS(4);
-
-#undef CHECK_CHANNELS
+      // TODO: Rewrite with regex when ROS supports C++11
+      std::vector<std::string> prefixes;
+      prefixes.push_back("8UC");
+      prefixes.push_back("8SC");
+      prefixes.push_back("16UC");
+      prefixes.push_back("16SC");
+      prefixes.push_back("32SC");
+      prefixes.push_back("32FC");
+      prefixes.push_back("64FC");
+      for (size_t i=0; i < prefixes.size(); i++)
+      {
+        std::string prefix = prefixes[i];
+        if (encoding.substr(0, prefix.size()) != prefix)
+          continue;
+        if (encoding.size() == prefix.size())
+          return 1;  // ex. 8UC -> 1
+        int n_channel = atoi(encoding.substr(prefix.size(),
+                                             encoding.size() - prefix.size()).c_str());  // ex. 8UC5 -> 5
+        if (n_channel != 0)
+          return n_channel;  // valid encoding string
+      }
 
       if (encoding == YUV422)
         return 2;
