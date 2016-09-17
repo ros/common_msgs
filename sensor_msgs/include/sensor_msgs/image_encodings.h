@@ -209,24 +209,28 @@ namespace sensor_msgs
           encoding == BAYER_GRBG16)
         return 16;
 
-      // B = bits (8, 16, ...), T = type (U, S, F)
-#define CHECK_BIT_DEPTH(B, T)                   \
-      if (encoding == TYPE_##B##T##C1 ||        \
-          encoding == TYPE_##B##T##C2 ||        \
-          encoding == TYPE_##B##T##C3 ||        \
-          encoding == TYPE_##B##T##C4)          \
-        return B;                               \
-      /***/
-
-      CHECK_BIT_DEPTH(8, U);
-      CHECK_BIT_DEPTH(8, S);
-      CHECK_BIT_DEPTH(16, U);
-      CHECK_BIT_DEPTH(16, S);
-      CHECK_BIT_DEPTH(32, S);
-      CHECK_BIT_DEPTH(32, F);
-      CHECK_BIT_DEPTH(64, F);
-
-#undef CHECK_BIT_DEPTH
+      // Now all the generic content encodings
+      // TODO: Rewrite with regex when ROS supports C++11
+      std::vector<std::string> prefixes;
+      prefixes.push_back("8UC");
+      prefixes.push_back("8SC");
+      prefixes.push_back("16UC");
+      prefixes.push_back("16SC");
+      prefixes.push_back("32SC");
+      prefixes.push_back("32FC");
+      prefixes.push_back("64FC");
+      for (size_t i=0; i < prefixes.size(); i++)
+      {
+        std::string prefix = prefixes[i];
+        if (encoding.substr(0, prefix.size()) != prefix)
+          continue;
+        if (encoding.size() == prefix.size())
+          return atoi(prefix.c_str());  // ex. 8UC -> 8
+        int n_channel = atoi(encoding.substr(prefix.size(),
+                                             encoding.size() - prefix.size()).c_str());  // ex. 8UC10 -> 10
+        if (n_channel != 0)
+          return atoi(prefix.c_str());  // valid encoding string
+      }
 
       if (encoding == YUV422)
         return 8;

@@ -54,6 +54,24 @@ TEST(sensor_msgs, NumChannels)
   ASSERT_EQ(sensor_msgs::image_encodings::numChannels("64FC10"), 10);
 }
 
+TEST(sensor_msgs, bitDepth)
+{
+  ASSERT_EQ(sensor_msgs::image_encodings::bitDepth("mono8"), 8);
+  ASSERT_EQ(sensor_msgs::image_encodings::bitDepth("rgb8"), 8);
+  ASSERT_EQ(sensor_msgs::image_encodings::bitDepth("8UC"), 8);
+  ASSERT_EQ(sensor_msgs::image_encodings::bitDepth("8UC3"), 8);
+  ASSERT_EQ(sensor_msgs::image_encodings::bitDepth("8UC10"), 8);
+  ASSERT_EQ(sensor_msgs::image_encodings::bitDepth("16UC"), 16);
+  ASSERT_EQ(sensor_msgs::image_encodings::bitDepth("16UC3"), 16);
+  ASSERT_EQ(sensor_msgs::image_encodings::bitDepth("16UC10"), 16);
+  ASSERT_EQ(sensor_msgs::image_encodings::bitDepth("32SC"), 32);
+  ASSERT_EQ(sensor_msgs::image_encodings::bitDepth("32SC3"), 32);
+  ASSERT_EQ(sensor_msgs::image_encodings::bitDepth("32SC10"), 32);
+  ASSERT_EQ(sensor_msgs::image_encodings::bitDepth("64FC"), 64);
+  ASSERT_EQ(sensor_msgs::image_encodings::bitDepth("64FC3"), 64);
+  ASSERT_EQ(sensor_msgs::image_encodings::bitDepth("64FC10"), 64);
+}
+
 int main(int argc, char** argv)
 {
   ::testing::InitGoogleTest(&argc, argv);
