@@ -99,6 +99,10 @@ namespace sensor_msgs
     // with an 8-bit depth
     const std::string YUV422="yuv422";
 
+    // Prefixes for abstract image encodings
+    const std::string ABSTRACT_ENCODING_PREFIXES[] = {
+        "8UC", "8SC", "16UC", "16SC", "32SC", "32FC", "64FC"};
+
     // Utility functions for inspecting an encoding string
     static inline bool isColor(const std::string& encoding)
     {
@@ -155,17 +159,9 @@ namespace sensor_msgs
 
       // Now all the generic content encodings
       // TODO: Rewrite with regex when ROS supports C++11
-      std::vector<std::string> prefixes;
-      prefixes.push_back("8UC");
-      prefixes.push_back("8SC");
-      prefixes.push_back("16UC");
-      prefixes.push_back("16SC");
-      prefixes.push_back("32SC");
-      prefixes.push_back("32FC");
-      prefixes.push_back("64FC");
-      for (size_t i=0; i < prefixes.size(); i++)
+      for (size_t i=0; i < sizeof(ABSTRACT_ENCODING_PREFIXES) / sizeof(*ABSTRACT_ENCODING_PREFIXES); i++)
       {
-        std::string prefix = prefixes[i];
+        std::string prefix = ABSTRACT_ENCODING_PREFIXES[i];
         if (encoding.substr(0, prefix.size()) != prefix)
           continue;
         if (encoding.size() == prefix.size())
@@ -211,17 +207,9 @@ namespace sensor_msgs
 
       // Now all the generic content encodings
       // TODO: Rewrite with regex when ROS supports C++11
-      std::vector<std::string> prefixes;
-      prefixes.push_back("8UC");
-      prefixes.push_back("8SC");
-      prefixes.push_back("16UC");
-      prefixes.push_back("16SC");
-      prefixes.push_back("32SC");
-      prefixes.push_back("32FC");
-      prefixes.push_back("64FC");
-      for (size_t i=0; i < prefixes.size(); i++)
+      for (size_t i=0; i < sizeof(ABSTRACT_ENCODING_PREFIXES) / sizeof(*ABSTRACT_ENCODING_PREFIXES); i++)
       {
-        std::string prefix = prefixes[i];
+        std::string prefix = ABSTRACT_ENCODING_PREFIXES[i];
         if (encoding.substr(0, prefix.size()) != prefix)
           continue;
         if (encoding.size() == prefix.size())
