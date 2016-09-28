@@ -50,7 +50,7 @@ Changelog for package actionlib_msgs
 
 1.10.5 (2014-02-25)
 -------------------
-* removing usage of catkin function not guarenteed available fixes `#30 <https://github.com/ros/common_msgs/issues/30>`_
+* removing usage of catkin function not guaranteed available fixes `#30 <https://github.com/ros/common_msgs/issues/30>`_
 * Contributors: Tully Foote
 
 1.10.4 (2014-02-18)
