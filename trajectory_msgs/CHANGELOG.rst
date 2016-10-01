@@ -2,6 +2,11 @@
 Changelog for package trajectory_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Fix spelling mistakes
+* Contributors: trorornmn
+
 1.12.4 (2016-02-22)
 -------------------
 
