@@ -2,8 +2,8 @@
 Changelog for package sensor_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.12.5 (2016-09-30)
+-------------------
 * Deal with abstract image encodings
 * Fix spelling mistakes
 * Fix year

@@ -2,8 +2,8 @@
 Changelog for package actionlib_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.12.5 (2016-09-30)
+-------------------
 * Fix spelling mistakes
 * Contributors: trorornmn
 
