@@ -17,7 +17,8 @@ add_service_files(
   FILES
   GetMap.srv
   GetPlan.srv
-  SetMap.srv)
+  SetMap.srv
+  LoadMap.srv)
 
 add_action_files(
   FILES
