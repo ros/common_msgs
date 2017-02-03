@@ -46,6 +46,8 @@
 #ifndef SENSOR_MSGS_POINT_FIELD_CONVERSION_H
 #define SENSOR_MSGS_POINT_FIELD_CONVERSION_H
 
+#include<string>
+
 /** 
   * \brief  This file provides a type to enum mapping for the different
   *         PointField types and methods to read and write in 
@@ -79,6 +81,24 @@ namespace sensor_msgs{
   template<> struct typeAsPointFieldType<float>    { static const uint8_t value = sensor_msgs::PointField::FLOAT32; };
   template<> struct typeAsPointFieldType<double>   { static const uint8_t value = sensor_msgs::PointField::FLOAT64; };
  
+  /*!
+   * \Type names of the PointField data type.
+   */
+  int getPointFieldTypeFromString(std::string field_name){
+    if(field_name == "int8")    return sensor_msgs::PointField::INT8;
+    if(field_name == "uint8")   return sensor_msgs::PointField::UINT8;
+    if(field_name == "int16")   return sensor_msgs::PointField::INT16;
+    if(field_name == "uint16")  return sensor_msgs::PointField::UINT16;
+    if(field_name == "int32")   return sensor_msgs::PointField::INT32;
+    if(field_name == "uint32")  return sensor_msgs::PointField::UINT32;
+    if(field_name == "float32") return sensor_msgs::PointField::FLOAT32;
+    if(field_name == "float64") return sensor_msgs::PointField::FLOAT64;
+    
+    ROS_ERROR_STREAM("Unknown type: \"" << field_name << "\"!");
+    ROS_ERROR_STREAM("Supported types are: int8, uint8, int16, uint16, int32, uint32, float32, float64"); 
+    return -1;
+  }
+
   /*!
    * \Converts a value at the given pointer position, interpreted as the datatype
    *  specified by the given template argument point_field_type, to the given
