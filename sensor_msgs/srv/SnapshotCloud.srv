@@ -1,0 +1,14 @@
+#Request/Reply for Point Cloud as a service
+
+# Request:
+#   dense_cloud = true if the cloud has to be dense (ordered)
+#   exposure in milliseconds (0 indicates autoexposure) 
+bool dense_cloud
+uint32 exposure
+
+---
+
+# Reply:
+#   cloud is the returning point cloud
+sensor_msgs/PointCloud2 cloud 
+
