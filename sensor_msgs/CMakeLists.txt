@@ -43,7 +43,8 @@ add_service_files(
   DIRECTORY srv
   FILES 
   SetCameraInfo.srv
-  SnapshotCloud.srv)
+  SnapshotCloud.srv
+  SnapshotImage.srv)
 
 generate_messages(DEPENDENCIES geometry_msgs std_msgs)
 
