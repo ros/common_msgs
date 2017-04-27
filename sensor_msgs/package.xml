@@ -20,7 +20,10 @@
   <run_depend>message_runtime</run_depend>
   <run_depend>std_msgs</run_depend>
 
+  <test_depend>rosbag</test_depend>
+
   <export>
     <architecture_independent/>
+    <rosbag migration_rule_file="migration_rules/sensor_msgs.bmr"/>
   </export>
 </package>
