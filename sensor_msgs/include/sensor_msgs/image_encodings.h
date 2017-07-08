@@ -115,7 +115,9 @@ namespace sensor_msgs
 
     static inline bool isMono(const std::string& encoding)
     {
-      return encoding == MONO8 || encoding == MONO16;
+      return encoding == MONO8 || encoding == MONO16 ||
+             encoding == "8UC" || encoding == "8UC1" ||
+             encoding == "16UC" || encoding == "16UC1";
     }
 
     static inline bool isBayer(const std::string& encoding)
