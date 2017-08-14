@@ -161,9 +161,23 @@ public:
    * WARNING: THIS FUNCTION DOES ADD ANY NECESSARY PADDING TRANSPARENTLY
    */
   void setPointCloud2FieldsByString(int n_fields, ...);
+
+  class PointFieldInfo{
+    public:
+      PointFieldInfo(std::string name, std::string datatype)
+         : name(name), datatype(datatype){}
+      std::string name;
+      std::string datatype;
+  };
+
+  void addPointCloud2Fields(std::vector<PointFieldInfo> fields);
+  bool addPointCloud2Field(std::string name, std::string datatype);
+
 protected:
   /** A reference to the original sensor_msgs::PointCloud2 that we read */
   PointCloud2& cloud_msg_;
+    /** The current offset for all point fields */
+  int current_offset_;
 };
 
 namespace impl

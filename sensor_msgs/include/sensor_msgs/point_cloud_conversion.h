@@ -41,6 +41,7 @@
 #include <sensor_msgs/PointCloud.h>
 #include <sensor_msgs/PointCloud2.h>
 #include <sensor_msgs/point_field_conversion.h>
+#include <algorithm>
 
 /** 
   * \brief Convert between the old (sensor_msgs::PointCloud) and the new (sensor_msgs::PointCloud2) format.
@@ -60,6 +61,11 @@ static inline int getPointCloud2FieldIndex (const sensor_msgs::PointCloud2 &clou
     if (cloud.fields[d].name == field_name)
       return (d);
   return (-1);
+}
+
+static inline bool hasPointCloud2Field (const sensor_msgs::PointCloud2& cloud, const std::string& field_name)
+{
+  return getPointCloud2FieldIndex(cloud, field_name) != -1;
 }
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

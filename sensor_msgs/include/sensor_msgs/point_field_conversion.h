@@ -84,7 +84,7 @@ namespace sensor_msgs{
   /*!
    * \Type names of the PointField data type.
    */
-  int getPointFieldTypeFromString(std::string field_name){
+  int getPointFieldTypeFromString(const std::string field_name){
     if(field_name == "int8")    return sensor_msgs::PointField::INT8;
     if(field_name == "uint8")   return sensor_msgs::PointField::UINT8;
     if(field_name == "int16")   return sensor_msgs::PointField::INT16;
@@ -94,9 +94,36 @@ namespace sensor_msgs{
     if(field_name == "float32") return sensor_msgs::PointField::FLOAT32;
     if(field_name == "float64") return sensor_msgs::PointField::FLOAT64;
     
-    ROS_ERROR_STREAM("Unknown type: \"" << field_name << "\"!");
-    ROS_ERROR_STREAM("Supported types are: int8, uint8, int16, uint16, int32, uint32, float32, float64"); 
+    std::cerr << "Unknown type: \"" << field_name << "\"! Supported types are: int8, uint8, int16, uint16, int32, uint32, float32, float64" << std::endl; 
     return -1;
+  }
+
+  /** Return the size of a datatype (which is an enum of sensor_msgs::PointField::) in bytes
+   * @param datatype one of the enums of sensor_msgs::PointField::
+  */
+  inline int sizeOfPointField(int datatype)
+  {
+      switch(datatype){
+        case sensor_msgs::PointField::INT8:
+          return sizeof( pointFieldTypeAsType<sensor_msgs::PointField::INT8>::type );
+        case sensor_msgs::PointField::UINT8:
+          return sizeof( pointFieldTypeAsType<sensor_msgs::PointField::UINT8>::type );
+        case sensor_msgs::PointField::INT16:
+          return sizeof( pointFieldTypeAsType<sensor_msgs::PointField::INT16>::type );
+        case sensor_msgs::PointField::UINT16:
+          return sizeof( pointFieldTypeAsType<sensor_msgs::PointField::UINT16>::type );
+        case sensor_msgs::PointField::INT32:
+          return sizeof( pointFieldTypeAsType<sensor_msgs::PointField::INT32>::type );
+        case sensor_msgs::PointField::UINT32:
+          return sizeof( pointFieldTypeAsType<sensor_msgs::PointField::UINT32>::type );
+        case sensor_msgs::PointField::FLOAT32:
+          return sizeof( pointFieldTypeAsType<sensor_msgs::PointField::FLOAT32>::type );
+        case sensor_msgs::PointField::FLOAT64:
+          return sizeof( pointFieldTypeAsType<sensor_msgs::PointField::FLOAT64>::type );
+        default:
+          std::cerr << "unknown datatype with the number: " << datatype;
+          return -1;
+      }
   }
 
   /*!
