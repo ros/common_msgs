@@ -43,6 +43,7 @@ Author: Tim Field
 import ctypes
 import math
 import struct
+from collections import namedtuple
 
 import roslib.message
 from sensor_msgs.msg import PointCloud2, PointField
@@ -111,6 +112,73 @@ def read_points(cloud, field_names=None, skip_nans=False, uvs=[]):
                 for u in range(width):
                     yield unpack_from(data, offset)
                     offset += point_step
+
+def read_points_list(cloud, field_names=None, skip_nans=False, uvs=[]):
+    """
+    Read points from a L{sensor_msgs.PointCloud2} message.
+
+    @param cloud: The point cloud to read from.
+    @type  cloud: L{sensor_msgs.PointCloud2}
+    @param field_names: The names of fields to read. If None, read all fields. [default: None]
+    @type  field_names: iterable
+    @param skip_nans: If True, then don't return any point with a NaN value.
+    @type  skip_nans: bool [default: False]
+    @param uvs: If specified, then only return the points at the given coordinates. [default: empty list]
+    @type  uvs: iterable
+    @return: List of namedtuples containing the values for each point
+    @rtype: list
+    """
+
+    assert isinstance(cloud, roslib.message.Message) and cloud._type == 'sensor_msgs/PointCloud2', 'cloud is not a sensor_msgs.msg.PointCloud2'
+    fmt = _get_struct_fmt(cloud.is_bigendian, cloud.fields, field_names)
+    width, height, point_step, row_step, data, isnan = cloud.width, cloud.height, cloud.point_step, cloud.row_step, cloud.data, math.isnan
+    unpack_from = struct.Struct(fmt).unpack_from
+
+    if field_names is None:
+        field_names = []
+        for field in cloud.fields:
+            field_names.append(field.name)
+
+    Point = namedtuple("Point", field_names)
+    point_list = []
+
+    if skip_nans:
+        if uvs:
+            for u, v in uvs:
+                point = Point._make(unpack_from(data, (row_step * v) + (point_step * u)))
+                has_nan = False
+                for pv in point:
+                    if isnan(pv):
+                        has_nan = True
+                        break
+                if not has_nan:
+                    point_list.append(point)
+        else:
+            for v in range(height):
+                offset = row_step * v
+                for u in range(width):
+                    point = Point._make(unpack_from(data, offset))
+                    has_nan = False
+                    for pv in point:
+                        if isnan(pv):
+                            has_nan = True
+                            break
+                    if not has_nan:
+                        point_list.append(point)
+                    offset += point_step
+    else:
+        if uvs:
+            for u, v in uvs:
+                point = Point._make(unpack_from(data, (row_step * v) + (point_step * u)))
+                point_list.append(point)
+        else:
+            for v in range(height):
+                offset = row_step * v
+                for u in range(width):
+                    point = Point._make(unpack_from(data, offset))
+                    point_list.append(point)
+                    offset += point_step
+    return point_list
 
 def create_cloud(header, fields, points):
     """
