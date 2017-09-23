@@ -33,6 +33,7 @@ add_message_files(
   PointCloud.msg
   PointCloud2.msg
   PointField.msg
+  RadarScan.msg
   Range.msg
   RegionOfInterest.msg
   RelativeHumidity.msg
