@@ -101,7 +101,7 @@ inline int addPointField(sensor_msgs::PointCloud2 &cloud_msg, const std::string 
 namespace sensor_msgs
 {
 
-inline PointCloud2Modifier::PointCloud2Modifier(PointCloud2& cloud_msg) : cloud_msg_(cloud_msg), current_offset_(0)
+inline PointCloud2Modifier::PointCloud2Modifier(PointCloud2& cloud_msg) : cloud_msg_(cloud_msg)
 {
 }
 
@@ -136,7 +136,7 @@ inline void PointCloud2Modifier::resize(size_t size)
 inline void PointCloud2Modifier::clear()
 {
   cloud_msg_.data.clear();
-  current_offset_ = 0;
+  cloud_msg_.point_step = 0;
 
   // Update height/width
   if (cloud_msg_.height == 1)
@@ -148,6 +148,13 @@ inline void PointCloud2Modifier::clear()
       cloud_msg_.row_step = cloud_msg_.width = cloud_msg_.height = 0;
 }
 
+inline void PointCloud2Modifier::setPointCloud2Fields(const std::vector<PointFieldInfo>& fields)
+{
+  cloud_msg_.fields.clear();
+  cloud_msg_.point_step = 0;
+  cloud_msg_.fields.reserve(fields.size());
+  addPointCloud2Fields(fields);
+}
 
 /**
  * @brief Function setting some fields in a PointCloud and adjusting the
@@ -169,7 +176,7 @@ inline void PointCloud2Modifier::clear()
 inline void PointCloud2Modifier::setPointCloud2Fields(int n_fields, ...)
 {
   cloud_msg_.fields.clear();
-  current_offset_ = 0;
+  cloud_msg_.point_step = 0;
   cloud_msg_.fields.reserve(n_fields);
   va_list vl;
   va_start(vl, n_fields);
@@ -178,12 +185,11 @@ inline void PointCloud2Modifier::setPointCloud2Fields(int n_fields, ...)
     std::string name(va_arg(vl, char*));
     int count(va_arg(vl, int));
     int datatype(va_arg(vl, int));
-    current_offset_ = addPointField(cloud_msg_, name, count, datatype, current_offset_);
+    cloud_msg_.point_step = addPointField(cloud_msg_, name, count, datatype, cloud_msg_.point_step);
   }
   va_end(vl);
 
   // Resize the point cloud accordingly
-  cloud_msg_.point_step = current_offset_;
   cloud_msg_.row_step = cloud_msg_.width * cloud_msg_.point_step;
   cloud_msg_.data.resize(cloud_msg_.height * cloud_msg_.row_step);
 }
@@ -201,7 +207,7 @@ inline void PointCloud2Modifier::setPointCloud2Fields(int n_fields, ...)
 inline void PointCloud2Modifier::setPointCloud2FieldsByString(int n_fields, ...)
 {
   cloud_msg_.fields.clear();
-  current_offset_ = 0;
+  cloud_msg_.point_step = 0;
   cloud_msg_.fields.reserve(n_fields);
   va_list vl;
   va_start(vl, n_fields);
@@ -212,46 +218,54 @@ inline void PointCloud2Modifier::setPointCloud2FieldsByString(int n_fields, ...)
     if (field_name == "xyz") {
       sensor_msgs::PointField point_field;
       // Do x, y and z
-      current_offset_ = addPointField(cloud_msg_, "x", 1, sensor_msgs::PointField::FLOAT32, current_offset_);
-      current_offset_ = addPointField(cloud_msg_, "y", 1, sensor_msgs::PointField::FLOAT32, current_offset_);
-      current_offset_ = addPointField(cloud_msg_, "z", 1, sensor_msgs::PointField::FLOAT32, current_offset_);
-      current_offset_ += sizeOfPointField(sensor_msgs::PointField::FLOAT32);
+      cloud_msg_.point_step = addPointField(cloud_msg_, "x", 1, sensor_msgs::PointField::FLOAT32, cloud_msg_.point_step);
+      cloud_msg_.point_step = addPointField(cloud_msg_, "y", 1, sensor_msgs::PointField::FLOAT32, cloud_msg_.point_step);
+      cloud_msg_.point_step = addPointField(cloud_msg_, "z", 1, sensor_msgs::PointField::FLOAT32, cloud_msg_.point_step);
+      cloud_msg_.point_step += sizeOfPointField(sensor_msgs::PointField::FLOAT32);
     } else
       if ((field_name == "rgb") || (field_name == "rgba")) {
-        current_offset_ = addPointField(cloud_msg_, field_name, 1, sensor_msgs::PointField::FLOAT32, current_offset_);
-        current_offset_ += 3 * sizeOfPointField(sensor_msgs::PointField::FLOAT32);
+        cloud_msg_.point_step = addPointField(cloud_msg_, field_name, 1, sensor_msgs::PointField::FLOAT32, cloud_msg_.point_step);
+        cloud_msg_.point_step += 3 * sizeOfPointField(sensor_msgs::PointField::FLOAT32);
       } else
         throw std::runtime_error("Field " + field_name + " does not exist");
   }
   va_end(vl);
 
   // Resize the point cloud accordingly
-  cloud_msg_.point_step = current_offset_;
   cloud_msg_.row_step = cloud_msg_.width * cloud_msg_.point_step;
   cloud_msg_.data.resize(cloud_msg_.height * cloud_msg_.row_step);
 }
 
 
-inline void PointCloud2Modifier::addPointCloud2Fields(std::vector<PointFieldInfo> fields){
-  for(std::vector<PointFieldInfo>::iterator iter = fields.begin(); iter != fields.end(); ++iter){
-    addPointCloud2Field(iter->name, iter->datatype);
+inline bool PointCloud2Modifier::addPointCloud2Fields(const std::vector<PointFieldInfo>& fields){
+  bool ret = true;
+  for(std::vector<PointFieldInfo>::const_iterator iter = fields.begin(); iter != fields.end(); ++iter){
+    if(!addPointCloud2Field(*iter)){
+      ret = false;
+    }
   }
+  return ret;
 }
 
-inline bool PointCloud2Modifier::addPointCloud2Field(std::string name, std::string datatype){
-  int type = sensor_msgs::getPointFieldTypeFromString(datatype);
-  if(type == -1){
-    std::cerr << "Could not add the field to the PointCloud2. Unknown datatype \"" << datatype << "\"!" << std::endl;
+inline bool PointCloud2Modifier::addPointCloud2Field(const PointFieldInfo& field){
+  if(field.datatype == -1){
+    std::cerr << "Could not add the field to the PointCloud2. Unknown datatype, name:\""
+              << field.datatype_name << "\", id:\"" << field.datatype << "\"!" << std::endl;
     return false;
   }
-  if(sensor_msgs::hasPointCloud2Field(cloud_msg_, name)){
-    std::cerr << "Could not add the field to the PointCloud2. The field name \"" << name << "\" already exists!" << std::endl;
+  if(sensor_msgs::hasPointCloud2Field(cloud_msg_, field.name)){
+    std::cerr << "Could not add the field to the PointCloud2. The field name \""
+              << field.name << "\" already exists!" << std::endl;
     return false;
   }
-  current_offset_ = addPointField(cloud_msg_, name, 1, type, current_offset_);
+  if(field.name.empty()){
+    // no name given for the field, just add an offset
+    cloud_msg_.point_step += sizeOfPointField(field.datatype);
+  }else{
+    cloud_msg_.point_step = addPointField(cloud_msg_, field.name, 1, field.datatype, cloud_msg_.point_step);
+  }
 
   // Resize the point cloud accordingly
-  cloud_msg_.point_step = current_offset_;
   cloud_msg_.row_step = cloud_msg_.width * cloud_msg_.point_step;
   cloud_msg_.data.resize(cloud_msg_.height * cloud_msg_.row_step);
 

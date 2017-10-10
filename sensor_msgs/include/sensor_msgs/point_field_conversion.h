@@ -83,8 +83,9 @@ namespace sensor_msgs{
  
   /*!
    * \Type names of the PointField data type.
+   * @param field_name Type name for a dynamic type initialization in the pointfield
    */
-  int getPointFieldTypeFromString(const std::string field_name){
+  inline int getPointFieldTypeFromString(const std::string& field_name){
     if(field_name == "int8")    return sensor_msgs::PointField::INT8;
     if(field_name == "uint8")   return sensor_msgs::PointField::UINT8;
     if(field_name == "int16")   return sensor_msgs::PointField::INT16;
@@ -98,7 +99,36 @@ namespace sensor_msgs{
     return -1;
   }
 
-  /** Return the size of a datatype (which is an enum of sensor_msgs::PointField::) in bytes
+  /*!
+   * Return the string name of a datatype (which is an enum of sensor_msgs::PointField::)
+   * @param datatype one of the enums of sensor_msgs::PointField::
+  */
+  inline const std::string getPointFieldNameFromType(const int datatype)
+  {
+    switch(datatype){
+      case sensor_msgs::PointField::INT8:
+        return "int8";
+      case sensor_msgs::PointField::UINT8:
+        return "uint8";
+      case sensor_msgs::PointField::INT16:
+        return "int16";
+      case sensor_msgs::PointField::UINT16:
+        return "uint16";
+      case sensor_msgs::PointField::INT32:
+        return "int32";
+      case sensor_msgs::PointField::UINT32:
+        return "uint32";
+      case sensor_msgs::PointField::FLOAT32:
+        return "float32";
+      case sensor_msgs::PointField::FLOAT64:
+        return "float64";
+      default:
+        std::cerr << "unknown datatype with the number: " << datatype;
+        return "";
+    }
+  }
+  /*!
+   * Return the size of a datatype (which is an enum of sensor_msgs::PointField::) in bytes
    * @param datatype one of the enums of sensor_msgs::PointField::
   */
   inline int sizeOfPointField(int datatype)

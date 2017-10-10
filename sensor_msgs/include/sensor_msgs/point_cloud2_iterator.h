@@ -36,6 +36,7 @@
 #define SENSOR_MSGS_POINT_CLOUD2_ITERATOR_H
 
 #include <sensor_msgs/PointCloud2.h>
+#include <sensor_msgs/point_field_conversion.h>
 #include <cstdarg>
 #include <string>
 #include <vector>
@@ -132,6 +133,72 @@ public:
   void clear();
 
   /**
+   * @brief point field info to create new point fields from datatype name or id. This allows to create a dynamic list
+   *        of fields and also for dynamic point cloud creation.
+   */
+  class PointFieldInfo{
+   public:
+    /**
+     * @brief Create a PointFieldInfo using the name of the datafield and the name of the datatype, which can be one of
+     *        the following names: "int8", "uint8", "int16", "uint16", "int32", "uint32", "float32", "float64"
+     * @param name Name of the datafield, e.g. "x", "y", "z", "r", "rgb", "rgba", "intensity", normal_x", ...
+     * @param datatype_name The name of the datatype names. It must be one of the following name: "int8", "uint8",
+     *                      "int16", "uint16", "int32", "uint32", "float32", "float64"!
+     */
+    PointFieldInfo(const std::string name, const std::string datatype_name)
+        : name(name), datatype_name(datatype_name),
+          datatype(sensor_msgs::getPointFieldTypeFromString(datatype_name)){}
+
+    /**
+     * @brief Create a PointFieldInfo using a name of the datatype and the datatype enumeration values defined in
+     *        PointField.msgs (sensor_msgs::PointField::INT8, sensor_msgs::PointField::UINT8, ... see PointField.msg)
+     * @param name Name of the datafield, e.g. "x", "y", "z", "r", "rgb", "rgba", "intensity", normal_x", ...
+     * @param datatype The id of the datatype enumeration value defined in the PointField.msg
+     */
+    PointFieldInfo(const std::string name, const int datatype)
+        : name(name), datatype(datatype), datatype_name(sensor_msgs::getPointFieldNameFromType(datatype)) {}
+
+    /**
+     * @brief Create a PointFieldInfo using the name of the datatype, which can be one of
+     *        the following names: "int8", "uint8", "int16", "uint16", "int32", "uint32", "float32", "float64"
+     *        Adding this nameless field will cause a padding in the cloud buffer with the size for the datatype.
+     * @param datatype_name The name of the datatype names. It must be one of the following name: "int8", "uint8",
+     *                      "int16", "uint16", "int32", "uint32", "float32", "float64"!
+     */
+    PointFieldInfo(const std::string datatype_name)
+        : name(""), datatype_name(datatype_name),
+          datatype(sensor_msgs::getPointFieldTypeFromString(datatype_name)){}
+
+    /**
+     * @brief Create a PointFieldInfo using the datatype enumeration values defined in
+     *        PointField.msgs (sensor_msgs::PointField::INT8, sensor_msgs::PointField::UINT8, ... see PointField.msg)
+     *        Adding this nameless field will cause a padding in the cloud buffer with the size for the datatype.
+     * @param name Name of the datafield, e.g. "x", "y", "z", "r", "rgb", "rgba", "intensity", normal_x", ...
+     * @param datatype The id of the datatype enumeration value defined in the PointField.msg
+     */
+    PointFieldInfo(const int datatype)
+        : name(""), datatype(datatype), datatype_name(sensor_msgs::getPointFieldNameFromType(datatype)) {}
+    //! The point field name, e.g. "x", "y", "z", "rgb", "intensity", "normal_x", etc.
+    std::string name;
+
+    //! The datatype id associated with stored datatype, see PointField.msg
+    int datatype;
+
+    //! The name of the datatype which is associated with the datatype id
+    std::string datatype_name;
+  };
+
+  /**
+   * @brief Sets the point cloud fields, which are given as a vector of PointFieldInfo objects. This allows a dynamic
+   *        creation of variable defined fields at runtime. This is useful to activate or deactivate fields in the
+   *        point cloud dynamically for PointCloud2 messages.
+   *
+   * @param fields A vector of PointFieldInfo objects. A PointFieldInfo object holds all necessary information to
+   *        create a new point field in the PointCloud2 object.
+   */
+  void setPointCloud2Fields(const std::vector<PointFieldInfo>& fields);
+
+  /**
    * @brief Function setting some fields in a PointCloud and adjusting the
    *        internals of the PointCloud2
    * @param n_fields the number of fields to add. The fields are given as
@@ -162,22 +229,33 @@ public:
    */
   void setPointCloud2FieldsByString(int n_fields, ...);
 
-  class PointFieldInfo{
-    public:
-      PointFieldInfo(std::string name, std::string datatype)
-         : name(name), datatype(datatype){}
-      std::string name;
-      std::string datatype;
-  };
+  /**
+   * @brief Adds the point cloud fields, which are given as a vector of PointFieldInfo objects, to the existing fields
+   *        in the PointCloud2. This allows a dynamic creation of variable defined fields at runtime. This is useful
+   *        to activate or deactivate fields in the point cloud dynamically for PointCloud2 messages.
+   *
+   * @param fields A vector of PointFieldInfo objects. A PointFieldInfo object holds all necessary information to
+   *        create a new point field in the PointCloud2 object.
+   *
+   * @return true, if the fields have been added successfully, false otherwise
+   */
+  bool addPointCloud2Fields(const std::vector<PointFieldInfo>& fields);
 
-  void addPointCloud2Fields(std::vector<PointFieldInfo> fields);
-  bool addPointCloud2Field(std::string name, std::string datatype);
+  /**
+   * @brief Adds the point cloud field, which is given as a PointFieldInfo objects, to the existing fields
+   *        in the PointCloud2. This allows a dynamic creation of variable defined fields at runtime. This is useful
+   *        to activate or deactivate fields in the point cloud dynamically for PointCloud2 messages.
+   *
+   * @param fields A PointFieldInfo object. A PointFieldInfo object holds all necessary information to
+   *        create a new point field in the PointCloud2 object.
+   *
+   * @return true if the field has been added successfully, false otherwise
+   */
+  bool addPointCloud2Field(const PointFieldInfo& field);
 
 protected:
   /** A reference to the original sensor_msgs::PointCloud2 that we read */
   PointCloud2& cloud_msg_;
-    /** The current offset for all point fields */
-  int current_offset_;
 };
 
 namespace impl
