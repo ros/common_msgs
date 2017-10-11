@@ -56,7 +56,7 @@
   */
 namespace sensor_msgs{
   /*!
-   * \Enum to type mapping.
+   * \brief Enum to type mapping.
    */
   template<int> struct pointFieldTypeAsType {};
   template<> struct pointFieldTypeAsType<sensor_msgs::PointField::INT8>    { typedef int8_t   type; };
@@ -69,7 +69,7 @@ namespace sensor_msgs{
   template<> struct pointFieldTypeAsType<sensor_msgs::PointField::FLOAT64> { typedef double   type; };
   
   /*!
-   * \Type to enum mapping.
+   * \brief Type to enum mapping.
    */
   template<typename T> struct typeAsPointFieldType {};
   template<> struct typeAsPointFieldType<int8_t>   { static const uint8_t value = sensor_msgs::PointField::INT8;    };
@@ -82,8 +82,8 @@ namespace sensor_msgs{
   template<> struct typeAsPointFieldType<double>   { static const uint8_t value = sensor_msgs::PointField::FLOAT64; };
  
   /*!
-   * \Type names of the PointField data type.
-   * @param field_name Type name for a dynamic type initialization in the pointfield
+   * \brief Type names of the PointField data type.
+   * \param field_name Type name for a dynamic type initialization in the pointfield
    */
   inline int getPointFieldTypeFromString(const std::string& field_name){
     if(field_name == "int8")    return sensor_msgs::PointField::INT8;
@@ -100,8 +100,8 @@ namespace sensor_msgs{
   }
 
   /*!
-   * Return the string name of a datatype (which is an enum of sensor_msgs::PointField::)
-   * @param datatype one of the enums of sensor_msgs::PointField::
+   * \brief Returns the string name of a datatype (which is an enum of sensor_msgs::PointField::)
+   * \param datatype one of the enums of sensor_msgs::PointField::
   */
   inline const std::string getPointFieldNameFromType(const int datatype)
   {
@@ -128,8 +128,8 @@ namespace sensor_msgs{
     }
   }
   /*!
-   * Return the size of a datatype (which is an enum of sensor_msgs::PointField::) in bytes
-   * @param datatype one of the enums of sensor_msgs::PointField::
+   * \brief Returns the size of a datatype (which is an enum of sensor_msgs::PointField::) in bytes
+   * \param datatype one of the enums of sensor_msgs::PointField::
   */
   inline int sizeOfPointField(int datatype)
   {
@@ -157,7 +157,7 @@ namespace sensor_msgs{
   }
 
   /*!
-   * \Converts a value at the given pointer position, interpreted as the datatype
+   * \brief Converts a value at the given pointer position, interpreted as the datatype
    *  specified by the given template argument point_field_type, to the given
    *  template type T and returns it.
    * \param data_ptr            pointer into the point cloud 2 buffer
@@ -171,7 +171,7 @@ namespace sensor_msgs{
     }
   
   /*!
-   * \Converts a value at the given pointer position interpreted as the datatype
+   * \brief Converts a value at the given pointer position interpreted as the datatype
    *  specified by the given datatype parameter to the given template type and returns it.
    * \param data_ptr    pointer into the point cloud 2 buffer
    * \param datatype    sensor_msgs::PointField datatype value
@@ -200,7 +200,7 @@ namespace sensor_msgs{
     }
 
   /*!
-   * \Inserts a given value at the given point position interpreted as the datatype
+   * \brief Inserts a given value at the given point position interpreted as the datatype
    *  specified by the template argument point_field_type.
    * \param data_ptr            pointer into the point cloud 2 buffer
    * \param value               the value to insert
@@ -214,7 +214,7 @@ namespace sensor_msgs{
     }
 
   /*!
-   * \Inserts a given value at the given point position interpreted as the datatype
+   * \brief Inserts a given value at the given point position interpreted as the datatype
    *  specified by the given datatype parameter.
    * \param data_ptr    pointer into the point cloud 2 buffer
    * \param datatype    sensor_msgs::PointField datatype value
