@@ -315,10 +315,29 @@ public:
    */
   V<T>& operator +=(int i);
 
+  /**
+   * Organized point cloud access, access the iterator at the associated position (column, row), where 0 <= column < width
+   * and 0 <= row <= height.
+   * @param column The column in which the iterator should be accessed, iterator at (column, row)
+   * @param row The row in whcih the iterator should be accessed, iterator at (column, row)
+   * @return an iterator at (column, row)
+   */
+  V<T>& operator ()(int column, int row);
+
   /** Compare to another iterator
    * @return whether the current iterator points to a different address than the other one
    */
   bool operator !=(const V<T>& iter) const;
+
+  /** Reset to start
+   * @return Resets the iterator to the start
+   */
+  V<T>& reset();
+
+  /** Return the start iterator
+   * @return the start iterator
+   */
+  V<T> start() const;
 
   /** Return the end iterator
    * @return the end iterator (useful when performing normal iterator processing with ++)
@@ -335,12 +354,18 @@ private:
 
   /** The "point_step" of the original cloud */
   int point_step_;
+  /** The "width" of the original cloud */
+  int width;
+  /** The "height" of the original cloud */
+  int height;
   /** The raw data  in uchar* where the iterator is */
   U* data_char_;
   /** The cast data where the iterator is */
   TT* data_;
   /** The end() pointer of the iterator */
   TT* data_end_;
+  /** pointer to first value in field */
+  U* data_begin_;
   /** Whether the fields are stored as bigendian */
   bool is_bigendian_;
 };

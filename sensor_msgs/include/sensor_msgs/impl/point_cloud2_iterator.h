@@ -294,7 +294,7 @@ PointCloud2IteratorBase<T, TT, U, C, V>::PointCloud2IteratorBase(C &cloud_msg, c
 {
   int offset = set_field(cloud_msg, field_name);
 
-  data_char_ = &(cloud_msg.data.front()) + offset;
+  data_begin_ = data_char_ = &(cloud_msg.data.front()) + offset;
   data_ = reinterpret_cast<TT*>(data_char_);
   data_end_ = reinterpret_cast<TT*>(&(cloud_msg.data.back()) + 1 + offset);
 }
@@ -364,6 +364,19 @@ V<T> PointCloud2IteratorBase<T, TT, U, C, V>::operator +(int i)
   return res;
 }
 
+/**
+ * Organized point cloud access, access the iterator at the associated position (column, row), where 0 <= column < width
+ * and 0 <= row <= height.
+ * @param column The column in which the iterator should be accessed, iterator at (column, row)
+ * @param row The row in whcih the iterator should be accessed, iterator at (column, row)
+ * @return an iterator at (column, row)
+ */
+template<typename T, typename TT, typename U, typename C, template <typename> class V>
+V<T>& PointCloud2IteratorBase<T, TT, U, C, V>::operator ()(int column, int row)
+{
+  return reset() += (row * width + column);
+}
+
 /** Increase the iterator by a certain amount
  * @return a reference to the updated iterator
  */
@@ -382,6 +395,29 @@ template<typename T, typename TT, typename U, typename C, template <typename> cl
 bool PointCloud2IteratorBase<T, TT, U, C, V>::operator !=(const V<T>& iter) const
 {
   return iter.data_ != data_;
+}
+
+/** Resets the iterator to the start
+ * @return The reset iterator
+ */
+template<typename T, typename TT, typename U, typename C, template <typename> class V>
+V<T>& PointCloud2IteratorBase<T, TT, U, C, V>::reset()
+{
+  data_char_ = data_begin_;
+  data_ = reinterpret_cast<TT*>(data_char_);
+  return *static_cast<V<T>*>(this);
+}
+
+/** Return the start iterator
+ * @return the start iterator
+ */
+template<typename T, typename TT, typename U, typename C, template <typename> class V>
+V<T> PointCloud2IteratorBase<T, TT, U, C, V>::start() const
+{
+  V<T> res = *static_cast<const V<T>*>(this);
+  res.data_char_ = data_begin_;
+  res.data_ = reinterpret_cast<TT*>(data_char_);
+  return res;
 }
 
 /** Return the end iterator
@@ -405,6 +441,8 @@ int PointCloud2IteratorBase<T, TT, U, C, V>::set_field(const sensor_msgs::PointC
 {
   is_bigendian_ = cloud_msg.is_bigendian;
   point_step_ = cloud_msg.point_step;
+  width = cloud_msg.width;
+  height = cloud_msg.height;
   // make sure the channel is valid
   std::vector<sensor_msgs::PointField>::const_iterator field_iter = cloud_msg.fields.begin(), field_end =
       cloud_msg.fields.end();
