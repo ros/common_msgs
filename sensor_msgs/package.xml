@@ -21,6 +21,8 @@
   <run_depend>std_msgs</run_depend>
 
   <test_depend>rosbag</test_depend>
+  <test_depend>rosunit</test_depend>
+
 
   <export>
     <architecture_independent/>
