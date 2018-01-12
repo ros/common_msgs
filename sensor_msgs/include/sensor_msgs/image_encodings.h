@@ -36,6 +36,7 @@
 #ifndef SENSOR_MSGS_IMAGE_ENCODINGS_H
 #define SENSOR_MSGS_IMAGE_ENCODINGS_H
 
+#include <cstdlib>
 #include <stdexcept>
 #include <string>
 
@@ -99,6 +100,10 @@ namespace sensor_msgs
     // with an 8-bit depth
     const std::string YUV422="yuv422";
 
+    // Prefixes for abstract image encodings
+    const std::string ABSTRACT_ENCODING_PREFIXES[] = {
+        "8UC", "8SC", "16UC", "16SC", "32SC", "32FC", "64FC"};
+
     // Utility functions for inspecting an encoding string
     static inline bool isColor(const std::string& encoding)
     {
@@ -154,23 +159,19 @@ namespace sensor_msgs
         return 1;
 
       // Now all the generic content encodings
-#define CHECK_CHANNELS(N)                       \
-      if (encoding == TYPE_8UC##N  ||           \
-          encoding == TYPE_8SC##N  ||           \
-          encoding == TYPE_16UC##N ||           \
-          encoding == TYPE_16SC##N ||           \
-          encoding == TYPE_32SC##N ||           \
-          encoding == TYPE_32FC##N ||           \
-          encoding == TYPE_64FC##N)             \
-        return N;                               \
-      /***/
-      
-      CHECK_CHANNELS(1);
-      CHECK_CHANNELS(2);
-      CHECK_CHANNELS(3);
-      CHECK_CHANNELS(4);
-
-#undef CHECK_CHANNELS
+      // TODO: Rewrite with regex when ROS supports C++11
+      for (size_t i=0; i < sizeof(ABSTRACT_ENCODING_PREFIXES) / sizeof(*ABSTRACT_ENCODING_PREFIXES); i++)
+      {
+        std::string prefix = ABSTRACT_ENCODING_PREFIXES[i];
+        if (encoding.substr(0, prefix.size()) != prefix)
+          continue;
+        if (encoding.size() == prefix.size())
+          return 1;  // ex. 8UC -> 1
+        int n_channel = atoi(encoding.substr(prefix.size(),
+                                             encoding.size() - prefix.size()).c_str());  // ex. 8UC5 -> 5
+        if (n_channel != 0)
+          return n_channel;  // valid encoding string
+      }
 
       if (encoding == YUV422)
         return 2;
@@ -205,24 +206,20 @@ namespace sensor_msgs
           encoding == BAYER_GRBG16)
         return 16;
 
-      // B = bits (8, 16, ...), T = type (U, S, F)
-#define CHECK_BIT_DEPTH(B, T)                   \
-      if (encoding == TYPE_##B##T##C1 ||        \
-          encoding == TYPE_##B##T##C2 ||        \
-          encoding == TYPE_##B##T##C3 ||        \
-          encoding == TYPE_##B##T##C4)          \
-        return B;                               \
-      /***/
-
-      CHECK_BIT_DEPTH(8, U);
-      CHECK_BIT_DEPTH(8, S);
-      CHECK_BIT_DEPTH(16, U);
-      CHECK_BIT_DEPTH(16, S);
-      CHECK_BIT_DEPTH(32, S);
-      CHECK_BIT_DEPTH(32, F);
-      CHECK_BIT_DEPTH(64, F);
-
-#undef CHECK_BIT_DEPTH
+      // Now all the generic content encodings
+      // TODO: Rewrite with regex when ROS supports C++11
+      for (size_t i=0; i < sizeof(ABSTRACT_ENCODING_PREFIXES) / sizeof(*ABSTRACT_ENCODING_PREFIXES); i++)
+      {
+        std::string prefix = ABSTRACT_ENCODING_PREFIXES[i];
+        if (encoding.substr(0, prefix.size()) != prefix)
+          continue;
+        if (encoding.size() == prefix.size())
+          return atoi(prefix.c_str());  // ex. 8UC -> 8
+        int n_channel = atoi(encoding.substr(prefix.size(),
+                                             encoding.size() - prefix.size()).c_str());  // ex. 8UC10 -> 10
+        if (n_channel != 0)
+          return atoi(prefix.c_str());  // valid encoding string
+      }
 
       if (encoding == YUV422)
         return 8;

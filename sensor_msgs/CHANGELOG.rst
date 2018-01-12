@@ -2,6 +2,13 @@
 Changelog for package sensor_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.12.5 (2016-09-30)
+-------------------
+* Deal with abstract image encodings
+* Fix spelling mistakes
+* Fix year
+* Contributors: Jochen Sprickerhof, Kentaro Wada, trorornmn
+
 1.12.4 (2016-02-22)
 -------------------
 * added type mapping and support for different types of points in point clouds

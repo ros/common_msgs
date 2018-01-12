@@ -2,6 +2,11 @@
 Changelog for package geometry_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.12.5 (2016-09-30)
+-------------------
+* Fix spelling mistakes
+* Contributors: trorornmn
+
 1.12.4 (2016-02-22)
 -------------------
 * clarify the definition of a Vector3

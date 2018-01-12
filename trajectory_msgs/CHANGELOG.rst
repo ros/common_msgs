@@ -2,6 +2,11 @@
 Changelog for package trajectory_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.12.5 (2016-09-30)
+-------------------
+* Fix spelling mistakes
+* Contributors: trorornmn
+
 1.12.4 (2016-02-22)
 -------------------
 
@@ -147,5 +152,5 @@ Changelog for package trajectory_msgs
 * common_msgs: starting catkin conversion
 * adios rosbuild2 in manifest.xml
 * rosbuild2 taking shape
-* removing old exports for msg/cpp and reving to 1.3.7 in preperation for release
+* removing old exports for msg/cpp and reving to 1.3.7 in preparation for release
 * migrating trajectory_msgs to common_msgs from pr2_controllers `#4675 <https://github.com/ros/common_msgs/issues/4675>`_

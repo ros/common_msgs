@@ -2,7 +2,7 @@
 
 # Software License Agreement (BSD License)
 #
-# Copyright (c) 208, Willow Garage, Inc.
+# Copyright (c) 2008, Willow Garage, Inc.
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -111,6 +111,31 @@ def read_points(cloud, field_names=None, skip_nans=False, uvs=[]):
                 for u in range(width):
                     yield unpack_from(data, offset)
                     offset += point_step
+
+def read_points_list(cloud, field_names=None, skip_nans=False, uvs=[]):
+    """
+    Read points from a L{sensor_msgs.PointCloud2} message. This function returns a list of namedtuples. 
+    It operates on top of the read_points method. For more efficient access use read_points directly. 
+ 
+    @param cloud: The point cloud to read from.
+    @type  cloud: L{sensor_msgs.PointCloud2}
+    @param field_names: The names of fields to read. If None, read all fields. [default: None]
+    @type  field_names: iterable
+    @param skip_nans: If True, then don't return any point with a NaN value.
+    @type  skip_nans: bool [default: False]
+    @param uvs: If specified, then only return the points at the given coordinates. [default: empty list]
+    @type  uvs: iterable
+    @return: List of namedtuples containing the values for each point
+    @rtype: list
+    """
+    assert isinstance(cloud, roslib.message.Message) and cloud._type == 'sensor_msgs/PointCloud2', 'cloud is not a sensor_msgs.msg.PointCloud2'
+
+    if field_names is None:
+        field_names = [f.name for f in cloud.fields]
+
+    Point = namedtuple("Point", field_names)
+
+    return [Point._make(l) for l in read_points(cloud, field_names, skip_nans, uvs)]
 
 def create_cloud(header, fields, points):
     """
