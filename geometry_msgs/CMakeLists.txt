@@ -17,6 +17,8 @@ add_message_files(
   PointStamped.msg
   Polygon.msg
   PolygonStamped.msg
+  Polygon64.msg
+  Polygon64Stamped.msg
   Pose2D.msg
   Pose.msg
   PoseArray.msg
