@@ -2,8 +2,8 @@
 Changelog for package sensor_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.12.6 (2018-05-03)
+-------------------
 * Return default value to prevent missing return warning.
 * Add function to convert PointCloud2 to namedtuples
   Add new function read_points_list that converts a PointCloud2 to a list of named tuples.
