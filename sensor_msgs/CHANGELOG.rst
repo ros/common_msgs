@@ -2,6 +2,21 @@
 Changelog for package sensor_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Return default value to prevent missing return warning.
+* Add function to convert PointCloud2 to namedtuples
+  Add new function read_points_list that converts a PointCloud2 to a list of named tuples.
+  It works on top of read_points, which generates lists containing the values.
+  In consequence read_points_list is slower than read_points.
+* Added equidistant distortion model const
+* Added test_depend on rosunit in sensor_msgs
+* fix catkin_lint warnings
+* add mingration rule, copied from common_msgs-1.6
+* Add missing include for atoi.
+  Fixes `#97 <https://github.com/ros/common_msgs/issues/97>`_
+* Contributors: 2scholz, Adam Allevato, Ivor Wanders, Kei Okada, Tully Foote, alexzzhu
+
 1.12.5 (2016-09-30)
 -------------------
 * Deal with abstract image encodings
