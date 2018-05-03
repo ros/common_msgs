@@ -2,6 +2,15 @@
 Changelog for package sensor_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Add missing include for atoi.
+  Fixes `#97 <https://github.com/ros/common_msgs/issues/97>`_
+* Add const variable for abstract image encoding prefixes
+* Deal with abstract image encodings in bitDepth
+* Deal with abstract image encodings in numChannels
+* Contributors: Kentaro Wada, Tully Foote
+
 1.11.9 (2016-02-22)
 -------------------
 * added type mapping and support for different types of point cloud points
