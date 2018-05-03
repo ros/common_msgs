@@ -25,6 +25,8 @@ add_message_files(
   PoseWithCovarianceStamped.msg
   Quaternion.msg
   QuaternionStamped.msg
+  Ray.msg
+  RayStamped.msg
   Transform.msg
   TransformStamped.msg
   Twist.msg
