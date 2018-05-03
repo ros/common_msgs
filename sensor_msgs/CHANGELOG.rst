@@ -2,8 +2,8 @@
 Changelog for package sensor_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.11.10 (2018-05-03)
+--------------------
 * Add missing include for atoi.
   Fixes `#97 <https://github.com/ros/common_msgs/issues/97>`_
 * Add const variable for abstract image encoding prefixes
