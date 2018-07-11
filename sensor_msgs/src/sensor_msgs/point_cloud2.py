@@ -40,13 +40,13 @@ Serialization of sensor_msgs.PointCloud2 messages.
 Author: Tim Field
 """
 
+from collections import namedtuple
 import ctypes
 import math
 import struct
 
 import roslib.message
 from sensor_msgs.msg import PointCloud2, PointField
-from collections import namedtuple
 
 _DATATYPES = {}
 _DATATYPES[PointField.INT8]    = ('b', 1)
