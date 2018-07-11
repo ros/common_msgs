@@ -40,6 +40,7 @@ Serialization of sensor_msgs.PointCloud2 messages.
 Author: Tim Field
 """
 
+from collections import namedtuple
 import ctypes
 import math
 import struct
