@@ -37,6 +37,7 @@
 
 #include <sensor_msgs/PointCloud2.h>
 #include <cstdarg>
+#include <sstream>
 #include <string>
 #include <vector>
 
