@@ -2,8 +2,8 @@
 Changelog for package sensor_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.12.7 (2018-11-06)
+-------------------
 * Include sstream on header that needs i (`#131 <https://github.com/ros/common_msgs/issues/131>`_)
 * included missing import for the read_points_list method (`#128 <https://github.com/ros/common_msgs/issues/128>`_)
   * included missing import for the read_points_list method
