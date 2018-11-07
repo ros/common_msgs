@@ -2,6 +2,13 @@
 Changelog for package geometry_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Add deprecation comment about Pose2D (`#130 <https://github.com/ros/common_msgs/issues/130>`_)
+  It started as unused and still isn't recommended.
+  Followup to `#129 <https://github.com/ros/common_msgs/issues/129>`_
+* Contributors: Tully Foote
+
 1.12.6 (2018-05-03)
 -------------------
 

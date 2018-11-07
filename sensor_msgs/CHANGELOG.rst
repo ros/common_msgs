@@ -2,6 +2,16 @@
 Changelog for package sensor_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Include sstream on header that needs i (`#131 <https://github.com/ros/common_msgs/issues/131>`_)
+* included missing import for the read_points_list method (`#128 <https://github.com/ros/common_msgs/issues/128>`_)
+  * included missing import for the read_points_list method
+* Merge pull request `#127 <https://github.com/ros/common_msgs/issues/127>`_ from ros-1/fix-typos
+* Merge pull request `#85 <https://github.com/ros/common_msgs/issues/85>`_ from ros/missing_test_target_dependency
+  fix missing test target dependency
+* Contributors: Dirk Thomas, Jasper, Kuang Fangjun, Tully Foote, chapulina
+
 1.12.6 (2018-05-03)
 -------------------
 * Return default value to prevent missing return warning.
