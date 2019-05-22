@@ -6,4 +6,4 @@ Header header
 string child_frame_id
 geometry_msgs/PoseWithCovariance pose
 geometry_msgs/TwistWithCovariance velocity
-geometry_msgs/TwistWithCovariance acceleration
+geometry_msgs/AccelWithCovariance accel
