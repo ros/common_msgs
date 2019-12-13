@@ -66,8 +66,8 @@ float32[] values
 	order = 0
 	migrated_types = [
 		("Header","Header"),
-                ("Point32","geometry_msgs/Point32"),
-                ("ChannelFloat32","ChannelFloat32")]
+		("Point32","geometry_msgs/Point32"),
+		("ChannelFloat32","ChannelFloat32")]
 
 	valid = True
 
@@ -593,15 +593,15 @@ string frame_id
 	valid = True
 
 
-        def update_empty(self, old_msg, new_msg):
-                pass
+	def update_empty(self, old_msg, new_msg):
+		pass
 
 	def update_mono_uint8(self, old_msg, new_msg):
-                assert (len(old_msg.uint8_data.layout.dim) == 3 and
-                        old_msg.uint8_data.layout.dim[0].label == 'height' and
-                        old_msg.uint8_data.layout.dim[1].label == 'width' and
-                        old_msg.uint8_data.layout.dim[2].label == 'channel'), \
-                        'This rule only supports migration images with 3 dimensions ordered: height, width, channel'
+		assert (len(old_msg.uint8_data.layout.dim) == 3 and
+			old_msg.uint8_data.layout.dim[0].label == 'height' and
+			old_msg.uint8_data.layout.dim[1].label == 'width' and
+			old_msg.uint8_data.layout.dim[2].label == 'channel'), \
+			'This rule only supports migration images with 3 dimensions ordered: height, width, channel'
 
 		self.migrate(old_msg.header, new_msg.header)
 		new_msg.encoding = 'mono8'
@@ -612,11 +612,11 @@ string frame_id
 		new_msg.is_bigendian = 0
 
 	def update_rgb_uint8(self, old_msg, new_msg):
-                assert (len(old_msg.uint8_data.layout.dim) == 3 and
-                        old_msg.uint8_data.layout.dim[0].label == 'height' and
-                        old_msg.uint8_data.layout.dim[1].label == 'width' and
-                        old_msg.uint8_data.layout.dim[2].label == 'channel'), \
-                        'This rule only supports migration images with 3 dimensions ordered: height, width, channel'
+		assert (len(old_msg.uint8_data.layout.dim) == 3 and
+			old_msg.uint8_data.layout.dim[0].label == 'height' and
+			old_msg.uint8_data.layout.dim[1].label == 'width' and
+			old_msg.uint8_data.layout.dim[2].label == 'channel'), \
+			'This rule only supports migration images with 3 dimensions ordered: height, width, channel'
 
 		self.migrate(old_msg.header, new_msg.header)
 		new_msg.encoding = 'rgb8'
@@ -627,11 +627,11 @@ string frame_id
 		new_msg.is_bigendian = 0
 
 	def update_bgr_uint8(self, old_msg, new_msg):
-                assert (len(old_msg.uint8_data.layout.dim) == 3 and
-                        old_msg.uint8_data.layout.dim[0].label == 'height' and
-                        old_msg.uint8_data.layout.dim[1].label == 'width' and
-                        old_msg.uint8_data.layout.dim[2].label == 'channel'), \
-                        'This rule only supports migration images with 3 dimensions ordered: height, width, channel'
+		assert (len(old_msg.uint8_data.layout.dim) == 3 and
+			old_msg.uint8_data.layout.dim[0].label == 'height' and
+			old_msg.uint8_data.layout.dim[1].label == 'width' and
+			old_msg.uint8_data.layout.dim[2].label == 'channel'), \
+			'This rule only supports migration images with 3 dimensions ordered: height, width, channel'
 
 		self.migrate(old_msg.header, new_msg.header)
 		new_msg.encoding = 'bgr8'
@@ -641,17 +641,17 @@ string frame_id
 		new_msg.width = old_msg.uint8_data.layout.dim[1].size
 		new_msg.is_bigendian = 0
 
-        def update(self, old_msg, new_msg):
-                encoding_map = {('',''): self.update_empty,
-                                ('other','none'): self.update_empty,
-                                ('mono', 'uint8'): self.update_mono_uint8,
-                                ('rgb', 'uint8'): self.update_rgb_uint8,
-                                ('bgr', 'uint8'): self.update_bgr_uint8}
-                key = (old_msg.encoding, old_msg.depth)
-        
-                assert key in encoding_map, 'This rule does not support migrating from %s %s'%key
+	def update(self, old_msg, new_msg):
+		encoding_map = {('',''): self.update_empty,
+				('other','none'): self.update_empty,
+				('mono', 'uint8'): self.update_mono_uint8,
+				('rgb', 'uint8'): self.update_rgb_uint8,
+				('bgr', 'uint8'): self.update_bgr_uint8}
+		key = (old_msg.encoding, old_msg.depth)
+	
+		assert key in encoding_map, 'This rule does not support migrating from %s %s'%key
 
-                encoding_map[key](old_msg, new_msg)
+		encoding_map[key](old_msg, new_msg)
 
 
 
@@ -1020,7 +1020,7 @@ float64[]         data          # array of data
 	order = 0
 	migrated_types = [
 		("Header","Header"),
-                ("Image","Image")]
+		("Image","Image")]
 
 	valid = True
 
@@ -1394,8 +1394,8 @@ float32[] values  #values array should have same number of elements as the assoc
 	order = 0
 	migrated_types = [
 		("Header","Header"),
-                ("geometry_msgs/Point32","geometry_msgs/Point32"),
-                ("ChannelFloat32","ChannelFloat32")]
+		("geometry_msgs/Point32","geometry_msgs/Point32"),
+		("ChannelFloat32","ChannelFloat32")]
 
 	valid = True
 
