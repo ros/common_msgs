@@ -1,6 +1,6 @@
 class update_robot_msgs_PointCloud_c47b5cedd2b77d241b27547ed7624840(MessageUpdateRule):
-	old_type = "robot_msgs/PointCloud"
-	old_full_text = """
+    old_type = "robot_msgs/PointCloud"
+    old_full_text = """
 Header header
 Point32[] pts
 ChannelFloat32[] chan
@@ -31,8 +31,8 @@ string name
 float32[] vals
 """
 
-	new_type = "sensor_msgs/PointCloud"
-	new_full_text = """
+    new_type = "sensor_msgs/PointCloud"
+    new_full_text = """
 Header header
 geometry_msgs/Point32[] points
 ChannelFloat32[] channels
@@ -63,49 +63,49 @@ string name
 float32[] values
 """
 
-	order = 0
-	migrated_types = [
-		("Header","Header"),
-                ("Point32","geometry_msgs/Point32"),
-                ("ChannelFloat32","ChannelFloat32")]
+    order = 0
+    migrated_types = [
+        ("Header","Header"),
+        ("Point32","geometry_msgs/Point32"),
+        ("ChannelFloat32","ChannelFloat32")]
 
-	valid = True
+    valid = True
 
-	def update(self, old_msg, new_msg):
-		self.migrate(old_msg.header, new_msg.header)
-		self.migrate_array(old_msg.pts, new_msg.points, "geometry_msgs/Point32")
-		self.migrate_array(old_msg.chan, new_msg.channels, "ChannelFloat32")
+    def update(self, old_msg, new_msg):
+        self.migrate(old_msg.header, new_msg.header)
+        self.migrate_array(old_msg.pts, new_msg.points, "geometry_msgs/Point32")
+        self.migrate_array(old_msg.chan, new_msg.channels, "ChannelFloat32")
 
 
 class update_robot_msgs_ChannelFloat32_61c47e4621e471c885edb248b5dcafd5(MessageUpdateRule):
-	old_type = "robot_msgs/ChannelFloat32"
-	old_full_text = """
+    old_type = "robot_msgs/ChannelFloat32"
+    old_full_text = """
 string name
 float32[] vals
 """
 
-	new_type = "sensor_msgs/ChannelFloat32"
-	new_full_text = """
+    new_type = "sensor_msgs/ChannelFloat32"
+    new_full_text = """
 string name
 float32[] values
 """
 
-	order = 0
-	migrated_types = []
+    order = 0
+    migrated_types = []
 
-	valid = True
+    valid = True
 
-	def update(self, old_msg, new_msg):
-		new_msg.name = old_msg.name
-		new_msg.values = old_msg.vals
+    def update(self, old_msg, new_msg):
+        new_msg.name = old_msg.name
+        new_msg.values = old_msg.vals
 
 
 
 
 
 class update_image_msgs_CamInfo_a48ffa77e74ab6901331e50745dff353(MessageUpdateRule):
-	old_type = "image_msgs/CamInfo"
-	old_full_text = """
+    old_type = "image_msgs/CamInfo"
+    old_full_text = """
 # This message defines meta information for a camera. It should be in a
 # camera namespace and accompanied by up to 5 image topics named:
 # 
@@ -139,8 +139,8 @@ time stamp
 string frame_id
 """
 
-	new_type = "sensor_msgs/CameraInfo"
-	new_full_text = """
+    new_type = "sensor_msgs/CameraInfo"
+    new_full_text = """
 # This message defines meta information for a camera. It should be in a
 # camera namespace and accompanied by up to 5 image topics named:
 # 
@@ -201,26 +201,26 @@ time stamp
 string frame_id
 """
 
-	order = 0
-	migrated_types = [
-		("Header","Header"),]
+    order = 0
+    migrated_types = [
+        ("Header","Header"),]
 
-	valid = True
+    valid = True
 
-	def update(self, old_msg, new_msg):
-		self.migrate(old_msg.header, new_msg.header)
-		new_msg.height = old_msg.height
-		new_msg.width = old_msg.width
-		new_msg.D = old_msg.D
-		new_msg.K = old_msg.K
-		new_msg.R = old_msg.R
-		new_msg.P = old_msg.P
+    def update(self, old_msg, new_msg):
+        self.migrate(old_msg.header, new_msg.header)
+        new_msg.height = old_msg.height
+        new_msg.width = old_msg.width
+        new_msg.D = old_msg.D
+        new_msg.K = old_msg.K
+        new_msg.R = old_msg.R
+        new_msg.P = old_msg.P
 
 
 class update_sensor_msgs_CameraInfo_a48ffa77e74ab6901331e50745dff353(MessageUpdateRule):
 
-	old_type = "sensor_msgs/CameraInfo"
-	old_full_text = """
+    old_type = "sensor_msgs/CameraInfo"
+    old_full_text = """
 # This message defines meta information for a camera. It should be in a
 # camera namespace and accompanied by up to 5 image topics named:
 # 
@@ -281,8 +281,8 @@ time stamp
 string frame_id
 """
 
-	new_type = "sensor_msgs/CameraInfo"
-	new_full_text = """
+    new_type = "sensor_msgs/CameraInfo"
+    new_full_text = """
 # This message defines meta information for a camera. It should be in a
 # camera namespace and accompanied by up to 5 image topics named:
 # 
@@ -358,26 +358,26 @@ uint32 height
 uint32 width
 """
 
-	order = 0
-	migrated_types = [
-		("Header","Header"),]
+    order = 0
+    migrated_types = [
+        ("Header","Header"),]
 
-	valid = True
+    valid = True
 
-	def update(self, old_msg, new_msg):
-		self.migrate(old_msg.header, new_msg.header)
-		new_msg.height = old_msg.height
-		new_msg.width = old_msg.width
-		new_msg.roi = self.get_new_class('sensor_msgs/RegionOfInterest')(0,0,old_msg.height,old_msg.width)
-		new_msg.D = old_msg.D
-		new_msg.K = old_msg.K
-		new_msg.R = old_msg.R
-		new_msg.P = old_msg.P
+    def update(self, old_msg, new_msg):
+        self.migrate(old_msg.header, new_msg.header)
+        new_msg.height = old_msg.height
+        new_msg.width = old_msg.width
+        new_msg.roi = self.get_new_class('sensor_msgs/RegionOfInterest')(0,0,old_msg.height,old_msg.width)
+        new_msg.D = old_msg.D
+        new_msg.K = old_msg.K
+        new_msg.R = old_msg.R
+        new_msg.P = old_msg.P
 
 
 class update_sensor_msgs_Image_97d4ca3868dc81af4a2403bcb6558cb0(MessageUpdateRule):
-	old_type = "sensor_msgs/Image"
-	old_full_text = """
+    old_type = "sensor_msgs/Image"
+    old_full_text = """
 Header header        # Header
 string label         # Label for the image
 string encoding      # Specifies the color encoding of the data
@@ -555,8 +555,8 @@ MultiArrayLayout  layout        # specification of data layout
 float64[]         data          # array of data
 """
 
-	new_type = "sensor_msgs/Image"
-	new_full_text = """
+    new_type = "sensor_msgs/Image"
+    new_full_text = """
 Header header        # Header
 
 uint32 height         # image height, that is, number of rows
@@ -586,80 +586,80 @@ time stamp
 string frame_id
 """
 
-	order = 0
-	migrated_types = [
-		("Header","Header"),]
+    order = 0
+    migrated_types = [
+        ("Header","Header"),]
 
-	valid = True
+    valid = True
 
 
-        def update_empty(self, old_msg, new_msg):
-                pass
+    def update_empty(self, old_msg, new_msg):
+        pass
 
-	def update_mono_uint8(self, old_msg, new_msg):
-                assert (len(old_msg.uint8_data.layout.dim) == 3 and
-                        old_msg.uint8_data.layout.dim[0].label == 'height' and
-                        old_msg.uint8_data.layout.dim[1].label == 'width' and
-                        old_msg.uint8_data.layout.dim[2].label == 'channel'), \
-                        'This rule only supports migration images with 3 dimensions ordered: height, width, channel'
+    def update_mono_uint8(self, old_msg, new_msg):
+        assert (len(old_msg.uint8_data.layout.dim) == 3 and
+            old_msg.uint8_data.layout.dim[0].label == 'height' and
+            old_msg.uint8_data.layout.dim[1].label == 'width' and
+            old_msg.uint8_data.layout.dim[2].label == 'channel'), \
+            'This rule only supports migration images with 3 dimensions ordered: height, width, channel'
 
-		self.migrate(old_msg.header, new_msg.header)
-		new_msg.encoding = 'mono8'
-		new_msg.step = old_msg.uint8_data.layout.dim[1].stride
-		new_msg.data = old_msg.uint8_data.data
-		new_msg.height = old_msg.uint8_data.layout.dim[0].size
-		new_msg.width = old_msg.uint8_data.layout.dim[1].size
-		new_msg.is_bigendian = 0
+        self.migrate(old_msg.header, new_msg.header)
+        new_msg.encoding = 'mono8'
+        new_msg.step = old_msg.uint8_data.layout.dim[1].stride
+        new_msg.data = old_msg.uint8_data.data
+        new_msg.height = old_msg.uint8_data.layout.dim[0].size
+        new_msg.width = old_msg.uint8_data.layout.dim[1].size
+        new_msg.is_bigendian = 0
 
-	def update_rgb_uint8(self, old_msg, new_msg):
-                assert (len(old_msg.uint8_data.layout.dim) == 3 and
-                        old_msg.uint8_data.layout.dim[0].label == 'height' and
-                        old_msg.uint8_data.layout.dim[1].label == 'width' and
-                        old_msg.uint8_data.layout.dim[2].label == 'channel'), \
-                        'This rule only supports migration images with 3 dimensions ordered: height, width, channel'
+    def update_rgb_uint8(self, old_msg, new_msg):
+        assert (len(old_msg.uint8_data.layout.dim) == 3 and
+            old_msg.uint8_data.layout.dim[0].label == 'height' and
+            old_msg.uint8_data.layout.dim[1].label == 'width' and
+            old_msg.uint8_data.layout.dim[2].label == 'channel'), \
+            'This rule only supports migration images with 3 dimensions ordered: height, width, channel'
 
-		self.migrate(old_msg.header, new_msg.header)
-		new_msg.encoding = 'rgb8'
-		new_msg.step = old_msg.uint8_data.layout.dim[1].stride
-		new_msg.data = old_msg.uint8_data.data
-		new_msg.height = old_msg.uint8_data.layout.dim[0].size
-		new_msg.width = old_msg.uint8_data.layout.dim[1].size
-		new_msg.is_bigendian = 0
+        self.migrate(old_msg.header, new_msg.header)
+        new_msg.encoding = 'rgb8'
+        new_msg.step = old_msg.uint8_data.layout.dim[1].stride
+        new_msg.data = old_msg.uint8_data.data
+        new_msg.height = old_msg.uint8_data.layout.dim[0].size
+        new_msg.width = old_msg.uint8_data.layout.dim[1].size
+        new_msg.is_bigendian = 0
 
-	def update_bgr_uint8(self, old_msg, new_msg):
-                assert (len(old_msg.uint8_data.layout.dim) == 3 and
-                        old_msg.uint8_data.layout.dim[0].label == 'height' and
-                        old_msg.uint8_data.layout.dim[1].label == 'width' and
-                        old_msg.uint8_data.layout.dim[2].label == 'channel'), \
-                        'This rule only supports migration images with 3 dimensions ordered: height, width, channel'
+    def update_bgr_uint8(self, old_msg, new_msg):
+        assert (len(old_msg.uint8_data.layout.dim) == 3 and
+            old_msg.uint8_data.layout.dim[0].label == 'height' and
+            old_msg.uint8_data.layout.dim[1].label == 'width' and
+            old_msg.uint8_data.layout.dim[2].label == 'channel'), \
+            'This rule only supports migration images with 3 dimensions ordered: height, width, channel'
 
-		self.migrate(old_msg.header, new_msg.header)
-		new_msg.encoding = 'bgr8'
-		new_msg.step = old_msg.uint8_data.layout.dim[1].stride
-		new_msg.data = old_msg.uint8_data.data
-		new_msg.height = old_msg.uint8_data.layout.dim[0].size
-		new_msg.width = old_msg.uint8_data.layout.dim[1].size
-		new_msg.is_bigendian = 0
+        self.migrate(old_msg.header, new_msg.header)
+        new_msg.encoding = 'bgr8'
+        new_msg.step = old_msg.uint8_data.layout.dim[1].stride
+        new_msg.data = old_msg.uint8_data.data
+        new_msg.height = old_msg.uint8_data.layout.dim[0].size
+        new_msg.width = old_msg.uint8_data.layout.dim[1].size
+        new_msg.is_bigendian = 0
 
-        def update(self, old_msg, new_msg):
-                encoding_map = {('',''): self.update_empty,
-                                ('other','none'): self.update_empty,
-                                ('mono', 'uint8'): self.update_mono_uint8,
-                                ('rgb', 'uint8'): self.update_rgb_uint8,
-                                ('bgr', 'uint8'): self.update_bgr_uint8}
-                key = (old_msg.encoding, old_msg.depth)
-        
-                assert key in encoding_map, 'This rule does not support migrating from %s %s'%key
+    def update(self, old_msg, new_msg):
+        encoding_map = {('',''): self.update_empty,
+                ('other','none'): self.update_empty,
+                ('mono', 'uint8'): self.update_mono_uint8,
+                ('rgb', 'uint8'): self.update_rgb_uint8,
+                ('bgr', 'uint8'): self.update_bgr_uint8}
+        key = (old_msg.encoding, old_msg.depth)
+    
+        assert key in encoding_map, 'This rule does not support migrating from %s %s'%key
 
-                encoding_map[key](old_msg, new_msg)
+        encoding_map[key](old_msg, new_msg)
 
 
 
 
 
 class update_image_msgs_Image_97d4ca3868dc81af4a2403bcb6558cb0(MessageUpdateRule):
-	old_type = "image_msgs/Image"
-	old_full_text = """
+    old_type = "image_msgs/Image"
+    old_full_text = """
 Header header        # Header
 string label         # Label for the image
 string encoding      # Specifies the color encoding of the data
@@ -838,8 +838,8 @@ float64[]         data          # array of data
 """
 
 
-	new_type = "sensor_msgs/Image"
-	new_full_text = """
+    new_type = "sensor_msgs/Image"
+    new_full_text = """
 Header header        # Header
 string label         # Label for the image
 string encoding      # Specifies the color encoding of the data
@@ -1017,22 +1017,22 @@ MultiArrayLayout  layout        # specification of data layout
 float64[]         data          # array of data
 """
 
-	order = 0
-	migrated_types = [
-		("Header","Header"),
-                ("Image","Image")]
+    order = 0
+    migrated_types = [
+        ("Header","Header"),
+        ("Image","Image")]
 
-	valid = True
+    valid = True
 
-	def update(self, old_msg, new_msg):
-		self.migrate(old_msg, new_msg)
+    def update(self, old_msg, new_msg):
+        self.migrate(old_msg, new_msg)
 
 
 
 
 class update_sensor_msgs_CompressedImage_9f25a34569b1b807704b985d4396ad35(MessageUpdateRule):
-	old_type = "sensor_msgs/CompressedImage"
-	old_full_text = """
+    old_type = "sensor_msgs/CompressedImage"
+    old_full_text = """
 Header header        # Header
 string label         # Label for the image
 string encoding      # Specifies the color encoding of the data
@@ -1107,8 +1107,8 @@ uint32 size    # size of given dimension (in type units)
 uint32 stride  # stride of given dimension
 """
 
-	new_type = "sensor_msgs/CompressedImage"
-	new_full_text = """
+    new_type = "sensor_msgs/CompressedImage"
+    new_full_text = """
 Header header        # Header
 string format        # Specifies the format of the data
                      #   Acceptable values:
@@ -1131,20 +1131,20 @@ time stamp
 string frame_id
 """
 
-	order = 0
-	migrated_types = [
-		("Header","Header"),]
+    order = 0
+    migrated_types = [
+        ("Header","Header"),]
 
-	valid = True
+    valid = True
 
-	def update(self, old_msg, new_msg):
-		self.migrate(old_msg.header, new_msg.header)
-		new_msg.format = old_msg.format
-		new_msg.data = old_msg.uint8_data.data
+    def update(self, old_msg, new_msg):
+        self.migrate(old_msg.header, new_msg.header)
+        new_msg.format = old_msg.format
+        new_msg.data = old_msg.uint8_data.data
 
 class update_laser_scan_LaserScan_90c7ef2dc6895d81024acba2ac42f369(MessageUpdateRule):
-	old_type = "laser_scan/LaserScan"
-	old_full_text = """
+    old_type = "laser_scan/LaserScan"
+    old_full_text = """
 #
 # Laser scans angles are measured counter clockwise, with 0 facing forward
 # (along the x-axis) of the device frame
@@ -1177,8 +1177,8 @@ time stamp
 string frame_id
 """
 
-	new_type = "sensor_msgs/LaserScan"
-	new_full_text = """
+    new_type = "sensor_msgs/LaserScan"
+    new_full_text = """
 # Single scan from a planar laser range-finder
 #
 # If you have another ranging device with different behavior (e.g. a sonar
@@ -1225,27 +1225,27 @@ time stamp
 string frame_id
 """
 
-	order = 0
-	migrated_types = [
-		("Header","Header"),]
+    order = 0
+    migrated_types = [
+        ("Header","Header"),]
 
-	valid = True
+    valid = True
 
-	def update(self, old_msg, new_msg):
-		self.migrate(old_msg.header, new_msg.header)
-		new_msg.angle_min = old_msg.angle_min
-		new_msg.angle_max = old_msg.angle_max
-		new_msg.angle_increment = old_msg.angle_increment
-		new_msg.time_increment = old_msg.time_increment
-		new_msg.scan_time = old_msg.scan_time
-		new_msg.range_min = old_msg.range_min
-		new_msg.range_max = old_msg.range_max
-		new_msg.ranges = old_msg.ranges
-		new_msg.intensities = old_msg.intensities
+    def update(self, old_msg, new_msg):
+        self.migrate(old_msg.header, new_msg.header)
+        new_msg.angle_min = old_msg.angle_min
+        new_msg.angle_max = old_msg.angle_max
+        new_msg.angle_increment = old_msg.angle_increment
+        new_msg.time_increment = old_msg.time_increment
+        new_msg.scan_time = old_msg.scan_time
+        new_msg.range_min = old_msg.range_min
+        new_msg.range_max = old_msg.range_max
+        new_msg.ranges = old_msg.ranges
+        new_msg.intensities = old_msg.intensities
 
 class update_mechanism_msgs_JointStates_6def7c223229ab1e340258092e485703(MessageUpdateRule):
-	old_type = "mechanism_msgs/JointStates"
-	old_full_text = """
+    old_type = "mechanism_msgs/JointStates"
+    old_full_text = """
 Header header
 mechanism_msgs/JointState[] joints
 
@@ -1274,8 +1274,8 @@ float64 commanded_effort
 byte is_calibrated
 """
 
-	new_type = "sensor_msgs/JointState"
-	new_full_text = """
+    new_type = "sensor_msgs/JointState"
+    new_full_text = """
 Header header
 
 string[] name
@@ -1299,22 +1299,22 @@ time stamp
 string frame_id
 """
 
-	order = 0
-	migrated_types = [
-		("Header","Header"),]
+    order = 0
+    migrated_types = [
+        ("Header","Header"),]
 
-	valid = True
+    valid = True
 
-	def update(self, old_msg, new_msg):
-		self.migrate(old_msg.header, new_msg.header)
-		new_msg.name = [j.name for j in old_msg.joints]
-		new_msg.position = [j.position for j in old_msg.joints]
-		new_msg.velocity = [j.velocity for j in old_msg.joints]
-		new_msg.effort = [j.applied_effort for j in old_msg.joints]
+    def update(self, old_msg, new_msg):
+        self.migrate(old_msg.header, new_msg.header)
+        new_msg.name = [j.name for j in old_msg.joints]
+        new_msg.position = [j.position for j in old_msg.joints]
+        new_msg.velocity = [j.velocity for j in old_msg.joints]
+        new_msg.effort = [j.applied_effort for j in old_msg.joints]
 
 class update_sensor_msgs_PointCloud_c47b5cedd2b77d241b27547ed7624840(MessageUpdateRule):
-	old_type = "sensor_msgs/PointCloud"
-	old_full_text = """
+    old_type = "sensor_msgs/PointCloud"
+    old_full_text = """
 Header header
 geometry_msgs/Point32[] pts
 ChannelFloat32[] chan
@@ -1345,8 +1345,8 @@ string name
 float32[] vals
 """
 
-	new_type = "sensor_msgs/PointCloud"
-	new_full_text = """
+    new_type = "sensor_msgs/PointCloud"
+    new_full_text = """
 #This message holds a collection of 3d points, plus optional additional information about each point.
 #Each Point32 should be interpreted as a 3d point in the frame given in the header
 
@@ -1391,28 +1391,28 @@ string name       #channel name should give semantics of the channel (e.g. "inte
 float32[] values  #values array should have same number of elements as the associated PointCloud
 """
 
-	order = 0
-	migrated_types = [
-		("Header","Header"),
-                ("geometry_msgs/Point32","geometry_msgs/Point32"),
-                ("ChannelFloat32","ChannelFloat32")]
+    order = 0
+    migrated_types = [
+        ("Header","Header"),
+        ("geometry_msgs/Point32","geometry_msgs/Point32"),
+        ("ChannelFloat32","ChannelFloat32")]
 
-	valid = True
+    valid = True
 
-	def update(self, old_msg, new_msg):
-		self.migrate(old_msg.header, new_msg.header)
-		self.migrate_array(old_msg.pts, new_msg.points, "geometry_msgs/Point32")
-		self.migrate_array(old_msg.chan, new_msg.channels, "ChannelFloat32")
+    def update(self, old_msg, new_msg):
+        self.migrate(old_msg.header, new_msg.header)
+        self.migrate_array(old_msg.pts, new_msg.points, "geometry_msgs/Point32")
+        self.migrate_array(old_msg.chan, new_msg.channels, "ChannelFloat32")
 
 class update_sensor_msgs_ChannelFloat32_61c47e4621e471c885edb248b5dcafd5(MessageUpdateRule):
-	old_type = "sensor_msgs/ChannelFloat32"
-	old_full_text = """
+    old_type = "sensor_msgs/ChannelFloat32"
+    old_full_text = """
 string name
 float32[] vals
 """
 
-	new_type = "sensor_msgs/ChannelFloat32"
-	new_full_text = """
+    new_type = "sensor_msgs/ChannelFloat32"
+    new_full_text = """
 #This message is used by the PointCloud message to hold optional data associated with each point in the cloud
 #The length of the values array should be the same as the length of the points array in the PointCloud, and each value should be associated with the corresponding point
 
@@ -1420,18 +1420,18 @@ string name       #channel name should give semantics of the channel (e.g. "inte
 float32[] values  #values array should have same number of elements as the associated PointCloud
 """
 
-	order = 0
-	migrated_types = []
+    order = 0
+    migrated_types = []
 
-	valid = True
+    valid = True
 
-	def update(self, old_msg, new_msg):
-		new_msg.name = old_msg.name
-		new_msg.values = old_msg.vals
+    def update(self, old_msg, new_msg):
+        new_msg.name = old_msg.name
+        new_msg.values = old_msg.vals
 
 class update_sensor_msgs_CameraInfo_1b5cf7f984c229b6141ceb3a955aa18f(MessageUpdateRule):
-	old_type = "sensor_msgs/CameraInfo"
-	old_full_text = """
+    old_type = "sensor_msgs/CameraInfo"
+    old_full_text = """
 # This message defines meta information for a camera. It should be in a
 # camera namespace and accompanied by up to 5 image topics named:
 # 
@@ -1507,8 +1507,8 @@ uint32 height
 uint32 width
 """
 
-	new_type = "sensor_msgs/CameraInfo"
-	new_full_text = """
+    new_type = "sensor_msgs/CameraInfo"
+    new_full_text = """
 # This message defines meta information for a camera. It should be in a
 # camera namespace on topic "camera_info" and accompanied by up to five
 # image topics named:
@@ -1682,43 +1682,43 @@ uint32 width     # Width of ROI
 bool do_rectify
 """
 
-	order = 1
-	migrated_types = [
-		("Header","Header"),
-		("RegionOfInterest","RegionOfInterest"),]
+    order = 1
+    migrated_types = [
+        ("Header","Header"),
+        ("RegionOfInterest","RegionOfInterest"),]
 
-	valid = True
+    valid = True
 
-	def update(self, old_msg, new_msg):
-		self.migrate(old_msg.header, new_msg.header)
-		new_msg.height = old_msg.height
-		new_msg.width = old_msg.width
-		#No matching field name in old message
-		new_msg.distortion_model = 'plumb_bob'
-		#Converted from fixed array of length 5 to variable length
-		new_msg.D = old_msg.D
-		new_msg.K = old_msg.K
-		new_msg.R = old_msg.R
-		new_msg.P = old_msg.P
-		#No matching field name in old message
-		new_msg.binning_x = 1
-		#No matching field name in old message
-		new_msg.binning_y = 1
-		self.migrate(old_msg.roi, new_msg.roi)
-		# Set do_rectify True if ROI is not full resolution
-		new_msg.roi.do_rectify = (new_msg.roi.width > 0 and new_msg.roi.width < new_msg.width) or \
-		                         (new_msg.roi.height > 0 and new_msg.roi.height < new_msg.height)
+    def update(self, old_msg, new_msg):
+        self.migrate(old_msg.header, new_msg.header)
+        new_msg.height = old_msg.height
+        new_msg.width = old_msg.width
+        #No matching field name in old message
+        new_msg.distortion_model = 'plumb_bob'
+        #Converted from fixed array of length 5 to variable length
+        new_msg.D = old_msg.D
+        new_msg.K = old_msg.K
+        new_msg.R = old_msg.R
+        new_msg.P = old_msg.P
+        #No matching field name in old message
+        new_msg.binning_x = 1
+        #No matching field name in old message
+        new_msg.binning_y = 1
+        self.migrate(old_msg.roi, new_msg.roi)
+        # Set do_rectify True if ROI is not full resolution
+        new_msg.roi.do_rectify = (new_msg.roi.width > 0 and new_msg.roi.width < new_msg.width) or \
+                                 (new_msg.roi.height > 0 and new_msg.roi.height < new_msg.height)
 class update_sensor_msgs_RegionOfInterest_878e60591f2679769082130f7aafa371(MessageUpdateRule):
-	old_type = "sensor_msgs/RegionOfInterest"
-	old_full_text = """
+    old_type = "sensor_msgs/RegionOfInterest"
+    old_full_text = """
 uint32 x_offset
 uint32 y_offset
 uint32 height
 uint32 width
 """
 
-	new_type = "sensor_msgs/RegionOfInterest"
-	new_full_text = """
+    new_type = "sensor_msgs/RegionOfInterest"
+    new_full_text = """
 # This message is used to specify a region of interest within an image.
 #
 # When used to specify the ROI setting of the camera when the image was
@@ -1740,17 +1740,17 @@ uint32 width     # Width of ROI
 bool do_rectify
 """
 
-	order = 0
-	migrated_types = []
+    order = 0
+    migrated_types = []
 
-	valid = True
+    valid = True
 
-	def update(self, old_msg, new_msg):
-		new_msg.x_offset = old_msg.x_offset
-		new_msg.y_offset = old_msg.y_offset
-		new_msg.height = old_msg.height
-		new_msg.width = old_msg.width
-		#No matching field name in old message
-		# We default to the old behavior here. do_rectify is actually set in the
-		# CameraInfo update rule, which knows the full-res height/width.
-		new_msg.do_rectify = False
+    def update(self, old_msg, new_msg):
+        new_msg.x_offset = old_msg.x_offset
+        new_msg.y_offset = old_msg.y_offset
+        new_msg.height = old_msg.height
+        new_msg.width = old_msg.width
+        #No matching field name in old message
+        # We default to the old behavior here. do_rectify is actually set in the
+        # CameraInfo update rule, which knows the full-res height/width.
+        new_msg.do_rectify = False
