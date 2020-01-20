@@ -150,6 +150,10 @@ def create_cloud(header, fields, points, height=1, width=None):
     @type  points: list of iterables, i.e. one iterable for each point, with the
                    elements of each iterable being the values of the fields for 
                    that point (in the same order as the fields parameter)
+    @param height: the height of the point cloud [default: 1]
+    @type height: unsigned int
+    @param width: the width of the point cloud [default: None]
+    @param width: unsigned int
     @return: The point cloud.
     @rtype:  L{sensor_msgs.msg.PointCloud2}
     """
