@@ -157,19 +157,18 @@ def create_cloud(header, fields, points, height=1, width=None):
     @return: The point cloud.
     @rtype:  L{sensor_msgs.msg.PointCloud2}
     """
-    if height == 1:
+    if height == 1 or width is None:
+        height = 1
         width = len(points)
 
     cloud_struct = struct.Struct(_get_struct_fmt(False, fields))
 
     buff = ctypes.create_string_buffer(cloud_struct.size * len(points))
 
-    point_step = cloud_struct.size
-    pack_into = cloud_struct.pack_into
     offset = 0
     for p in points:
-        pack_into(buff, offset, *p)
-        offset += point_step
+        cloud_struct.pack_into(buff, offset, *p)
+        offset += cloud_struct.size
 
     return PointCloud2(header=header,
                        height=height,
@@ -177,7 +176,7 @@ def create_cloud(header, fields, points, height=1, width=None):
                        is_dense=False,
                        is_bigendian=False,
                        fields=fields,
-                       point_step=point_step,
+                       point_step=cloud_struct.size,
                        row_step=cloud_struct.size * width,
                        data=buff.raw)
 
