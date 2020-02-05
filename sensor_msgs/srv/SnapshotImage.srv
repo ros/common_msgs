@@ -1,0 +1,17 @@
+# Image as a service
+
+# REQUEST
+
+# exposure in milliseconds (0 indicates autoexposure) 
+uint32 exposure
+
+---
+
+# RESPONSE:
+
+# image is the returning raw image
+sensor_msgs/Image image
+
+# camera info, which includes intrinsics calibration
+sensor_msgs/CameraInfo camera_info
+
