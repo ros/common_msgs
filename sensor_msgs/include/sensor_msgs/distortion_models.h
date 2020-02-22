@@ -45,7 +45,7 @@ namespace sensor_msgs
     const std::string PLUMB_BOB = "plumb_bob";
     const std::string RATIONAL_POLYNOMIAL = "rational_polynomial";
     const std::string EQUIDISTANT = "equidistant";
-    const std::string FISHEYE = "fisheye";
+    const std::string FISHEYE = "fisheye"; // Kannala-Brandt radial distortion model (theta: real angle, theta_d:distorted angle) θ_d=θ*(1+k1*θ^2+k2*θ^4+k3*θ^6+k4*θ^8) . As in https://docs.opencv.org/master/db/d58/group__calib3d__fisheye.html
   }
 }
 
