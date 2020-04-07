@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(sensor_msgs)
 
-find_package(catkin REQUIRED COMPONENTS geometry_msgs message_generation std_msgs)
+find_package(catkin REQUIRED COMPONENTS geometry_msgs actionlib_msgs message_generation std_msgs)
 
 # For point_cloud2.py
 catkin_python_setup()
@@ -46,7 +46,13 @@ add_service_files(
   SnapshotCloud.srv
   SnapshotImage.srv)
 
-generate_messages(DEPENDENCIES geometry_msgs std_msgs)
+add_action_files(
+  DIRECTORY action
+  FILES
+  AdvancedSnapshotCloud.action
+)
+
+generate_messages(DEPENDENCIES geometry_msgs std_msgs actionlib_msgs)
 
 catkin_package(
   INCLUDE_DIRS include

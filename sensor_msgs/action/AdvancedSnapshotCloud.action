@@ -1,0 +1,22 @@
+# dense_cloud = true, if the cloud has to be dense (ordered)
+bool dense_cloud
+
+# exposure in milliseconds (0 indicates autoexposure)
+uint32 exposure
+
+uint8 raw_data
+uint8 NO_RAW_DATA = 0
+uint8 GRAYSCALE = 1
+uint8 RGB = 2
+
+---
+
+# cloud is the returning point cloud
+sensor_msgs/PointCloud2 cloud
+
+# image is the 2d data form the camera
+sensor_msgs/Image image
+
+---
+
+uint32 percentage_completed
