@@ -2,6 +2,11 @@
 Changelog for package shape_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Bump CMake version to avoid CMP0048 warning (`#158 <https://github.com/ros/common_msgs/issues/158>`_)
+* Contributors: Shane Loretz
+
 1.12.7 (2018-11-06)
 -------------------
 
