@@ -2,8 +2,8 @@
 Changelog for package sensor_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.13.0 (2020-05-21)
+-------------------
 * Update BatteryState.msg (`#140 <https://github.com/ros/common_msgs/issues/140>`_)
 * Use setuptools instead of distutils (`#159 <https://github.com/ros/common_msgs/issues/159>`_)
 * Bump CMake version to avoid CMP0048 warning (`#158 <https://github.com/ros/common_msgs/issues/158>`_)
