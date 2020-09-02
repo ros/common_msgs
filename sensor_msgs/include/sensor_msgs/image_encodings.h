@@ -99,6 +99,7 @@ namespace sensor_msgs
     // This is the UYVY version of YUV422 codec http://www.fourcc.org/yuv.php#UYVY
     // with an 8-bit depth
     const std::string YUV422="yuv422";
+    const std::string YUV420="yuv420";
 
     // Prefixes for abstract image encodings
     const std::string ABSTRACT_ENCODING_PREFIXES[] = {
@@ -176,6 +177,9 @@ namespace sensor_msgs
       if (encoding == YUV422)
         return 2;
 
+      if (encoding == YUV420)
+        return 1;
+
       throw std::runtime_error("Unknown encoding " + encoding);
       return -1;
     }
@@ -221,7 +225,7 @@ namespace sensor_msgs
           return atoi(prefix.c_str());  // valid encoding string
       }
 
-      if (encoding == YUV422)
+      if (encoding == YUV422 || encoding == YUV420)
         return 8;
 
       throw std::runtime_error("Unknown encoding " + encoding);
