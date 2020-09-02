@@ -99,6 +99,7 @@ namespace sensor_msgs
     // This is the UYVY version of YUV422 codec http://www.fourcc.org/yuv.php#UYVY
     // with an 8-bit depth
     const std::string YUV422="yuv422";
+    // YUV420 format, 12 bits per pixel
     const std::string YUV420="yuv420";
 
     // Prefixes for abstract image encodings
