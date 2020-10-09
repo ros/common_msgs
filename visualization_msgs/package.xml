@@ -8,12 +8,13 @@
     The marker message is used to send visualization "markers" such as boxes, spheres, arrows, lines, etc. to a visualization environment such as <a href="http:///www.ros.org/wiki/rviz">rviz</a>.
     See the rviz tutorial <a href="http://www.ros.org/wiki/rviz/Tutorials">rviz tutorials</a> for more information.
   </description>
-  <maintainer email="tfoote@osrfoundation.org">Tully Foote</maintainer>
+  <maintainer email="michel@ekumenlabs.com">Michel Hidalgo</maintainer>
   <license>BSD</license>
 
   <url>http://ros.org/wiki/visualization_msgs</url>
   <author email="jfaust@willowgarage.com">Josh Faust</author>
   <author email="dgossow@willowgarage.com">Davis Gossow</author>
+  <author email="tfoote@osrfoundation.org">Tully Foote</author>
 
   <buildtool_depend>catkin</buildtool_depend>
 

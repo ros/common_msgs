@@ -6,11 +6,12 @@
     also the building blocks of most of the
     <a href="http://wiki.ros.org/control_msgs">control_msgs</a> actions.
   </description>
-  <maintainer email="tfoote@osrfoundation.org">Tully Foote</maintainer>
+  <maintainer email="michel@ekumenlabs.com">Michel Hidalgo</maintainer>
   <license>BSD</license>
 
   <url>http://wiki.ros.org/trajectory_msgs</url>
   <author>Stuart Glaser</author>
+  <author email="tfoote@osrfoundation.org">Tully Foote</author>
 
   <buildtool_depend>catkin</buildtool_depend>
 

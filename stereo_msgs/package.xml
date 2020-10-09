@@ -4,12 +4,13 @@
   <description>
     stereo_msgs contains messages specific to stereo processing, such as disparity images.
   </description>
-  <maintainer email="tfoote@osrfoundation.org">Tully Foote</maintainer>
+  <maintainer email="michel@ekumenlabs.com">Michel Hidalgo</maintainer>
   <license>BSD</license>
 
   <url>http://wiki.ros.org/stereo_msgs</url>
   <author>Patrick Mihelich</author>
   <author>Kurt Konolige</author>
+  <author email="tfoote@osrfoundation.org">Tully Foote</author>
 
   <buildtool_depend>catkin</buildtool_depend>
 

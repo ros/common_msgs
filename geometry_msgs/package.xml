@@ -7,12 +7,12 @@
     to provide a common data type and facilitate interoperability
     throughout the system.
   </description>
-  <maintainer email="tfoote@osrfoundation.org">Tully Foote</maintainer>
+  <maintainer email="michel@ekumenlabs.com">Michel Hidalgo</maintainer>
   <license>BSD</license>
 
   <url>http://wiki.ros.org/geometry_msgs</url>
-  <author>Tully Foote</author>
-  
+  <author email="tfoote@osrfoundation.org">Tully Foote</author>
+
   <buildtool_depend>catkin</buildtool_depend>
 
   <build_depend>message_generation</build_depend>
