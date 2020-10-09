@@ -9,10 +9,11 @@
     This package defines messages for commonly used sensors, including
     cameras and scanning laser rangefinders.
   </description>
-  <maintainer email="tfoote@osrfoundation.org">Tully Foote</maintainer>
+  <maintainer email="michel@ekumenlabs.com">Michel Hidalgo</maintainer>
   <license>BSD</license>
 
   <url>http://ros.org/wiki/sensor_msgs</url>
+  <author email="tfoote@osrfoundation.org">Tully Foote</author>
 
   <buildtool_depend>catkin</buildtool_depend>
   <buildtool_depend condition="$ROS_PYTHON_VERSION == 2">python-setuptools</buildtool_depend>

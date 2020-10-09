@@ -10,10 +10,11 @@
     robot navigation (<a href="http://wiki.ros.org/nav_msgs">nav_msgs</a>),
     and common sensors (<a href="http://wiki.ros.org/sensor_msgs">sensor_msgs</a>), such as laser range finders, cameras, point clouds.
   </description>
-  <maintainer email="tfoote@osrfoundation.org">Tully Foote</maintainer>
+  <maintainer email="michel@ekumenlabs.com">Michel Hidalgo</maintainer>
   <license>BSD</license>
 
   <url>http://wiki.ros.org/common_msgs</url>
+  <author email="tfoote@osrfoundation.org">Tully Foote</author>
 
   <buildtool_depend>catkin</buildtool_depend>
 
