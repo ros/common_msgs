@@ -2,8 +2,8 @@
 Changelog for package nav_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.13.1 (2021-01-11)
+-------------------
 * Update package maintainers (`#168 <https://github.com/ros/common_msgs/issues/168>`_)
 * Add LoadMap service (`#164 <https://github.com/ros/common_msgs/issues/164>`_)
 * Contributors: David V. Lu!!, Michel Hidalgo
