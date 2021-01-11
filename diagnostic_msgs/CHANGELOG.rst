@@ -2,6 +2,11 @@
 Changelog for package diagnostic_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Update package maintainers (`#168 <https://github.com/ros/common_msgs/issues/168>`_)
+* Contributors: Michel Hidalgo
+
 1.13.0 (2020-05-21)
 -------------------
 * Bump CMake version to avoid CMP0048 warning (`#158 <https://github.com/ros/common_msgs/issues/158>`_)

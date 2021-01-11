@@ -2,6 +2,11 @@
 Changelog for package sensor_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Update package maintainers (`#168 <https://github.com/ros/common_msgs/issues/168>`_)
+* Contributors: Michel Hidalgo
+
 1.13.0 (2020-05-21)
 -------------------
 * Update BatteryState.msg (`#140 <https://github.com/ros/common_msgs/issues/140>`_)
