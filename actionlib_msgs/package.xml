@@ -8,11 +8,12 @@
      the <a href="http://wiki.ros.org/actionlib">actionlib</a>
      package.
   </description>
-  <maintainer email="tfoote@osrfoundation.org">Tully Foote</maintainer>
+  <maintainer email="michel@ekumenlabs.com">Michel Hidalgo</maintainer>
   <license>BSD</license>
 
   <url>http://wiki.ros.org/actionlib_msgs</url>
   <author>Vijay Pradeep</author>
+  <author email="tfoote@osrfoundation.org">Tully Foote</author>
 
   <buildtool_depend version_gte="0.5.78">catkin</buildtool_depend>
 
