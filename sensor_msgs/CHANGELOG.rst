@@ -2,6 +2,14 @@
 Changelog for package sensor_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Update package maintainers (`#170 <https://github.com/ros/common_msgs/issues/170>`_)
+* Use setuptools instead of distutils (`#159 <https://github.com/ros/common_msgs/issues/159>`_)
+* Bump CMake version to avoid CMP0048 warning (`#158 <https://github.com/ros/common_msgs/issues/158>`_)
+* Fix TabError: inconsistent use of tabs and spaces in indentation (`#155 <https://github.com/ros/common_msgs/issues/155>`_)
+* Contributors: Michel Hidalgo, Ramon Wijnands, Shane Loretz
+
 1.12.7 (2018-11-06)
 -------------------
 * Include sstream on header that needs i (`#131 <https://github.com/ros/common_msgs/issues/131>`_)

@@ -2,6 +2,13 @@
 Changelog for package nav_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Update package maintainers (`#170 <https://github.com/ros/common_msgs/issues/170>`_)
+* Add LoadMap service definition (`#152 <https://github.com/ros/common_msgs/issues/152>`_)
+* Bump CMake version to avoid CMP0048 warning (`#158 <https://github.com/ros/common_msgs/issues/158>`_)
+* Contributors: Jacob Perron, Michel Hidalgo, Shane Loretz
+
 1.12.7 (2018-11-06)
 -------------------
 
