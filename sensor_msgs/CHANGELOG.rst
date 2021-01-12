@@ -2,8 +2,8 @@
 Changelog for package sensor_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.12.8 (2021-01-12)
+-------------------
 * Update package maintainers (`#170 <https://github.com/ros/common_msgs/issues/170>`_)
 * Use setuptools instead of distutils (`#159 <https://github.com/ros/common_msgs/issues/159>`_)
 * Bump CMake version to avoid CMP0048 warning (`#158 <https://github.com/ros/common_msgs/issues/158>`_)
