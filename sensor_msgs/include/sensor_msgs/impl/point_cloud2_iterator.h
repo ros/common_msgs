@@ -36,6 +36,9 @@
 #define SENSOR_MSGS_IMPL_POINT_CLOUD_ITERATOR_H
 
 #include <sensor_msgs/PointCloud2.h>
+#include <sensor_msgs/point_field_conversion.h>
+#include <sensor_msgs/point_cloud_conversion.h>
+
 #include <cstdarg>
 #include <sstream>
 #include <string>
@@ -134,6 +137,7 @@ inline void PointCloud2Modifier::resize(size_t size)
 inline void PointCloud2Modifier::clear()
 {
   cloud_msg_.data.clear();
+  cloud_msg_.point_step = 0;
 
   // Update height/width
   if (cloud_msg_.height == 1)
@@ -145,6 +149,13 @@ inline void PointCloud2Modifier::clear()
       cloud_msg_.row_step = cloud_msg_.width = cloud_msg_.height = 0;
 }
 
+inline void PointCloud2Modifier::setPointCloud2Fields(const std::vector<PointFieldInfo>& fields)
+{
+  cloud_msg_.fields.clear();
+  cloud_msg_.point_step = 0;
+  cloud_msg_.fields.reserve(fields.size());
+  addPointCloud2Fields(fields);
+}
 
 /**
  * @brief Function setting some fields in a PointCloud and adjusting the
@@ -166,21 +177,20 @@ inline void PointCloud2Modifier::clear()
 inline void PointCloud2Modifier::setPointCloud2Fields(int n_fields, ...)
 {
   cloud_msg_.fields.clear();
+  cloud_msg_.point_step = 0;
   cloud_msg_.fields.reserve(n_fields);
   va_list vl;
   va_start(vl, n_fields);
-  int offset = 0;
   for (int i = 0; i < n_fields; ++i) {
     // Create the corresponding PointField
     std::string name(va_arg(vl, char*));
     int count(va_arg(vl, int));
     int datatype(va_arg(vl, int));
-    offset = addPointField(cloud_msg_, name, count, datatype, offset);
+    cloud_msg_.point_step = addPointField(cloud_msg_, name, count, datatype, cloud_msg_.point_step);
   }
   va_end(vl);
 
   // Resize the point cloud accordingly
-  cloud_msg_.point_step = offset;
   cloud_msg_.row_step = cloud_msg_.width * cloud_msg_.point_step;
   cloud_msg_.data.resize(cloud_msg_.height * cloud_msg_.row_step);
 }
@@ -198,10 +208,10 @@ inline void PointCloud2Modifier::setPointCloud2Fields(int n_fields, ...)
 inline void PointCloud2Modifier::setPointCloud2FieldsByString(int n_fields, ...)
 {
   cloud_msg_.fields.clear();
+  cloud_msg_.point_step = 0;
   cloud_msg_.fields.reserve(n_fields);
   va_list vl;
   va_start(vl, n_fields);
-  int offset = 0;
   for (int i = 0; i < n_fields; ++i) {
     // Create the corresponding PointFields
     std::string
@@ -209,24 +219,60 @@ inline void PointCloud2Modifier::setPointCloud2FieldsByString(int n_fields, ...)
     if (field_name == "xyz") {
       sensor_msgs::PointField point_field;
       // Do x, y and z
-      offset = addPointField(cloud_msg_, "x", 1, sensor_msgs::PointField::FLOAT32, offset);
-      offset = addPointField(cloud_msg_, "y", 1, sensor_msgs::PointField::FLOAT32, offset);
-      offset = addPointField(cloud_msg_, "z", 1, sensor_msgs::PointField::FLOAT32, offset);
-      offset += sizeOfPointField(sensor_msgs::PointField::FLOAT32);
+      cloud_msg_.point_step = addPointField(cloud_msg_, "x", 1, sensor_msgs::PointField::FLOAT32, cloud_msg_.point_step);
+      cloud_msg_.point_step = addPointField(cloud_msg_, "y", 1, sensor_msgs::PointField::FLOAT32, cloud_msg_.point_step);
+      cloud_msg_.point_step = addPointField(cloud_msg_, "z", 1, sensor_msgs::PointField::FLOAT32, cloud_msg_.point_step);
+      cloud_msg_.point_step += sizeOfPointField(sensor_msgs::PointField::FLOAT32);
     } else
       if ((field_name == "rgb") || (field_name == "rgba")) {
-        offset = addPointField(cloud_msg_, field_name, 1, sensor_msgs::PointField::FLOAT32, offset);
-        offset += 3 * sizeOfPointField(sensor_msgs::PointField::FLOAT32);
+        cloud_msg_.point_step = addPointField(cloud_msg_, field_name, 1, sensor_msgs::PointField::FLOAT32, cloud_msg_.point_step);
+        cloud_msg_.point_step += 3 * sizeOfPointField(sensor_msgs::PointField::FLOAT32);
       } else
         throw std::runtime_error("Field " + field_name + " does not exist");
   }
   va_end(vl);
 
   // Resize the point cloud accordingly
-  cloud_msg_.point_step = offset;
   cloud_msg_.row_step = cloud_msg_.width * cloud_msg_.point_step;
   cloud_msg_.data.resize(cloud_msg_.height * cloud_msg_.row_step);
 }
+
+
+inline bool PointCloud2Modifier::addPointCloud2Fields(const std::vector<PointFieldInfo>& fields){
+  bool ret = true;
+  for(std::vector<PointFieldInfo>::const_iterator iter = fields.begin(); iter != fields.end(); ++iter){
+    if(!addPointCloud2Field(*iter)){
+      ret = false;
+    }
+  }
+  return ret;
+}
+
+inline bool PointCloud2Modifier::addPointCloud2Field(const PointFieldInfo& field){
+  if(field.datatype == -1){
+    std::cerr << "Could not add the field to the PointCloud2. Unknown datatype, name:\""
+              << field.datatype_name << "\", id:\"" << field.datatype << "\"!" << std::endl;
+    return false;
+  }
+  if(sensor_msgs::hasPointCloud2Field(cloud_msg_, field.name)){
+    std::cerr << "Could not add the field to the PointCloud2. The field name \""
+              << field.name << "\" already exists!" << std::endl;
+    return false;
+  }
+  if(field.name.empty()){
+    // no name given for the field, just add an offset
+    cloud_msg_.point_step += sizeOfPointField(field.datatype);
+  }else{
+    cloud_msg_.point_step = addPointField(cloud_msg_, field.name, 1, field.datatype, cloud_msg_.point_step);
+  }
+
+  // Resize the point cloud accordingly
+  cloud_msg_.row_step = cloud_msg_.width * cloud_msg_.point_step;
+  cloud_msg_.data.resize(cloud_msg_.height * cloud_msg_.row_step);
+
+  return true;
+}
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -249,7 +295,7 @@ PointCloud2IteratorBase<T, TT, U, C, V>::PointCloud2IteratorBase(C &cloud_msg, c
 {
   int offset = set_field(cloud_msg, field_name);
 
-  data_char_ = &(cloud_msg.data.front()) + offset;
+  data_begin_ = data_char_ = &(cloud_msg.data.front()) + offset;
   data_ = reinterpret_cast<TT*>(data_char_);
   data_end_ = reinterpret_cast<TT*>(&(cloud_msg.data.back()) + 1 + offset);
 }
@@ -319,6 +365,19 @@ V<T> PointCloud2IteratorBase<T, TT, U, C, V>::operator +(int i)
   return res;
 }
 
+/**
+ * Organized point cloud access, access the iterator at the associated position (column, row), where 0 <= column < width
+ * and 0 <= row <= height.
+ * @param column The column in which the iterator should be accessed, iterator at (column, row)
+ * @param row The row in whcih the iterator should be accessed, iterator at (column, row)
+ * @return an iterator at (column, row)
+ */
+template<typename T, typename TT, typename U, typename C, template <typename> class V>
+V<T>& PointCloud2IteratorBase<T, TT, U, C, V>::operator ()(int column, int row)
+{
+  return reset() += (row * width + column);
+}
+
 /** Increase the iterator by a certain amount
  * @return a reference to the updated iterator
  */
@@ -337,6 +396,29 @@ template<typename T, typename TT, typename U, typename C, template <typename> cl
 bool PointCloud2IteratorBase<T, TT, U, C, V>::operator !=(const V<T>& iter) const
 {
   return iter.data_ != data_;
+}
+
+/** Resets the iterator to the start
+ * @return The reset iterator
+ */
+template<typename T, typename TT, typename U, typename C, template <typename> class V>
+V<T>& PointCloud2IteratorBase<T, TT, U, C, V>::reset()
+{
+  data_char_ = data_begin_;
+  data_ = reinterpret_cast<TT*>(data_char_);
+  return *static_cast<V<T>*>(this);
+}
+
+/** Return the start iterator
+ * @return the start iterator
+ */
+template<typename T, typename TT, typename U, typename C, template <typename> class V>
+V<T> PointCloud2IteratorBase<T, TT, U, C, V>::start() const
+{
+  V<T> res = *static_cast<const V<T>*>(this);
+  res.data_char_ = data_begin_;
+  res.data_ = reinterpret_cast<TT*>(data_char_);
+  return res;
 }
 
 /** Return the end iterator
@@ -360,6 +442,8 @@ int PointCloud2IteratorBase<T, TT, U, C, V>::set_field(const sensor_msgs::PointC
 {
   is_bigendian_ = cloud_msg.is_bigendian;
   point_step_ = cloud_msg.point_step;
+  width = cloud_msg.width;
+  height = cloud_msg.height;
   // make sure the channel is valid
   std::vector<sensor_msgs::PointField>::const_iterator field_iter = cloud_msg.fields.begin(), field_end =
       cloud_msg.fields.end();
