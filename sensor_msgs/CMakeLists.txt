@@ -30,6 +30,7 @@ add_message_files(
   MultiEchoLaserScan.msg
   NavSatFix.msg
   NavSatStatus.msg
+  PanoramaInfo.msg
   PointCloud.msg
   PointCloud2.msg
   PointField.msg
