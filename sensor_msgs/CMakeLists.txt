@@ -11,6 +11,7 @@ include_directories(include)
 add_message_files(
   DIRECTORY msg
   FILES
+  AnchorScan.msg
   BatteryState.msg
   CameraInfo.msg
   ChannelFloat32.msg
