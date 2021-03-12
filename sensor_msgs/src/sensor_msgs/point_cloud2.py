@@ -138,7 +138,7 @@ def read_points_list(cloud, field_names=None, skip_nans=False, uvs=[]):
 
     return [Point._make(l) for l in read_points(cloud, field_names, skip_nans, uvs)]
 
-def create_cloud(header, fields, points):
+def create_cloud(header, fields, points, height=1, width=None):
     """
     Create a L{sensor_msgs.msg.PointCloud2} message.
 
@@ -150,28 +150,34 @@ def create_cloud(header, fields, points):
     @type  points: list of iterables, i.e. one iterable for each point, with the
                    elements of each iterable being the values of the fields for 
                    that point (in the same order as the fields parameter)
+    @param height: the height of the point cloud [default: 1]
+    @type height: unsigned int
+    @param width: the width of the point cloud [default: None]
+    @param width: unsigned int
     @return: The point cloud.
     @rtype:  L{sensor_msgs.msg.PointCloud2}
     """
+    if height == 1 or width is None:
+        height = 1
+        width = len(points)
 
     cloud_struct = struct.Struct(_get_struct_fmt(False, fields))
 
     buff = ctypes.create_string_buffer(cloud_struct.size * len(points))
 
-    point_step, pack_into = cloud_struct.size, cloud_struct.pack_into
     offset = 0
     for p in points:
-        pack_into(buff, offset, *p)
-        offset += point_step
+        cloud_struct.pack_into(buff, offset, *p)
+        offset += cloud_struct.size
 
     return PointCloud2(header=header,
-                       height=1,
-                       width=len(points),
+                       height=height,
+                       width=width,
                        is_dense=False,
                        is_bigendian=False,
                        fields=fields,
                        point_step=cloud_struct.size,
-                       row_step=cloud_struct.size * len(points),
+                       row_step=cloud_struct.size * width,
                        data=buff.raw)
 
 def create_cloud_xyz32(header, points):
