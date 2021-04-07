@@ -7,6 +7,7 @@ add_message_files(
   DIRECTORY msg
   FILES
   ImageMarker.msg
+  ImageMarkerArray.msg
   InteractiveMarker.msg
   InteractiveMarkerControl.msg
   InteractiveMarkerFeedback.msg
