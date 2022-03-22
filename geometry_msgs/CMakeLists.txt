@@ -26,7 +26,9 @@ add_message_files(
   Quaternion.msg
   QuaternionStamped.msg
   Transform.msg
+  TransformWithCovariance.msg
   TransformStamped.msg
+  TransformWithCovarianceStamped.msg
   Twist.msg
   TwistStamped.msg
   TwistWithCovariance.msg
