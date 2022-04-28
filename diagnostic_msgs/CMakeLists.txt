@@ -8,6 +8,7 @@ add_message_files(
   FILES
   DiagnosticArray.msg
   DiagnosticStatus.msg
+  Heartbeat.msg
   KeyValue.msg)
 
 add_service_files(
