@@ -33,6 +33,8 @@ add_message_files(
   TwistWithCovarianceStamped.msg
   Vector3.msg
   Vector3Stamped.msg
+  Vector3WithCovariance.msg
+  Vector3WithCovarianceStamped.msg
   Wrench.msg
   WrenchStamped.msg)
 
