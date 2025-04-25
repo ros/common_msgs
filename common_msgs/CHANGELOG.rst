@@ -2,6 +2,9 @@
 Changelog for package common_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 1.13.1 (2021-01-11)
 -------------------
 * Update package maintainers (`#168 <https://github.com/ros/common_msgs/issues/168>`_)

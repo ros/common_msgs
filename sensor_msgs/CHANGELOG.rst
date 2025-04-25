@@ -2,6 +2,13 @@
 Changelog for package sensor_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Remove additional spaces (`#180 <https://github.com/ros/common_msgs/issues/180>`_)
+* sensor_msgs/CompressedImage: updated description of format field (`#184 <https://github.com/ros/common_msgs/issues/184>`_)
+* Fix STL assertion on recent libstdc++ when handling empty PointCloud2 (`#192 <https://github.com/ros/common_msgs/issues/192>`_)
+* Contributors: Atsushi Watanabe, Martin Pecka, Oskar
+
 1.13.1 (2021-01-11)
 -------------------
 * Update package maintainers (`#168 <https://github.com/ros/common_msgs/issues/168>`_)
