@@ -249,9 +249,9 @@ PointCloud2IteratorBase<T, TT, U, C, V>::PointCloud2IteratorBase(C &cloud_msg, c
 {
   int offset = set_field(cloud_msg, field_name);
 
-  data_char_ = &(cloud_msg.data.front()) + offset;
+  data_char_ = cloud_msg.data.data() + offset;
   data_ = reinterpret_cast<TT*>(data_char_);
-  data_end_ = reinterpret_cast<TT*>(&(cloud_msg.data.back()) + 1 + offset);
+  data_end_ = reinterpret_cast<TT*>(data_char_ + cloud_msg.data.size());
 }
 
 /** Assignment operator

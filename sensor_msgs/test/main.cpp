@@ -34,7 +34,23 @@
 
 #include <gtest/gtest.h>
 
+#define _GLIBCXX_DEBUG  // Enable assertions in STL
+
 #include <sensor_msgs/point_cloud2_iterator.h>
+
+TEST(sensor_msgs, PointCloud2Iterator_Empty)
+{
+  EXPECT_EXIT({
+    sensor_msgs::PointCloud2 cloud_msg;
+    cloud_msg.width = 1;
+    sensor_msgs::PointCloud2Modifier modifier(cloud_msg);
+    modifier.setPointCloud2FieldsByString(1, "xyz");
+
+    sensor_msgs::PointCloud2Iterator<float> iter_x(cloud_msg, "x");
+
+    exit(0);
+  }, ::testing::ExitedWithCode(0), "");
+}
 
 TEST(sensor_msgs, PointCloud2Iterator)
 {
@@ -111,6 +127,17 @@ TEST(sensor_msgs, PointCloud2Iterator)
     iter_const_2_g += 1;
     iter_const_2_b = iter_const_2_b + 1;
   }
+  EXPECT_FALSE(iter_const_1_y != iter_const_1_y.end());
+  EXPECT_FALSE(iter_const_1_z != iter_const_1_z.end());
+  EXPECT_FALSE(iter_const_1_r != iter_const_1_r.end());
+  EXPECT_FALSE(iter_const_1_g != iter_const_1_g.end());
+  EXPECT_FALSE(iter_const_1_b != iter_const_1_b.end());
+  EXPECT_FALSE(iter_const_2_x != iter_const_2_x.end());
+  EXPECT_FALSE(iter_const_2_y != iter_const_2_y.end());
+  EXPECT_FALSE(iter_const_2_z != iter_const_2_z.end());
+  EXPECT_FALSE(iter_const_2_r != iter_const_2_r.end());
+  EXPECT_FALSE(iter_const_2_g != iter_const_2_g.end());
+  EXPECT_FALSE(iter_const_2_b != iter_const_2_b.end());
   EXPECT_EQ(i, n_points);
 }
 
