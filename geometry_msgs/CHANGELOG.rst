@@ -2,8 +2,8 @@
 Changelog for package geometry_msgs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.13.2 (2025-04-25)
+-------------------
 * Remove additional spaces (`#180 <https://github.com/ros/common_msgs/issues/180>`_)
 * Contributors: Oskar
 
